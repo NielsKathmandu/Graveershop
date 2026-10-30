@@ -18,6 +18,7 @@
  *   KV-binding ORDERS        opslag van openstaande bestellingen
  */
 
+const CADEAUPRIJS = 2.95;
 const GRAVEERPRIJS = n => (n >= 25 ? 4 : n >= 10 ? 5 : 7.5);
 const VERZENDKOSTEN = sub => (sub >= 30 ? 0 : 4.95);
 const MAX_SNEL = 3; // tot en met 3 stuks: binnen 3 werkdagen verzonden
@@ -67,15 +68,18 @@ async function maakOrder(invoer, env, voorvoegsel) {
   }
   const subtotaal = round(regels.reduce((t, r) => t + r.bedrag, 0));
   const verzending = VERZENDKOSTEN(subtotaal);
-  const totaal = round(subtotaal + verzending);
+  const cadeau = invoer.cadeau === true;
+  const cadeauverpakking = cadeau ? CADEAUPRIJS : 0;
+  if (cadeau && !String(k.ontvanger || "").trim()) return { fout: json({ fout: "Vul de naam van de ontvanger in." }, 400) };
+  const totaal = round(subtotaal + cadeauverpakking + verzending);
   const stuks = regels.reduce((t, r) => t + r.n, 0);
 
   const datum = new Date().toISOString().slice(0, 10).replace(/-/g, "");
   const nummer = `${voorvoegsel}-${datum}-${crypto.randomUUID().slice(0, 6).toUpperCase()}`;
   const order = {
     nummer, aangemaakt: new Date().toISOString(), status: "open",
-    klant: pick(k, ["naam", "bedrijf", "email", "telefoon", "straat", "postcode", "plaats", "land", "opmerking"]),
-    regels, subtotaal, verzending, totaal, stuks, levertijdInOverleg: stuks > MAX_SNEL,
+    klant: pick(k, ["naam", "bedrijf", "email", "telefoon", "straat", "postcode", "plaats", "land", "opmerking", "ontvanger"]),
+    regels, subtotaal, cadeau, cadeauverpakking, verzending, totaal, stuks, levertijdInOverleg: stuks > MAX_SNEL,
   };
   return { order };
 }
@@ -230,15 +234,17 @@ async function stuurOrdermail(env, o, test = false) {
     ${test ? `<p style="background:#E9DCC6;padding:8px"><b>TESTBESTELLING</b>: er is niet betaald. Niet verzenden.</p>` : ""}
     <h2>Nieuwe bestelling ${o.nummer}</h2>
     ${o.levertijdInOverleg ? `<p style="background:#FFF3D6;padding:8px"><b>${o.stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen.</b></p>` : `<p>${o.stuks} stuks: binnen 3 werkdagen verzenden.</p>`}
+    ${o.cadeau ? `<p style="background:#F6D7D2;padding:10px;font-size:16px"><b>🎁 CADEAUVERPAKKING – inpakken als cadeau en GEEN factuur of pakbon meesturen.</b><br>Verzenden naar: ${esc(k.ontvanger)}, ${esc(k.straat)}, ${esc(k.postcode)} ${esc(k.plaats)}, ${esc(k.land)}</p>` : ""}
     <p><b>Let op:</b> boek de artikelen handmatig uit in de kassa / op kathmandu.nl.</p>
-    <h3>Klant</h3>
+    <h3>${o.cadeau ? "Klant (besteller, krijgt de factuur per mail)" : "Klant"}</h3>
     <p>${esc(k.naam)}${k.bedrijf ? `<br>${esc(k.bedrijf)}` : ""}<br>${esc(k.straat)}<br>${esc(k.postcode)} ${esc(k.plaats)}<br>${esc(k.land)}<br>
        ${esc(k.email)}${k.telefoon ? `<br>${esc(k.telefoon)}` : ""}</p>
     ${k.opmerking ? `<p><b>Opmerking:</b> ${esc(k.opmerking)}</p>` : ""}
     <h3>Artikelen</h3>
     <table style="border-collapse:collapse;width:100%">
       <tr style="text-align:left"><th style="padding:8px">Omschrijving</th><th style="padding:8px;text-align:right">Aantal</th><th style="padding:8px;text-align:right">Stukprijs</th><th style="padding:8px;text-align:right">Bedrag</th></tr>${rijen}
-      <tr><td colspan="3" style="padding:8px;text-align:right">Subtotaal</td><td style="padding:8px;text-align:right">${euro(o.subtotaal)}</td></tr>
+      <tr><td colspan="3" style="padding:8px;text-align:right">Subtotaal</td><td style="padding:8px;text-align:right">${euro(o.subtotaal + (o.cadeauverpakking || 0))}</td></tr>
+      ${o.cadeau ? `<tr>${td("<b>Cadeauverpakking</b>")}${td(1, true)}${td(euro(o.cadeauverpakking), true)}${td(euro(o.cadeauverpakking), true)}</tr>` : ""}
       <tr><td colspan="3" style="padding:8px;text-align:right">Verzenden</td><td style="padding:8px;text-align:right">${o.verzending ? euro(o.verzending) : "gratis"}</td></tr>
       <tr><td colspan="3" style="padding:8px;text-align:right"><b>Totaal betaald</b></td><td style="padding:8px;text-align:right"><b>${euro(o.totaal)}</b></td></tr>
     </table></div>`;
@@ -257,8 +263,10 @@ async function stuurBevestiging(env, o, naar = null) {
     <p>Beste ${esc(k.naam)},</p>
     <p>Bedankt voor je bestelling bij Kathmandu Graveerwerk. We hebben je betaling ontvangen.</p>
     <table style="border-collapse:collapse">${regels}
+      ${o.cadeau ? `<tr>${tdk("Cadeauverpakking")}${tdk("1 × " + euro(o.cadeauverpakking), true)}${tdk(euro(o.cadeauverpakking), true)}</tr>` : ""}
       <tr>${tdk("Verzenden")}${tdk("", true)}${tdk(o.verzending ? euro(o.verzending) : "gratis", true)}</tr>
       <tr>${tdk("<b>Totaal betaald</b> (incl. btw)")}${tdk("", true)}${tdk(`<b>${euro(o.totaal)}</b>`, true)}</tr></table>
+    ${o.cadeau ? `<p>We pakken je bestelling in als cadeau en sturen hem zonder factuur naar ${esc(k.ontvanger)}, ${esc(k.straat)}, ${esc(k.postcode)} ${esc(k.plaats)}. Deze mail is je factuur.</p>` : ""}
     <p>${o.levertijdInOverleg ? "Omdat je 4 of meer artikelen hebt besteld, nemen we binnen 2 werkdagen contact met je op over de levertijd." : "We verzenden je bestelling binnen 3 werkdagen."}</p>
     <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail of mail naar webshop@kathmandu.nl.</p>
     <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel<br>Glencoe B.V. · Oudegracht 256-264, 3511 NV Utrecht · KvK 30166640</p></div>`;

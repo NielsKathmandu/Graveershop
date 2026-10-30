@@ -90,3 +90,15 @@ r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels
 assert.equal(r.status, 403, "testmodus uit");
 
 console.log("Alle tests geslaagd. Ordermail-onderwerp:", order.subject);
+
+// 7. cadeauverpakking: aparte regel van 2,95, ontvanger verplicht, melding in ordermail
+env.TESTMODUS = "1";
+r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, cadeau: true, regels: [{ code: "029031", n: 1 }] }));
+assert.equal(r.status, 400, "ontvanger verplicht bij cadeau");
+const v7 = verzoeken.length;
+r = await vraag("/testbestelling", JSON.stringify({ klant: { ...klant, ontvanger: "Piet Cadeau" }, akkoord: true, cadeau: true, regels: [{ code: "029031", n: 1 }] }));
+const cd = await r.json();
+assert.equal(cd.totaal, 57.9, "54,95 + 2,95 cadeau, gratis verzending");
+const cm = verzoeken.slice(v7).filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
+assert.match(cm[0].html, /CADEAUVERPAKKING/); assert.match(cm[0].html, /Piet Cadeau/); assert.match(cm[1].html, /Cadeauverpakking/);
+console.log("Cadeauverpakking ok");

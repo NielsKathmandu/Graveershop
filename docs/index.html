@@ -170,6 +170,9 @@ input[type=file]{font-size:14px;max-width:100%}
 .regel .rprijs{text-align:right;display:grid;gap:6px;justify-items:end}
 .regel .werkplaats{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px}
 @media (max-width:600px){.regel .werkplaats{grid-template-columns:minmax(0,1fr)}}
+.cadeauoptie{display:flex;gap:10px;align-items:flex-start;margin:6px 0 14px auto;max-width:460px;padding:12px 14px;border:1px solid var(--line);border-radius:4px;cursor:pointer}
+.cadeauoptie input{margin-top:3px;width:18px;height:18px;flex:none}
+.cadeauadres{border-left:3px solid var(--line);padding-left:12px}
 .mandtotaal{display:grid;gap:6px;justify-items:end;border-top:1px solid var(--line);padding-top:14px;font-size:15px}
 .mandtotaal .tot{font-size:20px;font-weight:700}
 .regel .svgbox{overflow:hidden;align-self:start}
@@ -357,12 +360,17 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
     <div class="afreken">
       <form id="afrekenForm" class="form afrekenform" novalidate>
         <div class="veld2">
-          <div class="field"><label for="kNaam">Naam</label><input type="text" id="kNaam" autocomplete="name" required></div>
+          <div class="field"><label for="kNaam" id="lNaam">Naam</label><input type="text" id="kNaam" autocomplete="name" required></div>
           <div class="field"><label for="kBedrijf">Bedrijfsnaam <small>optioneel</small></label><input type="text" id="kBedrijf" autocomplete="organization"></div>
         </div>
         <div class="veld2">
           <div class="field"><label for="kEmail">E-mailadres</label><input type="email" id="kEmail" autocomplete="email" required></div>
           <div class="field"><label for="kTel">Telefoon <small>optioneel</small></label><input type="tel" id="kTel" autocomplete="tel"></div>
+        </div>
+        <h2 class="label" id="lAdres" hidden style="margin:10px 0 0"></h2>
+        <div class="cadeauadres" id="cadeauAdres" hidden>
+          <p class="hint" style="margin:0 0 8px">Je bestelling gaat ingepakt als cadeau en zonder factuur naar dit adres. De factuur en de bevestiging mailen we naar jou.</p>
+          <div class="field"><label for="kOntvanger">Naam ontvanger</label><input type="text" id="kOntvanger" autocomplete="shipping name"></div>
         </div>
         <div class="field"><label for="kStraat">Straat en huisnummer</label><input type="text" id="kStraat" autocomplete="street-address" required></div>
         <div class="veld3">
@@ -431,6 +439,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
       <li>Bestellingen van in totaal 1 tot en met 3 stuks verzenden wij binnen 3 werkdagen na ontvangst van de betaling.</li>
       <li>Voor bestellingen vanaf 4 stuks stemmen wij de levertijd met je af. Je ontvangt binnen 2 werkdagen na je bestelling een voorstel. Past die levertijd je niet, dan kun je de bestelling kosteloos annuleren.</li>
       <li>Wij verzenden met PostNL. Binnen Nederland is verzenden gratis vanaf € 30; daaronder rekenen we € 4,95. Verzenden naar het buitenland kost minimaal € 7,95.</li>
+      <li>Kies je voor cadeauverpakking (€ 2,95 per bestelling), dan pakken wij de bestelling in als cadeau en sturen wij hem zonder factuur naar het adres van de ontvanger. De factuur ontvang je per e-mail.</li>
       <li>Wij leveren uiterlijk binnen 30 dagen. Lukt dat niet, dan mag je de bestelling kosteloos ontbinden.</li>
     </ul>
 
@@ -1128,13 +1137,13 @@ function kanToevoegen(p,n,toast){
 }
 function mandBijwerken(){
   $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
-  try{localStorage.setItem("graveerwerk-mand",JSON.stringify({regelNr,regels:state.mand.map(r=>({...r,p:r.p.code}))}));}catch(e){}
+  try{localStorage.setItem("graveerwerk-mand",JSON.stringify({regelNr,cadeau:!!state.cadeau,regels:state.mand.map(r=>({...r,p:r.p.code}))}));}catch(e){}
   renderMand();
 }
 function mandLaden(){
   try{
     const m=JSON.parse(localStorage.getItem("graveerwerk-mand")||"null"); if(!m) return;
-    regelNr=m.regelNr||0;
+    regelNr=m.regelNr||0; state.cadeau=!!m.cadeau;
     state.mand=m.regels.map(r=>({...r,p:PRODUCTEN.find(p=>p.code===r.p)})).filter(r=>r.p);
     $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
   }catch(e){}
@@ -1161,6 +1170,11 @@ $("form").addEventListener("submit",async e=>{
   $("toast").innerHTML=`Met gravure toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
 });
 function regelPrijs(r){return r.n*(r.p.prijs+(r.gravure?graveerPrijs(r.n):0));}
+const CADEAUPRIJS=2.95;
+function totalen(){
+  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), cadeau=state.cadeau&&state.mand.length?CADEAUPRIJS:0, verzend=sub>=30?0:4.95;
+  return {sub,cadeau,verzend,totaal:sub+cadeau+verzend,stuks:state.mand.reduce((t,r)=>t+r.n,0)};
+}
 function renderMand(){
   if(!state.mand.length){$("mand").innerHTML=`<p class="leeg">Je winkelmand is leeg. Kies een fles en voeg hem toe, met of zonder gravure.</p>`;return;}
   $("mand").innerHTML="";
@@ -1190,11 +1204,17 @@ function renderMand(){
     el.querySelector("[data-weg]").onclick=()=>{state.mand=state.mand.filter(x=>x!==r);mandBijwerken();};
   });
   $("mand").appendChild(lijst);
-  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95;
+  const {sub,cadeau,verzend,totaal}=totalen();
+  const kado=document.createElement("label");kado.className="cadeauoptie";
+  kado.innerHTML=`<input type="checkbox" id="cadeauVink"${state.cadeau?" checked":""}><span><strong>Met cadeauverpakking</strong> <span class="mono">+ ${euro(CADEAUPRIJS)}</span><br>
+    <span class="hint">We pakken je bestelling in als cadeau en sturen hem zonder factuur op. Zo kan hij direct naar de ontvanger; de factuur mailen we naar jou.</span></span>`;
+  kado.querySelector("input").onchange=e=>{state.cadeau=e.target.checked;mandBijwerken();};
+  $("mand").appendChild(kado);
   const tot=document.createElement("div");tot.className="mandtotaal";
   tot.innerHTML=`<span>Subtotaal <span class="mono">${euro(sub)}</span></span>
+    ${cadeau?`<span>Cadeauverpakking <span class="mono">${euro(cadeau)}</span></span>`:""}
     <span>Verzenden <span class="mono">${verzend?euro(verzend):"gratis"}</span></span>
-    <span class="tot">Totaal incl. btw <span class="mono">${euro(sub+verzend)}</span></span>
+    <span class="tot">Totaal incl. btw <span class="mono">${euro(totaal)}</span></span>
     <a class="btn" href="#afrekenen">Afrekenen</a>
     ${state.mand.reduce((t,r)=>t+r.n,0)>3?'<span class="hint">Vanaf 4 stuks stemmen we de levertijd met je af.</span>':'<span class="hint">Binnen 3 werkdagen verzonden.</span>'}`;
   $("mand").appendChild(tot);
@@ -1207,12 +1227,16 @@ const AFREKEN_URL="https://graveerwerk-afrekenen.niels-691.workers.dev";
 const BUCKAROO_ACTIEF=false;    // true zodra de Buckaroo-sleutels in de Worker staan; tot die tijd testbetaling
 function renderAfrekenen(){
   if(!state.mand.length){location.hash="winkelmand";return;}
-  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
+  const {cadeau,verzend,totaal,stuks}=totalen();
   $("samenvatting").innerHTML=`<strong>Je bestelling</strong>${state.mand.map(r=>`<div class="r"><span>${r.n} × ${esc(r.p.merk+" "+r.p.naam+" "+r.p.kleur)}</span><span class="mono">${euro(r.n*r.p.prijs)}</span></div>${r.gravure?`<div class="r"><span>${r.n} × Graveren à ${euro(graveerPrijs(r.n))}</span><span class="mono">${euro(r.n*graveerPrijs(r.n))}</span></div>`:""}`).join("")}
+    ${cadeau?`<div class="r"><span>Cadeauverpakking</span><span class="mono">${euro(cadeau)}</span></div>`:""}
     <div class="r"><span>Verzenden</span><span class="mono">${verzend?euro(verzend):"gratis"}</span></div>
-    <div class="r tot"><span>Totaal incl. btw</span><span class="mono">${euro(sub+verzend)}</span></div>
+    <div class="r tot"><span>Totaal incl. btw</span><span class="mono">${euro(totaal)}</span></div>
     <span class="hint">${stuks>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
   $("maatwerkMelding").hidden=!state.mand.some(r=>r.gravure);
+  $("cadeauAdres").hidden=!state.cadeau;
+  $("lNaam").textContent=state.cadeau?"Jouw naam":"Naam";
+  $("lAdres").textContent=state.cadeau?"Adres van de ontvanger":"";$("lAdres").hidden=!state.cadeau;
   $("afrekenFout").textContent="";
   $("betaalKnop").hidden=!BUCKAROO_ACTIEF; $("testKnop").hidden=BUCKAROO_ACTIEF;
   $("testKnop").disabled=false; $("testKnop").textContent="Testbetaling (er wordt niets afgeschreven)";
@@ -1223,8 +1247,8 @@ const TEST_ORDERMAIL="niels@kathmandu.nl";
 let wasTest=false; try{wasTest=sessionStorage.getItem("graveerwerk-test")==="1";sessionStorage.removeItem("graveerwerk-test");}catch(e){}
 function klantUitFormulier(){
   const v=id=>$(id).value.trim();
-  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm")};
-  const leeg=[["naam","kNaam"],["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
+  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm"),ontvanger:state.cadeau?v("kOntvanger"):""};
+  const leeg=[["naam","kNaam"],...(state.cadeau?[["naam van de ontvanger","kOntvanger"]]:[]),["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
   if(leeg){$("afrekenFout").textContent=`Vul je ${leeg[0]} in.`;$(leeg[1]).focus();return null;}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("afrekenFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return null;}
   if(!$("kAkkoord").checked){$("afrekenFout").textContent="Ga akkoord met de algemene voorwaarden om te bestellen.";return null;}
@@ -1235,12 +1259,13 @@ let laatsteTestorder=null;
 $("testKnop").onclick=async()=>{
   const klant=klantUitFormulier(); if(!klant) return;
   const d=new Date(), nummer=`TEST-${d.toISOString().slice(0,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
-  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
+  const {sub,cadeau,verzend,totaal,stuks}=totalen(), metCadeau=!!state.cadeau;
   const velden=[], bijlagen=[], regels=[];
   const veld=(k,v)=>velden.push([k,v]);
   veld("Bestelnummer",nummer+" (testbetaling, niets afgeschreven)");
   veld("Levertijd",stuks>3?`${stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen`:`${stuks} ${stuks===1?"stuk":"stuks"}: binnen 3 werkdagen verzenden`);
   veld("Let op","Artikelen handmatig uitboeken in de kassa / op kathmandu.nl");
+  if(metCadeau) veld("Cadeau","Inpakken als cadeau, GEEN factuur meesturen. Verzenden naar: "+[klant.ontvanger,klant.straat,`${klant.postcode} ${klant.plaats}`,klant.land].join(", "));
   veld("Klant",[klant.naam,klant.bedrijf,klant.straat,`${klant.postcode} ${klant.plaats}`,klant.land].filter(Boolean).join(", "));
   veld("E-mail klant",klant.email); if(klant.telefoon) veld("Telefoon klant",klant.telefoon); if(klant.opmerking) veld("Opmerking",klant.opmerking);
   state.mand.forEach((r,i)=>{
@@ -1258,19 +1283,19 @@ $("testKnop").onclick=async()=>{
     veld(`Regel ${nr}`,t); bijlagen.push(...eigen);
     regels.push({tekst:t,voorbeeld:r.gravure&&r.gravure.voorbeeld,bestanden:eigen});
   });
-  veld("Subtotaal",euro(sub)); veld("Verzenden",verzend?euro(verzend):"gratis"); veld("Totaal",euro(sub+verzend));
+  veld("Subtotaal",euro(sub)); if(cadeau) veld("Cadeauverpakking",euro(cadeau)); veld("Verzenden",verzend?euro(verzend):"gratis"); veld("Totaal",euro(totaal));
   laatsteTestorder={nummer,velden,regels};
   const verzendRegels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:r.gravure?{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
     formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}:null}));
   // mand leeg en testorder tonen; mail op de achtergrond versturen (pagina blijft staan)
-  state.mand=[]; mandBijwerken(); location.hash="testorder";
+  state.mand=[]; state.cadeau=false; mandBijwerken(); location.hash="testorder";
   if(!AFREKEN_URL){
     $("testMailStatus").textContent="De mailserver is nog niet gekoppeld, dus er is geen mail verstuurd. Hieronder staat de complete ordermail met de bijlagen om te downloaden.";
     return;
   }
   $("testMailStatus").textContent=`Ordermail wordt verstuurd naar ${TEST_ORDERMAIL}…`;
   try{
-    const r=await fetch(AFREKEN_URL+"/testbestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,akkoord:true,regels:verzendRegels})});
+    const r=await fetch(AFREKEN_URL+"/testbestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,akkoord:true,cadeau:metCadeau,regels:verzendRegels})});
     const d=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(d.fout||`Fout ${r.status}`);
     $("testMailStatus").textContent=`Ordermail ${d.nummer} is verstuurd naar ${d.naar}, met een voorbeeld van de klantbevestiging. De bijlagen kun je hieronder ook downloaden.`;
@@ -1296,8 +1321,8 @@ function renderTestorder(){
 $("afrekenForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const v=id=>$(id).value.trim();
-  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm")};
-  const leeg=[["naam","kNaam"],["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
+  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm"),ontvanger:state.cadeau?v("kOntvanger"):""};
+  const leeg=[["naam","kNaam"],...(state.cadeau?[["naam van de ontvanger","kOntvanger"]]:[]),["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
   if(leeg){$("afrekenFout").textContent=`Vul je ${leeg[0]} in.`;$(leeg[1]).focus();return;}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("afrekenFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return;}
   if(!$("kAkkoord").checked){$("afrekenFout").textContent="Ga akkoord met de algemene voorwaarden om te bestellen.";return;}
@@ -1306,7 +1331,7 @@ $("afrekenForm").addEventListener("submit",async e=>{
     formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}:null}));
   $("betaalKnop").disabled=true; $("betaalKnop").textContent="Bezig met doorsturen naar Buckaroo…"; $("afrekenFout").textContent="";
   try{
-    const r=await fetch(AFREKEN_URL+"/bestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,regels,akkoord:true})});
+    const r=await fetch(AFREKEN_URL+"/bestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,regels,akkoord:true,cadeau:!!state.cadeau})});
     const d=await r.json();
     if(!r.ok||!d.doorsturen) throw new Error(d.fout||"Afrekenen lukte niet.");
     location.href=d.doorsturen;
