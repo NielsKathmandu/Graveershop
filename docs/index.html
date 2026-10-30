@@ -706,7 +706,9 @@ const SOORT_PER_VORM={kkclassic:"water",kkloop:"water",iceflow:"water",
   legendary:"thermos",adventure:"thermos",growler:"thermos",
   transit:"beker",cafetogo:"beker",tkwide:"beker",campmug:"beker",stackcup:"beker",tumbler:"beker",stein:"beker",lowball:"beker",kkmug:"beker",
   foodjar:"overig",legjar:"overig",flask:"overig"};
-const soortVan=vorm=>SOORT_PER_VORM[vorm]||"overig";
+// Sommige modellen horen in meer dan één soort
+const EXTRA_SOORT=[[/isolatiefles classic met ringdop/i,"thermos"]];
+const soortenVan=(vorm,naam)=>[SOORT_PER_VORM[vorm]||"overig",...EXTRA_SOORT.filter(([re])=>re.test(naam||"")).map(([,k])=>k)];
 function vindModel(naam, afm){
   for(const [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
     const m={...maat};
@@ -754,7 +756,7 @@ const titel=document.title;
 
 /* ---------- overzicht ---------- */
 function renderGrid(){
-  const lijst=PRODUCTEN.filter(p=>(!state.merk||p.merk===state.merk)&&(!state.soort||p.soort===state.soort));
+  const lijst=PRODUCTEN.filter(p=>(!state.merk||p.merk===state.merk)&&(!state.soort||p.soorten.includes(state.soort)));
   $("count").textContent=`${lijst.length} ${lijst.length===1?"artikel":"artikelen"}`;
   $("grid").innerHTML=lijst.map(p=>{
     const v=voorraad(p);
@@ -766,7 +768,7 @@ function renderGrid(){
 }
 document.querySelectorAll(".chip[data-merk]").forEach(c=>c.onclick=()=>{state.merk=c.dataset.merk;document.querySelectorAll(".chip[data-merk]").forEach(x=>x.setAttribute("aria-pressed",x===c));renderGrid();});
 function renderSoortFilter(){
-  const aanwezig=Object.keys(SOORTEN).filter(k=>PRODUCTEN.some(p=>p.soort===k));
+  const aanwezig=Object.keys(SOORTEN).filter(k=>PRODUCTEN.some(p=>p.soorten.includes(k)));
   $("soortFilter").innerHTML=[["","Alle soorten"],...aanwezig.map(k=>[k,SOORTEN[k]])]
     .map(([k,l])=>`<button class="chip" data-soort="${k}" aria-pressed="${(state.soort||"")===k}">${l}</button>`).join("");
   $("soortFilter").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{state.soort=c.dataset.soort;renderSoortFilter();renderGrid();});
@@ -977,12 +979,12 @@ function vanJson(data){
     const lak=gemeten?gemeten.lak:kleurHex(kleur||volledig);
     return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:lak,lak,dop:gemeten?gemeten.dop:null,prijs:p.prijs||0,
       ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm:md.vorm,maat:md.maat,zone:md.zone,maatBron:md.maatBron,opspanning:md.opspanning,
-      fotos:p.lokale_afbeeldingen||[],omschrijving:p.omschrijving||null,soort:soortVan(md.vorm),recht:p.recht_foto&&p.recht_foto.pad&&p.recht_foto.cx?p.recht_foto:null};
+      fotos:p.lokale_afbeeldingen||[],omschrijving:p.omschrijving||null,soorten:soortenVan(md.vorm,volledig),recht:p.recht_foto&&p.recht_foto.pad&&p.recht_foto.cx?p.recht_foto:null};
   });
 }
 
 // demo-artikelen: vorm, maten en graveervlak uit de modellijst
-PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam,null);return {...p,vorm:m.vorm,maat:m.maat,zone:m.zone,maatBron:m.maatBron,opspanning:m.opspanning,soort:soortVan(m.vorm),lak:p.hex,dop:null};});
+PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam,null);return {...p,vorm:m.vorm,maat:m.maat,zone:m.zone,maatBron:m.maatBron,opspanning:m.opspanning,soorten:soortenVan(m.vorm,p.naam),lak:p.hex,dop:null};});
 segButtons($("fonts"),FONTDATA,"font");
 segButtons($("motifs"),MOTIFS,"motif");
 
