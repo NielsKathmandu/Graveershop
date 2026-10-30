@@ -620,21 +620,42 @@ function rondom(g,R){
     c.type==="Q"?`Q${f(X(c.x1))} ${f(c.y1)} ${f(X(c.x))} ${f(c.y)}`:
     `C${f(X(c.x1))} ${f(c.y1)} ${f(X(c.x2))} ${f(c.y2)} ${f(X(c.x))} ${f(c.y)}`).join("");
 }
+/* Graveermachine: xTool F1 met RA2 Pro-rotatiemodule (xtool.com, met extra verhogingen).
+   Pas deze grenzen aan als jullie opstelling anders is. */
+const MACHINE = {
+  naam: "xTool F1 met RA2 Pro",
+  rollers: {min: 3, max: 198},   // doorsnede in mm
+  klauw: {min: 0, max: 100},
+  veld: 115,                     // werkveld F1 in mm (maximale graveerhoogte)
+  maxHoogte: 60                  // praktische bovengrens graveervlak in mm
+};
+const MET_HENGSEL = new Set(["campmug","stein","growler","kkmug"]);
+
+/* Graveervlak in mm. Rondom met de rotatiemodule tot een derde van de omtrek;
+   met een hengsel tot een kwart (de fles kan niet helemaal rond). Heupfles: plat, alleen voorkant. */
 function graveervlakVan(vorm,maat){
   const v=(VORMEN[vorm]||VORMEN.transit)(T(),maat,{lak:"#777777",dop:"#777777"});
-  // rotatiemodule: gravure mag om de fles heen lopen, tot een derde van de omtrek
-  // (dan blijft hij van voren leesbaar). Heupfles is plat: alleen de voorkant.
-  const breed=vorm==="flask"?v.maxW:Math.min(Math.PI*maat.D/3,110);
-  return [Math.round(breed), Math.round(Math.min(v.maxH,60))];
+  const hengsel=MET_HENGSEL.has(vorm)||!!maat.hengsel;
+  const breed=vorm==="flask"?v.maxW:Math.min(Math.PI*maat.D/(hengsel?4:3),110);
+  const hoog=Math.min(v.maxH,MACHINE.maxHoogte,MACHINE.veld);
+  return [Math.round(breed), Math.round(hoog)];
+}
+/* Past het artikel op de rotatiemodule? Geeft de manier van opspannen of null. */
+function opspanning(vorm,maat){
+  if(vorm==="flask") return "plat in het werkveld";
+  const D=maat.D, hengsel=MET_HENGSEL.has(vorm)||!!maat.hengsel;
+  if(D>=MACHINE.rollers.min&&D<=MACHINE.rollers.max) return hengsel?"rollers, gravure aan de voorkant, uit de buurt van het hengsel":"rollers";
+  if(D<=MACHINE.klauw.max) return "klauw";
+  return null;
 }
 function vindModel(naam, afm){
   for(const [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
     const m={...maat};
-    return {vorm,maat:m,zone:graveervlakVan(vorm,m),maatBron:BRONNEN[bron]||bron};
+    return {vorm,maat:m,zone:graveervlakVan(vorm,m),maatBron:BRONNEN[bron]||bron,opspanning:opspanning(vorm,m)};
   }
   // onbekend model: maat van kathmandu.nl als die er is, anders een standaardbeker
   const m=afm&&afm.d&&afm.h?{D:afm.d,H:afm.h}:{D:76,H:220};
-  return {vorm:"transit",maat:m,zone:graveervlakVan("transit",m),maatBron:afm?"kathmandu.nl":"geschat"};
+  return {vorm:"transit",maat:m,zone:graveervlakVan("transit",m),maatBron:afm?"kathmandu.nl":"geschat",opspanning:opspanning("transit",m)};
 }
 
 /* Tekening + gravure. p heeft: vorm, maat, zone, lak, dop. g = bouwGravure-resultaat (in mm). */
@@ -703,6 +724,7 @@ function renderProduct(){
     <dt>Voorraad</dt><dd>Amsterdam ${p.ams} · Utrecht ${p.utr}</dd>
     <dt>Afmetingen</dt><dd><span class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</span><span class="hint"> (bron: ${p.maatBron})</span></dd>
     <dt>Graveervlak</dt><dd class="mono">max. ${p.zone[0]} × ${p.zone[1]} mm</dd>
+    <dt>Opspannen</dt><dd>${esc(MACHINE.naam)}, ${esc(p.opspanning)}</dd>
     <dt>Levering</dt><dd>Gegraveerd en verzonden binnen 3 werkdagen</dd>`;
   $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
   $("toast").textContent="";
@@ -838,13 +860,13 @@ function vanJson(data){
     const md=vindModel(volledig,p.afmetingen_mm), gemeten=p.graveervlak_foto||null;
     const lak=gemeten?gemeten.lak:kleurHex(kleur||volledig);
     return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:lak,lak,dop:gemeten?gemeten.dop:null,prijs:p.prijs||0,
-      ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm:md.vorm,maat:md.maat,zone:md.zone,maatBron:md.maatBron,
+      ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm:md.vorm,maat:md.maat,zone:md.zone,maatBron:md.maatBron,opspanning:md.opspanning,
       fotos:p.lokale_afbeeldingen||[],recht:p.recht_foto&&p.recht_foto.pad&&p.recht_foto.cx?p.recht_foto:null};
   });
 }
 
 // demo-artikelen: vorm, maten en graveervlak uit de modellijst
-PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam,null);return {...p,vorm:m.vorm,maat:m.maat,zone:m.zone,maatBron:m.maatBron,lak:p.hex,dop:null};});
+PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam,null);return {...p,vorm:m.vorm,maat:m.maat,zone:m.zone,maatBron:m.maatBron,opspanning:m.opspanning,lak:p.hex,dop:null};});
 segButtons($("fonts"),FONTDATA,"font");
 segButtons($("motifs"),MOTIFS,"motif");
 $("syncTxt").textContent=`Voorraad Amsterdam + Utrecht · ${SYNC}`;
@@ -852,7 +874,7 @@ renderGrid(); route();
 fetch("voorraad.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(data=>{
   if(!data||!data.producten||!data.producten.length) return;
   const lijst=vanJson(data); if(!lijst.length) return;
-  PRODUCTEN=lijst; state.sel=null;
+  PRODUCTEN=lijst.filter(p=>p.opspanning); state.sel=null;
   SYNC=new Date(data.bijgewerkt).toLocaleString("nl-NL",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
   $("syncTxt").textContent=`Voorraad Amsterdam + Utrecht · ${SYNC}`;
   renderGrid(); route();
