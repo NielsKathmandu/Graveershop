@@ -201,7 +201,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <p id="tZone"></p>
       </header>
       <div class="werkblad">
-        <div class="preview"><div id="preview"></div><p class="hint">Tekening van deze fles met je gravure op ware grootte</p></div>
+        <div class="preview"><div id="preview"></div><p class="hint">Voorbeeld op ware grootte, gezien van voren</p></div>
         <form class="form" id="form">
           <div class="field">
             <label for="r1">Regel 1 <small id="c1">0/20</small></label>
@@ -295,7 +295,8 @@ function bouwGravure(cfg){
   // schaal naar het vlak, met een bovengrens zodat korte tekst niet enorm wordt
   const s=Math.min((W-2*M)/maxW,(H-2*M)/totH,1.6);
   const tx=(W-maxW*s)/2, ty=(H-totH*s)/2;
-  return {W,H,d:toD(stacked.flatMap(c=>shift(c,s,tx,ty)))};
+  const cmds=stacked.flatMap(c=>shift(c,s,tx,ty));
+  return {W,H,d:toD(cmds),cmds};
 }
 function svgVoorXtool(g,meta){
   return `<?xml version="1.0" encoding="UTF-8"?>\n<!-- ${meta} -->\n<svg xmlns="http://www.w3.org/2000/svg" width="${g.W}mm" height="${g.H}mm" viewBox="0 0 ${g.W} ${g.H}">\n  <path d="${g.d}" fill="#000000" fill-rule="nonzero"/>\n</svg>\n`;
@@ -610,9 +611,21 @@ const MODELLEN = [
 ];
 const BRONNEN={S:"Stanley",K:"Klean Kanteen",KN:"kathmandu.nl",F:"fabrikant en foto",G:"geschat"};
 /* Graveervlak in mm, afgeleid uit het rechte deel van de fles in de tekening. */
+/* Platte gravure (mm) om een cilinder met straal R leggen en van voren bekijken.
+   Booglengte x wordt zichtbare positie R*sin(x/R): naar de zijkanten loopt de tekst weg.
+   Resultaat is gecentreerd rond x=0. */
+function rondom(g,R){
+  const f=n=>+n.toFixed(3), X=x=>R*Math.sin(Math.max(-Math.PI/2,Math.min(Math.PI/2,(x-g.W/2)/R)));
+  return g.cmds.map(c=>c.type==="Z"?"Z":c.type==="M"||c.type==="L"?`${c.type}${f(X(c.x))} ${f(c.y)}`:
+    c.type==="Q"?`Q${f(X(c.x1))} ${f(c.y1)} ${f(X(c.x))} ${f(c.y)}`:
+    `C${f(X(c.x1))} ${f(c.y1)} ${f(X(c.x2))} ${f(c.y2)} ${f(X(c.x))} ${f(c.y)}`).join("");
+}
 function graveervlakVan(vorm,maat){
   const v=(VORMEN[vorm]||VORMEN.transit)(T(),maat,{lak:"#777777",dop:"#777777"});
-  return [Math.round(Math.min(v.maxW,90)), Math.round(Math.min(v.maxH,v.maxW,90))];
+  // rotatiemodule: gravure mag om de fles heen lopen, tot een derde van de omtrek
+  // (dan blijft hij van voren leesbaar). Heupfles is plat: alleen de voorkant.
+  const breed=vorm==="flask"?v.maxW:Math.min(Math.PI*maat.D/3,110);
+  return [Math.round(breed), Math.round(Math.min(v.maxH,60))];
 }
 function vindModel(naam, afm){
   for(const [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
@@ -633,10 +646,11 @@ function teken(p, g){
   // gravure op ware grootte, gecentreerd op de as; te breed voor het zichtbare front? dan schalen
   let eng="";
   if(g&&g.d){
-    const s=Math.min(1, vlak.maxW/g.W);
+    const s=1, d=p.vorm==="flask"?g.d:rondom(g,D/2);
     const lak=c.lak, L=helder(lak), sat=(()=>{const n=parseInt(lak.slice(1),16);const a=[n>>16,(n>>8)&255,n&255];return Math.max(...a)-Math.min(...a);})();
     const inkt=L<140?"#DADDDE":sat<18?"#3E4144":"#8F9497";
-    eng=`<g transform="translate(${(-g.W*s/2).toFixed(2)} ${(vlak.cy-g.H*s/2).toFixed(2)}) scale(${s.toFixed(3)})"><path d="${g.d}" fill="${inkt}"/></g>`;
+    const dd=p.vorm==="flask"?d:d; const dx=p.vorm==="flask"?-g.W/2:0;
+    eng=`<g transform="translate(${dx.toFixed(2)} ${(vlak.cy-g.H*s/2).toFixed(2)})"><path d="${dd}" fill="${inkt}"/></g>`;
   }
   const breed=Math.max(D*1.5,H*.62), x0=-breed/2-D*.05, top=-H*.08, hoog=H*1.14;
   const bw=breed+D*.3;
@@ -690,7 +704,7 @@ function renderProduct(){
     <dt>Afmetingen</dt><dd><span class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</span><span class="hint"> (bron: ${p.maatBron})</span></dd>
     <dt>Graveervlak</dt><dd class="mono">max. ${p.zone[0]} × ${p.zone[1]} mm</dd>
     <dt>Levering</dt><dd>Gegraveerd en verzonden binnen 3 werkdagen</dd>`;
-  $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>.`;
+  $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
   $("toast").textContent="";
   renderTafel();
 }
@@ -702,10 +716,9 @@ function opFoto(p,g){
   let eng="";
   if(g.d){
     // ware schaal: productfoto-hoogte in pixels gedeeld door de echte hoogte in mm
-    const pxmm=v.product_h?v.product_h*S/p.maat.H:Math.min(v.w*S/g.W, v.h*S/g.H);
-    const s=Math.min(pxmm, v.w*S/g.W);
-    const ox=v.cx*S-g.W*s/2, oy=v.cy*S-g.H*s/2;
-    eng=`<g transform="translate(${ox.toFixed(1)} ${oy.toFixed(1)}) scale(${s.toFixed(3)})"><path d="${g.d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
+    const pxmm=v.product_h*S/p.maat.H;
+    const d=rondom(g,p.maat.D/2);
+    eng=`<g transform="translate(${(v.cx*S).toFixed(1)} ${(v.cy*S-g.H*pxmm/2).toFixed(1)}) scale(${pxmm.toFixed(3)})"><path d="${d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
   }
   return `<svg class="opfoto" viewBox="0 0 ${S} ${S}" role="img" aria-label="${esc(p.merk+" "+p.naam+", "+p.kleur)} met gravure">
     <image href="${esc(v.pad)}" width="${S}" height="${S}" onerror="this.parentNode.outerHTML=teken(state.sel,bouwGravure(cfg()))"/>${eng}</svg>`;
