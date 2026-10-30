@@ -1203,7 +1203,7 @@ renderMand();
 
 /* ---------- afrekenen ----------
    AFREKEN_URL: adres van de Cloudflare Worker (zie worker/README). Leeg = afrekenen nog niet gekoppeld. */
-const AFREKEN_URL="";          // bijv. https://graveerwerk-afrekenen.<naam>.workers.dev
+const AFREKEN_URL="https://graveerwerk-afrekenen.niels-691.workers.dev";
 const BUCKAROO_ACTIEF=false;    // true zodra de Buckaroo-sleutels in de Worker staan; tot die tijd testbetaling
 function renderAfrekenen(){
   if(!state.mand.length){location.hash="winkelmand";return;}
