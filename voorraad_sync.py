@@ -223,6 +223,95 @@ def bewerk_foto(data: bytes) -> bytes:
     return uit.getvalue()
 
 
+def meet_graveervlak(pad, merk=""):
+    """Meet op de (bijgesneden) hoofdfoto waar het rechte deel van de fles zit.
+    Geeft het graveervlak als fracties van de foto plus de lak- en graveerkleur,
+    zodat de shop de gravure op de echte foto kan tonen."""
+    from PIL import Image
+    im = Image.open(pad).convert("RGB")
+    k = 250 / im.width
+    klein = im.resize((250, round(im.height * k)))
+    grijs = klein.convert("L")
+    W, H = klein.size
+    px = grijs.load()
+    rijen = []  # per rij: (lengte, start) van het langste niet-witte stuk; hengsels zijn dunner
+    for y in range(H):
+        beste, start, run = (0, 0), None, 0
+        for x in range(W + 1):
+            donker = x < W and px[x, y] < 242
+            if donker:
+                if start is None:
+                    start = x
+            elif start is not None:
+                if x - start > beste[0]:
+                    beste = (x - start, start)
+                start = None
+        rijen.append(beste)
+    gevuld = [y for y, r in enumerate(rijen) if r[0] > 3]
+    if not gevuld:
+        return None
+    top, bodem = gevuld[0], gevuld[-1]
+    hoog = bodem - top
+    band = [rijen[y] for y in range(top + int(hoog * .3), bodem - int(hoog * .12))]
+    if not band:
+        return None
+    breed = sorted(r[0] for r in band)[len(band) // 2]
+    # langste aaneengesloten stuk waar de fles (bijna) volle breedte heeft: het cilindrische deel
+    beste, cur = (0, 0), None
+    for y in range(top, bodem + 1):
+        if rijen[y][0] >= .9 * breed:
+            cur = y if cur is None else cur
+            if y - cur > beste[1] - beste[0]:
+                beste = (cur, y)
+        else:
+            cur = None
+    y0, y1 = beste
+    if y1 - y0 < 10:
+        return None
+    midden = sorted(rijen[y][1] + rijen[y][0] / 2 for y in range(y0, y1 + 1))[(y1 - y0) // 2]
+    vw = breed * .78                                   # zichtbaar front waarbinnen de gravure past
+    # lakkleur: mediaan van een smalle strook midden op de fles
+    strook = [klein.getpixel((int(midden + dx), int(y))) for y in range(y0, y1, 2) for dx in (-breed * .12, 0, breed * .12)]
+    kleur = tuple(sorted(c[i] for c in strook)[len(strook) // 2] for i in range(3))
+
+    # Merklogo's en opdruk overslaan: rijen waar het midden van de fles duidelijk van de lak afwijkt
+    xa, xb = int(midden - breed * .3), int(midden + breed * .3)
+    def afwijkend(y):
+        n = sum(1 for x in range(xa, xb) if sum(abs(a - b) for a, b in zip(klein.getpixel((x, y)), kleur)) > 70)
+        return n > (xb - xa) * .05
+    logo = [afwijkend(y) for y in range(y0, y1 + 1)]
+    vrij = [not any(logo[max(0, i - 3):i + 4]) for i in range(len(logo))]   # 3 rijen marge rond opdruk
+    best, cur = (0, -1), None
+    for i, v in enumerate(vrij + [False]):
+        if v and cur is None:
+            cur = i
+        elif not v and cur is not None:
+            if i - cur > best[1] - best[0] + 1:
+                best = (cur, i - 1)
+            cur = None
+    seg = y1 - y0
+    if any(logo) and best[1] - best[0] + 1 >= seg * .3:
+        cy, vh = y0 + (best[0] + best[1]) / 2, (best[1] - best[0]) * .85
+    elif merk.lower() == "stanley":
+        # opdruk niet gevonden (bijv. donker logo op donkere lak): Stanley-logo zit altijd bovenaan
+        cy, vh = y0 + seg * .7, seg * .42
+    else:
+        cy, vh = y0 + seg * .5, seg * .8
+    lum = .299 * kleur[0] + .587 * kleur[1] + .114 * kleur[2]
+    verzadiging = max(kleur) - min(kleur)
+    if lum < 140:
+        gravure = "#D6D9DA"     # donkere lak: laser legt het staal bloot, licht zilver
+    elif verzadiging < 18:
+        gravure = "#3E4144"     # blank RVS of wit: laser kleurt donker
+    else:
+        gravure = "#8F9497"     # lichte lak: mat zilver (iets donkerder voor leesbaarheid)
+    return {
+        "cx": round(midden / W, 4), "cy": round(cy / H, 4),   # midden van het vlak
+        "w": round(vw / W, 4), "h": round(vh / H, 4),         # maximale ruimte
+        "lak": "#%02X%02X%02X" % kleur, "gravure": gravure,
+    }
+
+
 def download_fotos(info, map_, sessie, problemen, max_fotos=4):
     """Slaat de foto's op als img/<bestelcode>_<n>.jpg. Bestaande bestanden worden
     niet opnieuw gedownload, dus na de eerste run kost dit vrijwel niets."""
@@ -278,6 +367,12 @@ def main():
                 continue
             if args.fotos:
                 info["lokale_afbeeldingen"] = download_fotos(info, args.fotomap, sessie, problemen)
+                if info["lokale_afbeeldingen"]:
+                    try:
+                        hoofd = os.path.join(os.path.dirname(args.fotomap), info["lokale_afbeeldingen"][0])
+                        info["graveervlak_foto"] = meet_graveervlak(hoofd, merk)
+                    except Exception as e:  # noqa: BLE001
+                        print(f"graveervlak niet gemeten voor {info.get('bestelcode')}: {e}", file=sys.stderr)
             producten.append({"merk": merk, "url": item["url"], **info})
 
     zonder_tabel = sum(1 for p in producten if not p["voorraadtabel_gevonden"])

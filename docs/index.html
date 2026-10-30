@@ -106,7 +106,9 @@ header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;jus
 @media (max-width:860px){.werkblad{grid-template-columns:minmax(0,1fr)}}
 .preview{display:grid;place-items:center;gap:6px;padding:22px;background:color-mix(in srgb,var(--ink) 4%,var(--surface));align-content:center}
 .preview svg{width:100%;max-width:330px;height:420px}
-@media (max-width:860px){.preview svg{height:340px}}
+.preview svg.opfoto{max-width:520px;height:auto;aspect-ratio:1/1;background:var(--photo);border-radius:6px}
+.preview{background:var(--photo)}
+@media (max-width:860px){.preview svg{height:340px}.preview svg.opfoto{height:auto}}
 .preview .hint{text-align:center}
 .form{padding:22px;display:grid;gap:15px;align-content:start}
 .field{display:grid;gap:5px}
@@ -198,7 +200,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <p id="tZone"></p>
       </header>
       <div class="werkblad">
-        <div class="preview"><div id="preview"></div><p class="hint">Voorbeeld op schaal binnen het graveervlak</p></div>
+        <div class="preview"><div id="preview"></div><p class="hint">Voorbeeld van de gravure op deze fles</p></div>
         <form class="form" id="form">
           <div class="field">
             <label for="r1">Regel 1 <small id="c1">0/20</small></label>
@@ -378,6 +380,19 @@ function renderProduct(){
 }
 function renderFoto(){const p=state.sel;$("mainPhoto").innerHTML=foto(p,p.fotos[state.foto]||p.fotos[0],false);}
 
+/* Gravure op de echte productfoto. Vlak en kleuren zijn per foto gemeten door voorraad_sync.py. */
+function opFoto(p,g){
+  const v=p.vlak, S=1000;
+  let eng="";
+  if(g.d){
+    const bw=v.w*S, bh=v.h*S, s=Math.min(bw/g.W, bh/g.H);
+    const ox=v.cx*S-g.W*s/2, oy=v.cy*S-g.H*s/2;
+    eng=`<g transform="translate(${ox.toFixed(1)} ${oy.toFixed(1)}) scale(${s.toFixed(3)})"><path d="${g.d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
+  }
+  return `<svg class="opfoto" viewBox="0 0 ${S} ${S}" role="img" aria-label="${esc(p.merk+" "+p.naam+", "+p.kleur)} met gravure">
+    <image href="${esc(p.fotos[0])}" width="${S}" height="${S}" onerror="this.parentNode.outerHTML=silhouet(state.sel,bouwGravure(cfg()))"/>${eng}</svg>`;
+}
+
 /* ---------- graveertafel ---------- */
 function segButtons(el,opts,key){
   el.innerHTML="";
@@ -396,7 +411,7 @@ function renderTafel(){
   $("c1").textContent=`${$("r1").value.length}/20`;$("c2").textContent=`${$("r2").value.length}/28`;
   const a=$("aantal"); a.max=v; if(+a.value>v)a.value=v; if(+a.value<1)a.value=1;
   $("max").textContent=`max. ${v}`;
-  $("preview").innerHTML=silhouet(p,bouwGravure(cfg()));
+  $("preview").innerHTML=p.vlak&&p.fotos[0]?opFoto(p,bouwGravure(cfg())):silhouet(p,bouwGravure(cfg()));
   const n=+a.value, gp=graveerPrijs(n);
   $("som").innerHTML=`<div><span>${n} × fles</span><span class="mono">${euro(p.prijs*n)}</span></div>
     <div><span>${n} × graveren à ${euro(gp)}</span><span class="mono">${euro(gp*n)}</span></div>
@@ -490,9 +505,10 @@ function vanJson(data){
     const met=kleur.match(/^(met \S+?,?)\s+(.+)$/i);   // 'met koffiedop Black' -> dop bij de naam
     if(met){naam+=" "+met[1].replace(/,$/,"");kleur=met[2];}
     const [vorm,zone]=vormEnVlak(volledig);
-    return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:kleurHex(kleur||volledig),prijs:p.prijs||0,
+    const vlak=p.graveervlak_foto||null;
+    return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:vlak?vlak.lak:kleurHex(kleur||volledig),prijs:p.prijs||0,
       ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm,zone,
-      fotos:p.lokale_afbeeldingen||[]};
+      fotos:p.lokale_afbeeldingen||[],vlak};
   });
 }
 

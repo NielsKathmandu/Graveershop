@@ -25,7 +25,15 @@
       "lokale_afbeeldingen": [
         "img/025593_1.jpg",
         "img/025593_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.528,
+        "cy": 0.626,
+        "w": 0.1747,
+        "h": 0.3026,
+        "lak": "#161616",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -47,7 +55,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025592_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.528,
+        "cy": 0.656,
+        "w": 0.1747,
+        "h": 0.3776,
+        "lak": "#AEAFA8",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -71,7 +87,15 @@
       "lokale_afbeeldingen": [
         "img/025596_1.jpg",
         "img/025596_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.522,
+        "cy": 0.622,
+        "w": 0.1841,
+        "h": 0.3366,
+        "lak": "#A5C6DB",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -95,7 +119,15 @@
       "lokale_afbeeldingen": [
         "img/025594_1.jpg",
         "img/025594_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.532,
+        "cy": 0.63,
+        "w": 0.1747,
+        "h": 0.3162,
+        "lak": "#015378",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -117,7 +149,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025595_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.528,
+        "cy": 0.624,
+        "w": 0.1747,
+        "h": 0.306,
+        "lak": "#7C867B",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -143,7 +183,15 @@
         "img/025598_1.jpg",
         "img/025598_2.jpg",
         "img/025598_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.522,
+        "cy": 0.616,
+        "w": 0.1778,
+        "h": 0.34,
+        "lak": "#111111",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -167,7 +215,15 @@
       "lokale_afbeeldingen": [
         "img/025597_1.jpg",
         "img/025597_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.522,
+        "cy": 0.648,
+        "w": 0.1778,
+        "h": 0.3904,
+        "lak": "#ADAEA7",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -189,7 +245,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025602_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.524,
+        "cy": 0.622,
+        "w": 0.181,
+        "h": 0.3366,
+        "lak": "#CED89B",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -213,7 +277,15 @@
       "lokale_afbeeldingen": [
         "img/025604_1.jpg",
         "img/025604_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.654,
+        "w": 0.1747,
+        "h": 0.3872,
+        "lak": "#B1B0AB",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -235,7 +307,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028364_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.454,
+        "cy": 0.45,
+        "w": 0.5834,
+        "h": 0.5536,
+        "lak": "#4F4F4F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -257,7 +337,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028365_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.454,
+        "cy": 0.452,
+        "w": 0.5834,
+        "h": 0.5568,
+        "lak": "#85A591",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -279,7 +367,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/018725_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.394,
+        "cy": 0.484,
+        "w": 0.4992,
+        "h": 0.5312,
+        "lak": "#4D5A46",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -303,7 +399,15 @@
       "lokale_afbeeldingen": [
         "img/018726_1.jpg",
         "img/018726_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.41,
+        "cy": 0.494,
+        "w": 0.4898,
+        "h": 0.4318,
+        "lak": "#0F2A3A",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -329,7 +433,15 @@
         "img/018724_1.jpg",
         "img/018724_2.jpg",
         "img/018724_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.392,
+        "cy": 0.562,
+        "w": 0.4961,
+        "h": 0.4,
+        "lak": "#D3D2C1",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -351,7 +463,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025603_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.59,
+        "w": 0.1685,
+        "h": 0.3638,
+        "lak": "#75134C",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -373,7 +493,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026894_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.48,
+        "cy": 0.456,
+        "w": 0.1685,
+        "h": 0.2448,
+        "lak": "#BEC6C2",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -395,7 +523,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026893_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.484,
+        "cy": 0.61,
+        "w": 0.1685,
+        "h": 0.4832,
+        "lak": "#3F3F3F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -417,7 +553,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028366_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.482,
+        "cy": 0.612,
+        "w": 0.1716,
+        "h": 0.48,
+        "lak": "#5B8687",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -439,7 +583,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028368_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.482,
+        "cy": 0.612,
+        "w": 0.1716,
+        "h": 0.48,
+        "lak": "#806A75",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -461,7 +613,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028367_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.482,
+        "cy": 0.612,
+        "w": 0.1716,
+        "h": 0.48,
+        "lak": "#76927F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -483,7 +643,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026896_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.482,
+        "cy": 0.458,
+        "w": 0.1841,
+        "h": 0.255,
+        "lak": "#C0CCC5",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -505,7 +673,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026895_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.482,
+        "cy": 0.61,
+        "w": 0.1841,
+        "h": 0.4832,
+        "lak": "#3F3F3F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -527,7 +703,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026898_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.484,
+        "cy": 0.608,
+        "w": 0.1872,
+        "h": 0.4864,
+        "lak": "#568484",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -549,7 +733,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028369_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.444,
+        "w": 0.181,
+        "h": 0.1972,
+        "lak": "#8C747F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -571,7 +763,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026897_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.482,
+        "cy": 0.482,
+        "w": 0.1841,
+        "h": 0.153,
+        "lak": "#789483",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -595,7 +795,15 @@
       "lokale_afbeeldingen": [
         "img/018746_1.jpg",
         "img/018746_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.518,
+        "w": 0.2558,
+        "h": 0.3978,
+        "lak": "#1A1A1A",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -617,7 +825,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025610_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.51,
+        "w": 0.2527,
+        "h": 0.391,
+        "lak": "#7B8E82",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -639,7 +855,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025609_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.538,
+        "w": 0.2496,
+        "h": 0.4386,
+        "lak": "#DEAE01",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -661,7 +885,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/018750_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.702,
+        "w": 0.2558,
+        "h": 0.1598,
+        "lak": "#EEEBE6",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -683,7 +915,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/018756_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.52,
+        "w": 0.2215,
+        "h": 0.442,
+        "lak": "#1C1C1C",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -705,7 +945,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028374_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.482,
+        "w": 0.2215,
+        "h": 0.4114,
+        "lak": "#7F9386",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -727,7 +975,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028373_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.528,
+        "w": 0.2215,
+        "h": 0.4828,
+        "lak": "#E2B301",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Klean Kanteen",
@@ -749,7 +1005,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/018760_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.59,
+        "w": 0.2215,
+        "h": 0.3298,
+        "lak": "#EAEAE7",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -773,7 +1037,15 @@
       "lokale_afbeeldingen": [
         "img/011463_1.jpg",
         "img/011463_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.44,
+        "cy": 0.65,
+        "w": 0.2714,
+        "h": 0.2006,
+        "lak": "#616D61",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -795,7 +1067,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/011460_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.386,
+        "cy": 0.6928,
+        "w": 0.3557,
+        "h": 0.3293,
+        "lak": "#92A494",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -821,7 +1101,15 @@
         "img/029038_1.jpg",
         "img/029038_2.jpg",
         "img/029038_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.69,
+        "w": 0.1934,
+        "h": 0.2436,
+        "lak": "#373739",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -847,7 +1135,15 @@
         "img/029040_1.jpg",
         "img/029040_2.jpg",
         "img/029040_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.45,
+        "cy": 0.604,
+        "w": 0.103,
+        "h": 0.2176,
+        "lak": "#DEDFDC",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -873,7 +1169,15 @@
         "img/029039_1.jpg",
         "img/029039_2.jpg",
         "img/029039_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.664,
+        "w": 0.1934,
+        "h": 0.2992,
+        "lak": "#697E71",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -899,7 +1203,15 @@
         "img/029042_1.jpg",
         "img/029042_2.jpg",
         "img/029042_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.66,
+        "w": 0.1903,
+        "h": 0.3196,
+        "lak": "#657C6D",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -925,7 +1237,15 @@
         "img/029043_1.jpg",
         "img/029043_2.jpg",
         "img/029043_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.452,
+        "cy": 0.56,
+        "w": 0.0998,
+        "h": 0.1496,
+        "lak": "#DFE1DE",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -951,7 +1271,15 @@
         "img/029041_1.jpg",
         "img/029041_2.jpg",
         "img/029041_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.66,
+        "w": 0.1903,
+        "h": 0.3196,
+        "lak": "#657C6D",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -977,7 +1305,15 @@
         "img/021554_1.jpg",
         "img/021554_2.jpg",
         "img/021554_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.194,
+        "cy": 0.502,
+        "w": 0.1092,
+        "h": 0.4794,
+        "lak": "#E7E8EB",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1003,7 +1339,15 @@
         "img/029044_1.jpg",
         "img/029044_2.jpg",
         "img/029044_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.222,
+        "cy": 0.5,
+        "w": 0.1591,
+        "h": 0.4896,
+        "lak": "#DDDFDC",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1029,7 +1373,15 @@
         "img/029045_1.jpg",
         "img/029045_2.jpg",
         "img/029045_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.496,
+        "cy": 0.644,
+        "w": 0.5866,
+        "h": 0.2652,
+        "lak": "#6F8576",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1055,7 +1407,15 @@
         "img/029047_1.jpg",
         "img/029047_2.jpg",
         "img/029047_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.632,
+        "w": 0.468,
+        "h": 0.3196,
+        "lak": "#212223",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1081,7 +1441,15 @@
         "img/029046_1.jpg",
         "img/029046_2.jpg",
         "img/029046_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.282,
+        "cy": 0.592,
+        "w": 0.1217,
+        "h": 0.3672,
+        "lak": "#DEE0DD",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1107,7 +1475,15 @@
         "img/029048_1.jpg",
         "img/029048_2.jpg",
         "img/029048_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.64,
+        "w": 0.468,
+        "h": 0.3264,
+        "lak": "#708775",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1135,7 +1511,15 @@
         "img/023210_2.jpg",
         "img/023210_3.jpg",
         "img/023210_4.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.462,
+        "cy": 0.6896,
+        "w": 0.1654,
+        "h": 0.289,
+        "lak": "#D94524",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1163,7 +1547,15 @@
         "img/029009_2.jpg",
         "img/029009_3.jpg",
         "img/029009_4.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.7516,
+        "w": 0.3026,
+        "h": 0.1966,
+        "lak": "#7EA9D2",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1189,7 +1581,15 @@
         "img/029007_1.jpg",
         "img/029007_2.jpg",
         "img/029007_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.642,
+        "w": 0.3058,
+        "h": 0.085,
+        "lak": "#E8E3D8",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1215,7 +1615,15 @@
         "img/029008_1.jpg",
         "img/029008_2.jpg",
         "img/029008_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.7628,
+        "w": 0.2714,
+        "h": 0.2033,
+        "lak": "#E9DAD5",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1241,7 +1649,15 @@
         "img/028237_1.jpg",
         "img/028237_2.jpg",
         "img/028237_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.504,
+        "cy": 0.738,
+        "w": 0.3058,
+        "h": 0.255,
+        "lak": "#202123",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1267,7 +1683,15 @@
         "img/028236_1.jpg",
         "img/028236_2.jpg",
         "img/028236_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.7464,
+        "w": 0.3026,
+        "h": 0.1982,
+        "lak": "#556148",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1293,7 +1717,15 @@
         "img/029011_1.jpg",
         "img/029011_2.jpg",
         "img/029011_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.504,
+        "cy": 0.7352,
+        "w": 0.2558,
+        "h": 0.2251,
+        "lak": "#1B1C1E",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1319,7 +1751,15 @@
         "img/029013_1.jpg",
         "img/029013_2.jpg",
         "img/029013_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.504,
+        "cy": 0.8224,
+        "w": 0.2371,
+        "h": 0.1142,
+        "lak": "#EADBD6",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1345,7 +1785,15 @@
         "img/028239_1.jpg",
         "img/028239_2.jpg",
         "img/028239_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.738,
+        "w": 0.2527,
+        "h": 0.2268,
+        "lak": "#5F6A4F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1369,7 +1817,15 @@
       "lokale_afbeeldingen": [
         "img/009726_1.jpg",
         "img/009726_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.658,
+        "w": 0.3151,
+        "h": 0.4318,
+        "lak": "#7F8E82",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1395,7 +1851,15 @@
         "img/029037_1.jpg",
         "img/029037_2.jpg",
         "img/029037_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.396,
+        "cy": 0.764,
+        "w": 0.4711,
+        "h": 0.1972,
+        "lak": "#171515",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1423,7 +1887,15 @@
         "img/029036_2.jpg",
         "img/029036_3.jpg",
         "img/029036_4.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.396,
+        "cy": 0.6752,
+        "w": 0.4742,
+        "h": 0.2755,
+        "lak": "#798E79",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1449,7 +1921,15 @@
         "img/029035_1.jpg",
         "img/029035_2.jpg",
         "img/029035_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.332,
+        "cy": 0.702,
+        "w": 0.3682,
+        "h": 0.294,
+        "lak": "#E7D7D2",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1477,7 +1957,15 @@
         "img/029034_2.jpg",
         "img/029034_3.jpg",
         "img/029034_4.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.398,
+        "cy": 0.6632,
+        "w": 0.5117,
+        "h": 0.2587,
+        "lak": "#2D2E2E",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1501,7 +1989,15 @@
       "lokale_afbeeldingen": [
         "img/029032_1.jpg",
         "img/029032_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.4,
+        "cy": 0.6964,
+        "w": 0.5179,
+        "h": 0.257,
+        "lak": "#758677",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1527,7 +2023,15 @@
         "img/029033_1.jpg",
         "img/029033_2.jpg",
         "img/029033_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.396,
+        "cy": 0.6596,
+        "w": 0.5086,
+        "h": 0.2638,
+        "lak": "#DED2D0",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1553,7 +2057,15 @@
         "img/029031_1.jpg",
         "img/029031_2.jpg",
         "img/029031_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.7136,
+        "w": 0.1716,
+        "h": 0.2722,
+        "lak": "#1B1B1D",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1579,7 +2091,15 @@
         "img/029027_1.jpg",
         "img/029027_2.jpg",
         "img/029027_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.7192,
+        "w": 0.1747,
+        "h": 0.1579,
+        "lak": "#C5C0BC",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1605,7 +2125,15 @@
         "img/029029_1.jpg",
         "img/029029_2.jpg",
         "img/029029_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.64,
+        "w": 0.1747,
+        "h": 0.2516,
+        "lak": "#788E7B",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1631,7 +2159,15 @@
         "img/029030_1.jpg",
         "img/029030_2.jpg",
         "img/029030_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.654,
+        "w": 0.1747,
+        "h": 0.2822,
+        "lak": "#417586",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1657,7 +2193,15 @@
         "img/029028_1.jpg",
         "img/029028_2.jpg",
         "img/029028_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.742,
+        "w": 0.1716,
+        "h": 0.1092,
+        "lak": "#ECDDD8",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1683,7 +2227,15 @@
         "img/029315_1.jpg",
         "img/029315_2.jpg",
         "img/029315_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.6884,
+        "w": 0.1903,
+        "h": 0.2402,
+        "lak": "#252523",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1709,7 +2261,15 @@
         "img/029025_1.jpg",
         "img/029025_2.jpg",
         "img/029025_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.644,
+        "w": 0.1903,
+        "h": 0.2652,
+        "lak": "#6E837A",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1735,7 +2295,15 @@
         "img/029024_1.jpg",
         "img/029024_2.jpg",
         "img/029024_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.488,
+        "cy": 0.7196,
+        "w": 0.156,
+        "h": 0.163,
+        "lak": "#E9DAD5",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1761,7 +2329,15 @@
         "img/029019_1.jpg",
         "img/029019_2.jpg",
         "img/029019_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.438,
+        "cy": 0.732,
+        "w": 0.1778,
+        "h": 0.1848,
+        "lak": "#C9C5C1",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -1787,7 +2363,15 @@
         "img/029021_1.jpg",
         "img/029021_2.jpg",
         "img/029021_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.476,
+        "cy": 0.6896,
+        "w": 0.1747,
+        "h": 0.2386,
+        "lak": "#748C83",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1813,7 +2397,15 @@
         "img/029022_1.jpg",
         "img/029022_2.jpg",
         "img/029022_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.474,
+        "cy": 0.6812,
+        "w": 0.1778,
+        "h": 0.2335,
+        "lak": "#30668B",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1839,7 +2431,15 @@
         "img/029018_1.jpg",
         "img/029018_2.jpg",
         "img/029018_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.44,
+        "cy": 0.6996,
+        "w": 0.1934,
+        "h": 0.2302,
+        "lak": "#37668F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1867,7 +2467,15 @@
         "img/009694_2.jpg",
         "img/009694_3.jpg",
         "img/009694_4.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.436,
+        "cy": 0.6936,
+        "w": 0.1997,
+        "h": 0.2386,
+        "lak": "#94A696",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1889,7 +2497,15 @@
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/023231_1.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.442,
+        "cy": 0.696,
+        "w": 0.1966,
+        "h": 0.2352,
+        "lak": "#758876",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1915,7 +2531,15 @@
         "img/023239_1.jpg",
         "img/023239_2.jpg",
         "img/023239_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.466,
+        "cy": 0.682,
+        "w": 0.415,
+        "h": 0.2074,
+        "lak": "#D8C6C2",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1941,7 +2565,15 @@
         "img/029049_1.jpg",
         "img/029049_2.jpg",
         "img/029049_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.464,
+        "cy": 0.6644,
+        "w": 0.4087,
+        "h": 0.257,
+        "lak": "#161514",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -1965,7 +2597,15 @@
       "lokale_afbeeldingen": [
         "img/009698_1.jpg",
         "img/009698_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.658,
+        "w": 0.2995,
+        "h": 0.2268,
+        "lak": "#92A494",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -1991,7 +2631,15 @@
         "img/009728_1.jpg",
         "img/009728_2.jpg",
         "img/009728_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.5264,
+        "w": 0.2995,
+        "h": 0.2654,
+        "lak": "#556653",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2017,7 +2665,15 @@
         "img/029017_1.jpg",
         "img/029017_2.jpg",
         "img/029017_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.6716,
+        "w": 0.5366,
+        "h": 0.2806,
+        "lak": "#9F9E99",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2045,7 +2701,15 @@
         "img/029014_2.jpg",
         "img/029014_3.jpg",
         "img/029014_4.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.6712,
+        "w": 0.5335,
+        "h": 0.2755,
+        "lak": "#1C1D1D",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2071,7 +2735,15 @@
         "img/029016_1.jpg",
         "img/029016_2.jpg",
         "img/029016_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.72,
+        "w": 0.5304,
+        "h": 0.1768,
+        "lak": "#E0E1E3",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2097,7 +2769,15 @@
         "img/029004_1.jpg",
         "img/029004_2.jpg",
         "img/029004_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.6832,
+        "w": 0.2371,
+        "h": 0.3091,
+        "lak": "#F3B7B4",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -2123,7 +2803,15 @@
         "img/028999_1.jpg",
         "img/028999_2.jpg",
         "img/028999_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.676,
+        "w": 0.2371,
+        "h": 0.2856,
+        "lak": "#B1ACA8",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2147,7 +2835,15 @@
       "lokale_afbeeldingen": [
         "img/028998_1.jpg",
         "img/028998_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.77,
+        "w": 0.2496,
+        "h": 0.2074,
+        "lak": "#46484A",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2171,7 +2867,15 @@
       "lokale_afbeeldingen": [
         "img/029005_1.jpg",
         "img/029005_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.686,
+        "w": 0.234,
+        "h": 0.3108,
+        "lak": "#7AA3CE",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -2195,7 +2899,15 @@
       "lokale_afbeeldingen": [
         "img/029000_1.jpg",
         "img/029000_2.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.7252,
+        "w": 0.234,
+        "h": 0.2167,
+        "lak": "#E5E3D7",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2221,7 +2933,15 @@
         "img/029001_1.jpg",
         "img/029001_2.jpg",
         "img/029001_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.644,
+        "w": 0.2402,
+        "h": 0.3944,
+        "lak": "#5E694F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2247,7 +2967,15 @@
         "img/029006_1.jpg",
         "img/029006_2.jpg",
         "img/029006_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.682,
+        "w": 0.2371,
+        "h": 0.3108,
+        "lak": "#6E8176",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2273,7 +3001,15 @@
         "img/029002_1.jpg",
         "img/029002_2.jpg",
         "img/029002_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.656,
+        "w": 0.2371,
+        "h": 0.4216,
+        "lak": "#D7CBC9",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2299,7 +3035,15 @@
         "img/028990_1.jpg",
         "img/028990_2.jpg",
         "img/028990_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.502,
+        "cy": 0.7348,
+        "w": 0.1966,
+        "h": 0.2369,
+        "lak": "#BFB7B4",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2325,7 +3069,15 @@
         "img/028989_1.jpg",
         "img/028989_2.jpg",
         "img/028989_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.68,
+        "w": 0.1966,
+        "h": 0.3192,
+        "lak": "#2D2E2F",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2351,7 +3103,15 @@
         "img/028996_1.jpg",
         "img/028996_2.jpg",
         "img/028996_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.6772,
+        "w": 0.1934,
+        "h": 0.3175,
+        "lak": "#87B1DB",
+        "gravure": "#8F9497"
+      }
     },
     {
       "merk": "Stanley",
@@ -2377,7 +3137,15 @@
         "img/028991_1.jpg",
         "img/028991_2.jpg",
         "img/028991_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.6656,
+        "w": 0.1903,
+        "h": 0.3058,
+        "lak": "#E6E4D7",
+        "gravure": "#3E4144"
+      }
     },
     {
       "merk": "Stanley",
@@ -2403,7 +3171,15 @@
         "img/028993_1.jpg",
         "img/028993_2.jpg",
         "img/028993_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.6788,
+        "w": 0.1966,
+        "h": 0.3209,
+        "lak": "#5A624A",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2429,7 +3205,15 @@
         "img/028997_1.jpg",
         "img/028997_2.jpg",
         "img/028997_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.6784,
+        "w": 0.1934,
+        "h": 0.3158,
+        "lak": "#748B7E",
+        "gravure": "#D6D9DA"
+      }
     },
     {
       "merk": "Stanley",
@@ -2455,7 +3239,15 @@
         "img/028994_1.jpg",
         "img/028994_2.jpg",
         "img/028994_3.jpg"
-      ]
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.628,
+        "w": 0.1966,
+        "h": 0.4692,
+        "lak": "#DCD1CF",
+        "gravure": "#3E4144"
+      }
     }
   ]
 }
