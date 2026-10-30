@@ -62,6 +62,7 @@ assert.equal(mails.length, 2, "ordermail + bevestiging");
 const order = mails.find(m => m.to === "webshop@kathmandu.nl");
 assert.deepEqual(order.attachments.map(a => a.filename.replace(d.nummer, "NR")), ["NR_regel2_029031_xtool.svg", "NR_regel2_029031_voorbeeld.png"]);
 assert.equal(Buffer.from(order.attachments[0].content, "base64").toString(), svg);
+assert.match(order.html, /<b>Graveren<\/b>/, "gravure als losse regel"); assert.ok(order.html.includes("7,50"), "graveerprijs apart");
 assert.equal(JSON.parse(kv.get(d.nummer)).status, "betaald");
 
 // 4. dubbele push mailt niet opnieuw

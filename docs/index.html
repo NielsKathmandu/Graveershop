@@ -1176,7 +1176,7 @@ function renderMand(){
           <div class="acties" style="margin-top:6px"><button class="btn sec" type="button" data-kopieer="${r.nr}">Kopieer SVG voor xTool</button><span class="toast" id="kt${r.nr}"></span></div>
           <textarea id="ta${r.nr}" readonly aria-label="SVG-code werkbon ${r.nr}" hidden style="width:100%;height:100px;font:12px/1.4 var(--mono)"></textarea></div></div>`:""}
       </div>
-      <div class="rprijs"><span class="mono">${r.n} × ${euro(p.prijs)}${r.gravure?` + ${euro(gp)}`:""}</span><strong class="mono">${euro(regelPrijs(r))}</strong>
+      <div class="rprijs"><span class="mono">Artikel ${r.n} × ${euro(p.prijs)} = ${euro(r.n*p.prijs)}</span>${r.gravure?`<span class="mono">Graveren ${r.n} × ${euro(gp)} = ${euro(r.n*gp)}</span>`:""}<strong class="mono">${euro(regelPrijs(r))}</strong>
         <button class="linkknop" type="button" data-weg="${r.nr}">Verwijderen</button></div>`;
     lijst.appendChild(el);
     if(r.gravure){
@@ -1208,7 +1208,7 @@ const BUCKAROO_ACTIEF=false;    // true zodra de Buckaroo-sleutels in de Worker 
 function renderAfrekenen(){
   if(!state.mand.length){location.hash="winkelmand";return;}
   const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
-  $("samenvatting").innerHTML=`<strong>Je bestelling</strong>${state.mand.map(r=>`<div class="r"><span>${r.n} × ${esc(r.p.merk+" "+r.p.naam+" "+r.p.kleur)}${r.gravure?" <em>met gravure</em>":""}</span><span class="mono">${euro(regelPrijs(r))}</span></div>`).join("")}
+  $("samenvatting").innerHTML=`<strong>Je bestelling</strong>${state.mand.map(r=>`<div class="r"><span>${r.n} × ${esc(r.p.merk+" "+r.p.naam+" "+r.p.kleur)}</span><span class="mono">${euro(r.n*r.p.prijs)}</span></div>${r.gravure?`<div class="r"><span>${r.n} × Graveren à ${euro(graveerPrijs(r.n))}</span><span class="mono">${euro(r.n*graveerPrijs(r.n))}</span></div>`:""}`).join("")}
     <div class="r"><span>Verzenden</span><span class="mono">${verzend?euro(verzend):"gratis"}</span></div>
     <div class="r tot"><span>Totaal incl. btw</span><span class="mono">${euro(sub+verzend)}</span></div>
     <span class="hint">${stuks>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
@@ -1245,11 +1245,11 @@ $("testKnop").onclick=async()=>{
   veld("E-mail klant",klant.email); if(klant.telefoon) veld("Telefoon klant",klant.telefoon); if(klant.opmerking) veld("Opmerking",klant.opmerking);
   state.mand.forEach((r,i)=>{
     const nr=i+1, p=r.p, basis=`${nummer}_regel${nr}_${p.code}`;
-    let t=`${r.n} × ${p.merk} ${p.naam} ${p.kleur} (bestelcode ${p.code}) – ${euro(regelPrijs(r))}`;
+    let t=`${r.n} × ${p.merk} ${p.naam} ${p.kleur} (bestelcode ${p.code}) à ${euro(p.prijs)} = ${euro(r.n*p.prijs)}`;
     const eigen=[];
     if(r.gravure){
       const c=r.gravure.c;
-      t+=` | MET GRAVURE: regel 1 “${c.r1||"–"}”, regel 2 “${c.r2||"–"}”, lettertype ${FONTDATA[c.font].label}, symbool ${MOTIFS[c.motif]}, formaat ${r.gravure.g.W} × ${r.gravure.g.H} mm`;
+      t+=` | GRAVEREN ${r.n} × ${euro(graveerPrijs(r.n))} = ${euro(r.n*graveerPrijs(r.n))}: regel 1 “${c.r1||"–"}”, regel 2 “${c.r2||"–"}”, lettertype ${FONTDATA[c.font].label}, symbool ${MOTIFS[c.motif]}, formaat ${r.gravure.g.W} × ${r.gravure.g.H} mm`;
       eigen.push(new File([r.gravure.svg],`${basis}_xtool.svg`,{type:"image/svg+xml"}));
       if(r.gravure.voorbeeld) eigen.push(dataUrlNaarBestand(r.gravure.voorbeeld,`${basis}_voorbeeld.png`,"image/png"));
       if(r.gravure.logo&&r.gravure.logo.png) eigen.push(dataUrlNaarBestand(r.gravure.logo.png,`${basis}_logo.png`,"image/png"));

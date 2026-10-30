@@ -209,22 +209,21 @@ async function mail(env, bericht) {
 
 async function stuurOrdermail(env, o, test = false) {
   const bijlagen = [];
+  const td = (x, rechts = false) => `<td style="padding:8px;border-top:1px solid #ddd;vertical-align:top${rechts ? ";text-align:right;white-space:nowrap" : ""}">${x}</td>`;
   const rijen = o.regels.map((r, i) => {
     const nr = i + 1;
-    let g = "Zonder gravure";
+    let rij = `<tr>${td(`<b>${esc(r.naam)}</b><br>Bestelcode ${esc(r.code)}`)}${td(r.n, true)}${td(euro(r.stukprijs), true)}${td(euro(r.n * r.stukprijs), true)}</tr>`;
     if (r.gravure) {
       const c = r.gravure.config || {};
       const basis = `${o.nummer}_regel${nr}_${r.code}`;
       bijlagen.push({ filename: `${basis}_xtool.svg`, content: btoa(unescape(encodeURIComponent(r.gravure.svg))) });
       if (r.gravure.voorbeeld) bijlagen.push({ filename: `${basis}_voorbeeld.png`, content: r.gravure.voorbeeld.split(",")[1] });
       if (r.gravure.logo) bijlagen.push({ filename: `${basis}_logo.png`, content: r.gravure.logo.split(",")[1] });
-      g = `<b>Met gravure</b><br>Regel 1: ${esc(c.r1 || "–")}<br>Regel 2: ${esc(c.r2 || "–")}<br>Lettertype: ${esc(c.lettertype || "")} · Symbool: ${esc(c.symbool || "")}<br>
-           Formaat: ${esc(r.gravure.formaat || "")}<br>Bijlagen: ${basis}_xtool.svg, ${basis}_voorbeeld.png${r.gravure.logo ? `, ${basis}_logo.png` : ""}`;
+      const g = `<b>Graveren</b> – op ${esc(r.naam)} (${esc(r.code)})<br><span style="color:#555">Regel 1: ${esc(c.r1 || "–")}<br>Regel 2: ${esc(c.r2 || "–")}<br>Lettertype: ${esc(c.lettertype || "")} · Symbool: ${esc(c.symbool || "")}<br>
+           Formaat: ${esc(r.gravure.formaat || "")}<br>Bijlagen: ${basis}_xtool.svg, ${basis}_voorbeeld.png${r.gravure.logo ? `, ${basis}_logo.png` : ""}</span>`;
+      rij += `<tr>${td(g)}${td(r.n, true)}${td(euro(r.graveren), true)}${td(euro(r.n * r.graveren), true)}</tr>`;
     }
-    return `<tr><td style="padding:8px;border-top:1px solid #ddd;vertical-align:top">${nr}</td>
-      <td style="padding:8px;border-top:1px solid #ddd;vertical-align:top"><b>${esc(r.naam)}</b><br>Bestelcode ${esc(r.code)} · ${r.n} stuks</td>
-      <td style="padding:8px;border-top:1px solid #ddd;vertical-align:top">${g}</td>
-      <td style="padding:8px;border-top:1px solid #ddd;vertical-align:top;text-align:right">${euro(r.bedrag)}</td></tr>`;
+    return rij;
   }).join("");
   const k = o.klant;
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
@@ -237,7 +236,8 @@ async function stuurOrdermail(env, o, test = false) {
        ${esc(k.email)}${k.telefoon ? `<br>${esc(k.telefoon)}` : ""}</p>
     ${k.opmerking ? `<p><b>Opmerking:</b> ${esc(k.opmerking)}</p>` : ""}
     <h3>Artikelen</h3>
-    <table style="border-collapse:collapse;width:100%">${rijen}
+    <table style="border-collapse:collapse;width:100%">
+      <tr style="text-align:left"><th style="padding:8px">Omschrijving</th><th style="padding:8px;text-align:right">Aantal</th><th style="padding:8px;text-align:right">Stukprijs</th><th style="padding:8px;text-align:right">Bedrag</th></tr>${rijen}
       <tr><td colspan="3" style="padding:8px;text-align:right">Subtotaal</td><td style="padding:8px;text-align:right">${euro(o.subtotaal)}</td></tr>
       <tr><td colspan="3" style="padding:8px;text-align:right">Verzenden</td><td style="padding:8px;text-align:right">${o.verzending ? euro(o.verzending) : "gratis"}</td></tr>
       <tr><td colspan="3" style="padding:8px;text-align:right"><b>Totaal betaald</b></td><td style="padding:8px;text-align:right"><b>${euro(o.totaal)}</b></td></tr>
@@ -247,12 +247,18 @@ async function stuurOrdermail(env, o, test = false) {
 
 async function stuurBevestiging(env, o, naar = null) {
   const k = o.klant;
-  const regels = o.regels.map(r => `<li>${r.n} × ${esc(r.naam)}${r.gravure ? ` met gravure “${esc([r.gravure.config?.r1, r.gravure.config?.r2].filter(Boolean).join(" / ") || "symbool/logo")}”` : ""} – ${euro(r.bedrag)}</li>`).join("");
+  const tdk = (x, rechts = false) => `<td style="padding:6px 8px;border-top:1px solid #ddd;vertical-align:top${rechts ? ";text-align:right;white-space:nowrap" : ""}">${x}</td>`;
+  const regels = o.regels.map(r => {
+    let rij = `<tr>${tdk(esc(r.naam))}${tdk(`${r.n} × ${euro(r.stukprijs)}`, true)}${tdk(euro(r.n * r.stukprijs), true)}</tr>`;
+    if (r.gravure) rij += `<tr>${tdk(`Graveren: “${esc([r.gravure.config?.r1, r.gravure.config?.r2].filter(Boolean).join(" / ") || "symbool/logo")}”`)}${tdk(`${r.n} × ${euro(r.graveren)}`, true)}${tdk(euro(r.n * r.graveren), true)}</tr>`;
+    return rij;
+  }).join("");
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
     <p>Beste ${esc(k.naam)},</p>
     <p>Bedankt voor je bestelling bij Kathmandu Graveerwerk. We hebben je betaling ontvangen.</p>
-    <ul>${regels}</ul>
-    <p>Totaal betaald: <b>${euro(o.totaal)}</b> (inclusief ${o.verzending ? euro(o.verzending) + " verzendkosten" : "gratis verzending"}).</p>
+    <table style="border-collapse:collapse">${regels}
+      <tr>${tdk("Verzenden")}${tdk("", true)}${tdk(o.verzending ? euro(o.verzending) : "gratis", true)}</tr>
+      <tr>${tdk("<b>Totaal betaald</b> (incl. btw)")}${tdk("", true)}${tdk(`<b>${euro(o.totaal)}</b>`, true)}</tr></table>
     <p>${o.levertijdInOverleg ? "Omdat je 4 of meer artikelen hebt besteld, nemen we binnen 2 werkdagen contact met je op over de levertijd." : "We verzenden je bestelling binnen 3 werkdagen."}</p>
     <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail of mail naar webshop@kathmandu.nl.</p>
     <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel<br>Glencoe B.V. · Oudegracht 256-264, 3511 NV Utrecht · KvK 30166640</p></div>`;
