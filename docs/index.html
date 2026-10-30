@@ -187,6 +187,14 @@ input[type=file]{font-size:14px;max-width:100%}
 .maatwerk{background:color-mix(in srgb,var(--warn) 12%,transparent);border-left:3px solid var(--warn);padding:8px 10px;font-size:14px;margin:0}
 .toast.fout{color:var(--warn)}
 .testknop{background:var(--brass);color:#fff}
+.ordermail{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px}
+.ordermail dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 16px;margin:0;font-size:14px}
+.ordermail dt{color:var(--muted)}.ordermail dd{margin:0;overflow-wrap:anywhere}
+.ordermail .regels{display:grid;gap:10px}
+.ordermail .oregel{border-top:1px solid var(--line);padding-top:10px;display:grid;grid-template-columns:140px minmax(0,1fr);gap:14px}
+@media (max-width:560px){.ordermail .oregel{grid-template-columns:minmax(0,1fr)}}
+.ordermail .oregel img{width:100%;border:1px solid var(--line);border-radius:4px;background:#fff}
+.ordermail .downloads{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .testmelding{background:color-mix(in srgb,var(--brass) 14%,transparent);border-left:3px solid var(--brass);padding:8px 10px;font-size:14px}
 .samenvatting{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;font-size:14px}
 .samenvatting .r{display:flex;justify-content:space-between;gap:10px}
@@ -378,6 +386,13 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
     <h1>Bedankt voor je bestelling</h1>
     <p class="testmelding" id="testBedankt" hidden>Dit was een <strong>testbetaling</strong>: er is niets afgeschreven. De ordermail met de SVG en de voorbeeldafbeelding is verstuurd naar niels@kathmandu.nl.</p>
     <p>We hebben je betaling ontvangen. Je krijgt een bevestiging per e-mail. Bestellingen tot en met 3 stuks verzenden we binnen 3 werkdagen; bij grotere bestellingen nemen we binnen 2 werkdagen contact met je op over de levertijd.</p>
+    <p><a class="btn" href="#">Verder winkelen</a></p>
+  </section>
+  <section id="vTestorder" class="wrap bonnen" hidden>
+    <h1>Testorder geplaatst</h1>
+    <p class="testmelding">Dit was een <strong>testbetaling</strong>: er is niets afgeschreven.</p>
+    <p class="hint" id="testMailStatus"></p>
+    <div id="testOrder"></div>
     <p><a class="btn" href="#">Verder winkelen</a></p>
   </section>
   <section id="vMislukt" class="wrap bonnen" hidden>
@@ -1215,44 +1230,62 @@ function klantUitFormulier(){
   return klant;
 }
 function dataUrlNaarBestand(url,naam,type){const b=atob(url.split(",")[1]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return new File([u],naam,{type});}
-$("testKnop").onclick=()=>{
+let laatsteTestorder=null;
+$("testKnop").onclick=async()=>{
   const klant=klantUitFormulier(); if(!klant) return;
   const d=new Date(), nummer=`TEST-${d.toISOString().slice(0,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
   const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
-  const f=document.createElement("form"); f.method="POST"; f.enctype="multipart/form-data"; f.action="https://formsubmit.co/"+TEST_ORDERMAIL; f.hidden=true;
-  const veld=(naam,waarde)=>{const i=document.createElement("input");i.type="hidden";i.name=naam;i.value=waarde;f.appendChild(i);};
+  const velden=[], bijlagen=[], regels=[];
+  const veld=(k,v)=>velden.push([k,v]);
   veld("_subject",`TESTBESTELLING ${nummer} – ${klant.naam} – ${stuks} st.`);
   veld("_captcha","false"); veld("_template","table"); veld("_replyto",klant.email);
-  veld("_next",location.origin+location.pathname+"#bedankt");
   veld("Bestelnummer",nummer+" (testbetaling, niets afgeschreven)");
-  veld("Levertijd",stuks>3?`${stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen`:`${stuks} stuks: binnen 3 werkdagen verzenden`);
+  veld("Levertijd",stuks>3?`${stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen`:`${stuks} ${stuks===1?"stuk":"stuks"}: binnen 3 werkdagen verzenden`);
   veld("Let op","Artikelen handmatig uitboeken in de kassa / op kathmandu.nl");
   veld("Klant",[klant.naam,klant.bedrijf,klant.straat,`${klant.postcode} ${klant.plaats}`,klant.land].filter(Boolean).join(", "));
   veld("E-mail klant",klant.email); if(klant.telefoon) veld("Telefoon klant",klant.telefoon); if(klant.opmerking) veld("Opmerking",klant.opmerking);
-  const bestanden=new DataTransfer();
   state.mand.forEach((r,i)=>{
     const nr=i+1, p=r.p, basis=`${nummer}_regel${nr}_${p.code}`;
     let t=`${r.n} × ${p.merk} ${p.naam} ${p.kleur} (bestelcode ${p.code}) – ${euro(regelPrijs(r))}`;
+    const eigen=[];
     if(r.gravure){
       const c=r.gravure.c;
-      t+=` | MET GRAVURE: regel 1 “${c.r1||"–"}”, regel 2 “${c.r2||"–"}”, lettertype ${FONTDATA[c.font].label}, symbool ${MOTIFS[c.motif]}, formaat ${r.gravure.g.W} × ${r.gravure.g.H} mm | bijlagen: ${basis}_xtool.svg, ${basis}_voorbeeld.png${r.gravure.logo?`, ${basis}_logo.png`:""}`;
-      bestanden.items.add(new File([r.gravure.svg],`${basis}_xtool.svg`,{type:"image/svg+xml"}));
-      if(r.gravure.voorbeeld) bestanden.items.add(dataUrlNaarBestand(r.gravure.voorbeeld,`${basis}_voorbeeld.png`,"image/png"));
-      if(r.gravure.logo&&r.gravure.logo.png) bestanden.items.add(dataUrlNaarBestand(r.gravure.logo.png,`${basis}_logo.png`,"image/png"));
+      t+=` | MET GRAVURE: regel 1 “${c.r1||"–"}”, regel 2 “${c.r2||"–"}”, lettertype ${FONTDATA[c.font].label}, symbool ${MOTIFS[c.motif]}, formaat ${r.gravure.g.W} × ${r.gravure.g.H} mm`;
+      eigen.push(new File([r.gravure.svg],`${basis}_xtool.svg`,{type:"image/svg+xml"}));
+      if(r.gravure.voorbeeld) eigen.push(dataUrlNaarBestand(r.gravure.voorbeeld,`${basis}_voorbeeld.png`,"image/png"));
+      if(r.gravure.logo&&r.gravure.logo.png) eigen.push(dataUrlNaarBestand(r.gravure.logo.png,`${basis}_logo.png`,"image/png"));
+      t+=` | bijlagen: ${eigen.map(f=>f.name).join(", ")}`;
     } else t+=" | zonder gravure";
-    veld(`Regel ${nr}`,t);
+    veld(`Regel ${nr}`,t); bijlagen.push(...eigen);
+    regels.push({tekst:t,voorbeeld:r.gravure&&r.gravure.voorbeeld,bestanden:eigen});
   });
   veld("Subtotaal",euro(sub)); veld("Verzenden",verzend?euro(verzend):"gratis"); veld("Totaal",euro(sub+verzend));
-  if(bestanden.files.length){
-    let totaal=0; for(const b of bestanden.files) totaal+=b.size;
-    if(totaal>9.5e6){$("afrekenFout").textContent="De bijlagen zijn samen groter dan 10 MB. Bestel in een paar delen of gebruik een eenvoudiger logo.";return;}
-    const i=document.createElement("input"); i.type="file"; i.name="attachment"; i.multiple=true; i.files=bestanden.files; f.appendChild(i);
+  laatsteTestorder={nummer,velden,regels};
+  // mand leeg en testorder tonen; mail op de achtergrond versturen (pagina blijft staan)
+  state.mand=[]; mandBijwerken(); location.hash="testorder";
+  $("testMailStatus").textContent=`Ordermail wordt verstuurd naar ${TEST_ORDERMAIL}…`;
+  const fd=new FormData(); velden.forEach(([k,v])=>fd.append(k,v)); bijlagen.forEach(f=>fd.append("attachment",f,f.name));
+  try{
+    await fetch("https://formsubmit.co/"+TEST_ORDERMAIL,{method:"POST",body:fd,mode:"no-cors"});
+    $("testMailStatus").textContent=`Ordermail verstuurd naar ${TEST_ORDERMAIL} via FormSubmit. Komt hij niet binnen, kijk dan in je spam, of bevestig de activatiemail van FormSubmit en doe nog een testbestelling. De bijlagen kun je hieronder ook downloaden.`;
+  }catch(e){
+    $("testMailStatus").textContent="De mail kon niet worden verstuurd: FormSubmit is op dit moment niet bereikbaar. Hieronder staat de complete ordermail met de bijlagen om te downloaden.";
   }
-  try{sessionStorage.setItem("graveerwerk-test","1");}catch(e){}
-  document.body.appendChild(f);
-  $("testKnop").disabled=true; $("testKnop").textContent="Ordermail versturen…";
-  f.submit();
 };
+function renderTestorder(){
+  const o=laatsteTestorder;
+  if(!o){$("testOrder").innerHTML='<p class="leeg">Geen testorder gevonden. Plaats een testbestelling via de winkelmand.</p>';return;}
+  const info=o.velden.filter(([k])=>!k.startsWith("_")&&!k.startsWith("Regel "));
+  $("testOrder").innerHTML=`<div class="ordermail"><strong>Zo ziet de ordermail eruit</strong>
+    <dl>${info.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+    <div class="regels">${o.regels.map((r,i)=>`<div class="oregel">${r.voorbeeld?`<img src="${r.voorbeeld}" alt="Voorbeeld gravure regel ${i+1}">`:"<span></span>"}
+      <div><strong>Regel ${i+1}</strong><div>${esc(r.tekst)}</div>
+      ${r.bestanden.length?`<div class="downloads">${r.bestanden.map((f,j)=>`<a class="btn sec" href="#" data-r="${i}" data-f="${j}">Download ${esc(f.name.split("_").slice(-1)[0])}</a>`).join("")}</div>`:""}</div></div>`).join("")}</div></div>`;
+  $("testOrder").querySelectorAll("[data-f]").forEach(a=>{
+    const f=o.regels[+a.dataset.r].bestanden[+a.dataset.f];
+    a.href=URL.createObjectURL(f); a.download=f.name;
+  });
+}
 
 $("afrekenForm").addEventListener("submit",async e=>{
   e.preventDefault();
@@ -1285,8 +1318,9 @@ function route(){
   const m=h.match(/^p-(\d{6})$/), p=m&&PRODUCTEN.find(x=>x.code===m[1]);
   const wasOverzicht=!$("vOverzicht").hidden;
   if(wasOverzicht) laatsteScroll=scrollY;
-  const mand=h==="winkelmand"||h==="werkbonnen", vw=h==="voorwaarden", pr=h==="privacy", af=h==="afrekenen", bd=h==="bedankt", ms=h==="betaling-mislukt";
-  $("vAfrekenen").hidden=!af; $("vBedankt").hidden=!bd; $("vMislukt").hidden=!ms;
+  const mand=h==="winkelmand"||h==="werkbonnen", vw=h==="voorwaarden", pr=h==="privacy", af=h==="afrekenen", bd=h==="bedankt", ms=h==="betaling-mislukt", to=h==="testorder";
+  $("vAfrekenen").hidden=!af; $("vBedankt").hidden=!bd; $("vMislukt").hidden=!ms; $("vTestorder").hidden=!to;
+  if(to){["vOverzicht","vProduct","vMand","vVoorwaarden","vPrivacy"].forEach(id=>$(id).hidden=true);document.title="Testorder | "+titel;renderTestorder();scrollTo(0,0);return;}
   if(bd){state.mand=[];mandBijwerken();$("testBedankt").hidden=!wasTest;}
   if(af||bd||ms){$("vOverzicht").hidden=true;$("vProduct").hidden=true;$("vMand").hidden=true;$("vVoorwaarden").hidden=true;$("vPrivacy").hidden=true;
     document.title=(af?"Afrekenen":bd?"Bedankt":"Betaling niet gelukt")+" | "+titel; if(af)renderAfrekenen(); scrollTo(0,0); return;}
