@@ -297,6 +297,14 @@ def meet_graveervlak(pad, merk=""):
         cy, vh = y0 + seg * .7, seg * .42
     else:
         cy, vh = y0 + seg * .5, seg * .8
+    # dopkleur: bovenste 7% van het product, midden van elke rij
+    dop_px = []
+    for y in range(top, top + max(2, int(hoog * .07))):
+        lengte, start = rijen[y]
+        if lengte > 3:
+            for dx in (-.15, 0, .15):
+                dop_px.append(klein.getpixel((int(start + lengte * (.5 + dx)), y)))
+    dop = tuple(sorted(c[i] for c in dop_px)[len(dop_px) // 2] for i in range(3)) if dop_px else kleur
     lum = .299 * kleur[0] + .587 * kleur[1] + .114 * kleur[2]
     verzadiging = max(kleur) - min(kleur)
     if lum < 140:
@@ -308,7 +316,7 @@ def meet_graveervlak(pad, merk=""):
     return {
         "cx": round(midden / W, 4), "cy": round(cy / H, 4),   # midden van het vlak
         "w": round(vw / W, 4), "h": round(vh / H, 4),         # maximale ruimte
-        "lak": "#%02X%02X%02X" % kleur, "gravure": gravure,
+        "lak": "#%02X%02X%02X" % kleur, "dop": "#%02X%02X%02X" % dop, "gravure": gravure,
     }
 
 

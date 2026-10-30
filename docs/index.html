@@ -106,9 +106,9 @@ header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;jus
 @media (max-width:860px){.werkblad{grid-template-columns:minmax(0,1fr)}}
 .preview{display:grid;place-items:center;gap:6px;padding:22px;background:color-mix(in srgb,var(--ink) 4%,var(--surface));align-content:center}
 .preview svg{width:100%;max-width:330px;height:420px}
-.preview svg.opfoto{max-width:520px;height:auto;aspect-ratio:1/1;background:var(--photo);border-radius:6px}
+.preview svg.tekening{width:100%;max-width:380px;height:460px}
 .preview{background:var(--photo)}
-@media (max-width:860px){.preview svg{height:340px}.preview svg.opfoto{height:auto}}
+@media (max-width:860px){.preview svg,.preview svg.tekening{height:360px}}
 .preview .hint{text-align:center}
 .form{padding:22px;display:grid;gap:15px;align-content:start}
 .field{display:grid;gap:5px}
@@ -200,7 +200,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <p id="tZone"></p>
       </header>
       <div class="werkblad">
-        <div class="preview"><div id="preview"></div><p class="hint">Voorbeeld van de gravure op deze fles</p></div>
+        <div class="preview"><div id="preview"></div><p class="hint">Tekening van deze fles met je gravure op ware grootte</p></div>
         <form class="form" id="form">
           <div class="field">
             <label for="r1">Regel 1 <small id="c1">0/20</small></label>
@@ -332,9 +332,308 @@ for (const [k,f] of Object.entries(FONTDATA)) {
   try { new FontFace(f.css, b64buf(f.b64)).load().then(ff=>document.fonts.add(ff)); } catch(e) {}
 }
 
-/* Foto met silhouet als terugval (als de foto ontbreekt of niet laadt). */
+/* ---------- Productteken­ingen ----------
+   Rechte vooraanzichten per model, getekend in millimeters op basis van de productfoto's.
+   Kleuren per artikel: lak (romp) en dop komen uit de foto van kathmandu.nl.
+   Elke vorm geeft ook het graveervlak terug (midden en maat in mm), zodat de gravure
+   op ware schaal en kaarsrecht op de tekening staat. */
+
+function mix(hex, naar, f){ // f>0: naar wit, f<0: naar zwart
+  const n=parseInt(hex.slice(1),16); let r=n>>16,g=(n>>8)&255,b=n&255;
+  const t=f>0?255:0, a=Math.abs(f);
+  r=Math.round(r+(t-r)*a); g=Math.round(g+(t-g)*a); b=Math.round(b+(t-b)*a);
+  return "#"+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+}
+function helder(hex){const n=parseInt(hex.slice(1),16);return ((n>>16)*299+((n>>8)&255)*587+(n&255)*114)/1000;}
+
+let _gid=0;
+function verloop(kleur, soort){
+  // cilindrisch licht: links licht, rechts donker
+  const id="v"+(++_gid);
+  let stops;
+  if(soort==="staal") stops=[[0,"#7D8388"],[.18,"#E9ECEE"],[.32,"#C6CBCF"],[.62,"#9AA1A6"],[.86,"#D3D7DA"],[1,"#6E7479"]];
+  else { const L=helder(kleur), op=L>200?.35:.22, neer=L<60?.35:.24;
+    stops=[[0,mix(kleur,0,-neer)],[.22,mix(kleur,1,op)],[.45,kleur],[.85,mix(kleur,0,-neer*.7)],[1,mix(kleur,0,-neer*1.2)]]; }
+  return {id, def:`<linearGradient id="${id}" x1="0" x2="1" y1="0" y2="0">${stops.map(([o,c])=>`<stop offset="${o}" stop-color="${c}"/>`).join("")}</linearGradient>`};
+}
+
+/* Teken-hulpjes (x=0 is de middenas, y loopt naar beneden, alles in mm) */
+function T(){
+  const defs=[], parts=[];
+  const fill=(kleur,soort)=>{const v=verloop(kleur,soort);defs.push(v.def);return `url(#${v.id})`;};
+  return {
+    defs, parts,
+    staal(){return fill("#B9BEC2","staal");},
+    lak(k){return fill(k,"lak");},
+    vlak(k){return k;},
+    rect(y,h,w,rx,f){parts.push(`<rect x="${-w/2}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${f}"/>`);},
+    // romp met verloop van breedte w1 (boven) naar w2 (onder), afgeronde hoeken r
+    trap(y,h,w1,w2,r,f){
+      const a=w1/2,b=w2/2;
+      parts.push(`<path d="M${-a+r} ${y}H${a-r}Q${a} ${y} ${a+(b-a)*r/h} ${y+r}L${b} ${y+h-r}Q${b} ${y+h} ${b-r} ${y+h}H${-b+r}Q${-b} ${y+h} ${-b} ${y+h-r}L${-a-(b-a)*r/h} ${y+r}Q${-a} ${y} ${-a+r} ${y}Z" fill="${f}"/>`);
+    },
+    // schouder: van smal (boven) naar breed (onder) met een vloeiende S-curve
+    schouder(y,h,w1,w2,f){
+      const a=w1/2,b=w2/2;
+      parts.push(`<path d="M${-a} ${y}H${a}C${a} ${y+h*.45} ${b} ${y+h*.45} ${b} ${y+h}H${-b}C${-b} ${y+h*.45} ${-a} ${y+h*.45} ${-a} ${y}Z" fill="${f}"/>`);
+    },
+    // D-vormig hengsel aan de rechterkant
+    hengsel(x,y,b,h,dik,f){
+      const r=Math.min(b*.55,h*.3);
+      parts.push(`<path d="M${x} ${y}H${x+b-r}Q${x+b} ${y} ${x+b} ${y+r}V${y+h-r}Q${x+b} ${y+h} ${x+b-r} ${y+h}H${x}" fill="none" stroke="${f}" stroke-width="${dik}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    },
+    lus(cy,b,h,dik,f){ // draaglus bovenop
+      parts.push(`<path d="M${-b/2} ${cy+h}V${cy+h*.45}A${b/2} ${h*.45} 0 0 1 ${b/2} ${cy+h*.45}V${cy+h}" fill="none" stroke="${f}" stroke-width="${dik}" stroke-linecap="round"/>`);
+    },
+    raw(s){parts.push(s);}
+  };
+}
+
+/* ---------- vormen ---------- */
+const VORMEN = {
+  // Stanley Legendary Classic: stalen drinkbeker als dop, smalle hals, romp, stalen voet
+  legendary(t,m,c){
+    const {D,H}=m, cap=H*.17, hals=H*.05, sch=H*.07, voet=H*.075;
+    if(m.hengsel) t.hengsel(D*.42, cap+hals+sch+H*.03, D*.36, H*.42, D*.11, mix(c.lak,0,-.25));
+    t.rect(0,cap,D*.78,D*.08,t.staal());
+    t.rect(cap,H*.012,D*.8,1,mix(c.lak,1,.55));
+    t.rect(cap+H*.012,hals,D*.66,1,t.lak(mix(c.lak,0,-.12)));
+    t.rect(cap+hals+sch-D*.04,H-cap-hals-sch-voet+D*.04,D,D*.04,t.lak(c.lak));
+    t.schouder(cap+hals,sch+.5,D*.66,D,t.lak(c.lak));
+    t.trap(H-voet,voet,D,D*.94,D*.05,t.staal());
+    return {cy:cap+hals+sch+(H-cap-hals-sch-voet)*.56, maxW:D*.78};
+  },
+  // Stanley Adventure To-Go Bottle
+  adventure(t,m,c){
+    const {D,H}=m, cap=H*.09, sch=H*.12, voet=H*.06;
+    t.trap(0,cap,D*.6,D*.62,D*.05,t.staal());
+    t.rect(cap,H*.015,D*.64,.6,mix(c.lak,0,-.3));
+    t.schouder(cap+H*.015,sch,D*.64,D,t.lak(c.lak));
+    t.rect(cap+H*.015+sch,H-cap-sch-voet-H*.015,D,1,t.lak(c.lak));
+    t.trap(H-voet,voet,D,D*.96,D*.05,t.staal());
+    return {cy:cap+sch+(H-cap-sch-voet)*.5, maxW:D*.78};
+  },
+  // Stanley Adventure To-Go Food Jar
+  foodjar(t,m,c){
+    const {D,H}=m, dop=H*.06, rand=H*.11, voet=H*.11;
+    t.rect(0,dop,D*.96,D*.03,t.lak(c.dop));
+    t.rect(dop,rand,D,D*.02,t.staal());
+    t.rect(dop+rand,H-dop-rand-voet,D,1,t.lak(c.lak));
+    t.trap(H-voet,voet,D,D*.93,D*.05,t.staal());
+    return {cy:dop+rand+(H-dop-rand-voet)*.5, maxW:D*.72};
+  },
+  // Stanley Legendary Food Jar (hoge stalen deksel), optioneel met spork
+  legjar(t,m,c){
+    const {D,H}=m, dek=H*.23, ring=H*.035, voet=H*.075;
+    if(m.spork){ t.raw(`<rect x="${D*.5}" y="${H*.08}" width="${D*.07}" height="${H*.62}" rx="${D*.035}" fill="${mix(c.lak,0,-.3)}"/>`); }
+    t.trap(0,dek,D*.96,D*.98,D*.06,t.staal());
+    t.rect(dek,ring,D,.6,t.lak(mix(c.lak,0,-.35)));
+    t.rect(dek+ring,H-dek-ring-voet,D,1,t.lak(c.lak));
+    t.trap(H-voet,voet,D,D*.95,D*.05,t.staal());
+    return {cy:dek+ring+(H-dek-ring-voet)*.52, maxW:D*.72};
+  },
+  // Stanley Transit Fliptop / smalle rechte beker
+  transit(t,m,c){
+    const {D,H}=m, dek=H*.065;
+    t.trap(0,dek,D*.93,D,D*.08,t.lak(c.dop));
+    t.rect(dek-.4,H*.012,D,0,mix(c.dop,0,-.3));
+    t.trap(dek+H*.012,H-dek-H*.012,D,D*.96,D*.06,t.lak(c.lak));
+    return {cy:dek+(H-dek)*.55, maxW:D*.8};
+  },
+  // Stanley Café-To-Go: deksel met draaglus, stalen band, licht taps
+  cafetogo(t,m,c){
+    const {D,H}=m, lus=H*.16, dek=H*.11, band=H*.06;
+    t.lus(0,D*.62,lus+D*.04,D*.09,mix(c.dop,0,-.05));
+    t.trap(lus,dek,D*.9,D*.94,D*.05,t.lak(c.dop));
+    t.rect(lus+dek,band,D*.94,.5,t.staal());
+    t.trap(lus+dek+band,H-lus-dek-band,D*.94,D*.84,D*.08,t.lak(c.lak));
+    return {cy:lus+dek+band+(H-lus-dek-band)*.48, maxW:D*.7};
+  },
+  // Stanley Everyday Camp Mug: stalen rand boven, hengsel rechts
+  campmug(t,m,c){
+    const {D,H}=m, rand=H*.2;
+    t.hengsel(D*.42,H*.18,D*.36,H*.58,D*.05,mix(c.lak,0,-.3));
+    t.trap(H*.03,rand,D,D,D*.02,t.staal());
+    t.trap(H*.03+rand,H*.97-rand,D,D*.84,D*.12,t.lak(c.lak));
+    return {cy:H*.03+rand+(H*.97-rand)*.45, maxW:D*.72};
+  },
+  // Stanley Stay Hot Stacking Camp Cup: deksel, stalen rand, getrapt taps
+  stackcup(t,m,c){
+    const {D,H}=m, dek=H*.07, rand=H*.12, boven=H*.38;
+    t.trap(0,dek,D*.97,D,D*.04,t.lak(c.dop));
+    t.rect(dek,rand,D,0,t.staal());
+    t.rect(dek+rand,boven,D,0,t.lak(c.lak));
+    t.trap(dek+rand+boven,H*.12,D,D*.84,D*.03,t.lak(mix(c.lak,0,-.06)));
+    t.trap(dek+rand+boven+H*.12,H-dek-rand-boven-H*.12,D*.84,D*.8,D*.1,t.lak(c.lak));
+    return {cy:dek+rand+boven*.5, maxW:D*.72};
+  },
+  // Stanley Stacking Tumbler / pint
+  tumbler(t,m,c){
+    const {D,H}=m, rand=H*.13;
+    t.trap(0,rand,D,D*.96,D*.02,t.staal());
+    t.trap(rand,H-rand,D*.96,D*.72,D*.08,t.lak(c.lak));
+    return {cy:rand+(H-rand)*.42, maxW:D*.64};
+  },
+  // Stanley Beer Stein
+  stein(t,m,c){
+    const {D,H}=m, rand=H*.08, voet=H*.1;
+    t.hengsel(D*.42,H*.14,D*.5,H*.66,D*.11,mix(c.lak,0,-.42));
+    t.rect(0,rand,D*.98,D*.02,t.staal());
+    t.rect(rand,H-rand-voet,D,1,t.lak(c.lak));
+    t.trap(H-voet,voet,D,D*1.04,D*.02,t.lak(mix(c.lak,0,-.08)));
+    return {cy:rand+(H-rand-voet)*.5, maxW:D*.72};
+  },
+  // Stanley Beer Growler
+  growler(t,m,c){
+    const {D,H}=m, dop=H*.08, hals=H*.07, sch=H*.15, voet=H*.06;
+    t.hengsel(D*.38,H*.12,D*.36,H*.42,D*.07,mix(c.lak,0,-.42));
+    t.trap(0,dop,D*.42,D*.44,D*.04,t.staal());
+    t.rect(dop,hals,D*.4,.6,t.lak(c.lak));
+    t.rect(dop+hals+sch-D*.06,H-dop-hals-sch-voet+D*.06,D,D*.06,t.lak(c.lak));
+    t.schouder(dop+hals,sch+.3,D*.4,D,t.lak(c.lak));
+    t.trap(H-voet,voet,D*.98,D*.94,D*.05,t.staal());
+    return {cy:dop+hals+sch+(H-dop-hals-sch-voet)*.48, maxW:D*.66};
+  },
+  // Stanley Easy Fill Flask (heupfles, plat)
+  flask(t,m,c){
+    const {D,H}=m, dop=H*.09;
+    t.raw(`<rect x="${-D*.38}" y="0" width="${D*.26}" height="${dop}" rx="${D*.03}" fill="${t.staal()}"/>`);
+    t.raw(`<rect x="${-D*.1}" y="${dop*.25}" width="${D*.42}" height="${dop*.55}" rx="${dop*.27}" fill="${mix(c.lak,0,-.45)}"/>`);
+    t.rect(dop,H*.03,D*.92,D*.02,t.staal());
+    t.rect(dop+H*.03,H-dop-H*.03,D,D*.05,t.lak(c.lak));
+    return {cy:dop+(H-dop)*.5, maxW:D*.8};
+  },
+  // Stanley Aerolight IceFlow: rechte fles, flip-rietje met schuine draaglus
+  iceflow(t,m,c){
+    const {D,H}=m, dek=H*.11;
+    t.raw(`<path d="M${D*.18} ${dek*.2}L${D*.66} ${dek+H*.13}" stroke="${mix(c.lak,1,.15)}" stroke-width="${D*.2}" stroke-linecap="round"/>`);
+    t.trap(0,dek,D*.86,D,D*.12,t.lak(c.dop));
+    t.trap(dek,H-dek,D,D*.97,D*.1,t.lak(c.lak));
+    return {cy:dek+(H-dek)*.5, maxW:D*.8};
+  },
+  // Klean Kanteen Classic (enkelwandig): smalle hals, sportdop of bamboedop
+  kkclassic(t,m,c){
+    const {D,H}=m, dop=H*.15, hals=H*.06, sch=H*.12, rondbodem=D*.12;
+    if(m.bamboe){
+      t.lus(-H*.05,D*.46,H*.08,D*.04,t.staal());
+      t.rect(H*.02,dop*.55,D*.56,D*.04,"#C9A06A");
+      t.rect(H*.02+dop*.55,dop*.45-H*.02,D*.5,0,t.staal());
+    } else {
+      // sportdop: schuin tuitje op een ronde dop
+      t.raw(`<rect x="${-D*.11}" y="${dop*.02}" width="${D*.2}" height="${dop*.5}" rx="${D*.06}" fill="${mix(c.dop,0,-.15)}" transform="rotate(-22 0 ${dop*.45})"/>`);
+      t.trap(dop*.36,dop*.64,D*.44,D*.52,D*.06,t.lak(c.dop));
+      t.rect(dop*.5,dop*.06,D*.46,0,mix(c.dop,1,.18));
+    }
+    t.rect(dop,hals,D*.5,0,t.staal());
+    t.rect(dop+hals+sch-rondbodem,H-dop-hals-sch+rondbodem,D,rondbodem,t.lak(c.lak));
+    t.schouder(dop+hals,sch+.3,D*.5,D,t.lak(c.lak));
+    return {cy:dop+hals+sch+(H-dop-hals-sch)*.42, maxW:D*.8};
+  },
+  // Klean Kanteen Insulated Classic met ringdop / Rise met lusdop
+  kkloop(t,m,c){
+    const {D,H}=m, lus=H*.07, dop=H*.06, sch=H*.1, voet=m.staalvoet?H*.035:0;
+    t.lus(0,D*.5,lus+D*.04,D*.12,t.lak(c.dop));
+    t.trap(lus,dop,D*.58,D*.6,D*.04,t.lak(c.dop));
+    const r=voet?D*.03:D*.14;
+    t.rect(lus+dop+sch-r,H-lus-dop-sch-voet+r,D,r,t.lak(c.lak));
+    t.schouder(lus+dop,sch+.3,D*.6,D,t.lak(c.lak));
+    if(voet) t.trap(H-voet,voet,D,D*.95,D*.04,t.staal());
+    return {cy:lus+dop+sch+(H-lus-dop-sch-voet)*.4, maxW:D*.8};
+  },
+  // Klean Kanteen TKWide met koffiedop
+  tkwide(t,m,c){
+    const {D,H}=m, dop=H*.1, voet=H*.07;
+    t.trap(0,dop,D*.9,D*.96,D*.06,t.lak(mix(c.dop,0,-.05)));
+    t.rect(dop,H*.012,D*.97,0,mix(c.lak,0,-.35));
+    t.rect(dop+H*.012,H-dop-voet-H*.012,D,D*.03,t.lak(c.lak));
+    t.trap(H-voet,voet,D,D*.95,D*.05,t.staal());
+    return {cy:dop+(H-dop-voet)*.48, maxW:D*.8};
+  },
+  // Klean Kanteen Lowball met schuifdeksel
+  lowball(t,m,c){
+    const {D,H}=m, dek=H*.1;
+    t.trap(0,dek,D*.92,D*.96,D*.04,t.lak(mix(c.dop,0,-.08)));
+    t.raw(`<path d="M${-D/2} ${dek}H${D/2}V${H*.55}C${D/2} ${H*.92} ${D*.36} ${H} ${D*.2} ${H}H${-D*.2}C${-D*.36} ${H} ${-D/2} ${H*.92} ${-D/2} ${H*.55}Z" fill="${t.lak(c.lak)}"/>`);
+    return {cy:dek+(H-dek)*.4, maxW:D*.72};
+  },
+  // Klean Kanteen geïsoleerde mok met flipdeksel, tweekleurig
+  kkmug(t,m,c){
+    const {D,H}=m, dek=H*.1;
+    t.hengsel(D*.42,H*.15,D*.4,H*.65,D*.06,t.lak(mix(c.lak,0,-.06)));
+    t.trap(0,dek,D*.96,D,D*.05,t.lak(c.lak));
+    t.raw(`<path d="M${-D/2} ${dek}H${D/2}V${H*.6}C${D/2} ${H*.9} ${D*.4} ${H} ${D*.26} ${H}H${-D*.26}C${-D*.4} ${H} ${-D/2} ${H*.9} ${-D/2} ${H*.6}Z" fill="${t.lak(mix(c.lak,0,-.16))}"/>`);
+    t.rect(dek,H*.5-dek+H*.08,D,0,t.lak(c.lak));
+    return {cy:dek+(H*.58-dek)*.5, maxW:D*.72};
+  }
+};
+
+/* ---------- model herkennen uit de productnaam (maten in mm, ongeveer als het echte product) ---------- */
+const MODELLEN = [
+  [/legendary classic bottle 2,3/i, "legendary", {D:118,H:445,hengsel:1}, [55,45]],
+  [/legendary classic bottle 1,9/i, "legendary", {D:110,H:420,hengsel:1}, [55,45]],
+  [/legendary classic bottle 1,4/i, "legendary", {D:104,H:380,hengsel:1}, [55,45]],
+  [/legendary classic bottle 0,94/i, "legendary", {D:95,H:335}, [50,40]],
+  [/legendary classic bottle/i, "legendary", {D:79,H:290}, [50,40]],
+  [/adventure to-go bottle 1/i, "adventure", {D:86,H:320}, [50,40]],
+  [/adventure to-go bottle/i, "adventure", {D:80,H:290}, [50,40]],
+  [/adventure to-go food jar 0,53/i, "foodjar", {D:108,H:132}, [55,40]],
+  [/adventure to-go food jar/i, "foodjar", {D:108,H:112}, [55,35]],
+  [/legendary food jar \+ spork/i, "legjar", {D:92,H:150,spork:1}, [45,35]],
+  [/legendary food jar/i, "legjar", {D:100,H:195}, [50,40]],
+  [/transit fliptop mug 0,47/i, "transit", {D:76,H:228}, [45,40]],
+  [/transit fliptop/i, "transit", {D:76,H:196}, [45,35]],
+  [/caf.-to-go travel mug 0,23/i, "cafetogo", {D:84,H:150}, [45,30]],
+  [/caf.-to-go/i, "cafetogo", {D:80,H:200}, [45,35]],
+  [/everyday camp mug 0,23/i, "campmug", {D:88,H:84}, [40,25]],
+  [/everyday camp mug/i, "campmug", {D:96,H:96}, [45,30]],
+  [/stacking camp cup/i, "stackcup", {D:100,H:112}, [45,30]],
+  [/stacking tumbler/i, "tumbler", {D:94,H:150}, [45,35]],
+  [/beer stein/i, "stein", {D:112,H:190}, [50,40]],
+  [/growler/i, "growler", {D:140,H:290}, [55,45]],
+  [/easy fill flask/i, "flask", {D:95,H:150}, [50,40]],
+  [/iceflow/i, "iceflow", {D:80,H:262}, [45,40]],
+  [/reflect/i, "kkclassic", {D:73,H:300,bamboe:1}, [45,40]],
+  [/classic narrow/i, "kkclassic", {D:68,H:236}, [40,40]],
+  [/drinkfles classic/i, "kkclassic", {D:73,H:284}, [45,40]],
+  [/isolatiefles classic met ringdop/i, "kkloop", {D:74,H:268,staalvoet:1}, [45,40]],
+  [/rise classic 355/i, "kkloop", {D:68,H:205}, [40,35]],
+  [/rise classic/i, "kkloop", {D:74,H:258}, [45,40]],
+  [/tkwide 355/i, "tkwide", {D:80,H:172}, [45,35]],
+  [/tkwide/i, "tkwide", {D:80,H:206}, [45,40]],
+  [/lowball/i, "lowball", {D:92,H:96}, [40,30]],
+  [/mok met flip/i, "kkmug", {D:96,H:100}, [40,30]]
+];
+function vindModel(naam){
+  for(const [re,vorm,maat,zone] of MODELLEN) if(re.test(naam)) return {vorm,maat,zone};
+  return {vorm:"transit",maat:{D:76,H:220},zone:[45,35]};
+}
+
+/* Tekening + gravure. p heeft: vorm, maat, zone, lak, dop. g = bouwGravure-resultaat (in mm). */
+function teken(p, g){
+
+  const t=T(), c={lak:p.lak||p.hex||"#5B6862", dop:p.dop||p.lak||p.hex||"#2B2C2E"};
+  const vlak=(VORMEN[p.vorm]||VORMEN.transit)(t,p.maat,c);
+  const {D,H}=p.maat;
+  // gravure op ware grootte, gecentreerd op de as; te breed voor het zichtbare front? dan schalen
+  let eng="";
+  if(g&&g.d){
+    const s=Math.min(1, vlak.maxW/g.W);
+    const lak=c.lak, L=helder(lak), sat=(()=>{const n=parseInt(lak.slice(1),16);const a=[n>>16,(n>>8)&255,n&255];return Math.max(...a)-Math.min(...a);})();
+    const inkt=L<140?"#DADDDE":sat<18?"#3E4144":"#8F9497";
+    eng=`<g transform="translate(${(-g.W*s/2).toFixed(2)} ${(vlak.cy-g.H*s/2).toFixed(2)}) scale(${s.toFixed(3)})"><path d="${g.d}" fill="${inkt}"/></g>`;
+  }
+  const breed=Math.max(D*1.5,H*.62), x0=-breed/2-D*.05, top=-H*.08, hoog=H*1.14;
+  const bw=breed+D*.3;
+  return `<svg class="tekening" viewBox="${x0.toFixed(1)} ${top.toFixed(1)} ${bw.toFixed(1)} ${hoog.toFixed(1)}" role="img" aria-label="${p.merk} ${p.naam}, ${p.kleur}">
+    <defs>${t.defs.join("")}</defs>
+    <ellipse cx="0" cy="${H+H*.012}" rx="${D*.58}" ry="${Math.max(2,D*.06)}" fill="#000" opacity=".08"/>
+    ${t.parts.join("")}${eng}</svg>`;
+}
+
+
+/* Foto met tekening als terugval (als de foto ontbreekt of niet laadt). */
 function foto(p,src,lazy=true){
-  const sil=silhouet(p,null).replace("<svg ",'<svg hidden ');
+  const sil=teken(p,null).replace("<svg ",'<svg hidden ');
   if(!src) return sil.replace("<svg hidden ","<svg ");
   return `<img src="${esc(src)}" alt="${esc(p.merk+" "+p.naam+", "+p.kleur)}" ${lazy?'loading="lazy"':''} decoding="async"
     onerror="this.nextElementSibling.hidden=false;this.remove()">${sil}`;
@@ -411,7 +710,7 @@ function renderTafel(){
   $("c1").textContent=`${$("r1").value.length}/20`;$("c2").textContent=`${$("r2").value.length}/28`;
   const a=$("aantal"); a.max=v; if(+a.value>v)a.value=v; if(+a.value<1)a.value=1;
   $("max").textContent=`max. ${v}`;
-  $("preview").innerHTML=p.vlak&&p.fotos[0]?opFoto(p,bouwGravure(cfg())):silhouet(p,bouwGravure(cfg()));
+  $("preview").innerHTML=teken(p,bouwGravure(cfg()));
   const n=+a.value, gp=graveerPrijs(n);
   $("som").innerHTML=`<div><span>${n} × fles</span><span class="mono">${euro(p.prijs*n)}</span></div>
     <div><span>${n} × graveren à ${euro(gp)}</span><span class="mono">${euro(gp*n)}</span></div>
@@ -504,14 +803,16 @@ function vanJson(data){
     let naam=m?m[1]:volledig, kleur=m&&m[2]?m[2]:(p.kleur||"");
     const met=kleur.match(/^(met \S+?,?)\s+(.+)$/i);   // 'met koffiedop Black' -> dop bij de naam
     if(met){naam+=" "+met[1].replace(/,$/,"");kleur=met[2];}
-    const [vorm,zone]=vormEnVlak(volledig);
-    const vlak=p.graveervlak_foto||null;
-    return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:vlak?vlak.lak:kleurHex(kleur||volledig),prijs:p.prijs||0,
-      ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm,zone,
-      fotos:p.lokale_afbeeldingen||[],vlak};
+    const md=vindModel(volledig), gemeten=p.graveervlak_foto||null;
+    const lak=gemeten?gemeten.lak:kleurHex(kleur||volledig);
+    return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:lak,lak,dop:gemeten?gemeten.dop:null,prijs:p.prijs||0,
+      ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm:md.vorm,maat:md.maat,zone:md.zone,
+      fotos:p.lokale_afbeeldingen||[]};
   });
 }
 
+// demo-artikelen: vorm, maten en graveervlak uit de modellijst
+PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam);return {...p,vorm:m.vorm,maat:m.maat,zone:m.zone,lak:p.hex,dop:null};});
 segButtons($("fonts"),FONTDATA,"font");
 segButtons($("motifs"),MOTIFS,"motif");
 $("syncTxt").textContent=`Voorraad Amsterdam + Utrecht · ${SYNC}`;
