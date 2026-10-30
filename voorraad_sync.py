@@ -182,6 +182,47 @@ def verzamel_merk(merk: str, start_url: str, sessie: requests.Session):
     return list(alle.values())
 
 
+FOTO_PX = 1000      # breedte en hoogte van de opgeslagen foto
+FOTO_MARGE = 0.07   # witruimte rond de fles, als deel van de foto
+
+
+def _snij_achtergrond(im, kleur, drempel=14):
+    """Bounding box van alles wat afwijkt van de achtergrondkleur."""
+    from PIL import Image, ImageChops
+    vlak = Image.new("RGB", im.size, kleur)
+    verschil = ImageChops.difference(im, vlak).convert("L").point(lambda v: 255 if v > drempel else 0)
+    return verschil.getbbox()
+
+
+def bewerk_foto(data: bytes) -> bytes:
+    """Snijdt witte rand en een egaal (grijs) fotovlak weg, zet de fles gecentreerd op wit
+    en schaalt naar FOTO_PX. Valt terug op de originele foto als er iets misgaat."""
+    from io import BytesIO
+    from PIL import Image
+    im = Image.open(BytesIO(data)).convert("RGB")
+    for _ in range(2):  # eerst de witte rand, dan eventueel het grijze vlak daarbinnen
+        hoeken = [im.getpixel(p) for p in ((0, 0), (im.width - 1, 0), (0, im.height - 1), (im.width - 1, im.height - 1))]
+        gem = tuple(sum(c[i] for c in hoeken) // 4 for i in range(3))
+        egaal = all(max(abs(c[i] - gem[i]) for i in range(3)) < 10 for c in hoeken) and min(gem) > 200
+        if not egaal:
+            break
+        box = _snij_achtergrond(im, gem)
+        if not box or (box[2] - box[0]) * (box[3] - box[1]) > 0.97 * im.width * im.height:
+            break
+        im = im.crop(box)
+    # Restjes lichtgrijs fotovlak rond de fles wit maken
+    licht = im.convert("L").point(lambda v: 255 if v >= 240 else 0)
+    im.paste((255, 255, 255), mask=licht)
+    binnen = int(FOTO_PX * (1 - 2 * FOTO_MARGE))
+    schaal = binnen / max(im.width, im.height)  # ook vergroten, zodat elke fles even groot staat
+    im = im.resize((max(1, round(im.width * schaal)), max(1, round(im.height * schaal))), Image.LANCZOS)
+    vel = Image.new("RGB", (FOTO_PX, FOTO_PX), (255, 255, 255))
+    vel.paste(im, ((FOTO_PX - im.width) // 2, (FOTO_PX - im.height) // 2))
+    uit = BytesIO()
+    vel.save(uit, "JPEG", quality=84, optimize=True, progressive=True)
+    return uit.getvalue()
+
+
 def download_fotos(info, map_, sessie, problemen, max_fotos=4):
     """Slaat de foto's op als img/<bestelcode>_<n>.jpg. Bestaande bestanden worden
     niet opnieuw gedownload, dus na de eerste run kost dit vrijwel niets."""
@@ -198,8 +239,12 @@ def download_fotos(info, map_, sessie, problemen, max_fotos=4):
                 r.raise_for_status()
                 if not r.headers.get("Content-Type", "").startswith("image/"):
                     raise ValueError(f"geen afbeelding ({r.headers.get('Content-Type')})")
+                try:
+                    inhoud = bewerk_foto(r.content)
+                except Exception:  # noqa: BLE001  (Pillow ontbreekt of onleesbare foto)
+                    inhoud = r.content
                 with open(pad, "wb") as f:
-                    f.write(r.content)
+                    f.write(inhoud)
                 time.sleep(PAUZE_SECONDEN)
             except Exception as e:  # noqa: BLE001
                 problemen.append(f"foto {url}: {e}")
