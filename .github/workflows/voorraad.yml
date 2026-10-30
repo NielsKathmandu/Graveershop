@@ -1,0 +1,40 @@
+name: Voorraad bijwerken
+
+on:
+  schedule:
+    - cron: "17 6-21 * * *"   # elk uur, van 07:17 tot 22:17 Nederlandse wintertijd
+  workflow_dispatch: {}       # handmatig starten via Actions -> Run workflow
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voorraad
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - name: Voorraad en foto's ophalen van kathmandu.nl
+        id: sync
+        continue-on-error: true
+        run: python voorraad_sync.py --uit docs/voorraad.json --fotos
+      - name: Opslaan als er iets veranderd is
+        run: |
+          git config user.name "voorraad-bot"
+          git config user.email "voorraad-bot@users.noreply.github.com"
+          git add -A docs
+          git diff --cached --quiet || git commit -m "Voorraad bijgewerkt"
+          git push
+      - name: Melden als het ophalen niet goed ging
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "Het voorraadscript meldde problemen; zie de stap hierboven."
+          exit 1
+# Mislukt een run, dan mailt GitHub de eigenaar van de repository.
