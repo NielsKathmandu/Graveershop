@@ -1387,16 +1387,7 @@
         "img/029042_3.jpg"
       ],
       "recht_foto": {
-        "pad": "img/029042_recht.jpg",
-        "cx": 0.5,
-        "cy": 0.7156,
-        "w": 0.1934,
-        "h": 0.2638,
-        "lak": "#353536",
-        "dop": "#4E4E4E",
-        "gravure": "#D6D9DA",
-        "product_y0": 0.07,
-        "product_h": 0.86
+        "afgekeurd": true
       },
       "graveervlak_foto": {
         "cx": 0.498,
@@ -3241,16 +3232,7 @@
         "img/009694_4.jpg"
       ],
       "recht_foto": {
-        "pad": "img/009694_recht.jpg",
-        "cx": 0.44,
-        "cy": 0.6996,
-        "w": 0.1903,
-        "h": 0.2302,
-        "lak": "#37668F",
-        "dop": "#C4C3C0",
-        "gravure": "#D6D9DA",
-        "product_y0": 0.07,
-        "product_h": 0.86
+        "afgekeurd": true
       },
       "graveervlak_foto": {
         "cx": 0.436,

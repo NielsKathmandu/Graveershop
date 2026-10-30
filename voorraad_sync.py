@@ -541,6 +541,15 @@ def main():
                         info["graveervlak_foto"] = meet_graveervlak(hoofd, merk)
                     except Exception as e:  # noqa: BLE001
                         print(f"graveervlak niet gemeten voor {info.get('bestelcode')}: {e}", file=sys.stderr)
+            # Controle: wijkt de lakkleur van de fabrikantfoto sterk af van de foto op kathmandu.nl,
+            # dan is waarschijnlijk de verkeerde kleur gepakt. Dan geen fabrikantfoto gebruiken.
+            r, k = info.get("recht_foto"), info.get("graveervlak_foto")
+            if r and k and r.get("lak") and k.get("lak"):
+                a = [int(r["lak"][i:i + 2], 16) for i in (1, 3, 5)]
+                b = [int(k["lak"][i:i + 2], 16) for i in (1, 3, 5)]
+                if sum(abs(x - y) for x, y in zip(a, b)) > 150:
+                    print(f"kleur fabrikantfoto wijkt af, niet gebruikt: {info['naam']}", file=sys.stderr)
+                    info["recht_foto"] = {"afgekeurd": True, "lak": r["lak"]}
             producten.append({"merk": merk, "url": item["url"], **info})
 
     zonder_tabel = sum(1 for p in producten if not p["voorraadtabel_gevonden"])
