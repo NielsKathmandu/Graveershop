@@ -14,6 +14,7 @@
  *   RESEND_API_KEY           (geheim) voor het versturen van e-mail via resend.com
  *   MAIL_VAN                 bijv. "Kathmandu Graveerwerk <graveerwerk@kathmandu.nl>"
  *   MAIL_ORDERS              adres waar orders binnenkomen: niels@kathmandu.nl
+ *   TESTMODUS                "1" = /testbestelling aan (bestellen zonder betaling, mail alleen naar MAIL_ORDERS)
  *   KV-binding ORDERS        opslag van openstaande bestellingen
  */
 
@@ -27,6 +28,7 @@ export default {
     try {
       if (request.method === "OPTIONS") return cors(env, new Response(null, { status: 204 }));
       if (url.pathname === "/bestelling" && request.method === "POST") return cors(env, await bestelling(request, env, url));
+      if (url.pathname === "/testbestelling" && request.method === "POST") return cors(env, await testbestelling(request, env));
       if (url.pathname === "/push" && request.method === "POST") return await push(request, env);
       if (url.pathname === "/terug") return await terug(request, env);
       return new Response("Kathmandu Graveerwerk", { status: 200 });
@@ -38,15 +40,14 @@ export default {
 };
 
 /* ---------------- bestelling starten ---------------- */
-async function bestelling(request, env, url) {
-  const invoer = await request.json();
+async function maakOrder(invoer, env, voorvoegsel) {
   const k = invoer.klant || {};
   for (const veld of ["naam", "email", "straat", "postcode", "plaats", "land"]) {
-    if (!String(k[veld] || "").trim()) return json({ fout: `Vul je ${veld} in.` }, 400);
+    if (!String(k[veld] || "").trim()) return { fout: json({ fout: `Vul je ${veld} in.` }, 400) };
   }
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(k.email)) return json({ fout: "Dit e-mailadres klopt niet." }, 400);
-  if (!invoer.akkoord) return json({ fout: "Ga akkoord met de algemene voorwaarden om te bestellen." }, 400);
-  if (!Array.isArray(invoer.regels) || !invoer.regels.length) return json({ fout: "Je winkelmand is leeg." }, 400);
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(k.email)) return { fout: json({ fout: "Dit e-mailadres klopt niet." }, 400) };
+  if (!invoer.akkoord) return { fout: json({ fout: "Ga akkoord met de algemene voorwaarden om te bestellen." }, 400) };
+  if (!Array.isArray(invoer.regels) || !invoer.regels.length) return { fout: json({ fout: "Je winkelmand is leeg." }, 400) };
 
   // Prijzen en voorraad nooit uit de browser overnemen: zelf ophalen
   const voorraad = await (await fetch(`${env.SITE_URL}/voorraad.json`, { cf: { cacheTtl: 300 } })).json();
@@ -56,11 +57,11 @@ async function bestelling(request, env, url) {
   for (const r of invoer.regels) {
     const p = perCode[r.code];
     const n = Math.floor(Number(r.n));
-    if (!p || !(n >= 1)) return json({ fout: "Een artikel in je winkelmand bestaat niet meer. Verwijder het en probeer opnieuw." }, 400);
+    if (!p || !(n >= 1)) return { fout: json({ fout: "Een artikel in je winkelmand bestaat niet meer. Verwijder het en probeer opnieuw." }, 400) };
     inMand[r.code] = (inMand[r.code] || 0) + n;
-    if (inMand[r.code] > p.voorraad) return json({ fout: `Van ${p.naam} zijn er nog ${p.voorraad} op voorraad.` }, 409);
+    if (inMand[r.code] > p.voorraad) return { fout: json({ fout: `Van ${p.naam} zijn er nog ${p.voorraad} op voorraad.` }, 409) };
     const gravure = r.gravure && r.gravure.svg ? r.gravure : null;
-    if (gravure && gravure.svg.length > 2e6) return json({ fout: "Een gravure is te groot. Gebruik een eenvoudiger logo." }, 400);
+    if (gravure && gravure.svg.length > 2e6) return { fout: json({ fout: "Een gravure is te groot. Gebruik een eenvoudiger logo." }, 400) };
     const graveren = gravure ? GRAVEERPRIJS(n) : 0;
     regels.push({ code: r.code, naam: p.naam, n, stukprijs: p.prijs, graveren, bedrag: round(n * (p.prijs + graveren)), gravure });
   }
@@ -70,12 +71,19 @@ async function bestelling(request, env, url) {
   const stuks = regels.reduce((t, r) => t + r.n, 0);
 
   const datum = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  const nummer = `KG-${datum}-${crypto.randomUUID().slice(0, 6).toUpperCase()}`;
+  const nummer = `${voorvoegsel}-${datum}-${crypto.randomUUID().slice(0, 6).toUpperCase()}`;
   const order = {
     nummer, aangemaakt: new Date().toISOString(), status: "open",
     klant: pick(k, ["naam", "bedrijf", "email", "telefoon", "straat", "postcode", "plaats", "land", "opmerking"]),
     regels, subtotaal, verzending, totaal, stuks, levertijdInOverleg: stuks > MAX_SNEL,
   };
+  return { order };
+}
+
+async function bestelling(request, env, url) {
+  const { order, fout } = await maakOrder(await request.json(), env, "KG");
+  if (fout) return fout;
+  const nummer = order.nummer, totaal = order.totaal;
   await env.ORDERS.put(nummer, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 30 });
 
   const eigen = `${url.protocol}//${url.host}`;
@@ -101,6 +109,19 @@ async function bestelling(request, env, url) {
   order.buckarooKey = antwoord.Key;
   await env.ORDERS.put(nummer, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 30 });
   return json({ doorsturen, nummer });
+}
+
+/* ---------------- testbestelling: zonder betaling, wel een echte ordermail ----------------
+   Alleen actief als TESTMODUS = "1". De klant krijgt geen bevestiging; die gaat ter controle ook naar MAIL_ORDERS. */
+async function testbestelling(request, env) {
+  if (env.TESTMODUS !== "1") return json({ fout: "Testbestellingen staan uit." }, 403);
+  const { order, fout } = await maakOrder(await request.json(), env, "TEST");
+  if (fout) return fout;
+  order.status = "test";
+  const ok = await stuurOrdermail(env, order, true);
+  if (!ok) return json({ fout: "De ordermail kon niet worden verstuurd. Controleer de Resend-instellingen." }, 502);
+  await stuurBevestiging(env, order, env.MAIL_ORDERS);
+  return json({ ok: true, nummer: order.nummer, totaal: order.totaal, naar: env.MAIL_ORDERS });
 }
 
 /* ---------------- betaling gemeld ---------------- */
@@ -183,9 +204,10 @@ async function mail(env, bericht) {
     body: JSON.stringify({ from: env.MAIL_VAN, ...bericht }),
   });
   if (!r.ok) console.error("Mail mislukt", r.status, await r.text());
+  return r.ok;
 }
 
-async function stuurOrdermail(env, o) {
+async function stuurOrdermail(env, o, test = false) {
   const bijlagen = [];
   const rijen = o.regels.map((r, i) => {
     const nr = i + 1;
@@ -206,6 +228,7 @@ async function stuurOrdermail(env, o) {
   }).join("");
   const k = o.klant;
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
+    ${test ? `<p style="background:#E9DCC6;padding:8px"><b>TESTBESTELLING</b>: er is niet betaald. Niet verzenden.</p>` : ""}
     <h2>Nieuwe bestelling ${o.nummer}</h2>
     ${o.levertijdInOverleg ? `<p style="background:#FFF3D6;padding:8px"><b>${o.stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen.</b></p>` : `<p>${o.stuks} stuks: binnen 3 werkdagen verzenden.</p>`}
     <p><b>Let op:</b> boek de artikelen handmatig uit in de kassa / op kathmandu.nl.</p>
@@ -219,10 +242,10 @@ async function stuurOrdermail(env, o) {
       <tr><td colspan="3" style="padding:8px;text-align:right">Verzenden</td><td style="padding:8px;text-align:right">${o.verzending ? euro(o.verzending) : "gratis"}</td></tr>
       <tr><td colspan="3" style="padding:8px;text-align:right"><b>Totaal betaald</b></td><td style="padding:8px;text-align:right"><b>${euro(o.totaal)}</b></td></tr>
     </table></div>`;
-  await mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `Bestelling ${o.nummer} – ${k.naam} – ${o.stuks} st.`, html, attachments: bijlagen });
+  return mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `${test ? "TESTBESTELLING" : "Bestelling"} ${o.nummer} – ${k.naam} – ${o.stuks} st.`, html, attachments: bijlagen });
 }
 
-async function stuurBevestiging(env, o) {
+async function stuurBevestiging(env, o, naar = null) {
   const k = o.klant;
   const regels = o.regels.map(r => `<li>${r.n} × ${esc(r.naam)}${r.gravure ? ` met gravure “${esc([r.gravure.config?.r1, r.gravure.config?.r2].filter(Boolean).join(" / ") || "symbool/logo")}”` : ""} – ${euro(r.bedrag)}</li>`).join("");
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
@@ -233,7 +256,7 @@ async function stuurBevestiging(env, o) {
     <p>${o.levertijdInOverleg ? "Omdat je 4 of meer artikelen hebt besteld, nemen we binnen 2 werkdagen contact met je op over de levertijd." : "We verzenden je bestelling binnen 3 werkdagen."}</p>
     <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail of mail naar webshop@kathmandu.nl.</p>
     <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel<br>Glencoe B.V. · Oudegracht 256-264, 3511 NV Utrecht · KvK 30166640</p></div>`;
-  await mail(env, { to: k.email, reply_to: env.MAIL_ORDERS, subject: `Bevestiging bestelling ${o.nummer}`, html });
+  await mail(env, { to: naar || k.email, reply_to: env.MAIL_ORDERS, subject: `${naar ? "[Voorbeeld klantmail] " : ""}Bevestiging bestelling ${o.nummer}`, html });
 }
 
 /* ---------------- hulpjes ---------------- */

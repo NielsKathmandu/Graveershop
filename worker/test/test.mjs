@@ -14,7 +14,7 @@ const kv = new Map();
 const env = {
   SITE_URL: "https://nielskathmandu.github.io/Graveershop",
   BUCKAROO_TEST: "1", BUCKAROO_WEBSITE_KEY: "WEBKEY", BUCKAROO_SECRET_KEY: "GEHEIM",
-  RESEND_API_KEY: "re_test", MAIL_VAN: "Graveerwerk <x@kathmandu.nl>", MAIL_ORDERS: "webshop@kathmandu.nl",
+  RESEND_API_KEY: "re_test", TESTMODUS: "1", MAIL_VAN: "Graveerwerk <x@kathmandu.nl>", MAIL_ORDERS: "webshop@kathmandu.nl",
   ORDERS: { get: async k => kv.get(k) ?? null, put: async (k, v) => void kv.set(k, v) },
 };
 const verzoeken = [];
@@ -73,5 +73,19 @@ r = await vraag("/terug", "brq_statuscode=190&brq_invoicenumber=X", "POST", "app
 assert.equal(r.status, 303); assert.equal(r.headers.get("Location"), env.SITE_URL + "/#bedankt");
 r = await vraag("/terug", "brq_statuscode=890", "POST", "application/x-www-form-urlencoded");
 assert.equal(r.headers.get("Location"), env.SITE_URL + "/#betaling-mislukt");
+
+// 6. testbestelling zonder betaling: ordermail met TEST-label + voorbeeld-klantmail naar MAIL_ORDERS, geen Buckaroo
+const voor = verzoeken.length;
+r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1, gravure: { svg, voorbeeld: png, formaat: "83 × 60 mm", config: { r1: "Test" } } }] }));
+const td = await r.json();
+assert.equal(r.status, 200, JSON.stringify(td)); assert.ok(td.nummer.startsWith("TEST-"));
+const nieuw = verzoeken.slice(voor);
+assert.ok(!nieuw.some(v => v.url.includes("buckaroo")), "geen Buckaroo bij testbestelling");
+const tm = nieuw.filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
+assert.equal(tm.length, 2); assert.ok(tm.every(m => m.to === "webshop@kathmandu.nl"));
+assert.match(tm[0].subject, /^TESTBESTELLING TEST-/); assert.equal(tm[0].attachments.length, 2);
+env.TESTMODUS = "0";
+r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1 }] }));
+assert.equal(r.status, 403, "testmodus uit");
 
 console.log("Alle tests geslaagd. Ordermail-onderwerp:", order.subject);

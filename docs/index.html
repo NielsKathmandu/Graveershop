@@ -1203,7 +1203,8 @@ renderMand();
 
 /* ---------- afrekenen ----------
    AFREKEN_URL: adres van de Cloudflare Worker (zie worker/README). Leeg = afrekenen nog niet gekoppeld. */
-const AFREKEN_URL="";
+const AFREKEN_URL="";          // bijv. https://graveerwerk-afrekenen.<naam>.workers.dev
+const BUCKAROO_ACTIEF=false;    // true zodra de Buckaroo-sleutels in de Worker staan; tot die tijd testbetaling
 function renderAfrekenen(){
   if(!state.mand.length){location.hash="winkelmand";return;}
   const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
@@ -1213,7 +1214,7 @@ function renderAfrekenen(){
     <span class="hint">${stuks>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
   $("maatwerkMelding").hidden=!state.mand.some(r=>r.gravure);
   $("afrekenFout").textContent="";
-  $("betaalKnop").hidden=!AFREKEN_URL; $("testKnop").hidden=!!AFREKEN_URL;
+  $("betaalKnop").hidden=!BUCKAROO_ACTIEF; $("testKnop").hidden=BUCKAROO_ACTIEF;
   $("testKnop").disabled=false; $("testKnop").textContent="Testbetaling (er wordt niets afgeschreven)";
 }
 /* ---------- testbetaling ----------
@@ -1237,8 +1238,6 @@ $("testKnop").onclick=async()=>{
   const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
   const velden=[], bijlagen=[], regels=[];
   const veld=(k,v)=>velden.push([k,v]);
-  veld("_subject",`TESTBESTELLING ${nummer} – ${klant.naam} – ${stuks} st.`);
-  veld("_captcha","false"); veld("_template","table"); veld("_replyto",klant.email);
   veld("Bestelnummer",nummer+" (testbetaling, niets afgeschreven)");
   veld("Levertijd",stuks>3?`${stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen`:`${stuks} ${stuks===1?"stuk":"stuks"}: binnen 3 werkdagen verzenden`);
   veld("Let op","Artikelen handmatig uitboeken in de kassa / op kathmandu.nl");
@@ -1261,15 +1260,22 @@ $("testKnop").onclick=async()=>{
   });
   veld("Subtotaal",euro(sub)); veld("Verzenden",verzend?euro(verzend):"gratis"); veld("Totaal",euro(sub+verzend));
   laatsteTestorder={nummer,velden,regels};
+  const verzendRegels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:r.gravure?{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
+    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}:null}));
   // mand leeg en testorder tonen; mail op de achtergrond versturen (pagina blijft staan)
   state.mand=[]; mandBijwerken(); location.hash="testorder";
+  if(!AFREKEN_URL){
+    $("testMailStatus").textContent="De mailserver is nog niet gekoppeld, dus er is geen mail verstuurd. Hieronder staat de complete ordermail met de bijlagen om te downloaden.";
+    return;
+  }
   $("testMailStatus").textContent=`Ordermail wordt verstuurd naar ${TEST_ORDERMAIL}…`;
-  const fd=new FormData(); velden.forEach(([k,v])=>fd.append(k,v)); bijlagen.forEach(f=>fd.append("attachment",f,f.name));
   try{
-    await fetch("https://formsubmit.co/"+TEST_ORDERMAIL,{method:"POST",body:fd,mode:"no-cors"});
-    $("testMailStatus").textContent=`Ordermail verstuurd naar ${TEST_ORDERMAIL} via FormSubmit. Komt hij niet binnen, kijk dan in je spam, of bevestig de activatiemail van FormSubmit en doe nog een testbestelling. De bijlagen kun je hieronder ook downloaden.`;
+    const r=await fetch(AFREKEN_URL+"/testbestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,akkoord:true,regels:verzendRegels})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(d.fout||`Fout ${r.status}`);
+    $("testMailStatus").textContent=`Ordermail ${d.nummer} is verstuurd naar ${d.naar}, met een voorbeeld van de klantbevestiging. De bijlagen kun je hieronder ook downloaden.`;
   }catch(e){
-    $("testMailStatus").textContent="De mail kon niet worden verstuurd: FormSubmit is op dit moment niet bereikbaar. Hieronder staat de complete ordermail met de bijlagen om te downloaden.";
+    $("testMailStatus").textContent=`De mail kon niet worden verstuurd (${e.message}). Hieronder staat de complete ordermail met de bijlagen om te downloaden.`;
   }
 };
 function renderTestorder(){
