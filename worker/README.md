@@ -25,7 +25,7 @@ Zet dat adres daarna in de shop: in `index.html` bij `const AFREKEN_URL=""`.
 ## Testen
 
 - `BUCKAROO_TEST = "1"` in `wrangler.toml` gebruikt de testomgeving van Buckaroo. Daar betaal je met testgegevens, er wordt niets echt afgeschreven.
-- Doe een paar testbestellingen en controleer de ordermail op webshop@kathmandu.nl. Daarin zitten per gravure de SVG voor xTool, de voorbeeldafbeelding en eventueel het logo.
+- Doe een paar testbestellingen en controleer de ordermail op niels@kathmandu.nl. Daarin zitten per gravure de SVG voor xTool, de voorbeeldafbeelding en eventueel het logo.
 - Werkt alles, zet dan `BUCKAROO_TEST = "0"` en voer `npx wrangler deploy` opnieuw uit.
 
 ## Automatische test

@@ -13,7 +13,7 @@
  *   BUCKAROO_SECRET_KEY      (geheim) uit Buckaroo Plaza
  *   RESEND_API_KEY           (geheim) voor het versturen van e-mail via resend.com
  *   MAIL_VAN                 bijv. "Kathmandu Graveerwerk <graveerwerk@kathmandu.nl>"
- *   MAIL_ORDERS              adres waar orders binnenkomen, bijv. webshop@kathmandu.nl
+ *   MAIL_ORDERS              adres waar orders binnenkomen: niels@kathmandu.nl
  *   KV-binding ORDERS        opslag van openstaande bestellingen
  */
 

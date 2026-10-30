@@ -6,7 +6,7 @@ compatibility_date = "2024-09-23"
 SITE_URL = "https://nielskathmandu.github.io/Graveershop"
 BUCKAROO_TEST = "1"            # "0" zodra alles getest is
 MAIL_VAN = "Kathmandu Graveerwerk <graveerwerk@kathmandu.nl>"
-MAIL_ORDERS = "webshop@kathmandu.nl"
+MAIL_ORDERS = "niels@kathmandu.nl"
 
 # Opslag voor openstaande bestellingen. Maak aan met:
 #   npx wrangler kv namespace create ORDERS

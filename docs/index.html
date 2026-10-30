@@ -186,6 +186,8 @@ input[type=file]{font-size:14px;max-width:100%}
 .akkoord a,.maatwerk a{color:var(--pine);font-weight:600}
 .maatwerk{background:color-mix(in srgb,var(--warn) 12%,transparent);border-left:3px solid var(--warn);padding:8px 10px;font-size:14px;margin:0}
 .toast.fout{color:var(--warn)}
+.testknop{background:var(--brass);color:#fff}
+.testmelding{background:color-mix(in srgb,var(--brass) 14%,transparent);border-left:3px solid var(--brass);padding:8px 10px;font-size:14px}
 .samenvatting{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;font-size:14px}
 .samenvatting .r{display:flex;justify-content:space-between;gap:10px}
 .samenvatting .mono{white-space:nowrap}
@@ -364,6 +366,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <label class="akkoord"><input type="checkbox" id="kAkkoord"><span>Ik ga akkoord met de <a href="#voorwaarden" target="_blank">algemene voorwaarden</a> en heb de <a href="#privacy" target="_blank">privacyverklaring</a> gelezen.</span></label>
         <p class="maatwerk" id="maatwerkMelding" hidden>Je bestelling bevat gegraveerde artikelen. Die maken we speciaal voor jou; je kunt ze daarom niet retourneren of ruilen.</p>
         <button class="btn" type="submit" id="betaalKnop">Betalen</button>
+        <button class="btn testknop" type="button" id="testKnop" hidden>Testbetaling (er wordt niets afgeschreven)</button>
         <p class="toast fout" id="afrekenFout" role="alert"></p>
         <p class="hint">Je betaalt veilig via Buckaroo met iDEAL/Wero, creditcard of Bancontact.</p>
       </form>
@@ -373,6 +376,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
 
   <section id="vBedankt" class="wrap bonnen" hidden>
     <h1>Bedankt voor je bestelling</h1>
+    <p class="testmelding" id="testBedankt" hidden>Dit was een <strong>testbetaling</strong>: er is niets afgeschreven. De ordermail met de SVG en de voorbeeldafbeelding is verstuurd naar niels@kathmandu.nl.</p>
     <p>We hebben je betaling ontvangen. Je krijgt een bevestiging per e-mail. Bestellingen tot en met 3 stuks verzenden we binnen 3 werkdagen; bij grotere bestellingen nemen we binnen 2 werkdagen contact met je op over de levertijd.</p>
     <p><a class="btn" href="#">Verder winkelen</a></p>
   </section>
@@ -1193,8 +1197,63 @@ function renderAfrekenen(){
     <div class="r tot"><span>Totaal incl. btw</span><span class="mono">${euro(sub+verzend)}</span></div>
     <span class="hint">${stuks>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
   $("maatwerkMelding").hidden=!state.mand.some(r=>r.gravure);
-  $("afrekenFout").textContent=AFREKEN_URL?"":"Afrekenen is nog niet gekoppeld aan Buckaroo. Dit volgt zodra de betaalserver draait.";
+  $("afrekenFout").textContent="";
+  $("betaalKnop").hidden=!AFREKEN_URL; $("testKnop").hidden=!!AFREKEN_URL;
+  $("testKnop").disabled=false; $("testKnop").textContent="Testbetaling (er wordt niets afgeschreven)";
 }
+/* ---------- testbetaling ----------
+   Zolang Buckaroo niet gekoppeld is: geen betaling, wel een echte ordermail via FormSubmit (formulier met bijlagen). */
+const TEST_ORDERMAIL="niels@kathmandu.nl";
+let wasTest=false; try{wasTest=sessionStorage.getItem("graveerwerk-test")==="1";sessionStorage.removeItem("graveerwerk-test");}catch(e){}
+function klantUitFormulier(){
+  const v=id=>$(id).value.trim();
+  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm")};
+  const leeg=[["naam","kNaam"],["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
+  if(leeg){$("afrekenFout").textContent=`Vul je ${leeg[0]} in.`;$(leeg[1]).focus();return null;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("afrekenFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return null;}
+  if(!$("kAkkoord").checked){$("afrekenFout").textContent="Ga akkoord met de algemene voorwaarden om te bestellen.";return null;}
+  return klant;
+}
+function dataUrlNaarBestand(url,naam,type){const b=atob(url.split(",")[1]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return new File([u],naam,{type});}
+$("testKnop").onclick=()=>{
+  const klant=klantUitFormulier(); if(!klant) return;
+  const d=new Date(), nummer=`TEST-${d.toISOString().slice(0,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
+  const f=document.createElement("form"); f.method="POST"; f.enctype="multipart/form-data"; f.action="https://formsubmit.co/"+TEST_ORDERMAIL; f.hidden=true;
+  const veld=(naam,waarde)=>{const i=document.createElement("input");i.type="hidden";i.name=naam;i.value=waarde;f.appendChild(i);};
+  veld("_subject",`TESTBESTELLING ${nummer} – ${klant.naam} – ${stuks} st.`);
+  veld("_captcha","false"); veld("_template","table"); veld("_replyto",klant.email);
+  veld("_next",location.origin+location.pathname+"#bedankt");
+  veld("Bestelnummer",nummer+" (testbetaling, niets afgeschreven)");
+  veld("Levertijd",stuks>3?`${stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen`:`${stuks} stuks: binnen 3 werkdagen verzenden`);
+  veld("Let op","Artikelen handmatig uitboeken in de kassa / op kathmandu.nl");
+  veld("Klant",[klant.naam,klant.bedrijf,klant.straat,`${klant.postcode} ${klant.plaats}`,klant.land].filter(Boolean).join(", "));
+  veld("E-mail klant",klant.email); if(klant.telefoon) veld("Telefoon klant",klant.telefoon); if(klant.opmerking) veld("Opmerking",klant.opmerking);
+  const bestanden=new DataTransfer();
+  state.mand.forEach((r,i)=>{
+    const nr=i+1, p=r.p, basis=`${nummer}_regel${nr}_${p.code}`;
+    let t=`${r.n} × ${p.merk} ${p.naam} ${p.kleur} (bestelcode ${p.code}) – ${euro(regelPrijs(r))}`;
+    if(r.gravure){
+      const c=r.gravure.c;
+      t+=` | MET GRAVURE: regel 1 “${c.r1||"–"}”, regel 2 “${c.r2||"–"}”, lettertype ${FONTDATA[c.font].label}, symbool ${MOTIFS[c.motif]}, formaat ${r.gravure.g.W} × ${r.gravure.g.H} mm | bijlagen: ${basis}_xtool.svg, ${basis}_voorbeeld.png${r.gravure.logo?`, ${basis}_logo.png`:""}`;
+      bestanden.items.add(new File([r.gravure.svg],`${basis}_xtool.svg`,{type:"image/svg+xml"}));
+      if(r.gravure.voorbeeld) bestanden.items.add(dataUrlNaarBestand(r.gravure.voorbeeld,`${basis}_voorbeeld.png`,"image/png"));
+      if(r.gravure.logo&&r.gravure.logo.png) bestanden.items.add(dataUrlNaarBestand(r.gravure.logo.png,`${basis}_logo.png`,"image/png"));
+    } else t+=" | zonder gravure";
+    veld(`Regel ${nr}`,t);
+  });
+  veld("Subtotaal",euro(sub)); veld("Verzenden",verzend?euro(verzend):"gratis"); veld("Totaal",euro(sub+verzend));
+  if(bestanden.files.length){
+    let totaal=0; for(const b of bestanden.files) totaal+=b.size;
+    if(totaal>9.5e6){$("afrekenFout").textContent="De bijlagen zijn samen groter dan 10 MB. Bestel in een paar delen of gebruik een eenvoudiger logo.";return;}
+    const i=document.createElement("input"); i.type="file"; i.name="attachment"; i.multiple=true; i.files=bestanden.files; f.appendChild(i);
+  }
+  try{sessionStorage.setItem("graveerwerk-test","1");}catch(e){}
+  document.body.appendChild(f);
+  $("testKnop").disabled=true; $("testKnop").textContent="Ordermail versturen…";
+  f.submit();
+};
+
 $("afrekenForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const v=id=>$(id).value.trim();
@@ -1228,7 +1287,7 @@ function route(){
   if(wasOverzicht) laatsteScroll=scrollY;
   const mand=h==="winkelmand"||h==="werkbonnen", vw=h==="voorwaarden", pr=h==="privacy", af=h==="afrekenen", bd=h==="bedankt", ms=h==="betaling-mislukt";
   $("vAfrekenen").hidden=!af; $("vBedankt").hidden=!bd; $("vMislukt").hidden=!ms;
-  if(bd){state.mand=[];mandBijwerken();}
+  if(bd){state.mand=[];mandBijwerken();$("testBedankt").hidden=!wasTest;}
   if(af||bd||ms){$("vOverzicht").hidden=true;$("vProduct").hidden=true;$("vMand").hidden=true;$("vVoorwaarden").hidden=true;$("vPrivacy").hidden=true;
     document.title=(af?"Afrekenen":bd?"Bedankt":"Betaling niet gelukt")+" | "+titel; if(af)renderAfrekenen(); scrollTo(0,0); return;}
   $("vOverzicht").hidden=!!(p||mand||vw||pr);
