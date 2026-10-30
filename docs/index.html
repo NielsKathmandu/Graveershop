@@ -127,6 +127,33 @@ input[type=text],input[type=number]{width:100%;border:1px solid var(--line);back
 .toast{font-size:14px;color:var(--ok);min-height:1.4em;margin:0}
 .toast a{color:var(--pine);font-weight:600}
 
+/* kopen op de productpagina */
+.koop{display:grid;grid-template-columns:auto 84px 1fr;gap:10px;align-items:center}
+.koop input{width:84px}
+.koop .lbl{font-size:14px;font-weight:600}
+@media (max-width:420px){.koop{grid-template-columns:auto 1fr}.koop .btn{grid-column:1/-1}}
+.btn.sec.groot{padding:11px 16px;font-size:15px}
+/* producttekst */
+.omschrijving{border-top:1px solid var(--line);padding-block:26px 30px;display:grid;gap:10px}
+.omschrijving h2{font-size:24px}
+.oms-tekst{max-width:70ch;color:var(--ink)}
+.oms-tekst h3,.oms-tekst h4{font-family:var(--display);font-stretch:85%;font-size:17px;margin:16px 0 4px}
+.oms-tekst p{margin:0 0 10px}
+.oms-tekst ul{margin:0 0 10px;padding-left:20px}
+/* winkelmand */
+.regel{background:var(--surface);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;padding:14px;align-items:start}
+@media (max-width:600px){.regel{grid-template-columns:80px minmax(0,1fr)}.regel .rprijs{grid-column:1/-1;text-align:left}}
+.regel .ph{border-radius:4px}
+.regel h3{font-size:17px;margin-bottom:4px}
+.regel .rprijs{text-align:right;display:grid;gap:6px;justify-items:end}
+.regel .werkplaats{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px}
+@media (max-width:600px){.regel .werkplaats{grid-template-columns:minmax(0,1fr)}}
+.mandtotaal{display:grid;gap:6px;justify-items:end;border-top:1px solid var(--line);padding-top:14px;font-size:15px}
+.mandtotaal .tot{font-size:20px;font-weight:700}
+.regel .svgbox{overflow:hidden;align-self:start}
+.regel .svgbox svg{width:100%;height:auto;display:block}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.linkknop{background:none;border:0;color:var(--pine);font-weight:600;cursor:pointer;padding:0;font-size:14px}
 /* werkbonnen */
 section.bonnen{padding-block:26px 48px;display:grid;gap:14px}
 section.bonnen h1{font-size:clamp(28px,4vw,38px)}
@@ -151,7 +178,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
   <a class="brand" href="#">KATHMANDU <span>GRAVEERWERK</span></a>
   <div class="topright">
     <div class="sync"><span class="dot"></span><span id="syncTxt">Voorraad Amsterdam + Utrecht</span></div>
-    <a class="bonlink" href="#werkbonnen">Werkbonnen <span class="n" id="bonN">0</span></a>
+    <a class="bonlink" href="#winkelmand">Winkelmand <span class="n" id="bonN">0</span></a>
   </div>
 </div></header>
 
@@ -189,10 +216,22 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <div class="bigprijs" id="pPrijs"></div>
         <div id="pStock"></div>
         <div class="varianten" id="varianten"></div>
-        <button class="btn" type="button" id="naarTool" onclick="document.getElementById('graveren').scrollIntoView({behavior:'smooth'})">Personaliseer deze fles</button>
+        <div class="koop">
+          <label class="lbl" for="pAantal">Aantal</label>
+          <input type="number" id="pAantal" min="1" value="1" inputmode="numeric">
+          <button class="btn" type="button" id="pToevoegen">Toevoegen aan winkelmand</button>
+        </div>
+        <p class="toast" id="pToast" role="status"></p>
+        <button class="btn sec groot" type="button" id="naarTool" onclick="document.getElementById('graveren').scrollIntoView({behavior:'smooth'})">Liever met gravure? Personaliseer deze fles ↓</button>
         <dl class="feiten" id="feiten"></dl>
       </div>
     </div>
+
+    <section class="omschrijving" id="omschrijving" aria-labelledby="omsKop" hidden>
+      <h2 id="omsKop">Over dit product</h2>
+      <div class="oms-tekst" id="omsTekst"></div>
+      <p class="hint">Productinformatie van kathmandu.nl</p>
+    </section>
 
     <section class="tafel" id="graveren" aria-labelledby="tafelKop">
       <header>
@@ -224,19 +263,18 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
             <input type="number" id="aantal" min="1" value="1" inputmode="numeric">
           </div>
           <div class="som" id="som"></div>
-          <button class="btn" type="submit">Zet op werkbon</button>
+          <button class="btn" type="submit">Toevoegen aan winkelmand</button>
           <p class="toast" id="toast" role="status"></p>
         </form>
       </div>
     </section>
   </div>
 
-  <!-- werkbonnen -->
-  <section id="vBonnen" class="wrap bonnen" hidden>
-    <nav class="crumbs"><a href="#">← Alle flessen</a></nav>
-    <h1>Werkbonnen voor de graveermachine</h1>
-    <p class="hint">Elke bestelregel levert een SVG op ware grootte in millimeters. Kopieer de code, plak hem in een leeg tekstbestand met de extensie .svg en sleep dat in xTool Creative Space. De tekst is al omgezet naar vormen, dus je hebt geen lettertypes nodig.</p>
-    <div id="bonnen"><p class="leeg">Nog geen werkbonnen. Kies een fles, stel de gravure samen en kies <strong>Zet op werkbon</strong>.</p></div>
+  <!-- winkelmand -->
+  <section id="vMand" class="wrap bonnen" hidden>
+    <nav class="crumbs"><a href="#">← Verder winkelen</a></nav>
+    <h1>Winkelmand</h1>
+    <div id="mand"></div>
   </section>
 </main>
 
@@ -326,7 +364,7 @@ const voorraad = p => p.ams + p.utr;
 function graveerPrijs(n){ return n>=25?4:n>=10?5:7.5; }
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-const state = {sel:null, font:"strak", motif:"ster", merk:"", foto:0, bonnen:[]};
+const state = {sel:null, font:"strak", motif:"ster", merk:"", foto:0, mand:[]};
 const fonts = {};
 function b64buf(b){const s=atob(b),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u.buffer;}
 for (const [k,f] of Object.entries(FONTDATA)) {
@@ -721,7 +759,10 @@ function renderProduct(){
     <dt>Opspannen</dt><dd>${esc(MACHINE.naam)}</dd>
     <dt>Levering</dt><dd>Gegraveerd en verzonden binnen 3 werkdagen</dd>`;
   $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
-  $("toast").textContent="";
+  $("toast").textContent=""; $("pToast").textContent="";
+  $("pAantal").max=v; $("pAantal").value=1;
+  $("omschrijving").hidden=!p.omschrijving;
+  $("omsTekst").innerHTML=p.omschrijving||"";
   renderTafel();
 }
 function renderFoto(){const p=state.sel;$("mainPhoto").innerHTML=foto(p,p.fotos[state.foto]||p.fotos[0],false);}
@@ -767,44 +808,79 @@ function renderTafel(){
 }
 ["r1","r2","aantal"].forEach(id=>$(id).addEventListener("input",renderTafel));
 
+/* ---------- winkelmand ---------- */
+state.mand=[];
+let regelNr=0;
+const inMand=p=>state.mand.filter(r=>r.p===p).reduce((t,r)=>t+r.n,0);
+function kanToevoegen(p,n,toast){
+  const vrij=voorraad(p)-inMand(p);
+  if(n>vrij){$(toast).textContent=vrij>0?`Er zijn nog ${vrij} op voorraad die niet in je winkelmand zitten.`:"Alle voorraad van deze fles zit al in je winkelmand.";return false;}
+  return true;
+}
+function mandBijwerken(){
+  $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
+  renderMand();
+}
+$("pToevoegen").onclick=()=>{
+  const p=state.sel, n=Math.max(1,+$("pAantal").value||1);
+  if(!kanToevoegen(p,n,"pToast")) return;
+  const bestaand=state.mand.find(r=>r.p===p&&!r.gravure);
+  if(bestaand) bestaand.n+=n; else state.mand.push({nr:++regelNr,p,n,gravure:null});
+  mandBijwerken();
+  $("pToast").innerHTML=`${n} × toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
+};
 $("form").addEventListener("submit",e=>{
   e.preventDefault();
   const p=state.sel,c=cfg();
   if(!c.r1.trim()&&!c.r2.trim()&&c.motif==="geen"){$("toast").textContent="Vul minimaal één regel tekst in of kies een symbool.";return;}
-  const g=bouwGravure(c), n=+$("aantal").value;
-  const nr=String(state.bonnen.length+1).padStart(3,"0");
+  const n=+$("aantal").value;
+  if(!kanToevoegen(p,n,"toast")) return;
+  const g=bouwGravure(c), nr=++regelNr;
   const meta=`Werkbon ${nr} | ${p.merk} ${p.naam} ${p.kleur} | bestelcode ${p.code} | ${n} stuks | ${g.W}x${g.H} mm`;
-  state.bonnen.unshift({nr,p,c,n,g,svg:svgVoorXtool(g,meta)});
-  $("bonN").textContent=state.bonnen.length;
-  $("toast").innerHTML=`Werkbon ${nr} aangemaakt. <a href="#werkbonnen">Bekijk werkbonnen</a>`;
-  renderBonnen();
+  state.mand.push({nr,p,n,gravure:{c,g,svg:svgVoorXtool(g,meta)}});
+  mandBijwerken();
+  $("toast").innerHTML=`Met gravure toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
 });
-
-/* ---------- werkbonnen ---------- */
-function renderBonnen(){
-  if(!state.bonnen.length)return;
-  $("bonnen").innerHTML="";
-  state.bonnen.forEach(b=>{
-    const el=document.createElement("article");el.className="bon";
-    el.innerHTML=`<div class="svgbox">${b.svg.replace(/^[\s\S]*?(<svg)/,"$1")}</div>
-      <div><h3 style="font-size:18px;margin-bottom:8px">Werkbon ${b.nr}</h3>
-      <dl><dt>Fles</dt><dd>${esc(b.p.merk+" "+b.p.naam+", "+b.p.kleur)}</dd>
-      <dt>Bestelcode</dt><dd class="mono">${b.p.code}</dd>
-      <dt>Aantal</dt><dd>${b.n}</dd>
-      <dt>Tekst</dt><dd>${esc([b.c.r1,b.c.r2].filter(Boolean).join(" / ")||"–")}</dd>
-      <dt>Lettertype</dt><dd>${FONTDATA[b.c.font].label}${b.c.motif!=="geen"?" · symbool "+MOTIFS[b.c.motif].toLowerCase():""}</dd>
-      <dt>Formaat</dt><dd class="mono">${b.g.W} × ${b.g.H} mm, gecentreerd</dd></dl>
-      <div class="acties"><button class="btn sec" type="button" id="kp${b.nr}">Kopieer SVG</button><span class="toast" id="kt${b.nr}"></span></div>
-      <textarea id="ta${b.nr}" readonly aria-label="SVG-code werkbon ${b.nr}" hidden></textarea></div>`;
-    $("bonnen").appendChild(el);
-    const ta=$("ta"+b.nr); ta.value=b.svg;
-    $("kp"+b.nr).onclick=()=>{
-      const ok=()=>{$("kt"+b.nr).textContent="Gekopieerd. Plak in een .svg-bestand.";};
-      const fallback=()=>{ta.hidden=false;ta.focus();ta.select();$("kt"+b.nr).textContent="Kopiëren lukte niet automatisch; de code is geselecteerd.";};
-      try{navigator.clipboard.writeText(b.svg).then(ok,fallback);}catch(e){fallback();}
-    };
+function regelPrijs(r){return r.n*(r.p.prijs+(r.gravure?graveerPrijs(r.n):0));}
+function renderMand(){
+  if(!state.mand.length){$("mand").innerHTML=`<p class="leeg">Je winkelmand is leeg. Kies een fles en voeg hem toe, met of zonder gravure.</p>`;return;}
+  $("mand").innerHTML="";
+  const lijst=document.createElement("div");lijst.style.cssText="display:grid;gap:12px";
+  state.mand.forEach(r=>{
+    const p=r.p, el=document.createElement("article");el.className="regel";
+    const gp=r.gravure?graveerPrijs(r.n):0;
+    el.innerHTML=`<a class="ph" href="#p-${p.code}">${foto(p,p.fotos[0])}</a>
+      <div><span class="merk">${esc(p.merk)}</span><h3>${esc(p.naam)}</h3><div class="kleur">${esc(p.kleur)}</div>
+        <div class="hint" style="margin-top:6px">${r.gravure?`Met gravure: <strong>${esc([r.gravure.c.r1,r.gravure.c.r2].filter(Boolean).join(" / ")||"alleen symbool")}</strong> · ${FONTDATA[r.gravure.c.font].label}${r.gravure.c.motif!=="geen"?" · "+MOTIFS[r.gravure.c.motif].toLowerCase():""}`:"Zonder gravure"}</div>
+        ${r.gravure?`<div class="werkplaats"><div class="svgbox" style="border:1px dashed var(--muted);background:#fff;border-radius:3px;padding:6px">${r.gravure.svg.replace(/^[\s\S]*?(<svg)/,"$1")}</div>
+          <div><span class="label">Werkbon ${r.nr} · voor de werkplaats</span><div class="hint">${r.gravure.g.W} × ${r.gravure.g.H} mm, bestelcode ${p.code}</div>
+          <div class="acties" style="margin-top:6px"><button class="btn sec" type="button" data-kopieer="${r.nr}">Kopieer SVG voor xTool</button><span class="toast" id="kt${r.nr}"></span></div>
+          <textarea id="ta${r.nr}" readonly aria-label="SVG-code werkbon ${r.nr}" hidden style="width:100%;height:100px;font:12px/1.4 var(--mono)"></textarea></div></div>`:""}
+      </div>
+      <div class="rprijs"><span class="mono">${r.n} × ${euro(p.prijs)}${r.gravure?` + ${euro(gp)}`:""}</span><strong class="mono">${euro(regelPrijs(r))}</strong>
+        <button class="linkknop" type="button" data-weg="${r.nr}">Verwijderen</button></div>`;
+    lijst.appendChild(el);
+    if(r.gravure){
+      const ta=el.querySelector("#ta"+r.nr); ta.value=r.gravure.svg;
+      el.querySelector("[data-kopieer]").onclick=()=>{
+        const ok=()=>{$("kt"+r.nr).textContent="Gekopieerd. Plak in een .svg-bestand.";};
+        const fallback=()=>{ta.hidden=false;ta.focus();ta.select();$("kt"+r.nr).textContent="Kopiëren lukte niet automatisch; de code is geselecteerd.";};
+        try{navigator.clipboard.writeText(r.gravure.svg).then(ok,fallback);}catch(e){fallback();}
+      };
+    }
+    el.querySelector("[data-weg]").onclick=()=>{state.mand=state.mand.filter(x=>x!==r);mandBijwerken();};
   });
+  $("mand").appendChild(lijst);
+  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95;
+  const tot=document.createElement("div");tot.className="mandtotaal";
+  tot.innerHTML=`<span>Subtotaal <span class="mono">${euro(sub)}</span></span>
+    <span>Verzenden <span class="mono">${verzend?euro(verzend):"gratis"}</span></span>
+    <span class="tot">Totaal incl. btw <span class="mono">${euro(sub+verzend)}</span></span>
+    <button class="btn" type="button" disabled title="Volgt in de echte webshop">Afrekenen</button>
+    <span class="hint">Afrekenen werkt nog niet in deze proefversie.</span>`;
+  $("mand").appendChild(tot);
 }
+renderMand();
 
 /* ---------- navigatie: #, #p-<bestelcode>, #werkbonnen, #graveren ---------- */
 let laatsteScroll=0;
@@ -814,11 +890,12 @@ function route(){
   const m=h.match(/^p-(\d{6})$/), p=m&&PRODUCTEN.find(x=>x.code===m[1]);
   const wasOverzicht=!$("vOverzicht").hidden;
   if(wasOverzicht) laatsteScroll=scrollY;
-  $("vOverzicht").hidden=!!(p||h==="werkbonnen");
+  const mand=h==="winkelmand"||h==="werkbonnen";
+  $("vOverzicht").hidden=!!(p||mand);
   $("vProduct").hidden=!p;
-  $("vBonnen").hidden=h!=="werkbonnen";
+  $("vMand").hidden=!mand;
   if(p){ if(state.sel!==p){state.sel=p;state.foto=0;} renderProduct(); scrollTo(0,0); }
-  else { document.title=titel; if(h==="werkbonnen") scrollTo(0,0); else if(!wasOverzicht) scrollTo(0,laatsteScroll); }
+  else { document.title=mand?"Winkelmand | "+titel:titel; if(mand){renderMand();scrollTo(0,0);} else if(!wasOverzicht) scrollTo(0,laatsteScroll); }
 }
 addEventListener("hashchange",route);
 
@@ -855,7 +932,7 @@ function vanJson(data){
     const lak=gemeten?gemeten.lak:kleurHex(kleur||volledig);
     return {code:p.bestelcode,merk:p.merk,naam,kleur,hex:lak,lak,dop:gemeten?gemeten.dop:null,prijs:p.prijs||0,
       ams:p.voorraad_per_winkel.Amsterdam||0,utr:p.voorraad_per_winkel.Utrecht||0,vorm:md.vorm,maat:md.maat,zone:md.zone,maatBron:md.maatBron,opspanning:md.opspanning,
-      fotos:p.lokale_afbeeldingen||[],recht:p.recht_foto&&p.recht_foto.pad&&p.recht_foto.cx?p.recht_foto:null};
+      fotos:p.lokale_afbeeldingen||[],omschrijving:p.omschrijving||null,recht:p.recht_foto&&p.recht_foto.pad&&p.recht_foto.cx?p.recht_foto:null};
   });
 }
 
