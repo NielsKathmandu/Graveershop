@@ -259,9 +259,9 @@ function silhouet(p, gravure){
 
 /* Productfoto uit img/ (gevuld door voorraad_sync.py --fotos); zonder foto het silhouet. */
 function foto(p){
-  const sil=silhouet(p,null).replace("<svg ",'<svg class="sil" ');
-  return `<img class="pfoto" src="${p.foto||"img/"+p.code+"_1.jpg"}" alt="${p.merk} ${p.naam}, ${p.kleur}" loading="lazy" hidden
-    onload="this.hidden=false;this.nextElementSibling.hidden=true" onerror="this.remove()">${sil}`;
+  const sil=silhouet(p,null).replace("<svg ",'<svg class="sil" hidden ');
+  return `<img class="pfoto" src="${p.foto||"img/"+p.code+"_1.jpg"}" alt="${p.merk} ${p.naam}, ${p.kleur}" loading="lazy" decoding="async"
+    onerror="this.nextElementSibling.hidden=false;this.remove()">${sil}`;
 }
 
 /* ---------- UI ---------- */
