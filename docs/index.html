@@ -36,7 +36,10 @@ a{color:inherit}
 
 /* kop */
 header.top{border-bottom:1px solid var(--line);background:var(--surface)}
-header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between;padding-block:12px}
+header.top .wrap{display:flex;flex-wrap:nowrap;gap:12px;align-items:center;justify-content:space-between;padding-block:12px}
+.brand{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:480px){.brand{font-size:18px;line-height:1.05}.brand span{display:block;font-size:11px;letter-spacing:.16em}}
+@media (max-width:860px){.crumbs #crumbMerk,.crumbs [aria-hidden="true"]{display:none}}
 .brand{font-family:var(--display);font-weight:800;font-size:20px;font-stretch:80%;letter-spacing:.01em;text-decoration:none}
 .brand span{color:var(--brass)}
 .topright{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
@@ -77,6 +80,15 @@ header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;jus
 .product{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:36px;align-items:start;padding-bottom:36px}
 @media (max-width:860px){.product{grid-template-columns:minmax(0,1fr);gap:20px}}
 .gallery{display:grid;gap:10px}
+.mkop{display:none}
+@media (max-width:860px){
+  .mkop{display:grid;gap:2px;padding-bottom:12px}
+  .mkop .mnaam{font-family:var(--display);font-stretch:85%;font-weight:750;font-size:26px;line-height:1.1}
+  .pinfo>#pMerk,.pinfo>#pNaam,.pinfo>#pKleur{display:none}
+}
+@keyframes inschuiven{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.binnen{animation:inschuiven .28s ease-out}
+@media (prefers-reduced-motion:reduce){.binnen{animation:none}}
 .gallery .main{border:1px solid var(--line);border-radius:6px}
 .thumbs{display:flex;gap:8px;flex-wrap:wrap}
 .thumbs button{width:76px;aspect-ratio:1/1;border:1px solid var(--line);border-radius:4px;background:var(--photo);padding:0;cursor:pointer;overflow:hidden}
@@ -179,7 +191,6 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
 <header class="top"><div class="wrap">
   <a class="brand" href="#">KATHMANDU <span>GRAVEERWERK</span></a>
   <div class="topright">
-    <div class="sync"><span class="dot"></span><span id="syncTxt">Voorraad Amsterdam + Utrecht</span></div>
     <a class="bonlink" href="#winkelmand">Winkelmand <span class="n" id="bonN">0</span></a>
   </div>
 </div></header>
@@ -189,7 +200,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
   <div id="vOverzicht" class="wrap">
     <div class="intro">
       <span class="demo">Proof of concept</span>
-      <h1>Thermosflessen met naam of logo, gegraveerd in onze eigen werkplaats</h1>
+      <h1>Personaliseer waterflessen of thermosflessen voor een uniek cadeau, of natuurlijk voor jezelf</h1>
       <p>Voor relatiegeschenken, personeelscadeaus en december. Kies een fles en stel op de productpagina je gravure samen. Je bestelt alleen wat in onze winkels op voorraad is.</p>
     </div>
     <div class="toolbar">
@@ -206,6 +217,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
   <!-- productpagina -->
   <div id="vProduct" class="wrap" hidden>
     <nav class="crumbs" aria-label="Kruimelpad"><a href="#">← Alle flessen</a><span aria-hidden="true">/</span><span id="crumbMerk"></span></nav>
+    <div class="mkop" aria-hidden="true"><span class="merk" id="mMerk"></span><div class="mnaam" id="mNaam"></div><div class="kleurregel" id="mKleur"></div></div>
     <div class="product">
       <div class="gallery">
         <div class="ph main" id="mainPhoto"></div>
@@ -749,6 +761,8 @@ function renderProduct(){
   document.title=`${p.merk} ${p.naam} ${p.kleur} | ${titel}`;
   $("crumbMerk").textContent=`${p.merk} · ${p.naam}`;
   $("pMerk").textContent=p.merk; $("pNaam").textContent=p.naam; $("pKleur").textContent=p.kleur;
+  $("mMerk").textContent=p.merk; $("mNaam").textContent=p.naam; $("mKleur").textContent=p.kleur;
+  const vp=$("vProduct"); vp.classList.remove("binnen"); void vp.offsetWidth; vp.classList.add("binnen");
   $("pPrijs").textContent=euro(p.prijs);
   $("pStock").innerHTML=`<span class="stock${v<=2?" laag":""}">${v<=2?"Nog "+v+" op voorraad":v+" op voorraad"}</span>`;
   renderFoto();
@@ -757,10 +771,9 @@ function renderProduct(){
   const sib=PRODUCTEN.filter(q=>q.merk===p.merk&&q.naam===p.naam);
   $("varianten").innerHTML=sib.length>1?`<span class="label">${sib.length} kleuren op voorraad</span><div class="lijst">${sib.map(q=>`<a href="#p-${q.code}" title="${esc(q.kleur)}" aria-label="${esc(q.kleur)}"${q===p?' aria-current="page"':""}>${foto(q,q.fotos[0])}</a>`).join("")}</div>`:"";
   $("feiten").innerHTML=`<dt>Bestelcode</dt><dd class="mono">${p.code}</dd>
-    <dt>Voorraad</dt><dd>Amsterdam ${p.ams} · Utrecht ${p.utr}</dd>
-    <dt>Afmetingen</dt><dd><span class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</span><span class="hint"> (bron: ${p.maatBron})</span></dd>
-    <dt>Graveervlak</dt><dd class="mono">max. ${p.zone[0]} × ${p.zone[1]} mm</dd>
-    <dt>Opspannen</dt><dd>${esc(MACHINE.naam)}</dd>
+    <dt>Voorraad</dt><dd>${v}</dd>
+    <dt>Afmetingen</dt><dd class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</dd>
+    <dt>Graveervlak</dt><dd class="mono">${p.zone[0]} × ${p.zone[1]} mm</dd>
     <dt>Levering</dt><dd>Gegraveerd en verzonden binnen 3 werkdagen</dd>`;
   $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
   $("toast").textContent=""; $("pToast").textContent="";
@@ -772,14 +785,24 @@ function renderProduct(){
 function renderFoto(){const p=state.sel;$("mainPhoto").innerHTML=foto(p,p.fotos[state.foto]||p.fotos[0],false);}
 
 /* Gravure op de echte productfoto. Vlak en kleuren zijn per foto gemeten door voorraad_sync.py. */
-function opFoto(p,g){
-  const v=p.recht, S=1000;
+/* Klopt de gemeten fles op de foto met de echte doorsnede? Bij een witte fles op een witte
+   achtergrond meet het script soms te smal en scheef. Zonder hengsel staat de fles gecentreerd,
+   dan zetten we de gravure in het midden; met hengsel liever de tekening. */
+const MET_HENGSEL=new Set(["campmug","stein","growler","kkmug"]);
+function rechtBruikbaar(p){
+  const v=p.recht; if(!v||!v.product_h||!v.cx) return null;
+  const verwacht=p.maat.D*v.product_h/p.maat.H, gemeten=v.w/.78, r=gemeten/verwacht;
+  if(r>.8&&r<1.25) return {cx:v.cx};
+  return MET_HENGSEL.has(p.vorm)||p.maat.hengsel ? null : {cx:.5};
+}
+function opFoto(p,g,plek){
+  const v=p.recht, S=1000, cx=(plek&&plek.cx)||v.cx;
   let eng="";
   if(g.d){
     // ware schaal: productfoto-hoogte in pixels gedeeld door de echte hoogte in mm
     const pxmm=v.product_h*S/p.maat.H;
     const d=rondom(g,p.maat.D/2);
-    eng=`<g transform="translate(${(v.cx*S).toFixed(1)} ${(v.cy*S-g.H*pxmm/2).toFixed(1)}) scale(${pxmm.toFixed(3)})"><path d="${d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
+    eng=`<g transform="translate(${(cx*S).toFixed(1)} ${(v.cy*S-g.H*pxmm/2).toFixed(1)}) scale(${pxmm.toFixed(3)})"><path d="${d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
   }
   return `<svg class="opfoto" viewBox="0 0 ${S} ${S}" role="img" aria-label="${esc(p.merk+" "+p.naam+", "+p.kleur)} met gravure">
     <image href="${esc(v.pad)}" width="${S}" height="${S}" onerror="this.parentNode.outerHTML=teken(state.sel,bouwGravure(cfg()))"/>${eng}</svg>`;
@@ -803,7 +826,8 @@ function renderTafel(){
   $("c1").textContent=`${$("r1").value.length}/20`;$("c2").textContent=`${$("r2").value.length}/28`;
   const a=$("aantal"); a.max=v; if(+a.value>v)a.value=v; if(+a.value<1)a.value=1;
   $("max").textContent=`max. ${v}`;
-  $("preview").innerHTML=p.recht?opFoto(p,bouwGravure(cfg())):teken(p,bouwGravure(cfg()));
+  const foto_ok=rechtBruikbaar(p);
+  $("preview").innerHTML=foto_ok?opFoto(p,bouwGravure(cfg()),foto_ok):teken(p,bouwGravure(cfg()));
   const n=+a.value, gp=graveerPrijs(n);
   $("som").innerHTML=`<div><span>${n} × fles</span><span class="mono">${euro(p.prijs*n)}</span></div>
     <div><span>${n} × graveren à ${euro(gp)}</span><span class="mono">${euro(gp*n)}</span></div>
@@ -944,14 +968,14 @@ function vanJson(data){
 PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam,null);return {...p,vorm:m.vorm,maat:m.maat,zone:m.zone,maatBron:m.maatBron,opspanning:m.opspanning,lak:p.hex,dop:null};});
 segButtons($("fonts"),FONTDATA,"font");
 segButtons($("motifs"),MOTIFS,"motif");
-$("syncTxt").textContent=`Voorraad Amsterdam + Utrecht · ${SYNC}`;
+
 renderGrid(); route();
 fetch("voorraad.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(data=>{
   if(!data||!data.producten||!data.producten.length) return;
   const lijst=vanJson(data); if(!lijst.length) return;
   PRODUCTEN=lijst.filter(p=>p.opspanning); state.sel=null;
   SYNC=new Date(data.bijgewerkt).toLocaleString("nl-NL",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
-  $("syncTxt").textContent=`Voorraad Amsterdam + Utrecht · ${SYNC}`;
+  
   renderGrid(); route();
 }).catch(()=>{});
 document.fonts && document.fonts.ready.then(()=>renderTafel());
