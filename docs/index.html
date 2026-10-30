@@ -620,33 +620,27 @@ function rondom(g,R){
     c.type==="Q"?`Q${f(X(c.x1))} ${f(c.y1)} ${f(X(c.x))} ${f(c.y)}`:
     `C${f(X(c.x1))} ${f(c.y1)} ${f(X(c.x2))} ${f(c.y2)} ${f(X(c.x))} ${f(c.y)}`).join("");
 }
-/* Graveermachine: xTool F1 met RA2 Pro-rotatiemodule (xtool.com, met extra verhogingen).
-   Pas deze grenzen aan als jullie opstelling anders is. */
+/* Graveermachine: xTool F1 met RA2 Pro-rotatiemodule, alleen met de klauw (chuck).
+   De fles draait volledig rond, dus een hengsel is geen probleem. Pas de grenzen aan als jullie opstelling anders is. */
 const MACHINE = {
-  naam: "xTool F1 met RA2 Pro",
-  rollers: {min: 3, max: 198},   // doorsnede in mm
-  klauw: {min: 0, max: 100},
-  veld: 115,                     // werkveld F1 in mm (maximale graveerhoogte)
+  naam: "xTool F1 met RA2 Pro, klauw",
+  klauw: {min: 0, max: 100},     // maximale doorsnede in mm (xtool.com)
+  veld: 115,                     // werkveld F1 in mm
   maxHoogte: 60                  // praktische bovengrens graveervlak in mm
 };
-const MET_HENGSEL = new Set(["campmug","stein","growler","kkmug"]);
 
-/* Graveervlak in mm. Rondom met de rotatiemodule tot een derde van de omtrek;
-   met een hengsel tot een kwart (de fles kan niet helemaal rond). Heupfles: plat, alleen voorkant. */
+/* Graveervlak in mm: rondom tot een derde van de omtrek (blijft van voren leesbaar).
+   Heupfles is plat: alleen de voorkant. */
 function graveervlakVan(vorm,maat){
   const v=(VORMEN[vorm]||VORMEN.transit)(T(),maat,{lak:"#777777",dop:"#777777"});
-  const hengsel=MET_HENGSEL.has(vorm)||!!maat.hengsel;
-  const breed=vorm==="flask"?v.maxW:Math.min(Math.PI*maat.D/(hengsel?4:3),110);
+  const breed=vorm==="flask"?v.maxW:Math.min(Math.PI*maat.D/3,110);
   const hoog=Math.min(v.maxH,MACHINE.maxHoogte,MACHINE.veld);
   return [Math.round(breed), Math.round(hoog)];
 }
-/* Past het artikel op de rotatiemodule? Geeft de manier van opspannen of null. */
+/* Past het artikel in de klauw? Geeft de manier van opspannen of null. */
 function opspanning(vorm,maat){
   if(vorm==="flask") return "plat in het werkveld";
-  const D=maat.D, hengsel=MET_HENGSEL.has(vorm)||!!maat.hengsel;
-  if(D>=MACHINE.rollers.min&&D<=MACHINE.rollers.max) return hengsel?"rollers, gravure aan de voorkant, uit de buurt van het hengsel":"rollers";
-  if(D<=MACHINE.klauw.max) return "klauw";
-  return null;
+  return maat.D<=MACHINE.klauw.max ? "in de klauw" : null;
 }
 function vindModel(naam, afm){
   for(const [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
@@ -724,7 +718,7 @@ function renderProduct(){
     <dt>Voorraad</dt><dd>Amsterdam ${p.ams} · Utrecht ${p.utr}</dd>
     <dt>Afmetingen</dt><dd><span class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</span><span class="hint"> (bron: ${p.maatBron})</span></dd>
     <dt>Graveervlak</dt><dd class="mono">max. ${p.zone[0]} × ${p.zone[1]} mm</dd>
-    <dt>Opspannen</dt><dd>${esc(MACHINE.naam)}, ${esc(p.opspanning)}</dd>
+    <dt>Opspannen</dt><dd>${esc(MACHINE.naam)}</dd>
     <dt>Levering</dt><dd>Gegraveerd en verzonden binnen 3 werkdagen</dd>`;
   $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
   $("toast").textContent="";
