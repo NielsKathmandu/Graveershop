@@ -1,5 +1,5 @@
 {
-  "bijgewerkt": "2026-10-30T09:40:43+00:00",
+  "bijgewerkt": "2026-10-30T10:38:55+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
   "aantal": 99,
   "producten": [
@@ -16,6 +16,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/55/93/025593_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/55/93/025593_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 5
@@ -48,6 +49,7 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/55/92/025592_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 7
@@ -80,6 +82,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/55/96/025596_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/55/96/025596_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 4
@@ -113,6 +116,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/55/94/025594_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/55/94/025594_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 7
@@ -145,6 +149,7 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/55/95/025595_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 5
@@ -178,6 +183,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/55/98/025598_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/55/98/025598_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -212,6 +218,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/55/97/025597_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/55/97/025597_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 5,
         "Utrecht": 6
@@ -244,6 +251,7 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/56/02/025602_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 0
@@ -276,6 +284,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/56/04/025604_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/56/04/025604_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 5
@@ -308,6 +317,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/64/028364_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 83.0,
+        "h": 98.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -339,6 +352,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/65/028365_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 83.0,
+        "h": 98.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 4
@@ -370,6 +387,7 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/01/87/25/018725_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 0
@@ -402,6 +420,7 @@
         "https://www.kathmandu.nl/pimages/cache/01/87/26/018726_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/01/87/26/018726_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 1
@@ -436,6 +455,7 @@
         "https://www.kathmandu.nl/pimages/cache/01/87/24/018724_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/01/87/24/018724_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 1
@@ -469,6 +489,7 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/56/03/025603_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -500,6 +521,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/68/94/026894_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 6
@@ -531,6 +556,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/68/93/026893_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -562,6 +591,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/66/028366_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 3
@@ -593,6 +626,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/68/028368_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 0
@@ -624,6 +661,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/67/028367_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 4
@@ -655,6 +696,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/68/96/026896_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -686,6 +731,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/68/95/026895_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -717,6 +766,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/68/98/026898_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 1
@@ -748,6 +801,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/69/028369_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 81.0,
+        "h": 286.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 3
@@ -779,6 +836,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/68/97/026897_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 72.5,
+        "h": 262.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 3
@@ -811,6 +872,10 @@
         "https://www.kathmandu.nl/pimages/cache/01/87/46/018746_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/01/87/46/018746_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 9
@@ -843,6 +908,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/56/10/025610_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 6
@@ -874,6 +943,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/56/09/025609_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 5
@@ -905,6 +978,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/01/87/50/018750_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 6
@@ -936,6 +1013,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/01/87/56/018756_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -967,6 +1048,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/74/028374_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -998,6 +1083,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/83/73/028373_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 7
@@ -1029,6 +1118,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/01/87/60/018760_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 76.2,
+        "h": 185.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 4
@@ -1061,6 +1154,10 @@
         "https://www.kathmandu.nl/pimages/cache/01/14/63/011463_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/01/14/63/011463_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 125.0,
+        "h": 294.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 2
@@ -1093,6 +1190,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/01/14/60/011460_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 172.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -1126,6 +1227,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/38/029038_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/38/029038_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 2
@@ -1161,6 +1263,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/40/029040_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/40/029040_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 3
@@ -1196,6 +1299,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/39/029039_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/39/029039_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -1231,6 +1335,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/42/029042_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/42/029042_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 88.0,
+        "h": 73.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -1266,6 +1374,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/43/029043_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/43/029043_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 88.0,
+        "h": 73.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 4
@@ -1301,6 +1413,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/41/029041_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/41/029041_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 88.0,
+        "h": 73.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 1
@@ -1336,6 +1452,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/15/54/021554_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/15/54/021554_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 107.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -1371,6 +1491,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/44/029044_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/44/029044_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 107.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -1406,6 +1530,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/45/029045_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/45/029045_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 107.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 2
@@ -1441,6 +1569,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/47/029047_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/47/029047_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 135.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 8
@@ -1476,6 +1608,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/46/029046_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/46/029046_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 135.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 4
@@ -1511,6 +1647,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/48/029048_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/48/029048_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 100.0,
+        "h": 135.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 7
@@ -1547,6 +1687,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_3-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_4-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 73.0,
+        "h": 289.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -1584,6 +1728,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_3-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_4-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 158.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -1620,6 +1768,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/07/029007_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/07/029007_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 158.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 2
@@ -1655,6 +1807,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/08/029008_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/08/029008_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 158.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 2
@@ -1690,6 +1846,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/82/37/028237_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/82/37/028237_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 158.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -1725,6 +1885,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/82/36/028236_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/82/36/028236_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 158.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -1760,6 +1924,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/11/029011_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/11/029011_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 190.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 5
@@ -1795,6 +1963,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/13/029013_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/13/029013_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 190.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 0
@@ -1830,6 +2002,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/82/39/028239_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/82/39/028239_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 190.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 5
@@ -1864,6 +2040,10 @@
         "https://www.kathmandu.nl/pimages/cache/00/97/26/009726_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/00/97/26/009726_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 38.0,
+        "h": 191.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -1898,6 +2078,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/37/029037_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/37/029037_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 108.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -1934,6 +2118,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_3-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_4-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 3
@@ -1970,6 +2155,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/35/029035_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/35/029035_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 108.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 1
@@ -2006,6 +2195,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_3-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_4-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 99.0,
+        "h": 120.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 1
@@ -2041,6 +2234,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 99.0,
+        "h": 120.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 0
@@ -2075,6 +2272,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/33/029033_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/33/029033_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 99.0,
+        "h": 120.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 4
@@ -2110,6 +2311,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/31/029031_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/31/029031_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 290.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -2145,6 +2350,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/27/029027_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/27/029027_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 290.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 2
@@ -2180,6 +2389,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/29/029029_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/29/029029_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 290.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 0
@@ -2215,6 +2428,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/30/029030_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/30/029030_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 290.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -2250,6 +2467,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/28/029028_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/28/029028_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 79.0,
+        "h": 290.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 0
@@ -2285,6 +2506,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/93/15/029315_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/93/15/029315_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 92.0,
+        "h": 308.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -2320,6 +2545,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/25/029025_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/25/029025_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 92.0,
+        "h": 308.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 4
@@ -2355,6 +2584,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/24/029024_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/24/029024_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 92.0,
+        "h": 308.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -2390,6 +2623,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/19/029019_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/19/029019_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 99.0,
+        "h": 358.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -2425,6 +2662,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/21/029021_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/21/029021_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 99.0,
+        "h": 358.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 2
@@ -2460,6 +2701,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 99.0,
+        "h": 358.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 0
@@ -2495,6 +2740,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/18/029018_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/18/029018_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 111.0,
+        "h": 373.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 3
@@ -2531,6 +2780,10 @@
         "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_3-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_4-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 111.0,
+        "h": 373.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 4
@@ -2565,6 +2818,10 @@
       "afbeeldingen": [
         "https://www.kathmandu.nl/pimages/cache/02/32/31/023231_1-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 111.0,
+        "h": 390.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 3
@@ -2598,6 +2855,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 1
@@ -2633,6 +2891,7 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/49/029049_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/49/029049_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": null,
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 2
@@ -2667,6 +2926,10 @@
         "https://www.kathmandu.nl/pimages/cache/00/96/98/009698_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/00/96/98/009698_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 101.0,
+        "h": 221.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -2701,6 +2964,10 @@
         "https://www.kathmandu.nl/pimages/cache/00/97/28/009728_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/00/97/28/009728_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 87.0,
+        "h": 146.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 0
@@ -2736,6 +3003,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/17/029017_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/17/029017_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 91.0,
+        "h": 99.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 8
@@ -2772,6 +3043,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_3-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_4-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 91.0,
+        "h": 99.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 6,
         "Utrecht": 3
@@ -2808,6 +3083,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/16/029016_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/16/029016_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 91.0,
+        "h": 99.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 1
@@ -2843,6 +3122,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -2878,6 +3161,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/99/028999_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/99/028999_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 4,
         "Utrecht": 0
@@ -2912,6 +3199,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/98/028998_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/98/028998_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 2,
         "Utrecht": 5
@@ -2945,6 +3236,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/05/029005_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/05/029005_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -2978,6 +3273,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/00/029000_1-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/00/029000_2-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 4
@@ -3012,6 +3311,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/01/029001_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/01/029001_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 3,
         "Utrecht": 5
@@ -3047,6 +3350,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/06/029006_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/06/029006_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 6
@@ -3082,6 +3389,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/90/02/029002_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/90/02/029002_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 5,
         "Utrecht": 4
@@ -3117,6 +3428,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/90/028990_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/90/028990_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 0
@@ -3152,6 +3467,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/89/028989_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/89/028989_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 7,
         "Utrecht": 9
@@ -3187,6 +3506,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/96/028996_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/96/028996_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 1
@@ -3222,6 +3545,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/91/028991_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/91/028991_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 0,
         "Utrecht": 3
@@ -3257,6 +3584,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/93/028993_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/93/028993_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 2
@@ -3292,6 +3623,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/97/028997_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/97/028997_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 3
@@ -3327,6 +3662,10 @@
         "https://www.kathmandu.nl/pimages/cache/02/89/94/028994_2-1500-1500.jpg",
         "https://www.kathmandu.nl/pimages/cache/02/89/94/028994_3-1500-1500.jpg"
       ],
+      "afmetingen_mm": {
+        "d": 68.0,
+        "h": 227.0
+      },
       "voorraad_per_winkel": {
         "Amsterdam": 1,
         "Utrecht": 3
