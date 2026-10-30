@@ -128,10 +128,12 @@ input[type=text],input[type=number]{width:100%;border:1px solid var(--line);back
 .toast a{color:var(--pine);font-weight:600}
 
 /* kopen op de productpagina */
-.koop{display:grid;grid-template-columns:auto 84px 1fr;gap:10px;align-items:center}
+.koop{display:grid;grid-template-columns:auto 84px;gap:10px;align-items:center;justify-content:start}
 .koop input{width:84px}
 .koop .lbl{font-size:14px;font-weight:600}
-@media (max-width:420px){.koop{grid-template-columns:auto 1fr}.koop .btn{grid-column:1/-1}}
+.koopknoppen{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.koopknoppen .btn{min-height:52px}
+@media (max-width:520px){.koopknoppen{grid-template-columns:1fr}}
 .btn.sec.groot{padding:11px 16px;font-size:15px}
 /* producttekst */
 .omschrijving{border-top:1px solid var(--line);padding-block:26px 30px;display:grid;gap:10px}
@@ -219,10 +221,12 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <div class="koop">
           <label class="lbl" for="pAantal">Aantal</label>
           <input type="number" id="pAantal" min="1" value="1" inputmode="numeric">
-          <button class="btn" type="button" id="pToevoegen">Toevoegen aan winkelmand</button>
+          <div class="koopknoppen">
+            <button class="btn" type="button" id="pToevoegen">Toevoegen zonder gravure</button>
+            <button class="btn" type="button" id="naarTool" onclick="document.getElementById('graveren').scrollIntoView({behavior:'smooth'})">Liever gepersonaliseerd? Ga naar ontwerpen</button>
+          </div>
         </div>
         <p class="toast" id="pToast" role="status"></p>
-        <button class="btn sec groot" type="button" id="naarTool" onclick="document.getElementById('graveren').scrollIntoView({behavior:'smooth'})">Liever met gravure? Personaliseer deze fles ↓</button>
         <dl class="feiten" id="feiten"></dl>
       </div>
     </div>
