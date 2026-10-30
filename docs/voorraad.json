@@ -1168,18 +1168,6 @@
         "img/011463_1.jpg",
         "img/011463_2.jpg"
       ],
-      "recht_foto": {
-        "pad": "img/011463_recht.jpg",
-        "cx": 0.5,
-        "cy": 0.5924,
-        "w": 0.2278,
-        "h": 0.1394,
-        "lak": "#78A89D",
-        "dop": "#91BAAA",
-        "gravure": "#8F9497",
-        "product_y0": 0.071,
-        "product_h": 0.859
-      },
       "graveervlak_foto": {
         "cx": 0.44,
         "cy": 0.65,
@@ -1215,18 +1203,6 @@
       "lokale_afbeeldingen": [
         "img/011460_1.jpg"
       ],
-      "recht_foto": {
-        "pad": "img/011460_recht.jpg",
-        "cx": 0.5,
-        "cy": 0.5924,
-        "w": 0.2278,
-        "h": 0.1394,
-        "lak": "#78A89D",
-        "dop": "#91BAAA",
-        "gravure": "#8F9497",
-        "product_y0": 0.071,
-        "product_h": 0.859
-      },
       "graveervlak_foto": {
         "cx": 0.386,
         "cy": 0.6928,
@@ -3444,18 +3420,6 @@
         "img/009698_1.jpg",
         "img/009698_2.jpg"
       ],
-      "recht_foto": {
-        "pad": "img/009698_recht.jpg",
-        "cx": 0.5,
-        "cy": 0.6036,
-        "w": 0.2278,
-        "h": 0.1462,
-        "lak": "#E9339F",
-        "dop": "#E647AF",
-        "gravure": "#D6D9DA",
-        "product_y0": 0.07,
-        "product_h": 0.86
-      },
       "graveervlak_foto": {
         "cx": 0.5,
         "cy": 0.658,
@@ -3689,18 +3653,6 @@
         "img/029004_2.jpg",
         "img/029004_3.jpg"
       ],
-      "recht_foto": {
-        "pad": "img/029004_recht.jpg",
-        "cx": 0.502,
-        "cy": 0.7488,
-        "w": 0.2402,
-        "h": 0.2117,
-        "lak": "#304B71",
-        "dop": "#365976",
-        "gravure": "#D6D9DA",
-        "product_y0": 0.07,
-        "product_h": 0.86
-      },
       "graveervlak_foto": {
         "cx": 0.5,
         "cy": 0.6832,

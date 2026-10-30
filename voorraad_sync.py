@@ -230,7 +230,10 @@ STANLEY_PAGINAS = [
     (r"everyday camp mug 0,23", "/products/classic-legendary-camp-mug-0-23-l"),
     (r"everyday camp mug 0,35", "/products/classic-legendary-camp-mug-0-35-l"),
     (r"stacking camp cup", "/products/stay-hot-stacking-camp-cup-0-29-l"),
-    (r"stacking tumbler", "/products/stacking-tumbler-0-47-l"),
+    (r"stacking tumbler", "/products/adventure-stacking-beer-pint-16-oz"),
+    (r"legendary food jar 0,7", "/products/classic-legendary-food-jar-0-71-l"),
+    (r"growler", "/products/classic-easy-pour-growler-64-oz"),
+    (r"beer stein", "/products/adventure-big-grip-beer-stein-24-oz"),
     (r"easy fill flask", "/products/classic-easy-fill-wide-mouth-flask-0-23-l"),
     (r"iceflow", "/products/the-iceflow-aerolight-water-bottle-fast-flow-0-59-l"),
 ]
@@ -258,16 +261,7 @@ def stanley_vooraanzicht(naam, sessie):
     laag = naam.lower()
     pad = next((p for r, p in STANLEY_PAGINAS if re.search(r, laag)), None)
     if pad is None:
-        model = re.sub(r"^stanley\s+(the\s+)?", "", re.sub(r"\s+", " ", naam), flags=re.I)
-        model = re.sub(r"\d+(?:,\d+)?\s?(?:ml|l|L)\b.*$", "", model)
-        try:
-            zoek = BeautifulSoup(haal(f"{STANLEY}/search?q={requests.utils.quote(model)}&type=product", sessie), "html.parser")
-            link = next((a["href"] for a in zoek.find_all("a", href=True) if a["href"].startswith("/products/")), None)
-        except Exception:  # noqa: BLE001
-            link = None
-        if not link:
-            return None
-        pad = link.split("?")[0]
+        return None   # alleen bekende modelpagina's; vrij zoeken gaf verkeerde producten
     soup = BeautifulSoup(haal(STANLEY + pad, sessie), "html.parser")
     gewenst = _norm(kleur_uit_naam(naam))
     beste, score = None, 0.0
@@ -282,14 +276,14 @@ def stanley_vooraanzicht(naam, sessie):
         s = SequenceMatcher(None, gewenst, kandidaat).ratio()
         if kandidaat == gewenst:
             s = 1.0
-        elif gewenst and (gewenst in kandidaat or kandidaat in gewenst):
+        elif len(gewenst) >= 3 and gewenst in kandidaat:   # "Ash" past bij "Hammertone Ash"
             s = max(s, .9)
         src = img.get("src") or img.get("data-src") or ""
         if not src and img.get("srcset"):
             src = img["srcset"].split(",")[0].split()[0]
         if src and s > score:
             beste, score = src, s
-    if not beste or score < .75:
+    if not beste or score < .85:
         return None
     if beste.startswith("//"):
         beste = "https:" + beste
