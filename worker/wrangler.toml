@@ -1,0 +1,21 @@
+name = "graveerwerk-afrekenen"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+SITE_URL = "https://nielskathmandu.github.io/Graveershop"
+BUCKAROO_TEST = "1"            # "0" zodra alles getest is
+MAIL_VAN = "Kathmandu Graveerwerk <graveerwerk@kathmandu.nl>"
+MAIL_ORDERS = "webshop@kathmandu.nl"
+
+# Opslag voor openstaande bestellingen. Maak aan met:
+#   npx wrangler kv namespace create ORDERS
+# en vul hieronder het id in dat wrangler teruggeeft.
+[[kv_namespaces]]
+binding = "ORDERS"
+id = "VUL_HIER_HET_KV_ID_IN"
+
+# Geheimen (niet in dit bestand!):
+#   npx wrangler secret put BUCKAROO_WEBSITE_KEY
+#   npx wrangler secret put BUCKAROO_SECRET_KEY
+#   npx wrangler secret put RESEND_API_KEY

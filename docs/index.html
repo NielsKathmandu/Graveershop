@@ -175,6 +175,21 @@ input[type=file]{font-size:14px;max-width:100%}
 .regel .svgbox{overflow:hidden;align-self:start}
 .regel .svgbox svg{width:100%;height:auto;display:block}
 .btn:disabled{opacity:.45;cursor:not-allowed}
+.afreken{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.afreken{grid-template-columns:minmax(0,1fr)}.samenvatting{order:-1}}
+.afrekenform{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.veld2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.veld3{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:12px}
+@media (max-width:560px){.veld2,.veld3{grid-template-columns:minmax(0,1fr)}}
+.afrekenform input[type=email],.afrekenform input[type=tel],.afrekenform select,.afrekenform textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:9px 10px;font:inherit;color:inherit}
+.akkoord{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+.akkoord a,.maatwerk a{color:var(--pine);font-weight:600}
+.maatwerk{background:color-mix(in srgb,var(--warn) 12%,transparent);border-left:3px solid var(--warn);padding:8px 10px;font-size:14px;margin:0}
+.toast.fout{color:var(--warn)}
+.samenvatting{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;font-size:14px}
+.samenvatting .r{display:flex;justify-content:space-between;gap:10px}
+.samenvatting .mono{white-space:nowrap}
+.samenvatting .tot{font-weight:700;font-size:17px;border-top:1px solid var(--line);padding-top:8px}
 .linkknop{background:none;border:0;color:var(--pine);font-weight:600;cursor:pointer;padding:0;font-size:14px}
 /* werkbonnen */
 section.bonnen{padding-block:26px 48px;display:grid;gap:14px}
@@ -324,6 +339,47 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
     <nav class="crumbs"><a href="#">← Verder winkelen</a></nav>
     <h1>Winkelmand</h1>
     <div id="mand"></div>
+  </section>
+  <!-- afrekenen -->
+  <section id="vAfrekenen" class="wrap bonnen" hidden>
+    <nav class="crumbs"><a href="#winkelmand">← Terug naar winkelmand</a></nav>
+    <h1>Afrekenen</h1>
+    <div class="afreken">
+      <form id="afrekenForm" class="form afrekenform" novalidate>
+        <div class="veld2">
+          <div class="field"><label for="kNaam">Naam</label><input type="text" id="kNaam" autocomplete="name" required></div>
+          <div class="field"><label for="kBedrijf">Bedrijfsnaam <small>optioneel</small></label><input type="text" id="kBedrijf" autocomplete="organization"></div>
+        </div>
+        <div class="veld2">
+          <div class="field"><label for="kEmail">E-mailadres</label><input type="email" id="kEmail" autocomplete="email" required></div>
+          <div class="field"><label for="kTel">Telefoon <small>optioneel</small></label><input type="tel" id="kTel" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="kStraat">Straat en huisnummer</label><input type="text" id="kStraat" autocomplete="street-address" required></div>
+        <div class="veld3">
+          <div class="field"><label for="kPostcode">Postcode</label><input type="text" id="kPostcode" autocomplete="postal-code" required></div>
+          <div class="field"><label for="kPlaats">Plaats</label><input type="text" id="kPlaats" autocomplete="address-level2" required></div>
+          <div class="field"><label for="kLand">Land</label><select id="kLand" autocomplete="country-name"><option>Nederland</option><option>België</option></select></div>
+        </div>
+        <div class="field"><label for="kOpm">Opmerking <small>optioneel</small></label><textarea id="kOpm" rows="2"></textarea></div>
+        <label class="akkoord"><input type="checkbox" id="kAkkoord"><span>Ik ga akkoord met de <a href="#voorwaarden" target="_blank">algemene voorwaarden</a> en heb de <a href="#privacy" target="_blank">privacyverklaring</a> gelezen.</span></label>
+        <p class="maatwerk" id="maatwerkMelding" hidden>Je bestelling bevat gegraveerde artikelen. Die maken we speciaal voor jou; je kunt ze daarom niet retourneren of ruilen.</p>
+        <button class="btn" type="submit" id="betaalKnop">Betalen</button>
+        <p class="toast fout" id="afrekenFout" role="alert"></p>
+        <p class="hint">Je betaalt veilig via Buckaroo met iDEAL/Wero, creditcard of Bancontact.</p>
+      </form>
+      <aside class="samenvatting" id="samenvatting"></aside>
+    </div>
+  </section>
+
+  <section id="vBedankt" class="wrap bonnen" hidden>
+    <h1>Bedankt voor je bestelling</h1>
+    <p>We hebben je betaling ontvangen. Je krijgt een bevestiging per e-mail. Bestellingen tot en met 3 stuks verzenden we binnen 3 werkdagen; bij grotere bestellingen nemen we binnen 2 werkdagen contact met je op over de levertijd.</p>
+    <p><a class="btn" href="#">Verder winkelen</a></p>
+  </section>
+  <section id="vMislukt" class="wrap bonnen" hidden>
+    <h1>De betaling is niet gelukt</h1>
+    <p>Er is niets afgeschreven. Je winkelmand staat nog voor je klaar.</p>
+    <p><a class="btn" href="#afrekenen">Opnieuw proberen</a></p>
   </section>
   <!-- algemene voorwaarden -->
   <section id="vVoorwaarden" class="wrap juridisch" hidden>
@@ -1022,6 +1078,26 @@ $("logoBestand").addEventListener("change",e=>{
 });
 ["logoDrempel","logoOmdraaien"].forEach(id=>$(id).addEventListener("input",logoVerwerken));
 
+/* Het voorbeeld uit de graveertool als PNG vastleggen, zoals de klant het zag (voor de ordermail). */
+async function voorbeeldAfbeelding(){
+  try{
+    const svg=document.querySelector("#preview svg"); if(!svg) return null;
+    const kopie=svg.cloneNode(true), vb=svg.viewBox.baseVal;
+    for(const im of kopie.querySelectorAll("image")){
+      const src=im.getAttribute("href"); const b=await new Promise((ok,nee)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=nee;i.src=src;});
+      const c=document.createElement("canvas");c.width=b.naturalWidth;c.height=b.naturalHeight;c.getContext("2d").drawImage(b,0,0);
+      im.setAttribute("href",c.toDataURL("image/jpeg",.9));
+    }
+    kopie.setAttribute("width",800); kopie.setAttribute("height",Math.round(800*vb.height/vb.width));
+    const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(kopie)],{type:"image/svg+xml"}));
+    const b=await new Promise((ok,nee)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=nee;i.src=url;});
+    const c=document.createElement("canvas");c.width=800;c.height=Math.round(800*vb.height/vb.width);
+    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(b,0,0,c.width,c.height);
+    URL.revokeObjectURL(url);
+    return c.toDataURL("image/png");
+  }catch(e){return null;}
+}
+
 /* ---------- winkelmand ---------- */
 state.mand=[];
 let regelNr=0;
@@ -1033,7 +1109,16 @@ function kanToevoegen(p,n,toast){
 }
 function mandBijwerken(){
   $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
+  try{localStorage.setItem("graveerwerk-mand",JSON.stringify({regelNr,regels:state.mand.map(r=>({...r,p:r.p.code}))}));}catch(e){}
   renderMand();
+}
+function mandLaden(){
+  try{
+    const m=JSON.parse(localStorage.getItem("graveerwerk-mand")||"null"); if(!m) return;
+    regelNr=m.regelNr||0;
+    state.mand=m.regels.map(r=>({...r,p:PRODUCTEN.find(p=>p.code===r.p)})).filter(r=>r.p);
+    $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
+  }catch(e){}
 }
 $("pToevoegen").onclick=()=>{
   const p=state.sel, n=Math.max(1,+$("pAantal").value||1);
@@ -1043,16 +1128,16 @@ $("pToevoegen").onclick=()=>{
   mandBijwerken();
   $("pToast").innerHTML=`${n} × toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
 };
-$("form").addEventListener("submit",e=>{
+$("form").addEventListener("submit",async e=>{
   e.preventDefault();
   const p=state.sel,c=cfg();
   if(c.motif==="logo"&&!state.logo){$("toast").textContent="Upload eerst je logo, of kies een ander symbool.";return;}
   if(!c.r1.trim()&&!c.r2.trim()&&c.motif==="geen"){$("toast").textContent="Vul minimaal één regel tekst in of kies een symbool.";return;}
   const n=+$("aantal").value;
   if(!kanToevoegen(p,n,"toast")) return;
-  const g=bouwGravure(c), nr=++regelNr;
+  const g=bouwGravure(c), nr=++regelNr, voorbeeld=await voorbeeldAfbeelding();
   const meta=`Werkbon ${nr} | ${p.merk} ${p.naam} ${p.kleur} | bestelcode ${p.code} | ${n} stuks | ${g.W}x${g.H} mm`;
-  state.mand.push({nr,p,n,gravure:{c,g,svg:svgVoorXtool(g,meta),logo:c.motif==="logo"&&state.logo?{png:state.logo.png,naam:state.logo.naam}:null}});
+  state.mand.push({nr,p,n,gravure:{c,g:{W:g.W,H:g.H},svg:svgVoorXtool(g,meta),voorbeeld,logo:c.motif==="logo"&&state.logo?{png:state.logo.png,naam:state.logo.naam}:null}});
   mandBijwerken();
   $("toast").innerHTML=`Met gravure toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
 });
@@ -1091,11 +1176,47 @@ function renderMand(){
   tot.innerHTML=`<span>Subtotaal <span class="mono">${euro(sub)}</span></span>
     <span>Verzenden <span class="mono">${verzend?euro(verzend):"gratis"}</span></span>
     <span class="tot">Totaal incl. btw <span class="mono">${euro(sub+verzend)}</span></span>
-    <button class="btn" type="button" disabled title="Volgt in de echte webshop">Afrekenen</button>
-    <span class="hint">Afrekenen werkt nog niet in deze proefversie.</span>`;
+    <a class="btn" href="#afrekenen">Afrekenen</a>
+    ${state.mand.reduce((t,r)=>t+r.n,0)>3?'<span class="hint">Vanaf 4 stuks stemmen we de levertijd met je af.</span>':'<span class="hint">Binnen 3 werkdagen verzonden.</span>'}`;
   $("mand").appendChild(tot);
 }
 renderMand();
+
+/* ---------- afrekenen ----------
+   AFREKEN_URL: adres van de Cloudflare Worker (zie worker/README). Leeg = afrekenen nog niet gekoppeld. */
+const AFREKEN_URL="";
+function renderAfrekenen(){
+  if(!state.mand.length){location.hash="winkelmand";return;}
+  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), verzend=sub>=30?0:4.95, stuks=state.mand.reduce((t,r)=>t+r.n,0);
+  $("samenvatting").innerHTML=`<strong>Je bestelling</strong>${state.mand.map(r=>`<div class="r"><span>${r.n} × ${esc(r.p.merk+" "+r.p.naam+" "+r.p.kleur)}${r.gravure?" <em>met gravure</em>":""}</span><span class="mono">${euro(regelPrijs(r))}</span></div>`).join("")}
+    <div class="r"><span>Verzenden</span><span class="mono">${verzend?euro(verzend):"gratis"}</span></div>
+    <div class="r tot"><span>Totaal incl. btw</span><span class="mono">${euro(sub+verzend)}</span></div>
+    <span class="hint">${stuks>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
+  $("maatwerkMelding").hidden=!state.mand.some(r=>r.gravure);
+  $("afrekenFout").textContent=AFREKEN_URL?"":"Afrekenen is nog niet gekoppeld aan Buckaroo. Dit volgt zodra de betaalserver draait.";
+}
+$("afrekenForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const v=id=>$(id).value.trim();
+  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm")};
+  const leeg=[["naam","kNaam"],["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
+  if(leeg){$("afrekenFout").textContent=`Vul je ${leeg[0]} in.`;$(leeg[1]).focus();return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("afrekenFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return;}
+  if(!$("kAkkoord").checked){$("afrekenFout").textContent="Ga akkoord met de algemene voorwaarden om te bestellen.";return;}
+  if(!AFREKEN_URL){$("afrekenFout").textContent="Afrekenen is nog niet gekoppeld aan Buckaroo. Dit volgt zodra de betaalserver draait.";return;}
+  const regels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:r.gravure?{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
+    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}:null}));
+  $("betaalKnop").disabled=true; $("betaalKnop").textContent="Bezig met doorsturen naar Buckaroo…"; $("afrekenFout").textContent="";
+  try{
+    const r=await fetch(AFREKEN_URL+"/bestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,regels,akkoord:true})});
+    const d=await r.json();
+    if(!r.ok||!d.doorsturen) throw new Error(d.fout||"Afrekenen lukte niet.");
+    location.href=d.doorsturen;
+  }catch(err){
+    $("afrekenFout").textContent=err.message||"Afrekenen lukte niet. Probeer het opnieuw.";
+    $("betaalKnop").disabled=false; $("betaalKnop").textContent="Betalen";
+  }
+});
 
 /* ---------- navigatie: #, #p-<bestelcode>, #werkbonnen, #graveren ---------- */
 let laatsteScroll=0;
@@ -1105,7 +1226,11 @@ function route(){
   const m=h.match(/^p-(\d{6})$/), p=m&&PRODUCTEN.find(x=>x.code===m[1]);
   const wasOverzicht=!$("vOverzicht").hidden;
   if(wasOverzicht) laatsteScroll=scrollY;
-  const mand=h==="winkelmand"||h==="werkbonnen", vw=h==="voorwaarden", pr=h==="privacy";
+  const mand=h==="winkelmand"||h==="werkbonnen", vw=h==="voorwaarden", pr=h==="privacy", af=h==="afrekenen", bd=h==="bedankt", ms=h==="betaling-mislukt";
+  $("vAfrekenen").hidden=!af; $("vBedankt").hidden=!bd; $("vMislukt").hidden=!ms;
+  if(bd){state.mand=[];mandBijwerken();}
+  if(af||bd||ms){$("vOverzicht").hidden=true;$("vProduct").hidden=true;$("vMand").hidden=true;$("vVoorwaarden").hidden=true;$("vPrivacy").hidden=true;
+    document.title=(af?"Afrekenen":bd?"Bedankt":"Betaling niet gelukt")+" | "+titel; if(af)renderAfrekenen(); scrollTo(0,0); return;}
   $("vOverzicht").hidden=!!(p||mand||vw||pr);
   $("vProduct").hidden=!p;
   $("vMand").hidden=!mand;
@@ -1158,14 +1283,14 @@ PRODUCTEN=PRODUCTEN.map(p=>{const m=vindModel(p.naam,null);return {...p,vorm:m.v
 segButtons($("fonts"),FONTDATA,"font");
 segButtons($("motifs"),MOTIFS,"motif");
 
-renderSoortFilter(); renderGrid(); route();
+mandLaden(); renderSoortFilter(); renderGrid(); route();
 fetch("voorraad.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(data=>{
   if(!data||!data.producten||!data.producten.length) return;
   const lijst=vanJson(data); if(!lijst.length) return;
   PRODUCTEN=lijst.filter(p=>p.opspanning); state.sel=null;
   SYNC=new Date(data.bijgewerkt).toLocaleString("nl-NL",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
   
-  renderSoortFilter(); renderGrid(); route();
+  mandLaden(); renderSoortFilter(); renderGrid(); route();
 }).catch(()=>{});
 document.fonts && document.fonts.ready.then(()=>renderTafel());
 </script>
