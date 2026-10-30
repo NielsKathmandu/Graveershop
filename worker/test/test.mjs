@@ -83,7 +83,8 @@ assert.equal(r.status, 200, JSON.stringify(td)); assert.ok(td.nummer.startsWith(
 const nieuw = verzoeken.slice(voor);
 assert.ok(!nieuw.some(v => v.url.includes("buckaroo")), "geen Buckaroo bij testbestelling");
 const tm = nieuw.filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
-assert.equal(tm.length, 2); assert.ok(tm.every(m => m.to === "webshop@kathmandu.nl"));
+assert.equal(tm.length, 2); assert.equal(tm[0].to, "webshop@kathmandu.nl"); assert.equal(tm[1].to, "sanne@example.com", "klantmail naar ingevuld adres");
+assert.equal(td.klantmail, "sanne@example.com");
 assert.match(tm[0].subject, /^TESTBESTELLING TEST-/); assert.equal(tm[0].attachments.length, 2);
 env.TESTMODUS = "0";
 r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1 }] }));
@@ -102,3 +103,15 @@ assert.equal(cd.totaal, 57.9, "54,95 + 2,95 cadeau, gratis verzending");
 const cm = verzoeken.slice(v7).filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
 assert.match(cm[0].html, /CADEAUVERPAKKING/); assert.match(cm[0].html, /Piet Cadeau/); assert.match(cm[1].html, /Cadeauverpakking/);
 console.log("Cadeauverpakking ok");
+
+// 9. Resend weigert klantadres (domein niet geverifieerd) -> voorbeeld naar MAIL_ORDERS
+const echteFetch = globalThis.fetch;
+globalThis.fetch = async (url, opt = {}) => (String(url).includes("api.resend.com") && JSON.parse(opt.body).to === "sanne@example.com")
+  ? new Response('{"message":"You can only send testing emails to your own email address"}', { status: 403 }) : echteFetch(url, opt);
+const v9 = verzoeken.length;
+r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1 }] }));
+const d9 = await r.json();
+assert.equal(d9.klantmail, null);
+const m9 = verzoeken.slice(v9).filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
+assert.equal(m9.at(-1).to, "webshop@kathmandu.nl"); assert.match(m9.at(-1).subject, /Voorbeeld klantmail/);
+console.log("Klantmail-terugval ok");

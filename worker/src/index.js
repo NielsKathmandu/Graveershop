@@ -67,9 +67,9 @@ async function maakOrder(invoer, env, voorvoegsel) {
     regels.push({ code: r.code, naam: p.naam, n, stukprijs: p.prijs, graveren, bedrag: round(n * (p.prijs + graveren)), gravure });
   }
   const subtotaal = round(regels.reduce((t, r) => t + r.bedrag, 0));
-  const verzending = VERZENDKOSTEN(subtotaal);
   const cadeau = invoer.cadeau === true;
   const cadeauverpakking = cadeau ? CADEAUPRIJS : 0;
+  const verzending = VERZENDKOSTEN(subtotaal + cadeauverpakking);
   if (cadeau && !String(k.ontvanger || "").trim()) return { fout: json({ fout: "Vul de naam van de ontvanger in." }, 400) };
   const totaal = round(subtotaal + cadeauverpakking + verzending);
   const stuks = regels.reduce((t, r) => t + r.n, 0);
@@ -116,7 +116,8 @@ async function bestelling(request, env, url) {
 }
 
 /* ---------------- testbestelling: zonder betaling, wel een echte ordermail ----------------
-   Alleen actief als TESTMODUS = "1". De klant krijgt geen bevestiging; die gaat ter controle ook naar MAIL_ORDERS. */
+   Alleen actief als TESTMODUS = "1". De bevestiging gaat naar het ingevulde e-mailadres. Weigert Resend dat
+   (domein nog niet geverifieerd: dan mag alleen naar het eigen account), dan gaat een voorbeeld naar MAIL_ORDERS. */
 async function testbestelling(request, env) {
   if (env.TESTMODUS !== "1") return json({ fout: "Testbestellingen staan uit." }, 403);
   const { order, fout } = await maakOrder(await request.json(), env, "TEST");
@@ -124,8 +125,12 @@ async function testbestelling(request, env) {
   order.status = "test";
   const ok = await stuurOrdermail(env, order, true);
   if (!ok) return json({ fout: "De ordermail kon niet worden verstuurd. Controleer de Resend-instellingen." }, 502);
-  await stuurBevestiging(env, order, env.MAIL_ORDERS);
-  return json({ ok: true, nummer: order.nummer, totaal: order.totaal, naar: env.MAIL_ORDERS });
+  let klantmail = order.klant.email;
+  if (!(await stuurBevestiging(env, order))) {
+    klantmail = null;
+    await stuurBevestiging(env, order, env.MAIL_ORDERS);
+  }
+  return json({ ok: true, nummer: order.nummer, totaal: order.totaal, naar: env.MAIL_ORDERS, klantmail });
 }
 
 /* ---------------- betaling gemeld ---------------- */
@@ -270,7 +275,7 @@ async function stuurBevestiging(env, o, naar = null) {
     <p>${o.levertijdInOverleg ? "Omdat je 4 of meer artikelen hebt besteld, nemen we binnen 2 werkdagen contact met je op over de levertijd." : "We verzenden je bestelling binnen 3 werkdagen."}</p>
     <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail of mail naar webshop@kathmandu.nl.</p>
     <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel<br>Glencoe B.V. · Oudegracht 256-264, 3511 NV Utrecht · KvK 30166640</p></div>`;
-  await mail(env, { to: naar || k.email, reply_to: env.MAIL_ORDERS, subject: `${naar ? "[Voorbeeld klantmail] " : ""}Bevestiging bestelling ${o.nummer}`, html });
+  return mail(env, { to: naar || k.email, reply_to: env.MAIL_ORDERS, subject: `${naar ? "[Voorbeeld klantmail] " : ""}Bevestiging bestelling ${o.nummer}`, html });
 }
 
 /* ---------------- hulpjes ---------------- */
