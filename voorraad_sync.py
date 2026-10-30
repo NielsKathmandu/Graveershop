@@ -78,6 +78,33 @@ def producten_op_lijstpagina(html: str):
     return list(gevonden.values())
 
 
+def parse_afmetingen(tekst: str):
+    """Haalt doorsnede en hoogte (mm) uit de producttekst. Kathmandu.nl schrijft dit op
+    verschillende manieren, bijvoorbeeld 'Afmetingen: 69 x 68 x 227 mm' of
+    'Grootte 18,5 cm H x 7,62 cm'. Geeft None als er geen bruikbare maat staat."""
+    def mm(getal, eenheid):
+        v = float(getal.replace(",", "."))
+        return v * 10 if eenheid and eenheid.lower() == "cm" else v
+    getal = r"(\d+(?:[.,]\d+)?)"
+    for regel in tekst.splitlines():
+        laag = regel.lower()
+        if not any(w in laag for w in ("afmeting", "grootte", "formaat", "maten", "dimensie")):
+            continue
+        delen = re.findall(getal + r"\s*(mm|cm)?\s*(h|hoog|hoogte)?", regel, re.I)
+        delen = [(g, e, h) for g, e, h in delen if float(g.replace(",", ".")) > 0]
+        if len(delen) < 2 or "x" not in laag:
+            continue
+        # eenheid die achteraan staat geldt voor alle getallen zonder eigen eenheid
+        laatste = next((e for _, e, _ in reversed(delen) if e), "mm")
+        waarden = [(mm(g, e or laatste), bool(h)) for g, e, h in delen[:3]]
+        hoogte = next((v for v, h in waarden if h), max(v for v, _ in waarden))
+        rest = [v for v, h in waarden if v != hoogte] or [hoogte]
+        d = min(rest)
+        if 30 <= d <= 250 and 50 <= hoogte <= 600 and hoogte >= d * .6:
+            return {"d": round(d, 1), "h": round(hoogte, 1)}
+    return None
+
+
 def lees_productpagina(html: str):
     """Haalt naam, prijs, bestelcode, leverancierscode, afbeelding en voorraad uit een productpagina."""
     soup = BeautifulSoup(html, "html.parser")
@@ -148,6 +175,7 @@ def lees_productpagina(html: str):
         "kleur": kenmerk("Kleur"),
         "afbeelding": afbeeldingen[0] if afbeeldingen else None,
         "afbeeldingen": afbeeldingen,
+        "afmetingen_mm": parse_afmetingen(soup.get_text("\n")),
         "voorraad_per_winkel": voorraad,
         "voorraad": sum(voorraad.values()),
         "voorraadtabel_gevonden": tabel_gevonden,
