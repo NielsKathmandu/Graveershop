@@ -105,6 +105,54 @@ def parse_afmetingen(tekst: str):
     return None
 
 
+TOEGESTANE_TAGS = {"p", "ul", "ol", "li", "h3", "h4", "strong", "b", "em", "i", "br"}
+
+
+def lees_omschrijving(soup):
+    """Producttekst onder 'Over dit item' tot de volgende hoofdkop, als schone HTML
+    (alleen alinea's, lijsten, tussenkoppen en nadruk; geen links, scripts of opmaak)."""
+    from bs4 import NavigableString, Tag
+    kop = soup.find(lambda t: t.name in ("h2", "h3") and t.get_text(strip=True).lower() == "over dit item")
+    if not kop:
+        return None
+
+    def schoon(el):
+        if isinstance(el, NavigableString):
+            return re.sub(r"\s+", " ", str(el)).replace("<", "&lt;").replace(">", "&gt;")
+        if not isinstance(el, Tag) or el.name in ("script", "style", "img", "table", "form", "button"):
+            return ""
+        binnen = "".join(schoon(k) for k in el.children).strip()
+        if el.name == "br":
+            return "<br>"
+        if el.name in TOEGESTANE_TAGS and binnen:
+            naam = {"b": "strong", "i": "em"}.get(el.name, el.name)
+            return f"<{naam}>{binnen}</{naam}>"
+        if el.name in ("div", "section") and binnen and not binnen.startswith("<"):
+            return f"<p>{binnen}</p>"
+        return binnen
+
+    delen = []
+    for el in kop.next_siblings:
+        if isinstance(el, Tag) and el.name == "h2":
+            break
+        tekst = schoon(el).strip()
+        if tekst:
+            delen.append(tekst if tekst.startswith("<") else f"<p>{tekst}</p>")
+    if not delen:
+        # kop zit in een eigen omhulsel: loop vooruit door het document tot de volgende h2
+        gezien = []
+        for el in kop.find_all_next(True):
+            if el.name == "h2":
+                break
+            if el.name in ("p", "ul", "ol", "h3", "h4") and not any(g in el.parents for g in gezien):
+                gezien.append(el)
+                tekst = schoon(el).strip()
+                if tekst:
+                    delen.append(tekst if tekst.startswith("<") else f"<p>{tekst}</p>")
+    html = "".join(delen)
+    return html or None
+
+
 def lees_productpagina(html: str):
     """Haalt naam, prijs, bestelcode, leverancierscode, afbeelding en voorraad uit een productpagina."""
     soup = BeautifulSoup(html, "html.parser")
@@ -176,6 +224,7 @@ def lees_productpagina(html: str):
         "afbeelding": afbeeldingen[0] if afbeeldingen else None,
         "afbeeldingen": afbeeldingen,
         "afmetingen_mm": parse_afmetingen(soup.get_text("\n")),
+        "omschrijving": lees_omschrijving(soup),
         "voorraad_per_winkel": voorraad,
         "voorraad": sum(voorraad.values()),
         "voorraadtabel_gevonden": tabel_gevonden,
