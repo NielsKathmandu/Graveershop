@@ -210,6 +210,126 @@ def verzamel_merk(merk: str, start_url: str, sessie: requests.Session):
     return list(alle.values())
 
 
+# ---------- rechte vooraanzichten van de fabrikant (Stanley) ----------
+STANLEY = "https://eu.stanley1913.com"
+STANLEY_PAGINAS = [
+    (r"legendary classic bottle 2,3", "/products/classic-legendary-bottle-2-3-l"),
+    (r"legendary classic bottle 1,9", "/products/classic-legendary-bottle-1-9-l"),
+    (r"legendary classic bottle 1,4", "/products/legendary-classic-bottle-1-4-l"),
+    (r"legendary classic bottle 0,94", "/products/classic-legendary-bottle-0-94-l"),
+    (r"legendary classic bottle 0,59", "/products/classic-legendary-bottle-0-59-l"),
+    (r"adventure to-go bottle 1", "/products/adventure-to-go-bottle-1-l"),
+    (r"adventure to-go bottle 0,75", "/products/adventure-to-go-bottle-0-75-l"),
+    (r"adventure to-go food jar 0,53", "/products/adventure-to-go-food-jar-0-53-l"),
+    (r"adventure to-go food jar", "/products/adventure-to-go-food-jar-0-35-l"),
+    (r"legendary food jar \+ spork", "/products/legendary-food-jar-spork-0-4-l"),
+    (r"transit fliptop mug 0,47", "/products/transit-fliptop-mug-0-47-l"),
+    (r"transit fliptop mug 0,35", "/products/transit-fliptop-mug-0-35-l"),
+    (r"caf.-to-go travel mug 0,23", "/products/cafe-to-go-travel-mug-0-23-l"),
+    (r"caf.-to-go travel mug 0,35", "/products/cafe-to-go-travel-mug-0-35-l"),
+    (r"everyday camp mug 0,23", "/products/classic-legendary-camp-mug-0-23-l"),
+    (r"everyday camp mug 0,35", "/products/classic-legendary-camp-mug-0-35-l"),
+    (r"stacking camp cup", "/products/stay-hot-stacking-camp-cup-0-29-l"),
+    (r"stacking tumbler", "/products/stacking-tumbler-0-47-l"),
+    (r"easy fill flask", "/products/classic-easy-fill-wide-mouth-flask-0-23-l"),
+    (r"iceflow", "/products/the-iceflow-aerolight-water-bottle-fast-flow-0-59-l"),
+]
+
+
+def kleur_uit_naam(naam):
+    """'Stanley The Legendary Classic Bottle 0,59L  Hammertone Green' -> 'Hammertone Green'."""
+    n = re.sub(r"\s+", " ", naam)
+    m = re.search(r"\d+(?:,\d+)?\s?(?:ml|l|L|oz)\b(?:/\d+oz)?\s*(.*)$", n)
+    kleur = m.group(1) if m else ""
+    kleur = re.sub(r"^met \S+?,?\s+", "", kleur, flags=re.I)
+    if not kleur:  # bv. 'Stay Hot Stacking Camp Cup Ash'
+        kleur = " ".join(n.split()[-1:])
+    return kleur.strip()
+
+
+def _norm(s):
+    return re.sub(r"[^a-z]", "", s.lower().replace("2.0", ""))
+
+
+def stanley_vooraanzicht(naam, sessie):
+    """Zoekt op eu.stanley1913.com de rechte vooraanzicht-foto ('Front View') in de kleur
+    van dit artikel. Geeft de afbeeldings-URL of None."""
+    from difflib import SequenceMatcher
+    laag = naam.lower()
+    pad = next((p for r, p in STANLEY_PAGINAS if re.search(r, laag)), None)
+    if pad is None:
+        model = re.sub(r"^stanley\s+(the\s+)?", "", re.sub(r"\s+", " ", naam), flags=re.I)
+        model = re.sub(r"\d+(?:,\d+)?\s?(?:ml|l|L)\b.*$", "", model)
+        try:
+            zoek = BeautifulSoup(haal(f"{STANLEY}/search?q={requests.utils.quote(model)}&type=product", sessie), "html.parser")
+            link = next((a["href"] for a in zoek.find_all("a", href=True) if a["href"].startswith("/products/")), None)
+        except Exception:  # noqa: BLE001
+            link = None
+        if not link:
+            return None
+        pad = link.split("?")[0]
+    soup = BeautifulSoup(haal(STANLEY + pad, sessie), "html.parser")
+    gewenst = _norm(kleur_uit_naam(naam))
+    beste, score = None, 0.0
+    for img in soup.find_all("img"):
+        alt = img.get("alt") or ""
+        if "front view" not in alt.lower():
+            continue
+        m = re.search(r"\bin (.+?)\s*\|\s*front view", alt, re.I)
+        if not m:
+            continue
+        kandidaat = _norm(m.group(1))
+        s = SequenceMatcher(None, gewenst, kandidaat).ratio()
+        if kandidaat == gewenst:
+            s = 1.0
+        elif gewenst and (gewenst in kandidaat or kandidaat in gewenst):
+            s = max(s, .9)
+        src = img.get("src") or img.get("data-src") or ""
+        if not src and img.get("srcset"):
+            src = img["srcset"].split(",")[0].split()[0]
+        if src and s > score:
+            beste, score = src, s
+    if not beste or score < .75:
+        return None
+    if beste.startswith("//"):
+        beste = "https:" + beste
+    beste = urljoin(STANLEY, beste)
+    # grote versie opvragen
+    beste = re.sub(r"([?&])(width|height)=\d+", r"\g<1>", beste).rstrip("&?")
+    return beste + ("&" if "?" in beste else "?") + "width=1200"
+
+
+def foto_naar_wit(data: bytes) -> bytes:
+    """Transparante PNG op een witte achtergrond zetten (JPEG-bytes terug)."""
+    from io import BytesIO
+    from PIL import Image
+    im = Image.open(BytesIO(data))
+    if im.mode in ("RGBA", "LA", "P"):
+        im = im.convert("RGBA")
+        wit = Image.new("RGBA", im.size, (255, 255, 255, 255))
+        wit.alpha_composite(im)
+        im = wit
+    uit = BytesIO()
+    im.convert("RGB").save(uit, "JPEG", quality=95)
+    return uit.getvalue()
+
+
+def recht_fotovlak(pad, merk):
+    """Meet op de rechte foto het graveervlak en de verhouding pixels/hoogte,
+    zodat de shop de gravure op ware schaal kan tonen."""
+    from PIL import Image
+    v = meet_graveervlak(pad, merk)
+    if not v:
+        return None
+    grijs = Image.open(pad).convert("L")
+    masker = grijs.point(lambda x: 255 if x < 242 else 0)
+    box = masker.getbbox()
+    if box:
+        v["product_y0"] = round(box[1] / grijs.height, 4)
+        v["product_h"] = round((box[3] - box[1]) / grijs.height, 4)
+    return v
+
+
 FOTO_PX = 1000      # breedte en hoogte van de opgeslagen foto
 FOTO_MARGE = 0.07   # witruimte rond de fles, als deel van de foto
 
@@ -403,6 +523,24 @@ def main():
                 continue
             if args.fotos:
                 info["lokale_afbeeldingen"] = download_fotos(info, args.fotomap, sessie, problemen)
+                if merk == "Stanley" and info.get("bestelcode"):
+                    recht = os.path.join(args.fotomap, f"{info['bestelcode']}_recht.jpg")
+                    try:
+                        if not os.path.exists(recht):
+                            url = stanley_vooraanzicht(info["naam"] or "", sessie)
+                            if url:
+                                r = sessie.get(url, headers=HEADERS, timeout=30)
+                                r.raise_for_status()
+                                with open(recht, "wb") as f:
+                                    f.write(bewerk_foto(foto_naar_wit(r.content)))
+                                time.sleep(PAUZE_SECONDEN)
+                            else:
+                                print(f"geen Stanley-vooraanzicht gevonden: {info['naam']}", file=sys.stderr)
+                        if os.path.exists(recht):
+                            info["recht_foto"] = {"pad": f"{os.path.basename(args.fotomap)}/{os.path.basename(recht)}",
+                                                  **(recht_fotovlak(recht, merk) or {})}
+                    except Exception as e:  # noqa: BLE001
+                        print(f"Stanley-vooraanzicht mislukt voor {info.get('bestelcode')}: {e}", file=sys.stderr)
                 if info["lokale_afbeeldingen"]:
                     try:
                         hoofd = os.path.join(os.path.dirname(args.fotomap), info["lokale_afbeeldingen"][0])
