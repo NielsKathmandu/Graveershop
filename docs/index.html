@@ -707,7 +707,7 @@ const SOORT_PER_VORM={kkclassic:"water",kkloop:"water",iceflow:"water",
   transit:"beker",cafetogo:"beker",tkwide:"beker",campmug:"beker",stackcup:"beker",tumbler:"beker",stein:"beker",lowball:"beker",kkmug:"beker",
   foodjar:"overig",legjar:"overig",flask:"overig"};
 // Sommige modellen horen in meer dan één soort
-const EXTRA_SOORT=[[/isolatiefles classic met ringdop/i,"thermos"]];
+const EXTRA_SOORT=[[/isolatiefles classic met ringdop/i,"thermos"],[/transit fliptop/i,"thermos"],[/caf.-to-go/i,"thermos"],[/tkwide/i,"thermos"]];
 const soortenVan=(vorm,naam)=>[SOORT_PER_VORM[vorm]||"overig",...EXTRA_SOORT.filter(([re])=>re.test(naam||"")).map(([,k])=>k)];
 function vindModel(naam, afm){
   for(const [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
