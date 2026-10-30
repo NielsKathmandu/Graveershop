@@ -1,0 +1,2461 @@
+{
+  "bijgewerkt": "2026-10-30T09:40:43+00:00",
+  "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
+  "aantal": 99,
+  "producten": [
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-narrow-met-flip-sportdop-532ml-1011187-025593",
+      "naam": "Klean Kanteen Drinkfles Classic Narrow met flip/sportdop, 532ml Black",
+      "prijs": 22.95,
+      "bestelcode": "025593",
+      "leverancierscode": "1011187",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/93/025593_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/93/025593_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/55/93/025593_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 5
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025593_1.jpg",
+        "img/025593_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-narrow-met-flip-sportdop-532ml-1011186-025592",
+      "naam": "Klean Kanteen Drinkfles Classic Narrow met flip/sportdop, 532ml Brushed Stainless",
+      "prijs": 22.95,
+      "bestelcode": "025592",
+      "leverancierscode": "1011186",
+      "kleur": "Zilver",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/92/025592_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/92/025592_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 7
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025592_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-narrow-met-flip-sportdop-532ml-1011190-025596",
+      "naam": "Klean Kanteen Drinkfles Classic Narrow met flip/sportdop, 532ml Clear Sky",
+      "prijs": 22.95,
+      "bestelcode": "025596",
+      "leverancierscode": "1011190",
+      "kleur": "Lichtblauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/96/025596_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/96/025596_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/55/96/025596_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 4
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025596_1.jpg",
+        "img/025596_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-narrow-met-flip-sportdop-532ml-1011188-025594",
+      "naam": "Klean Kanteen Drinkfles Classic Narrow met flip/sportdop, 532ml Corsair",
+      "prijs": 22.95,
+      "bestelcode": "025594",
+      "leverancierscode": "1011188",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/94/025594_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/94/025594_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/55/94/025594_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 7
+      },
+      "voorraad": 9,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025594_1.jpg",
+        "img/025594_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-narrow-met-flip-sportdop-532ml-1011189-025595",
+      "naam": "Klean Kanteen Drinkfles Classic Narrow met flip/sportdop, 532ml Sea Spray",
+      "prijs": 22.95,
+      "bestelcode": "025595",
+      "leverancierscode": "1011189",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/95/025595_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/95/025595_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 5
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025595_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-met-flip-sportdop-800ml-1011193-025598",
+      "naam": "Klean Kanteen Drinkfles Classic met flip/sportdop, 800ml Black",
+      "prijs": 24.95,
+      "bestelcode": "025598",
+      "leverancierscode": "1011193",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/98/025598_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/98/025598_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/55/98/025598_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/55/98/025598_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025598_1.jpg",
+        "img/025598_2.jpg",
+        "img/025598_3.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-met-flip-sportdop-800ml-1011192-025597",
+      "naam": "Klean Kanteen Drinkfles Classic met flip/sportdop, 800ml Brushed Stainless",
+      "prijs": 24.95,
+      "bestelcode": "025597",
+      "leverancierscode": "1011192",
+      "kleur": "Zilver",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/97/025597_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/97/025597_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/55/97/025597_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 5,
+        "Utrecht": 6
+      },
+      "voorraad": 11,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025597_1.jpg",
+        "img/025597_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-met-flip-sportdop-800ml-1011199-025602",
+      "naam": "Klean Kanteen Drinkfles Classic met flip/sportdop, 800ml Shadow Lime",
+      "prijs": 24.95,
+      "bestelcode": "025602",
+      "leverancierscode": "1011199",
+      "kleur": "Lichtgroen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/56/02/025602_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/56/02/025602_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 0
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025602_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-reflect-met-bamboedop-800ml-1008541-025604",
+      "naam": "Klean Kanteen Drinkfles Reflect met bamboedop, 800ml Brushed Stainless",
+      "prijs": 38.95,
+      "bestelcode": "025604",
+      "leverancierscode": "1008541",
+      "kleur": "Zilver",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/56/04/025604_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/56/04/025604_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/56/04/025604_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 5
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025604_1.jpg",
+        "img/025604_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-geisoleerde-beker-lowball-met-schuifdeksel-280ml-1011589-028364",
+      "naam": "Klean Kanteen Geisoleerde Beker Lowball met schuifdeksel, 280ml Black",
+      "prijs": 24.95,
+      "bestelcode": "028364",
+      "leverancierscode": "1011589",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/64/028364_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/64/028364_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028364_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-geisoleerde-beker-lowball-met-schuifdeksel-280ml-1011591-028365",
+      "naam": "Klean Kanteen Geisoleerde Beker Lowball met schuifdeksel, 280ml Iceberg",
+      "prijs": 24.95,
+      "bestelcode": "028365",
+      "leverancierscode": "1011591",
+      "kleur": "Turquoise",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/65/028365_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/65/028365_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 4
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028365_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-geisoleerde-mok-met-flip-deksel-399ml-14oz-1010194-018725",
+      "naam": "Klean Kanteen Geisoleerde Mok met Flip-deksel 399ml/14oz Sea Spray",
+      "prijs": 34.95,
+      "bestelcode": "018725",
+      "leverancierscode": "1010194",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/25/018725_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/25/018725_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 0
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018725_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-geisoleerde-mok-met-flip-deksel-399ml-14oz-1010196-018726",
+      "naam": "Klean Kanteen Geisoleerde Mok met Flip-deksel 399ml/14oz Stellar",
+      "prijs": 34.95,
+      "bestelcode": "018726",
+      "leverancierscode": "1010196",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/26/018726_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/26/018726_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/01/87/26/018726_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 1
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018726_1.jpg",
+        "img/018726_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-geisoleerde-mok-met-flip-deksel-399ml-14oz-1010192-018724",
+      "naam": "Klean Kanteen Geisoleerde Mok met Flip-deksel 399ml/14oz Tofu",
+      "prijs": 34.95,
+      "bestelcode": "018724",
+      "leverancierscode": "1010192",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/24/018724_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/24/018724_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/01/87/24/018724_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/01/87/24/018724_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 1
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018724_1.jpg",
+        "img/018724_2.jpg",
+        "img/018724_3.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-classic-met-ringdop-592ml-1010576-025603",
+      "naam": "Klean Kanteen Isolatiefles Classic met ringdop, 592ml   Purple Potion",
+      "prijs": 37.95,
+      "bestelcode": "025603",
+      "leverancierscode": "1010576",
+      "kleur": "Paars",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/56/03/025603_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/56/03/025603_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025603_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-355ml-1011477-026894",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 355ml Barely Blue",
+      "prijs": 29.95,
+      "bestelcode": "026894",
+      "leverancierscode": "1011477",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/94/026894_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/94/026894_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 6
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026894_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-355ml-1011476-026893",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 355ml Black",
+      "prijs": 29.95,
+      "bestelcode": "026893",
+      "leverancierscode": "1011476",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/93/026893_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/93/026893_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026893_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-355ml-1011579-028366",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 355ml Brittany Blue",
+      "prijs": 29.95,
+      "bestelcode": "028366",
+      "leverancierscode": "1011579",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/66/028366_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/66/028366_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 3
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028366_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-355ml-1011581-028368",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 355ml Dusty Orchid",
+      "prijs": 29.95,
+      "bestelcode": "028368",
+      "leverancierscode": "1011581",
+      "kleur": "Paars",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/68/028368_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/68/028368_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 0
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028368_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-355ml-1011580-028367",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 355ml Iceberg",
+      "prijs": 29.95,
+      "bestelcode": "028367",
+      "leverancierscode": "1011580",
+      "kleur": "Turquoise",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/67/028367_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/67/028367_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 4
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028367_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-591ml-1011490-026896",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 591ml Barely Blue",
+      "prijs": 37.95,
+      "bestelcode": "026896",
+      "leverancierscode": "1011490",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/96/026896_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/96/026896_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026896_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-591ml-1011489-026895",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 591ml Black",
+      "prijs": 37.95,
+      "bestelcode": "026895",
+      "leverancierscode": "1011489",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/95/026895_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/95/026895_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026895_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-591ml-1011492-026898",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 591ml Brittany Blue",
+      "prijs": 37.95,
+      "bestelcode": "026898",
+      "leverancierscode": "1011492",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/98/026898_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/98/026898_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 1
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026898_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-591ml-1011583-028369",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 591ml Dusty Orchid",
+      "prijs": 37.95,
+      "bestelcode": "028369",
+      "leverancierscode": "1011583",
+      "kleur": "Paars",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/69/028369_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/69/028369_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 3
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028369_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-591ml-1011491-026897",
+      "naam": "Klean Kanteen Isolatiefles Rise Classic 591ml Iceberg Green",
+      "prijs": 37.95,
+      "bestelcode": "026897",
+      "leverancierscode": "1011491",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/97/026897_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/97/026897_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 3
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026897_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-355ml-met-koffiedop-1008302-018746",
+      "naam": "Klean Kanteen Isolatiefles TKWide 355ml met koffiedop Black",
+      "prijs": 33.95,
+      "bestelcode": "018746",
+      "leverancierscode": "1008302",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/46/018746_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/46/018746_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/01/87/46/018746_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 9
+      },
+      "voorraad": 13,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018746_1.jpg",
+        "img/018746_2.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-355ml-met-koffiedop-1011145-025610",
+      "naam": "Klean Kanteen Isolatiefles TKWide 355ml met koffiedop Sea Spray",
+      "prijs": 33.95,
+      "bestelcode": "025610",
+      "leverancierscode": "1011145",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/56/10/025610_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/56/10/025610_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 6
+      },
+      "voorraad": 10,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025610_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-355ml-met-koffiedop-1011144-025609",
+      "naam": "Klean Kanteen Isolatiefles TKWide 355ml met koffiedop Sunset",
+      "prijs": 33.95,
+      "bestelcode": "025609",
+      "leverancierscode": "1011144",
+      "kleur": "Geel",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/56/09/025609_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/56/09/025609_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 5
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025609_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-355ml-met-koffiedop-1008307-018750",
+      "naam": "Klean Kanteen Isolatiefles TKWide 355ml met koffiedop Tofu",
+      "prijs": 33.95,
+      "bestelcode": "018750",
+      "leverancierscode": "1008307",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/50/018750_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/50/018750_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 6
+      },
+      "voorraad": 8,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018750_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-473ml-met-koffiedop-1008313-018756",
+      "naam": "Klean Kanteen Isolatiefles TKWide 473ml met koffiedop Black",
+      "prijs": 36.95,
+      "bestelcode": "018756",
+      "leverancierscode": "1008313",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/56/018756_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/56/018756_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018756_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-473ml-met-koffiedop-1011149-028374",
+      "naam": "Klean Kanteen Isolatiefles TKWide 473ml met koffiedop Sea Spray",
+      "prijs": 36.95,
+      "bestelcode": "028374",
+      "leverancierscode": "1011149",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/74/028374_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/74/028374_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028374_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-473ml-met-koffiedop-1011148-028373",
+      "naam": "Klean Kanteen Isolatiefles TKWide 473ml met koffiedop Sunset",
+      "prijs": 36.95,
+      "bestelcode": "028373",
+      "leverancierscode": "1011148",
+      "kleur": "Geel",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/83/73/028373_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/83/73/028373_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 7
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028373_1.jpg"
+      ]
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-tkwide-473ml-met-koffiedop-1008318-018760",
+      "naam": "Klean Kanteen Isolatiefles TKWide 473ml met koffiedop Tofu",
+      "prijs": 36.95,
+      "bestelcode": "018760",
+      "leverancierscode": "1008318",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/87/60/018760_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/87/60/018760_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 4
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/018760_1.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-beer-growler-10-01941-067-011463",
+      "naam": "Stanley Beer Growler Hammertone Green",
+      "prijs": 71.95,
+      "bestelcode": "011463",
+      "leverancierscode": "10-01941-067",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/14/63/011463_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/14/63/011463_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/01/14/63/011463_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 2
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/011463_1.jpg",
+        "img/011463_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-beer-stein-100000108380-011460",
+      "naam": "Stanley Beer Stein Hammertone Green",
+      "prijs": 33.95,
+      "bestelcode": "011460",
+      "leverancierscode": "10-02874-033",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/01/14/60/011460_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/01/14/60/011460_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/011460_1.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-bottle-0-75l-100000115987-029038",
+      "naam": "Stanley The Adventure To-Go Bottle 0,75L  Black 2.0",
+      "prijs": 49.95,
+      "bestelcode": "029038",
+      "leverancierscode": "10-10818-0055",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/38/029038_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/38/029038_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/38/029038_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/38/029038_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 2
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029038_1.jpg",
+        "img/029038_2.jpg",
+        "img/029038_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-bottle-0-75l-100000115854-029040",
+      "naam": "Stanley The Adventure To-Go Bottle 0,75L  Frost",
+      "prijs": 49.95,
+      "bestelcode": "029040",
+      "leverancierscode": "10-10818-048",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/40/029040_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/40/029040_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/40/029040_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/40/029040_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 3
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029040_1.jpg",
+        "img/029040_2.jpg",
+        "img/029040_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-bottle-0-75l-100000115692-029039",
+      "naam": "Stanley The Adventure To-Go Bottle 0,75L  Hammertone Green",
+      "prijs": 49.95,
+      "bestelcode": "029039",
+      "leverancierscode": "10-10818-052",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/39/029039_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/39/029039_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/39/029039_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/39/029039_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029039_1.jpg",
+        "img/029039_2.jpg",
+        "img/029039_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-bottle-1l-100000116343-029042",
+      "naam": "Stanley The Adventure To-Go Bottle 1L  Black 2.0",
+      "prijs": 54.95,
+      "bestelcode": "029042",
+      "leverancierscode": "10-10819-060",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/42/029042_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/42/029042_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/42/029042_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/42/029042_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029042_1.jpg",
+        "img/029042_2.jpg",
+        "img/029042_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-bottle-1l-100000115763-029043",
+      "naam": "Stanley The Adventure To-Go Bottle 1L  Frost",
+      "prijs": 54.95,
+      "bestelcode": "029043",
+      "leverancierscode": "10-10819-058",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/43/029043_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/43/029043_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/43/029043_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/43/029043_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 4
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029043_1.jpg",
+        "img/029043_2.jpg",
+        "img/029043_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-bottle-1l-100000115730-029041",
+      "naam": "Stanley The Adventure To-Go Bottle 1L  Hammertone Green",
+      "prijs": 54.95,
+      "bestelcode": "029041",
+      "leverancierscode": "10-10819-0087",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/41/029041_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/41/029041_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/41/029041_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/41/029041_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 1
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029041_1.jpg",
+        "img/029041_2.jpg",
+        "img/029041_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-food-jar-35l-10-10837-013-021554",
+      "naam": "Stanley The Adventure To-Go Food Jar .35L Polar",
+      "prijs": 34.95,
+      "bestelcode": "021554",
+      "leverancierscode": "10-10837-013",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/15/54/021554_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/15/54/021554_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/15/54/021554_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/15/54/021554_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/021554_1.jpg",
+        "img/021554_2.jpg",
+        "img/021554_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-food-jar-0-35l-100000115654-029044",
+      "naam": "Stanley The Adventure To-Go Food Jar 0,35L  Frost",
+      "prijs": 39.95,
+      "bestelcode": "029044",
+      "leverancierscode": "10-10837-039",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/44/029044_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/44/029044_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/44/029044_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/44/029044_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029044_1.jpg",
+        "img/029044_2.jpg",
+        "img/029044_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-food-jar-0-35l-100000115694-029045",
+      "naam": "Stanley The Adventure To-Go Food Jar 0,35L  Hammertone Green",
+      "prijs": 39.95,
+      "bestelcode": "029045",
+      "leverancierscode": "10-10837-040",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/45/029045_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/45/029045_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/45/029045_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/45/029045_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 2
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029045_1.jpg",
+        "img/029045_2.jpg",
+        "img/029045_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-food-jar-0-53l-100000115958-029047",
+      "naam": "Stanley The Adventure To-Go Food Jar 0,53L  Black 2.0",
+      "prijs": 44.95,
+      "bestelcode": "029047",
+      "leverancierscode": "10-10836-0075",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/47/029047_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/47/029047_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/47/029047_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/47/029047_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 8
+      },
+      "voorraad": 10,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029047_1.jpg",
+        "img/029047_2.jpg",
+        "img/029047_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-food-jar-0-53l-100000115567-029046",
+      "naam": "Stanley The Adventure To-Go Food Jar 0,53L  Frost",
+      "prijs": 44.95,
+      "bestelcode": "029046",
+      "leverancierscode": "10-10836-041",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/46/029046_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/46/029046_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/46/029046_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/46/029046_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 4
+      },
+      "voorraad": 8,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029046_1.jpg",
+        "img/029046_2.jpg",
+        "img/029046_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-adventure-to-go-food-jar-0-53l-100000115588-029048",
+      "naam": "Stanley The Adventure To-Go Food Jar 0,53L  Hammertone Green",
+      "prijs": 44.95,
+      "bestelcode": "029048",
+      "leverancierscode": "10-10836-047",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/48/029048_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/48/029048_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/48/029048_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/48/029048_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 7
+      },
+      "voorraad": 10,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029048_1.jpg",
+        "img/029048_2.jpg",
+        "img/029048_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-aerolight-iceflow-water-bottle-fast-flow-0-6l-10-12515-003-023210",
+      "naam": "Stanley The Aerolight IceFlow Water Bottle Fast Flow 0,6L Tigerlily Plum",
+      "prijs": 42.95,
+      "bestelcode": "023210",
+      "leverancierscode": "10-12515-003",
+      "kleur": "Rood",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/10/023210_4-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/023210_1.jpg",
+        "img/023210_2.jpg",
+        "img/023210_3.jpg",
+        "img/023210_4.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000148729-029009",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,23L  Blue Sky",
+      "prijs": 27.95,
+      "bestelcode": "029009",
+      "leverancierscode": "10-21326-0003",
+      "kleur": "Lichtblauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_4-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029009_1.jpg",
+        "img/029009_2.jpg",
+        "img/029009_3.jpg",
+        "img/029009_4.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000108038-029007",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,23L  Cream Gloss",
+      "prijs": 27.95,
+      "bestelcode": "029007",
+      "leverancierscode": "10-12079-038",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/07/029007_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/07/029007_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/07/029007_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/07/029007_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 2
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029007_1.jpg",
+        "img/029007_2.jpg",
+        "img/029007_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000108050-029008",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,23L  Rose Quartz",
+      "prijs": 27.95,
+      "bestelcode": "029008",
+      "leverancierscode": "10-12079-009",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/08/029008_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/08/029008_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/08/029008_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/08/029008_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 2
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029008_1.jpg",
+        "img/029008_2.jpg",
+        "img/029008_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000108009-028237",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,23L Black",
+      "prijs": 28.95,
+      "bestelcode": "028237",
+      "leverancierscode": "10-12079-014",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/82/37/028237_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/82/37/028237_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/82/37/028237_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/82/37/028237_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028237_1.jpg",
+        "img/028237_2.jpg",
+        "img/028237_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000107950-028236",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,23L Dried Pine",
+      "prijs": 28.95,
+      "bestelcode": "028236",
+      "leverancierscode": "10-12079-041",
+      "kleur": "Donkergroen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/82/36/028236_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/82/36/028236_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/82/36/028236_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/82/36/028236_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028236_1.jpg",
+        "img/028236_2.jpg",
+        "img/028236_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-35l-100000107881-029011",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,35L  Black 2.0",
+      "prijs": 33.95,
+      "bestelcode": "029011",
+      "leverancierscode": "10-12080-017",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/11/029011_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/11/029011_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/11/029011_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/11/029011_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 5
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029011_1.jpg",
+        "img/029011_2.jpg",
+        "img/029011_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-35l-100000107909-029013",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,35L  Rose Quartz",
+      "prijs": 33.95,
+      "bestelcode": "029013",
+      "leverancierscode": "10-12080-012",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/13/029013_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/13/029013_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/13/029013_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/13/029013_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 0
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029013_1.jpg",
+        "img/029013_2.jpg",
+        "img/029013_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-35l-100000108098-028239",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,35L Dried Pine",
+      "prijs": 33.95,
+      "bestelcode": "028239",
+      "leverancierscode": "10-12080-041",
+      "kleur": "Donkergroen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/82/39/028239_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/82/39/028239_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/82/39/028239_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/82/39/028239_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 5
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028239_1.jpg",
+        "img/028239_2.jpg",
+        "img/028239_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-easy-fill-flask-230ml-100000108638-009726",
+      "naam": "Stanley The Easy Fill Flask 230ml Hammertone Green",
+      "prijs": 27.5,
+      "bestelcode": "009726",
+      "leverancierscode": "10-00837-126",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/97/26/009726_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/97/26/009726_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/97/26/009726_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/009726_1.jpg",
+        "img/009726_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-23l-100000118451-029037",
+      "naam": "Stanley The Everyday Camp Mug 0,23L  Black 2.0",
+      "prijs": 31.95,
+      "bestelcode": "029037",
+      "leverancierscode": "10-13103-0068",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/37/029037_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/37/029037_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/37/029037_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/37/029037_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029037_1.jpg",
+        "img/029037_2.jpg",
+        "img/029037_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-23l-100000116117-029036",
+      "naam": "Stanley The Everyday Camp Mug 0,23L  Hammertone Green",
+      "prijs": 31.95,
+      "bestelcode": "029036",
+      "leverancierscode": "10-13103-0046",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/36/029036_4-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 3
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029036_1.jpg",
+        "img/029036_2.jpg",
+        "img/029036_3.jpg",
+        "img/029036_4.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-23l-100000116700-029035",
+      "naam": "Stanley The Everyday Camp Mug 0,23L  Hammertone Rose Quartz",
+      "prijs": 31.95,
+      "bestelcode": "029035",
+      "leverancierscode": "10-13103-0054",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/35/029035_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/35/029035_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/35/029035_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/35/029035_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 1
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029035_1.jpg",
+        "img/029035_2.jpg",
+        "img/029035_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-35l-100000118450-029034",
+      "naam": "Stanley The Everyday Camp Mug 0,35L  Black 2.0",
+      "prijs": 35.95,
+      "bestelcode": "029034",
+      "leverancierscode": "10-13094-0081",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/34/029034_4-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 1
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029034_1.jpg",
+        "img/029034_2.jpg",
+        "img/029034_3.jpg",
+        "img/029034_4.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-35l-100000123671-029032",
+      "naam": "Stanley The Everyday Camp Mug 0,35L  Hammertone Green",
+      "prijs": 35.95,
+      "bestelcode": "029032",
+      "leverancierscode": "10-13094-0125",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 0
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029032_1.jpg",
+        "img/029032_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-35l-100000116922-029033",
+      "naam": "Stanley The Everyday Camp Mug 0,35L  Hammertone Rose Quartz",
+      "prijs": 35.95,
+      "bestelcode": "029033",
+      "leverancierscode": "10-13094-0077",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/33/029033_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/33/029033_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/33/029033_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/33/029033_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 4
+      },
+      "voorraad": 8,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029033_1.jpg",
+        "img/029033_2.jpg",
+        "img/029033_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-59l-100000132922-029031",
+      "naam": "Stanley The Legendary Classic Bottle 0,59L  Black 2.0",
+      "prijs": 54.95,
+      "bestelcode": "029031",
+      "leverancierscode": "10-11345-044",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/31/029031_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/31/029031_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/31/029031_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/31/029031_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029031_1.jpg",
+        "img/029031_2.jpg",
+        "img/029031_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-59l-100000116134-029027",
+      "naam": "Stanley The Legendary Classic Bottle 0,59L  Hammertone Ash",
+      "prijs": 54.95,
+      "bestelcode": "029027",
+      "leverancierscode": "10-11345-0063",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/27/029027_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/27/029027_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/27/029027_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/27/029027_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 2
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029027_1.jpg",
+        "img/029027_2.jpg",
+        "img/029027_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-59l-100000115641-029029",
+      "naam": "Stanley The Legendary Classic Bottle 0,59L  Hammertone Green",
+      "prijs": 54.95,
+      "bestelcode": "029029",
+      "leverancierscode": "10-11345-042",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/29/029029_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/29/029029_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/29/029029_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/29/029029_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 0
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029029_1.jpg",
+        "img/029029_2.jpg",
+        "img/029029_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-59l-100000115586-029030",
+      "naam": "Stanley The Legendary Classic Bottle 0,59L  Hammertone Lake",
+      "prijs": 54.95,
+      "bestelcode": "029030",
+      "leverancierscode": "10-11345-043",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/30/029030_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/30/029030_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/30/029030_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/30/029030_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029030_1.jpg",
+        "img/029030_2.jpg",
+        "img/029030_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-59l-100000116116-029028",
+      "naam": "Stanley The Legendary Classic Bottle 0,59L  Hammertone Rose Quartz",
+      "prijs": 54.95,
+      "bestelcode": "029028",
+      "leverancierscode": "10-11345-0061",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/28/029028_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/28/029028_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/28/029028_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/28/029028_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 0
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029028_1.jpg",
+        "img/029028_2.jpg",
+        "img/029028_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-94l-100000132963-029315",
+      "naam": "Stanley The Legendary Classic Bottle 0,94L  Black 2.0",
+      "prijs": 64.95,
+      "bestelcode": "029315",
+      "leverancierscode": "100000132963",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/93/15/029315_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/93/15/029315_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/93/15/029315_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/93/15/029315_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029315_1.jpg",
+        "img/029315_2.jpg",
+        "img/029315_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-94l-100000115659-029025",
+      "naam": "Stanley The Legendary Classic Bottle 0,94L  Hammertone Green",
+      "prijs": 64.95,
+      "bestelcode": "029025",
+      "leverancierscode": "10-11346-091",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/25/029025_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/25/029025_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/25/029025_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/25/029025_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 4
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029025_1.jpg",
+        "img/029025_2.jpg",
+        "img/029025_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-0-94l-100000117255-029024",
+      "naam": "Stanley The Legendary Classic Bottle 0,94L  Hammertone Rose Quartz",
+      "prijs": 51.95,
+      "bestelcode": "029024",
+      "leverancierscode": "10-11346-0153",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/24/029024_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/24/029024_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/24/029024_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/24/029024_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029024_1.jpg",
+        "img/029024_2.jpg",
+        "img/029024_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-1-4l-100000116345-029019",
+      "naam": "Stanley The Legendary Classic Bottle 1,4L  Hammertone Ash",
+      "prijs": 69.95,
+      "bestelcode": "029019",
+      "leverancierscode": "10-11347-0337",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/19/029019_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/19/029019_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/19/029019_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/19/029019_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029019_1.jpg",
+        "img/029019_2.jpg",
+        "img/029019_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-1-4l-100000115856-029021",
+      "naam": "Stanley The Legendary Classic Bottle 1,4L  Hammertone Green",
+      "prijs": 69.95,
+      "bestelcode": "029021",
+      "leverancierscode": "10-11347-119",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/21/029021_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/21/029021_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/21/029021_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/21/029021_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 2
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029021_1.jpg",
+        "img/029021_2.jpg",
+        "img/029021_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-1-4l-100000115850-029022",
+      "naam": "Stanley The Legendary Classic Bottle 1,4L  Hammertone Lake",
+      "prijs": 69.95,
+      "bestelcode": "029022",
+      "leverancierscode": "10-11347-120",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 0
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029022_1.jpg",
+        "img/029022_2.jpg",
+        "img/029022_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-1-9l-100000107724-029018",
+      "naam": "Stanley The Legendary Classic Bottle 1,9L  Hammertone Lake",
+      "prijs": 59.95,
+      "bestelcode": "029018",
+      "leverancierscode": "10-07934-078",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/18/029018_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/18/029018_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/18/029018_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/18/029018_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029018_1.jpg",
+        "img/029018_2.jpg",
+        "img/029018_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-1-9l-100000104650-009694",
+      "naam": "Stanley The Legendary Classic Bottle 1,9L Hammertone Green",
+      "prijs": 74.95,
+      "bestelcode": "009694",
+      "leverancierscode": "10-07934-003",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/96/94/009694_4-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 4
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/009694_1.jpg",
+        "img/009694_2.jpg",
+        "img/009694_3.jpg",
+        "img/009694_4.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-2-3l-100000104985-023231",
+      "naam": "Stanley The Legendary Classic Bottle 2,3L Hammertone Green",
+      "prijs": 79.95,
+      "bestelcode": "023231",
+      "leverancierscode": "10-07935-044",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/32/31/023231_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/32/31/023231_1-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 3
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/023231_1.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-spork-0-4l-100000133118-023239",
+      "naam": "Stanley The Legendary Food Jar + Spork 0,4L",
+      "prijs": 45.95,
+      "bestelcode": "023239",
+      "leverancierscode": "10-09382-106",
+      "kleur": "Oud Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 1
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/023239_1.jpg",
+        "img/023239_2.jpg",
+        "img/023239_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-spork-0-4l-100000116009-029049",
+      "naam": "Stanley The Legendary Food Jar + Spork 0,4L  Black 2.0",
+      "prijs": 45.95,
+      "bestelcode": "029049",
+      "leverancierscode": "10-11353-0105",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/49/029049_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/49/029049_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/49/029049_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/49/029049_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 2
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029049_1.jpg",
+        "img/029049_2.jpg",
+        "img/029049_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-0-7l-100000128482-009698",
+      "naam": "Stanley The Legendary Food Jar 0,7L",
+      "prijs": 54.95,
+      "bestelcode": "009698",
+      "leverancierscode": "10-07936-003",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/96/98/009698_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/96/98/009698_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/96/98/009698_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/009698_1.jpg",
+        "img/009698_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-stacking-tumbler-470ml-100000104333-009728",
+      "naam": "Stanley The Stacking Tumbler 470ml Hammertone Green",
+      "prijs": 19.95,
+      "bestelcode": "009728",
+      "leverancierscode": "10-02282-057",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/97/28/009728_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/97/28/009728_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/97/28/009728_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/97/28/009728_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 0
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/009728_1.jpg",
+        "img/009728_2.jpg",
+        "img/009728_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-stay-hot-stacking-camp-cup-100000116230-029017",
+      "naam": "Stanley The Stay Hot Stacking Camp Cup Ash",
+      "prijs": 20.95,
+      "bestelcode": "029017",
+      "leverancierscode": "10-12078-0041",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/17/029017_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/17/029017_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/17/029017_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/17/029017_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 8
+      },
+      "voorraad": 12,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029017_1.jpg",
+        "img/029017_2.jpg",
+        "img/029017_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-stay-hot-stacking-camp-cup-100000116229-029014",
+      "naam": "Stanley The Stay Hot Stacking Camp Cup Black",
+      "prijs": 20.95,
+      "bestelcode": "029014",
+      "leverancierscode": "10-12078-0033",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/14/029014_4-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 6,
+        "Utrecht": 3
+      },
+      "voorraad": 9,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029014_1.jpg",
+        "img/029014_2.jpg",
+        "img/029014_3.jpg",
+        "img/029014_4.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-stay-hot-stacking-camp-cup-100000116181-029016",
+      "naam": "Stanley The Stay Hot Stacking Camp Cup Frost",
+      "prijs": 20.95,
+      "bestelcode": "029016",
+      "leverancierscode": "10-12078-0039",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/16/029016_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/16/029016_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/16/029016_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/16/029016_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 1
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029016_1.jpg",
+        "img/029016_2.jpg",
+        "img/029016_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000115838-029004",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L",
+      "prijs": 31.95,
+      "bestelcode": "029004",
+      "leverancierscode": "10-13063-0050",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029004_1.jpg",
+        "img/029004_2.jpg",
+        "img/029004_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000113241-028999",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Ash",
+      "prijs": 31.95,
+      "bestelcode": "028999",
+      "leverancierscode": "10-13063-012",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/99/028999_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/99/028999_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/99/028999_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/99/028999_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 0
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028999_1.jpg",
+        "img/028999_2.jpg",
+        "img/028999_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000113240-028998",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Black 2.0",
+      "prijs": 31.95,
+      "bestelcode": "028998",
+      "leverancierscode": "10-13063-011",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/98/028998_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/98/028998_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/98/028998_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 5
+      },
+      "voorraad": 7,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028998_1.jpg",
+        "img/028998_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000115839-029005",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Blue Sky",
+      "prijs": 31.95,
+      "bestelcode": "029005",
+      "leverancierscode": "10-13063-0052",
+      "kleur": "Lichtblauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/05/029005_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/05/029005_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/05/029005_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029005_1.jpg",
+        "img/029005_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000113238-029000",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Cream Gloss",
+      "prijs": 31.95,
+      "bestelcode": "029000",
+      "leverancierscode": "10-13063-013",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/00/029000_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/00/029000_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/00/029000_2-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029000_1.jpg",
+        "img/029000_2.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000115840-029001",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Dried Pine",
+      "prijs": 31.95,
+      "bestelcode": "029001",
+      "leverancierscode": "10-13063-0046",
+      "kleur": "Donkergroen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/01/029001_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/01/029001_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/01/029001_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/01/029001_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 5
+      },
+      "voorraad": 8,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029001_1.jpg",
+        "img/029001_2.jpg",
+        "img/029001_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000113206-029006",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Hammertone Green",
+      "prijs": 31.95,
+      "bestelcode": "029006",
+      "leverancierscode": "10-13063-020",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/06/029006_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/06/029006_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/06/029006_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/06/029006_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 6
+      },
+      "voorraad": 6,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029006_1.jpg",
+        "img/029006_2.jpg",
+        "img/029006_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000113239-029002",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Rose Quartz",
+      "prijs": 31.95,
+      "bestelcode": "029002",
+      "leverancierscode": "10-13063-014",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/02/029002_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/02/029002_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/02/029002_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/02/029002_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 5,
+        "Utrecht": 4
+      },
+      "voorraad": 9,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029002_1.jpg",
+        "img/029002_2.jpg",
+        "img/029002_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000113259-028990",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Ash",
+      "prijs": 37.95,
+      "bestelcode": "028990",
+      "leverancierscode": "10-13062-012",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/90/028990_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/90/028990_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/90/028990_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/90/028990_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 0
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028990_1.jpg",
+        "img/028990_2.jpg",
+        "img/028990_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000113258-028989",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Black 2.0",
+      "prijs": 37.95,
+      "bestelcode": "028989",
+      "leverancierscode": "10-13062-011",
+      "kleur": "Zwart",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/89/028989_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/89/028989_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/89/028989_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/89/028989_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 7,
+        "Utrecht": 9
+      },
+      "voorraad": 16,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028989_1.jpg",
+        "img/028989_2.jpg",
+        "img/028989_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000115883-028996",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Blue Sky",
+      "prijs": 37.95,
+      "bestelcode": "028996",
+      "leverancierscode": "10-13062-0056",
+      "kleur": "Lichtblauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/96/028996_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/96/028996_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/96/028996_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/96/028996_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028996_1.jpg",
+        "img/028996_2.jpg",
+        "img/028996_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000113256-028991",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Cream Gloss",
+      "prijs": 37.95,
+      "bestelcode": "028991",
+      "leverancierscode": "10-13062-013",
+      "kleur": "Wit",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/91/028991_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/91/028991_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/91/028991_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/91/028991_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 3
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028991_1.jpg",
+        "img/028991_2.jpg",
+        "img/028991_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000115845-028993",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Dried Pine",
+      "prijs": 37.95,
+      "bestelcode": "028993",
+      "leverancierscode": "10-13062-0048",
+      "kleur": "Donkergroen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/93/028993_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/93/028993_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/93/028993_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/93/028993_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 2
+      },
+      "voorraad": 3,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028993_1.jpg",
+        "img/028993_2.jpg",
+        "img/028993_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000113439-028997",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Hammertone Green",
+      "prijs": 37.95,
+      "bestelcode": "028997",
+      "leverancierscode": "10-13062-020",
+      "kleur": "Groen",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/97/028997_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/97/028997_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/97/028997_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/97/028997_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 3
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028997_1.jpg",
+        "img/028997_2.jpg",
+        "img/028997_3.jpg"
+      ]
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-47l-100000113257-028994",
+      "naam": "Stanley The Transit Fliptop Mug 0,47L  Rose Quartz",
+      "prijs": 37.95,
+      "bestelcode": "028994",
+      "leverancierscode": "10-13062-014",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/89/94/028994_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/89/94/028994_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/94/028994_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/89/94/028994_3-1500-1500.jpg"
+      ],
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 3
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/028994_1.jpg",
+        "img/028994_2.jpg",
+        "img/028994_3.jpg"
+      ]
+    }
+  ]
+}
