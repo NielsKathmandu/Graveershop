@@ -1,5 +1,5 @@
 {
-  "bijgewerkt": "2026-10-31T21:44:04+00:00",
+  "bijgewerkt": "2026-11-01T07:07:17+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
   "aantal": 99,
   "producten": [
@@ -296,9 +296,9 @@
       "omschrijving": "<p>Enkelwandige drinkfles van roestvrij staal, 800 ml</p><h3>Eigenschappen Klean Kanteen Drinkfles Reflect met bamboedop, 800ml</h3><ul><li>100% lekvrij ontwerp</li><li>Met duurzaam geproduceerde bamboe voor een natuurlijke uitstraling</li><li>Slank ontwerp past in de meeste bekerhouders</li><li>Gemakkelijk schoon te maken dankzij brede opening en afgeronde hoeken</li><li>Geen verf, inkt, coating of plastic en volledig roestvrijstalen binnenkant</li><li>Diameter opening 4,4 cm</li></ul><p>Mooi in zijn eenvoud en weloverwogen in zijn ontwerp. Deze drinkfles is gemaakt van duurzaam geoogste bamboe, voedselveilig silicone en roestvrij staal. Slechts drie materialen, geen verf, geen plastic. De Bamboo Cap is vervaardigd uit één stuk roestvrij staal, afgewerkt met een mooi stuk bamboe en gemakkelijk te dragen met de roestvrijstalen lus.</p>",
       "voorraad_per_winkel": {
         "Amsterdam": 0,
-        "Utrecht": 5
+        "Utrecht": 4
       },
-      "voorraad": 5,
+      "voorraad": 4,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/025604_1.jpg",
@@ -3245,9 +3245,9 @@
       "omschrijving": "<p>Robuuste thermosfles 1.9 liter</p><h3>Eigenschappen Stanley Classic Vacuum Bottle 1,9L</h3><ul><li>Lekvrij en compact</li><li>Dubbelwandige vacuüm isolatie</li><li>De geïsoleerde deksel fungeert ook als beker</li><li>Vaatwasmachinebestendig</li><li>Afmetingen: 13,1 x 11,1 x 37,3 cm</li><li>Inhoud: 1,9 liter</li><li>Gewicht: 1128 gram</li></ul><h4>Materiaal</h4><ul><li>Gemaakt van 18/8 Roestvrij staal</li><li>BPA-vrij</li></ul><p>Een dagje vissen of een wandeling door het bos. Bij dit soort activiteiten mag een praktische thermosfles die jouw drankje op de juiste temperatuur houdt niet ontbreken. De Stanley Classic 1,9 liter thermosfles is robuust waardoor hij tegen een stootje kan. De fles is compact en voorzien van een handvat, zodat jij je drankje zonder morsen kan inschenken. Bovendien is de thermosfles voorzien van een dubbele wandconstructie. Hierdoor blijven warme dranken tot wel 45 uur warm en koude dranken 2 dagen lang koel.</p>",
       "voorraad_per_winkel": {
         "Amsterdam": 2,
-        "Utrecht": 3
+        "Utrecht": 2
       },
-      "voorraad": 5,
+      "voorraad": 4,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/029018_1.jpg",
@@ -3360,55 +3360,6 @@
     },
     {
       "merk": "Stanley",
-      "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-spork-0-4l-100000133118-023239",
-      "naam": "Stanley The Legendary Food Jar + Spork 0,4L",
-      "prijs": 45.95,
-      "bestelcode": "023239",
-      "leverancierscode": "10-09382-106",
-      "kleur": "Oud Roze",
-      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_1-1500-1500.jpg",
-      "afbeeldingen": [
-        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_1-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_2-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_3-1500-1500.jpg"
-      ],
-      "afmetingen_mm": null,
-      "omschrijving": "<p>Isolerende etenswarenpot van 0.4 liter met spork.</p><h3>Eigenschappen</h3><ul><li>Dubbelwandig vacuum isolatie</li><li>18/8 roetsvrij staal</li><li>BPA-free</li><li>Lekvrij</li><li>Gewicht: 340 gram</li><li>Inhoud: 0,4 liter</li><li>Afmetingen: 13,5 x 86,3 x 10,7 cm</li><li>7 uur heet</li><li>7 uur koud</li><li>Geschikt voor vaatwasser (bovenste lade)</li></ul><p>Deze voedselpot voor onderweg of op de camping heeft alles wat je nodig hebt. Compact, maar met voldoende ruimte voor uw favoriete warme of koude recept. Een geïsoleerd deksel met een drukontlastventiel zodat je hem eenvoudig kan openen. De brede mondopening van de vacuümgeïsoleerde voedselpot maakt het vullen, gieten en schoonmaken eenvoudig. Elk onderdeel van deze roestvrijstalen voedselcontainer is vaatwasmachinebestendig, alleen in het bovenste rek. En last but not least: een roestvrijstalen spork die veilig in de bevestigde beugel aan de zijkant past. Eet smakelijk!</p>",
-      "voorraad_per_winkel": {
-        "Amsterdam": 1,
-        "Utrecht": 1
-      },
-      "voorraad": 2,
-      "voorraadtabel_gevonden": true,
-      "lokale_afbeeldingen": [
-        "img/023239_1.jpg",
-        "img/023239_2.jpg",
-        "img/023239_3.jpg"
-      ],
-      "recht_foto": {
-        "pad": "img/023239_recht.jpg",
-        "cx": 0.464,
-        "cy": 0.672,
-        "w": 0.4025,
-        "h": 0.252,
-        "lak": "#D0A8A7",
-        "dop": "#737374",
-        "gravure": "#8F9497",
-        "product_y0": 0.07,
-        "product_h": 0.86
-      },
-      "graveervlak_foto": {
-        "cx": 0.466,
-        "cy": 0.682,
-        "w": 0.415,
-        "h": 0.2074,
-        "lak": "#D8C6C2",
-        "dop": "#676765",
-        "gravure": "#8F9497"
-      }
-    },
-    {
-      "merk": "Stanley",
       "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-spork-0-4l-100000116009-029049",
       "naam": "Stanley The Legendary Food Jar + Spork 0,4L  Black 2.0",
       "prijs": 45.95,
@@ -3458,8 +3409,57 @@
     },
     {
       "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-spork-0-4l-100000133118-023239",
+      "naam": "Stanley The Legendary Food Jar + Spork 0,4L  Rose Quartz",
+      "prijs": 45.95,
+      "bestelcode": "023239",
+      "leverancierscode": "10-09382-106",
+      "kleur": "Oud Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/32/39/023239_3-1500-1500.jpg"
+      ],
+      "afmetingen_mm": null,
+      "omschrijving": "<p>Isolerende etenswarenpot van 0.4 liter met spork.</p><h3>Eigenschappen</h3><ul><li>Dubbelwandig vacuum isolatie</li><li>18/8 roetsvrij staal</li><li>BPA-free</li><li>Lekvrij</li><li>Gewicht: 340 gram</li><li>Inhoud: 0,4 liter</li><li>Afmetingen: 13,5 x 86,3 x 10,7 cm</li><li>7 uur heet</li><li>7 uur koud</li><li>Geschikt voor vaatwasser (bovenste lade)</li></ul><p>Deze voedselpot voor onderweg of op de camping heeft alles wat je nodig hebt. Compact, maar met voldoende ruimte voor uw favoriete warme of koude recept. Een geïsoleerd deksel met een drukontlastventiel zodat je hem eenvoudig kan openen. De brede mondopening van de vacuümgeïsoleerde voedselpot maakt het vullen, gieten en schoonmaken eenvoudig. Elk onderdeel van deze roestvrijstalen voedselcontainer is vaatwasmachinebestendig, alleen in het bovenste rek. En last but not least: een roestvrijstalen spork die veilig in de bevestigde beugel aan de zijkant past. Eet smakelijk!</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 1,
+        "Utrecht": 1
+      },
+      "voorraad": 2,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/023239_1.jpg",
+        "img/023239_2.jpg",
+        "img/023239_3.jpg"
+      ],
+      "recht_foto": {
+        "pad": "img/023239_recht.jpg",
+        "cx": 0.464,
+        "cy": 0.672,
+        "w": 0.4025,
+        "h": 0.252,
+        "lak": "#D0A8A7",
+        "dop": "#737374",
+        "gravure": "#8F9497",
+        "product_y0": 0.07,
+        "product_h": 0.86
+      },
+      "graveervlak_foto": {
+        "cx": 0.466,
+        "cy": 0.682,
+        "w": 0.415,
+        "h": 0.2074,
+        "lak": "#D8C6C2",
+        "dop": "#676765",
+        "gravure": "#8F9497"
+      }
+    },
+    {
+      "merk": "Stanley",
       "url": "https://www.kathmandu.nl/stanley-the-legendary-food-jar-0-7l-100000128482-009698",
-      "naam": "Stanley The Legendary Food Jar 0,7L",
+      "naam": "Stanley The Legendary Food Jar 0,7L Hammertone Green",
       "prijs": 54.95,
       "bestelcode": "009698",
       "leverancierscode": "10-07936-003",
@@ -3690,46 +3690,6 @@
         "lak": "#E0E1E3",
         "dop": "#C3BFBA",
         "gravure": "#3E4144"
-      }
-    },
-    {
-      "merk": "Stanley",
-      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000115838-029004",
-      "naam": "Stanley The Transit Fliptop Mug 0,35L",
-      "prijs": 31.95,
-      "bestelcode": "029004",
-      "leverancierscode": "10-13063-0050",
-      "kleur": "Roze",
-      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
-      "afbeeldingen": [
-        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_2-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_3-1500-1500.jpg"
-      ],
-      "afmetingen_mm": {
-        "d": 69.0,
-        "h": 163.0
-      },
-      "omschrijving": "<p>Lichtgewicht en slank formaat thermosdrinkbeker.</p><h3>Eigenschappen Stanley Transit Fliptop Mug 0,35L</h3><ul><li>Slank design</li><li>4 uur heet</li><li>6 uur koud</li><li>18/8 gerecycled roestvrij staal</li><li>AeroLight™-technologie met gesponnen staal</li><li>Dubbelwandige vacuümisolatie</li><li>Lekvrij</li><li>Siliconen lipje op deksel</li><li>Siliconen footpad</li><li>Vaatwasmachinebestendig</li><li>BPA-vrij</li><li>Inhoud: 0,35 liter</li><li>Past in bekerhouder in auto's (diameter: 6,9 cm)</li><li>Afmetingen: 16,3 x 6,9 x 6,9 cm (h x b x d)</li><li>Gewicht: 180 gram</li></ul><p>De Transit Flip Top Mug van 0.47L is uitgerust met de premium AeroLight™-technologie en aanzienlijk lichter dan standaard roestvrij staal. De vederlichte isolatie van gesponnen staal houdt je drank urenlang op de juiste temperatuur. Bijpassende siliconen details aan het lipje en op de onderkant zorgen voor stille bewegingen bij openen, sluiten en neerzetten.</p><p>Deze beker is ontworpen voor woon-werkverkeer en is 33% lichter dan Stanley's standaard roestvrijstalen thermosflessen. Het geheim is Stanley's AeroLight™ vederlichte technologie die geen concessies doet aan duurzaamheid of thermische prestaties. Water blijft koud vanaf het moment van vertrek tot aan het einde van de dag. Het doordrinkdeksel sluit goed af voor lekvrij opbergen in de tas.</p>",
-      "voorraad_per_winkel": {
-        "Amsterdam": 0,
-        "Utrecht": 1
-      },
-      "voorraad": 1,
-      "voorraadtabel_gevonden": true,
-      "lokale_afbeeldingen": [
-        "img/029004_1.jpg",
-        "img/029004_2.jpg",
-        "img/029004_3.jpg"
-      ],
-      "graveervlak_foto": {
-        "cx": 0.5,
-        "cy": 0.6832,
-        "w": 0.2371,
-        "h": 0.3091,
-        "lak": "#F3B7B4",
-        "dop": "#D99D92",
-        "gravure": "#8F9497"
       }
     },
     {
@@ -4036,6 +3996,58 @@
         "lak": "#6E8176",
         "dop": "#42635F",
         "gravure": "#D6D9DA"
+      }
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000115838-029004",
+      "naam": "Stanley The Transit Fliptop Mug 0,35L  Peach Rose",
+      "prijs": 31.95,
+      "bestelcode": "029004",
+      "leverancierscode": "10-13063-0050",
+      "kleur": "Roze",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_3-1500-1500.jpg"
+      ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 163.0
+      },
+      "omschrijving": "<p>Lichtgewicht en slank formaat thermosdrinkbeker.</p><h3>Eigenschappen Stanley Transit Fliptop Mug 0,35L</h3><ul><li>Slank design</li><li>4 uur heet</li><li>6 uur koud</li><li>18/8 gerecycled roestvrij staal</li><li>AeroLight™-technologie met gesponnen staal</li><li>Dubbelwandige vacuümisolatie</li><li>Lekvrij</li><li>Siliconen lipje op deksel</li><li>Siliconen footpad</li><li>Vaatwasmachinebestendig</li><li>BPA-vrij</li><li>Inhoud: 0,35 liter</li><li>Past in bekerhouder in auto's (diameter: 6,9 cm)</li><li>Afmetingen: 16,3 x 6,9 x 6,9 cm (h x b x d)</li><li>Gewicht: 180 gram</li></ul><p>De Transit Flip Top Mug van 0.47L is uitgerust met de premium AeroLight™-technologie en aanzienlijk lichter dan standaard roestvrij staal. De vederlichte isolatie van gesponnen staal houdt je drank urenlang op de juiste temperatuur. Bijpassende siliconen details aan het lipje en op de onderkant zorgen voor stille bewegingen bij openen, sluiten en neerzetten.</p><p>Deze beker is ontworpen voor woon-werkverkeer en is 33% lichter dan Stanley's standaard roestvrijstalen thermosflessen. Het geheim is Stanley's AeroLight™ vederlichte technologie die geen concessies doet aan duurzaamheid of thermische prestaties. Water blijft koud vanaf het moment van vertrek tot aan het einde van de dag. Het doordrinkdeksel sluit goed af voor lekvrij opbergen in de tas.</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029004_1.jpg",
+        "img/029004_2.jpg",
+        "img/029004_3.jpg"
+      ],
+      "recht_foto": {
+        "pad": "img/029004_recht.jpg",
+        "cx": 0.5,
+        "cy": 0.6832,
+        "w": 0.234,
+        "h": 0.3091,
+        "lak": "#F2B7B2",
+        "dop": "#D99B93",
+        "gravure": "#8F9497",
+        "product_y0": 0.07,
+        "product_h": 0.86
+      },
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.6832,
+        "w": 0.2371,
+        "h": 0.3091,
+        "lak": "#F3B7B4",
+        "dop": "#D99D92",
+        "gravure": "#8F9497"
       }
     },
     {
