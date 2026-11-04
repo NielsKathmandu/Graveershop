@@ -1,7 +1,7 @@
 {
-  "bijgewerkt": "2026-11-04T14:27:46+00:00",
+  "bijgewerkt": "2026-11-04T16:02:03+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
-  "aantal": 98,
+  "aantal": 100,
   "producten": [
     {
       "merk": "Klean Kanteen",
@@ -244,6 +244,39 @@
         "lak": "#ADAEA7",
         "dop": "#303033",
         "gravure": "#3E4144"
+      }
+    },
+    {
+      "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-drinkfles-classic-met-flip-sportdop-800ml-1011194-025599",
+      "naam": "Klean Kanteen Drinkfles Classic met flip/sportdop, 800ml Corsair",
+      "prijs": 24.95,
+      "bestelcode": "025599",
+      "leverancierscode": "1011194",
+      "kleur": "Blauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/55/99/025599_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/55/99/025599_1-1500-1500.jpg"
+      ],
+      "afmetingen_mm": null,
+      "omschrijving": "<p>Enkelwandige roestvrij stalen drinkfles 800ml</p><h3>Eigenschappen Klean Kanteen Drinkfles Classic met flip/sportdop, 800ml</h3><ul><li>100% lekvrij ontwerp</li><li>Wordt geleverd met een herbruikbaar rietje van siliconen en roestvrij staal</li><li>Drink rechtop via het verwijderbare rietje of kantel voor een stevige slok uit de ergonomische tuit.</li><li>Lichtgewicht</li><li>Enkelwandige fles</li><li>Past in de meeste bekerhouders</li><li>Klean Coat® afwerking,bestand tegen krassen en behoudt kleur.</li><li>Vaatwasmachinebestendig voor eenvoudig dagelijks gebruik. Graphics blijven langer mooi bij handwas.</li><li>Gemaakt van gecertificeerd 90% post-consumer gerecycled staal.</li><li>Gemaakt van BPA-vrije materialen</li><li>Gemaakt van veilige, loodvrije materialen</li><li>Gewicht: 238.1 gram</li><li>Diameter opening 4,4 cm</li><li>Afmetingen 27,3 x 86,6 cm</li></ul><p>De klassieker als het gaat om een roestvrijstalen drinkfles. De naam kon niet passender zijn voor de originele roestvrijstalen fles die al 17 jaar bestaat en nog steeds populair is. Hoewel sommige dingen zijn verbeterd en veranderd, blijft de Klean Kanteen Classic de perfecte keuze voor draagbare hydratatie. Dit product werd gemaakt van 90% certified post-consumer recycled 18/8 stainless steel. Dit verkleint onze uitstoot met ongeveer 50%.</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 4
+      },
+      "voorraad": 4,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/025599_1.jpg"
+      ],
+      "graveervlak_foto": {
+        "cx": 0.524,
+        "cy": 0.644,
+        "w": 0.181,
+        "h": 0.3944,
+        "lak": "#01486F",
+        "dop": "#3C7DA6",
+        "gravure": "#D6D9DA"
       }
     },
     {
@@ -526,6 +559,39 @@
     },
     {
       "merk": "Klean Kanteen",
+      "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-reflect-met-bamboedop-473ml-1011488-026892",
+      "naam": "Klean Kanteen Isolatiefles Reflect met bamboedop 473ml Brushed Stainless",
+      "prijs": 39.95,
+      "bestelcode": "026892",
+      "leverancierscode": "1011488",
+      "kleur": "Zilver",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/68/92/026892_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/68/92/026892_1-1500-1500.jpg"
+      ],
+      "afmetingen_mm": null,
+      "omschrijving": "<p>Goed isolerende isolatiefles van roestvrij staal</p><h3>Eigenschappen Klean Kanteen Isolatiefles Reflect met bamboedop 473ml</h3><ul><li>100% lekvrij ontwerp</li><li>Met duurzaam geproduceerde bamboe voor een natuurlijke uitstraling</li><li>Slank ontwerp past in de meeste bekerhouders</li><li>Extra bodemversteviging voor verbeterde duurzaamheid</li><li>Gemakkelijk schoon te maken dankzij brede opening en afgeronde hoeken</li><li>Geen verf, inkt, coating of plastic en volledig roestvrijstalen binnenkant</li><li>Gemaakt van gecertificeerd 90% post-consumer gerecycled staal</li><li>Gemaakt van BPA-vrije materialen voor veilige hydratatie</li><li>Gemaakt van veilige, loodvrije materialen</li><li>Gewicht: 346,6 g</li><li>Diameter opening 4,4 cm</li><li>Afmetingen 24,3 x 76,2 cm</li></ul><p>De Rise Reflect: puur design zonder plastic of verf. Gemaakt van drie natuurlijke materialen voor een eenvoudige, duurzame levensstijl.</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 8
+      },
+      "voorraad": 8,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/026892_1.jpg"
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.48,
+        "w": 0.181,
+        "h": 0.2496,
+        "lak": "#A2A19D",
+        "dop": "#97948D",
+        "gravure": "#3E4144"
+      }
+    },
+    {
+      "merk": "Klean Kanteen",
       "url": "https://www.kathmandu.nl/klean-kanteen-isolatiefles-rise-classic-355ml-1011477-026894",
       "naam": "Klean Kanteen Isolatiefles Rise Classic 355ml Barely Blue",
       "prijs": 29.95,
@@ -579,9 +645,9 @@
       "omschrijving": "<p>Goed isolerende drinkfles van roestvrij staal</p><h3>Eigenschappen Klean Kanteen Isolatiefles Rise Classic 355ml</h3><ul><li>100% lekvrij ontwerp voorkomt morsen</li><li>Award-winning Climate Lock™ vacuum isolatie</li><li>Geïntegreerd handvat maakt dragen en bevestigen eenvoudig en veilig</li><li>Slank ontwerp past in de meeste bekerhouders</li><li>Extra bodemversteviging voor verbeterde duurzaamheid</li><li>Duurzame Klean Coat® afwerking is bestand tegen krassen en behoudt kleur</li><li>Vaatwasmachinebestendig voor eenvoudig dagelijks gebruik. Graphics blijven langer mooi bij handwas</li><li>Gemaakt van gecertificeerd 90% post-consumer gerecycled staal</li><li>Gemaakt van BPA-vrije materialen voor veilige hydratatie</li><li>Gemaakt van veilige, loodvrije materialen</li><li>Inhoud: 355 ml</li><li>Gewicht: 398 g</li><li>Diameter opening: 4,4 cm</li><li>Afmetingen: 26,2 x 7,25 cm</li></ul><p>De vacuüm geïsoleerde Rise Classic is een drinkfles die perfect is voor onderweg naar het werk. Ideaal tijdens een wandeling in het weekend. De Rise Classic bestaat uit 90% gerecycled 18/8 roestvrij staal. De isolatie is van topkwaliteit. De Arch Loop Cap is ergonomisch en volledig lekvrij. De stevige onderzijde beschermt tegen stoten. Warme dranken blijven meer dan 14 uur heet, klud water blijft tot wel 42 uur koud.</p><p>Nu gemaakt van gecertificeerd 90% post-consumer gerecycleerd 18/8 roestvrij staal. Door deze verandering wordt de levensloop van de grondstoffen verlengd en de impact op het milieu verminderd.</p>",
       "voorraad_per_winkel": {
         "Amsterdam": 2,
-        "Utrecht": 3
+        "Utrecht": 5
       },
-      "voorraad": 5,
+      "voorraad": 7,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026893_1.jpg"
@@ -651,9 +717,9 @@
       "omschrijving": "<p>Slanke, compacte geïsoleerde drinkflesTgQPHd|||[]</p><h3>Eigenschappen Klean Kanteen Isolatiefles Rise Vac Classic 355mlTgQPHd|||[]</h3><ul><li>Climate Lock™-vacuümisolatie houdt dranken tot 14 uur warm en 42 uur ijskoudTgQPHd|||[]TgQPHd|||[]</li><li>Ergonomische Arch Loop Cap is 100% lekvrij en voorzien van een handige draaglusTgQPHd|||[]TgQPHd|||[]</li><li>Slank ontwerp past comfortabel in de hand en in de meeste bekerhoudersTgQPHd|||[]TgQPHd|||[]</li><li>Extra verstevigde bodem biedt verhoogde impactbescherming tegen deuken en stotenTgQPHd|||[]TgQPHd|||[]</li><li>Volledig zweetvrij ontwerp voorkomt condensvorming aan de buitenzijdeTgQPHd|||[]TgQPHd|||[]</li><li>Inhoud: 355 ml (12 oz)TgQPHd|||[]TgQPHd|||[]</li><li>Afmetingen: 26,2 x 7,25 cmTgQPHd|||[]TgQPHd|||[]</li><li>Gewicht: 398 gramTgQPHd|||[] TgQPHd|||[]</li>TgQPHd|||[]</ul><h4>MateriaalTgQPHd|||[]</h4><ul><li>Flesbehuizing: Gecertificeerd 90% post-consumer gerecycled 18/8 roestvrij staalTgQPHd|||[]TgQPHd|||[]</li><li>Coating: Klean Coat® slijt-, kras- en vaatwasserbestendige afwerkingTgQPHd|||[]TgQPHd|||[]</li><li>Veiligheid: 100% BPA-, lood- en gifvrij materiaalTgQPHd|||[]</li>TgQPHd|||[]</ul><p>De Klean Kanteen Isolatiefles Rise Vac Classic 355ml combineert een bekroond, minimalistisch tweekleurig design met hoogwaardige ecologische prestaties. Gemaakt van gecertificeerd gerecycled roestvrij staal kies je voor een uiterst verantwoorde drinkfles die de noodzaak van wegwerpbekers volledig overbodig maakt. Dankzij de krachtige vacuümisolatie geniet je urenlang van dampende koffie op kantoor of ijskoud water tijdens een wandeling. De fles is onderhoudsvriendelijk ontworpen en mag na gebruik direct de vaatwasser in om weer klaar te zijn voor je volgende dag</p>",
       "voorraad_per_winkel": {
         "Amsterdam": 1,
-        "Utrecht": 0
+        "Utrecht": 4
       },
-      "voorraad": 1,
+      "voorraad": 5,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/028368_1.jpg"
@@ -867,9 +933,9 @@
       "omschrijving": "<p>Goed isolerende drinkfles van roestvrij staal</p><h3>Eigenschappen Klean Kanteen Isolatiefles Rise Classic 355ml</h3><ul><li>100% lekvrij ontwerp voorkomt morsen</li><li>Award-winning Climate Lock™ vacuum isolatie</li><li>Geïntegreerd handvat maakt dragen en bevestigen eenvoudig en veilig</li><li>Slank ontwerp past in de meeste bekerhouders</li><li>Extra bodemversteviging voor verbeterde duurzaamheid</li><li>Duurzame Klean Coat® afwerking is bestand tegen krassen en behoudt kleur</li><li>Vaatwasmachinebestendig voor eenvoudig dagelijks gebruik. Graphics blijven langer mooi bij handwas</li><li>Gemaakt van gecertificeerd 90% post-consumer gerecycled staal</li><li>Gemaakt van BPA-vrije materialen voor veilige hydratatie</li><li>Gemaakt van veilige, loodvrije materialen</li><li>Inhoud: 355 ml</li><li>Gewicht: 398 g</li><li>Diameter opening: 4,4 cm</li><li>Afmetingen: 26,2 x 7,25 cm</li></ul><p>De vacuüm geïsoleerde Rise Classic is een drinkfles die perfect is voor onderweg naar het werk. Ideaal tijdens een wandeling in het weekend. De Rise Classic bestaat uit 90% gerecycled 18/8 roestvrij staal. De isolatie is van topkwaliteit. De Arch Loop Cap is ergonomisch en volledig lekvrij. De stevige onderzijde beschermt tegen stoten. Warme dranken blijven meer dan 14 uur heet, klud water blijft tot wel 42 uur koud.</p><p>Nu gemaakt van gecertificeerd 90% post-consumer gerecycleerd 18/8 roestvrij staal. Door deze verandering wordt de levensloop van de grondstoffen verlengd en de impact op het milieu verminderd.</p>",
       "voorraad_per_winkel": {
         "Amsterdam": 3,
-        "Utrecht": 3
+        "Utrecht": 5
       },
-      "voorraad": 6,
+      "voorraad": 8,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/026897_1.jpg"
