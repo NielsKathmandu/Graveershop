@@ -1,7 +1,7 @@
 {
-  "bijgewerkt": "2026-11-07T12:59:44+00:00",
+  "bijgewerkt": "2026-11-07T13:58:17+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
-  "aantal": 101,
+  "aantal": 100,
   "producten": [
     {
       "merk": "Klean Kanteen",
@@ -4097,58 +4097,6 @@
         "lak": "#6E8176",
         "dop": "#42635F",
         "gravure": "#D6D9DA"
-      }
-    },
-    {
-      "merk": "Stanley",
-      "url": "https://www.kathmandu.nl/stanley-the-transit-fliptop-mug-0-35l-100000115838-029004",
-      "naam": "Stanley The Transit Fliptop Mug 0,35L  Peach Rose",
-      "prijs": 31.95,
-      "bestelcode": "029004",
-      "leverancierscode": "10-13063-0050",
-      "kleur": "Roze",
-      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
-      "afbeeldingen": [
-        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_1-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_2-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/04/029004_3-1500-1500.jpg"
-      ],
-      "afmetingen_mm": {
-        "d": 69.0,
-        "h": 163.0
-      },
-      "omschrijving": "<p>Lichtgewicht en slank formaat thermosdrinkbeker.</p><h3>Eigenschappen Stanley Transit Fliptop Mug 0,35L</h3><ul><li>Slank design</li><li>4 uur heet</li><li>6 uur koud</li><li>18/8 gerecycled roestvrij staal</li><li>AeroLight™-technologie met gesponnen staal</li><li>Dubbelwandige vacuümisolatie</li><li>Lekvrij</li><li>Siliconen lipje op deksel</li><li>Siliconen footpad</li><li>Vaatwasmachinebestendig</li><li>BPA-vrij</li><li>Inhoud: 0,35 liter</li><li>Past in bekerhouder in auto's (diameter: 6,9 cm)</li><li>Afmetingen: 16,3 x 6,9 x 6,9 cm (h x b x d)</li><li>Gewicht: 180 gram</li></ul><p>De Transit Flip Top Mug van 0.47L is uitgerust met de premium AeroLight™-technologie en aanzienlijk lichter dan standaard roestvrij staal. De vederlichte isolatie van gesponnen staal houdt je drank urenlang op de juiste temperatuur. Bijpassende siliconen details aan het lipje en op de onderkant zorgen voor stille bewegingen bij openen, sluiten en neerzetten.</p><p>Deze beker is ontworpen voor woon-werkverkeer en is 33% lichter dan Stanley's standaard roestvrijstalen thermosflessen. Het geheim is Stanley's AeroLight™ vederlichte technologie die geen concessies doet aan duurzaamheid of thermische prestaties. Water blijft koud vanaf het moment van vertrek tot aan het einde van de dag. Het doordrinkdeksel sluit goed af voor lekvrij opbergen in de tas.</p>",
-      "voorraad_per_winkel": {
-        "Amsterdam": 0,
-        "Utrecht": 1
-      },
-      "voorraad": 1,
-      "voorraadtabel_gevonden": true,
-      "lokale_afbeeldingen": [
-        "img/029004_1.jpg",
-        "img/029004_2.jpg",
-        "img/029004_3.jpg"
-      ],
-      "recht_foto": {
-        "pad": "img/029004_recht.jpg",
-        "cx": 0.5,
-        "cy": 0.6832,
-        "w": 0.234,
-        "h": 0.3091,
-        "lak": "#F2B7B2",
-        "dop": "#D99B93",
-        "gravure": "#8F9497",
-        "product_y0": 0.07,
-        "product_h": 0.86
-      },
-      "graveervlak_foto": {
-        "cx": 0.5,
-        "cy": 0.6832,
-        "w": 0.2371,
-        "h": 0.3091,
-        "lak": "#F3B7B4",
-        "dop": "#D99D92",
-        "gravure": "#8F9497"
       }
     },
     {
