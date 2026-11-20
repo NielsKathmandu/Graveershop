@@ -1129,7 +1129,7 @@ $("form").addEventListener("submit",async e=>{
   const g=bouwGravure(c), nr=++regelNr, voorbeeld=await voorbeeldAfbeelding();
   const meta=`Werkbon ${nr} | ${p.merk} ${p.naam} ${p.kleur} | bestelcode ${p.code} | ${n} stuks | ${g.W}x${g.H} mm`;
   state.mand.push({nr,p,n,gravure:{c,g:{W:g.W,H:g.H},svg:svgVoorXtool(g,meta),voorbeeld,logo:c.motif==="logo"&&state.logo?{png:state.logo.png,naam:state.logo.naam}:null}});
-  mandBijwerken();
+  mandBijwerken(); ontwerpLegen();
   $("toast").innerHTML=`Toegevoegd aan de bestelling. <a href="#bestelling">Naar de bestelling</a> of kies nog een fles.`;
 });
 function renderMand(){
@@ -1146,6 +1146,12 @@ function renderMand(){
   $("mand").querySelectorAll("[data-weg]").forEach(b=>b.onclick=()=>{state.mand=state.mand.filter(x=>x.nr!==+b.dataset.weg);mandBijwerken();});
 }
 
+function ontwerpLegen(){
+  $("r1").value=""; $("r2").value=""; $("aantal").value=1;
+  state.font="strak"; state.motif="ster";
+  segButtons($("fonts"),FONTDATA,"font"); segButtons($("motifs"),MOTIFS,"motif");
+  renderTafel();
+}
 /* ---------- versturen ---------- */
 let laatsteOrder=null;
 $("klantForm").addEventListener("submit",async e=>{
@@ -1168,7 +1174,7 @@ $("klantForm").addEventListener("submit",async e=>{
     laatsteOrder={nummer:d.nummer,winkel:state.winkel,klant,kassa:state.mand.reduce((t,r)=>t+r.n*r.p.prijs,0),stuks:state.mand.reduce((t,r)=>t+r.n,0),medewerker:v("kMedewerker"),datum:new Date(),
       regels:state.mand.map(r=>({n:r.n,p:r.p,c:r.gravure.c,voorbeeld:r.gravure.voorbeeld,W:r.gravure.g.W,H:r.gravure.g.H})),
       status:`De ordermail met de bestanden is verstuurd naar ${d.naar}.`};
-    state.mand=[]; mandBijwerken(); ["kNaam","kEmail","kTel","kOpm"].forEach(id=>$(id).value=""); $("kBetaald").checked=false;
+    state.mand=[]; mandBijwerken(); ontwerpLegen(); ["kNaam","kEmail","kTel","kOpm"].forEach(id=>$(id).value=""); $("kBetaald").checked=false;
     opslag.zet("graveerweekend-medewerker",v("kMedewerker"));
     location.hash="verstuurd";
   }catch(err){
@@ -1199,7 +1205,7 @@ function renderKlaar(){
       <div><strong>${r.n} × ${esc(r.p.merk+" "+r.p.naam)}</strong><div>${esc(r.p.kleur)} · bestelcode <span class="mono">${r.p.code}</span></div>
       <div class="hint">“${esc([r.c.r1,r.c.r2].filter(Boolean).join(" / ")||"alleen symbool")}” · ${FONTDATA[r.c.font].label} · ${MOTIFS[r.c.motif]} · ${r.W} × ${r.H} mm</div></div></div>`).join("")}</div>`;
 }
-$("nieuweKlant").onclick=()=>{laatsteOrder=null;state.sel=null;$("r1").value="";$("r2").value="";$("zoek").value="";state.zoek="";renderGrid();location.hash="";};
+$("nieuweKlant").onclick=()=>{laatsteOrder=null;state.sel=null;ontwerpLegen();$("zoek").value="";state.zoek="";renderGrid();location.hash="";};
 
 /* ---------- navigatie: #, #p-<bestelcode>, #bestelling, #verstuurd ---------- */
 let laatsteScroll=0;
