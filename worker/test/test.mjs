@@ -58,6 +58,11 @@ r = await vraag("/winkelorder", order({ winkel: "Utrecht" }));
 const u = await r.json();
 assert.match(u.nummer, /^U-/); assert.equal(mails().length, 2); assert.match(mails()[1].html, /terug naar Utrecht/);
 
+// 4b. opmerking valt op
+r = await vraag("/winkelorder", order({ klant: { ...klant, opmerking: "Graag aan de achterkant" } }));
+assert.equal(r.status, 200); assert.match(mails().at(-1).html, /OPMERKING:<\/b> Graag aan de achterkant/); assert.match(mails().at(-1).subject, /MET OPMERKING$/);
+assert.doesNotMatch(mails()[0].subject, /OPMERKING/);
+
 // 5. zonder PINCODE-variabele
 delete env.PINCODE;
 r = await vraag("/pin", { pin: "246810" }); assert.equal(r.status, 500);

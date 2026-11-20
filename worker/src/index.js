@@ -121,20 +121,20 @@ async function stuurOrdermail(env, o) {
     <p style="background:#E9DCC6;padding:10px;font-size:16px;margin:0 0 12px">
       Gekocht in <b>${esc(o.winkel)}</b>. Na het graveren <b>terug naar ${esc(o.winkel)}</b>: de klant haalt de fles daar op.
       ${naarUtrecht ? "<br>De fles komt met dit ordernummer van Amsterdam naar Utrecht." : ""}</p>
+    ${k.opmerking ? `<div style="border:3px solid #C0392B;background:#FDECEA;padding:12px 14px;margin:0 0 14px;font-size:17px"><b style="color:#C0392B">⚠ OPMERKING:</b> ${esc(k.opmerking)}</div>` : ""}
     <p><b>Graveerweekend:</b> de klant rekent de fles af aan de kassa, graveren is gratis. Het ordernummer staat op de kassabon die aan de fles zit.</p>
     <table style="border-collapse:collapse">
       <tr><td style="padding:2px 16px 2px 0;color:#555">Klant</td><td>${esc(k.naam)}</td></tr>
       <tr><td style="padding:2px 16px 2px 0;color:#555">E-mail</td><td>${esc(k.email)}</td></tr>
       ${k.telefoon ? `<tr><td style="padding:2px 16px 2px 0;color:#555">Telefoon</td><td>${esc(k.telefoon)}</td></tr>` : ""}
       <tr><td style="padding:2px 16px 2px 0;color:#555">Opgenomen door</td><td>${esc(o.medewerker)}, ${esc(o.datum)}</td></tr>
-      ${k.opmerking ? `<tr><td style="padding:2px 16px 2px 0;color:#555">Opmerking</td><td>${esc(k.opmerking)}</td></tr>` : ""}
     </table>
     <h3>Te graveren (${o.stuks} ${o.stuks === 1 ? "fles" : "flessen"})</h3>
     <table style="border-collapse:collapse;width:100%">
       <tr style="text-align:left"><th style="padding:8px">#</th><th style="padding:8px">Artikel</th><th style="padding:8px;text-align:right">Aantal</th><th style="padding:8px">Gravure</th></tr>${rijen}
     </table>
     <p style="color:#555">Beantwoorden van deze mail gaat naar de klant, bijvoorbeeld om te laten weten dat de fles klaarligt in ${esc(o.winkel)}.</p></div>`;
-  return mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `Graveerorder ${o.nummer} – ${o.winkel} – ${k.naam} – ${o.stuks} st.`, html, attachments: bijlagen });
+  return mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `Graveerorder ${o.nummer} – ${o.winkel} – ${k.naam} – ${o.stuks} st.${k.opmerking ? " – MET OPMERKING" : ""}`, html, attachments: bijlagen });
 }
 
 /* ---------------- hulpjes ---------------- */
