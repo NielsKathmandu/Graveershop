@@ -17,9 +17,9 @@ De personeelstool staat op GitHub Pages. Deze kleine server controleert de pinco
 
 De oude variabelen `TESTMODUS` en `BUCKAROO_TEST` en de KV-koppeling `ORDERS` worden niet meer gebruikt en mogen weg.
 
-## Mail naar klanten
+## Mail
 
-Zolang kathmandu.nl niet geverifieerd is bij Resend, mag Resend alleen mailen naar het adres van het eigen account. De bevestiging voor de klant komt dan als voorbeeld bij `MAIL_ORDERS` binnen. Na de verificatie (Resend → Domains) gaat hij vanzelf naar de klant; zet dan `MAIL_VAN` op `Kathmandu Graveerwerk <graveerwerk@kathmandu.nl>`.
+De klant krijgt geen mail. Het e-mailadres van de klant staat in de ordermail; antwoorden op de ordermail gaat naar de klant, bijvoorbeeld om te melden dat de fles klaarligt.
 
 ## Automatische test
 

@@ -1169,7 +1169,7 @@ $("klantForm").addEventListener("submit",async e=>{
     if(!r.ok) throw new Error(d.fout||`Versturen lukte niet (fout ${r.status}).`);
     laatsteOrder={nummer:d.nummer,winkel:state.winkel,klant,bonnummer:v("kBon"),medewerker:v("kMedewerker"),datum:new Date(),
       regels:state.mand.map(r=>({n:r.n,p:r.p,c:r.gravure.c,voorbeeld:r.gravure.voorbeeld,W:r.gravure.g.W,H:r.gravure.g.H})),
-      status:`De ordermail met de bestanden is verstuurd naar ${d.naar}. `+(d.klantmail?`De klant krijgt een bevestiging op ${d.klantmail}.`:`De bevestiging kon nog niet naar de klant (domein nog niet geverifieerd bij Resend); een voorbeeld staat in de mailbox van ${d.naar}.`)};
+      status:`De ordermail met de bestanden is verstuurd naar ${d.naar}.`};
     state.mand=[]; mandBijwerken(); ["kNaam","kEmail","kTel","kBon","kOpm"].forEach(id=>$(id).value=""); $("kBetaald").checked=false;
     opslag.zet("graveerweekend-medewerker",v("kMedewerker"));
     location.hash="verstuurd";

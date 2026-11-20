@@ -45,23 +45,18 @@ r = await vraag("/winkelorder", order());
 const d = await r.json();
 assert.equal(r.status, 200, JSON.stringify(d));
 assert.match(d.nummer, /^A-\d{4}-[A-Z0-9]{3}$/);
-assert.equal(d.klantmail, "sanne@example.com");
-const [om, km] = mails();
+assert.equal(mails().length, 1, "alleen de ordermail, geen klantmail");
+const [om] = mails();
 assert.equal(om.to, "niels@kathmandu.nl"); assert.equal(om.reply_to, "sanne@example.com");
 assert.match(om.subject, /^Graveerorder A-.* – Amsterdam – Sanne Test – 2 st\.$/);
 assert.match(om.html, /terug naar Amsterdam/); assert.match(om.html, /123456/); assert.match(om.html, /Dries/);
 assert.deepEqual(om.attachments.map(a => a.filename.replace(d.nummer, "NR")), ["NR_regel1_029031_xtool.svg", "NR_regel1_029031_voorbeeld.png"]);
 assert.equal(Buffer.from(om.attachments[0].content, "base64").toString(), svg);
-assert.equal(km.to, "sanne@example.com"); assert.match(km.html, /Haarlemmerstraat 123/); assert.equal(km.attachments.length, 1);
 
-// 4. Utrecht + Resend weigert klantadres -> voorbeeld naar MAIL_ORDERS
-resendWeigertKlant = true;
-const voor = mails().length;
+// 4. Utrecht
 r = await vraag("/winkelorder", order({ winkel: "Utrecht" }));
 const u = await r.json();
-assert.match(u.nummer, /^U-/); assert.equal(u.klantmail, null);
-const nieuw = mails().slice(voor);
-assert.equal(nieuw.at(-1).to, "niels@kathmandu.nl"); assert.match(nieuw.at(-1).subject, /Voorbeeld klantmail/); assert.match(nieuw.at(-1).html, /Oudegracht 256-264/);
+assert.match(u.nummer, /^U-/); assert.equal(mails().length, 2); assert.match(mails()[1].html, /terug naar Utrecht/);
 
 // 5. zonder PINCODE-variabele
 delete env.PINCODE;

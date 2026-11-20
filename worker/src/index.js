@@ -3,7 +3,7 @@
  *
  * Draait als Cloudflare Worker (gratis abonnement volstaat). Routes:
  *   POST /pin          controleert de pincode van de medewerkers
- *   POST /winkelorder  bestelling uit de winkel -> ordermail met SVG/voorbeeld naar MAIL_ORDERS + bevestiging naar de klant
+ *   POST /winkelorder  bestelling uit de winkel -> ordermail met SVG/voorbeeld naar MAIL_ORDERS (de klant krijgt geen mail)
  *
  * Instellingen (Cloudflare: Settings -> Variables and Secrets):
  *   SITE_URL        https://nielskathmandu.github.io/Graveershop   (zonder slash)
@@ -90,13 +90,7 @@ async function winkelorder(request, env) {
 
   const ok = await stuurOrdermail(env, order);
   if (!ok) return json({ fout: "De ordermail kon niet worden verstuurd. Controleer de Resend-instellingen." }, 502);
-  // bevestiging naar de klant; weigert Resend dat (domein nog niet geverifieerd), dan een voorbeeld naar MAIL_ORDERS
-  let klantmail = k.email;
-  if (!(await stuurBevestiging(env, order))) {
-    klantmail = null;
-    await stuurBevestiging(env, order, env.MAIL_ORDERS);
-  }
-  return json({ ok: true, nummer: order.nummer, naar: env.MAIL_ORDERS, klantmail });
+  return json({ ok: true, nummer: order.nummer, naar: env.MAIL_ORDERS });
 }
 
 /* ---------------- e-mail via Resend ---------------- */
@@ -144,23 +138,6 @@ async function stuurOrdermail(env, o) {
     </table>
     <p style="color:#555">Beantwoorden van deze mail gaat naar de klant, bijvoorbeeld om te laten weten dat de fles klaarligt in ${esc(o.winkel)}.</p></div>`;
   return mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `Graveerorder ${o.nummer} – ${o.winkel} – ${k.naam} – ${o.stuks} st.`, html, attachments: bijlagen });
-}
-
-async function stuurBevestiging(env, o, naar = null) {
-  const k = o.klant, w = WINKELS[o.winkel];
-  const regels = o.regels.map(r => `<li>${r.n} × ${esc(r.naam)}: “${esc([r.gravure.config?.r1, r.gravure.config?.r2].filter(Boolean).join(" / ") || "symbool/logo")}”</li>`).join("");
-  const metOntwerp = o.regels.filter(r => r.gravure.voorbeeld);
-  const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
-    <p>Beste ${esc(k.naam)},</p>
-    <p>Bedankt voor je aankoop tijdens ons graveerweekend. We graveren je ${o.stuks === 1 ? "fles" : "flessen"} gratis.</p>
-    <p>Ordernummer: <b>${esc(o.nummer)}</b></p>
-    <ul>${regels}</ul>
-    ${metOntwerp.length ? "<p>Het ontwerp zoals je het in de winkel hebt gezien, zit als bijlage bij deze mail.</p>" : ""}
-    <p>Zodra je bestelling gegraveerd is, laten we het je weten. Je kunt hem dan ophalen in onze winkel in ${esc(o.winkel)}, ${esc(w.adres.split(",")[0])}. Neem je ordernummer of kassabon mee.</p>
-    <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail.</p>
-    <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel</p></div>`;
-  const bijlagen = metOntwerp.map((r, i) => ({ filename: `ontwerp_${i + 1}.png`, content: r.gravure.voorbeeld.split(",")[1] }));
-  return mail(env, { to: naar || k.email, reply_to: env.MAIL_ORDERS, subject: `${naar ? "[Voorbeeld klantmail] " : ""}Je graveerbestelling ${o.nummer} bij Kathmandu`, html, attachments: bijlagen });
 }
 
 /* ---------------- hulpjes ---------------- */
