@@ -113,7 +113,8 @@ async function stuurOrdermail(env, o) {
     if (r.gravure.logo) bijlagen.push({ filename: `${basis}_logo.png`, content: r.gravure.logo.split(",")[1] });
     return `<tr>${td(nr)}${td(`<b>${esc(r.naam)}</b><br>Bestelcode ${esc(r.code)}`)}${td(r.n, true)}
       ${td(`Regel 1: <b>${esc(c.r1 || "–")}</b><br>Regel 2: <b>${esc(c.r2 || "–")}</b><br>Lettertype: ${esc(c.lettertype || "")} · Symbool: ${esc(c.symbool || "")}<br>
-        Formaat: ${esc(r.gravure.formaat || "")}<br><span style="color:#555">Bijlagen: ${basis}_xtool.svg${r.gravure.voorbeeld ? `, ${basis}_voorbeeld.png` : ""}${r.gravure.logo ? `, ${basis}_logo.png` : ""}</span>`)}</tr>`;
+        Formaat: ${esc(r.gravure.formaat || "")}<br>
+        ${r.gravure.opspanning ? (/statisch|plat/i.test(r.gravure.opspanning) ? `<b style="color:#C0392B">${esc(r.gravure.opspanning)}</b><br>` : `Opspanning: ${esc(r.gravure.opspanning)}<br>`) : ""}<span style="color:#555">Bijlagen: ${basis}_xtool.svg${r.gravure.voorbeeld ? `, ${basis}_voorbeeld.png` : ""}${r.gravure.logo ? `, ${basis}_logo.png` : ""}</span>`)}</tr>`;
   }).join("");
   const k = o.klant, naarUtrecht = o.winkel !== "Utrecht";
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">

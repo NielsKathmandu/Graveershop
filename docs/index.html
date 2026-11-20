@@ -808,7 +808,7 @@ const MODELLEN = [
   [/everyday camp mug/i, "campmug", {D:99,H:120}, "S"],
   [/stacking camp cup/i, "stackcup", {D:91,H:99}, "KN"],
   [/stacking tumbler/i, "tumbler", {D:87,H:146}, "KN"],
-  [/beer stein/i, "stein", {D:100,H:172}, "KN"],
+  [/beer stein/i, "stein", {D:100,H:172,statisch:55}, "KN"],   // past niet in de rotary: statisch, max. 55 mm breed
   [/growler/i, "growler", {D:125,H:294}, "KN"],
   [/easy fill flask/i, "flask", {D:76,H:160}, "S"],
   [/iceflow/i, "iceflow", {D:73,H:289}, "KN"],
@@ -852,13 +852,14 @@ const MACHINE = {
    Heupfles is plat: alleen de voorkant. */
 function graveervlakVan(vorm,maat){
   const v=(VORMEN[vorm]||VORMEN.transit)(T(),maat,{lak:"#777777",dop:"#777777"});
-  const breed=vorm==="flask"?v.maxW:Math.min(Math.PI*maat.D/3,110);
+  const breed=vorm==="flask"?v.maxW:maat.statisch?maat.statisch:Math.min(Math.PI*maat.D/3,110);
   const hoog=Math.min(v.maxH,MACHINE.maxHoogte,MACHINE.veld);
   return [Math.round(breed), Math.round(hoog)];
 }
 /* Past het artikel in de klauw? Geeft de manier van opspannen of null. */
 function opspanning(vorm,maat){
   if(vorm==="flask") return "plat in het werkveld";
+  if(maat.statisch) return "statisch, zonder rotary";
   return maat.D<=MACHINE.klauw.max ? "in de klauw" : null;
 }
 /* Soort per vorm, zelfde indeling als kathmandu.nl (drinkflessen, thermosflessen, thermosbekers). */
@@ -890,10 +891,11 @@ function teken(p, g){
   // gravure op ware grootte, gecentreerd op de as; te breed voor het zichtbare front? dan schalen
   let eng="";
   if(g&&g.d){
-    const s=1, d=p.vorm==="flask"?g.d:rondom(g,D/2);
+    const plat=p.vorm==="flask"||p.maat.statisch;
+    const s=1, d=plat?g.d:rondom(g,D/2);
     const lak=c.lak, L=helder(lak), sat=(()=>{const n=parseInt(lak.slice(1),16);const a=[n>>16,(n>>8)&255,n&255];return Math.max(...a)-Math.min(...a);})();
     const inkt=L<140?"#DADDDE":sat<18?"#3E4144":"#8F9497";
-    const dd=p.vorm==="flask"?d:d; const dx=p.vorm==="flask"?-g.W/2:0;
+    const dd=d; const dx=plat?-g.W/2:0;
     eng=`<g transform="translate(${dx.toFixed(2)} ${(vlak.cy-g.H*s/2).toFixed(2)})"><path d="${dd}" fill="${inkt}"/></g>`;
   }
   const breed=Math.max(D*1.5,H*.62), x0=-breed/2-D*.05, top=-H*.08, hoog=H*1.14;
@@ -959,7 +961,7 @@ function renderProduct(){
   $("feiten").innerHTML=`<dt>Bestelcode</dt><dd class="mono">${p.code}</dd>
     <dt>Afmetingen</dt><dd class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</dd>
     <dt>Graveervlak</dt><dd class="mono">${p.zone[0]} × ${p.zone[1]} mm</dd>`;
-  $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
+  $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":p.maat.statisch?". Dit artikel past niet in de rotatiemodule en wordt aan de voorkant gegraveerd, daarom is het vlak smaller":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
   $("toast").textContent=""; $("aantal").value=1;
   renderTafel();
 }
@@ -982,8 +984,8 @@ function opFoto(p,g,plek){
   if(g.d){
     // ware schaal: productfoto-hoogte in pixels gedeeld door de echte hoogte in mm
     const pxmm=v.product_h*S/p.maat.H;
-    const d=rondom(g,p.maat.D/2);
-    eng=`<g transform="translate(${(cx*S).toFixed(1)} ${(v.cy*S-g.H*pxmm/2).toFixed(1)}) scale(${pxmm.toFixed(3)})"><path d="${d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
+    const plat=p.vorm==="flask"||p.maat.statisch, d=plat?g.d:rondom(g,p.maat.D/2);
+    eng=`<g transform="translate(${(cx*S).toFixed(1)} ${(v.cy*S-g.H*pxmm/2).toFixed(1)}) scale(${pxmm.toFixed(3)})${plat?` translate(${(-g.W/2).toFixed(2)} 0)`:""}"><path d="${d}" fill="${v.gravure}" fill-opacity=".93"/></g>`;
   }
   return `<svg class="opfoto" viewBox="0 0 ${S} ${S}" role="img" aria-label="${esc(p.merk+" "+p.naam+", "+p.kleur)} met gravure">
     <image href="${esc(v.pad)}" width="${S}" height="${S}" onerror="this.parentNode.outerHTML=teken(state.sel,bouwGravure(cfg()))"/>${eng}</svg>`;
@@ -1134,7 +1136,7 @@ $("form").addEventListener("submit",async e=>{
   if(!c.r1.trim()&&!c.r2.trim()&&c.motif==="geen"){$("toast").textContent="Vul minimaal één regel tekst in of kies een symbool.";return;}
   const n=Math.max(1,+$("aantal").value||1);
   const g=bouwGravure(c), nr=++regelNr, voorbeeld=await voorbeeldAfbeelding();
-  const meta=`Werkbon ${nr} | ${p.merk} ${p.naam} ${p.kleur} | bestelcode ${p.code} | ${n} stuks | ${g.W}x${g.H} mm`;
+  const meta=`Werkbon ${nr} | ${p.merk} ${p.naam} ${p.kleur} | bestelcode ${p.code} | ${n} stuks | ${g.W}x${g.H} mm | ${p.opspanning||""}`;
   state.mand.push({nr,p,n,gravure:{c,g:{W:g.W,H:g.H},svg:svgVoorXtool(g,meta),voorbeeld,logo:c.motif==="logo"&&state.logo?{png:state.logo.png,naam:state.logo.naam}:null}});
   mandBijwerken(); ontwerpLegen();
   $("toast").innerHTML=`Toegevoegd aan de bestelling. <a href="#bestelling">Naar de bestelling</a> of kies nog een fles.`;
@@ -1170,7 +1172,7 @@ $("klantForm").addEventListener("submit",async e=>{
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("klantFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return;}
   if(!$("kBetaald").checked){$("klantFout").textContent="Vink aan dat de klant het ontwerp heeft goedgekeurd.";return;}
   const regels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
-    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}}));
+    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,opspanning:r.p.opspanning||"",config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}}));
   $("verstuurKnop").disabled=true; $("verstuurKnop").textContent="Bezig met versturen…"; $("klantFout").textContent="";
   try{
     const r=await fetch(SERVER_URL+"/winkelorder",{method:"POST",headers:{"Content-Type":"application/json"},

@@ -63,6 +63,10 @@ r = await vraag("/winkelorder", order({ klant: { ...klant, opmerking: "Graag aan
 assert.equal(r.status, 200); assert.match(mails().at(-1).html, /OPMERKING:<\/b> Graag aan de achterkant/); assert.match(mails().at(-1).subject, /MET OPMERKING$/);
 assert.doesNotMatch(mails()[0].subject, /OPMERKING/);
 
+// 4c. statisch graveren valt op
+r = await vraag("/winkelorder", order({ regels: [{ ...regel, gravure: { ...regel.gravure, opspanning: "statisch, zonder rotary" } }] }));
+assert.equal(r.status, 200); assert.match(mails().at(-1).html, /color:#C0392B">statisch, zonder rotary/);
+
 // 5. zonder PINCODE-variabele
 delete env.PINCODE;
 r = await vraag("/pin", { pin: "246810" }); assert.equal(r.status, 500);
