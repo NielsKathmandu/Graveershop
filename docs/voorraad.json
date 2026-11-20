@@ -1,7 +1,7 @@
 {
-  "bijgewerkt": "2026-11-20T13:24:44+00:00",
+  "bijgewerkt": "2026-11-20T13:47:01+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
-  "aantal": 108,
+  "aantal": 112,
   "producten": [
     {
       "merk": "Klean Kanteen",
@@ -1436,6 +1436,154 @@
         "lak": "#EAEAE7",
         "dop": "#D1C4B8",
         "gravure": "#3E4144"
+      }
+    },
+    {
+      "merk": "Rubytec",
+      "url": "https://www.kathmandu.nl/rubytec-cool-drink-bottle-550ml-ru513205b-008175",
+      "naam": "Rubytec Cool Drink Bottle 550ml. Red",
+      "prijs": 29.95,
+      "bestelcode": "008175",
+      "leverancierscode": "RU513205B",
+      "kleur": "Rood",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/81/75/008175_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/81/75/008175_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/81/75/008175_2-1500-1500.jpg"
+      ],
+      "afmetingen_mm": null,
+      "omschrijving": "<p>Deze praktische drinkfles combineert een prettige drinktuit met de isolatie van een vacuüm in dubbelwandig rvs waardoor koude vloeistoffen urenlang koud blijven. De BPA-vrije dop heeft een smalle drinktuit is volledig lekvrij dankzij de siliconenafdichting. De schroefdraad loopt binnenin voor een prettige lipaansluiting en voorkomt zo morsen tijdens het drinken. De drinkdop kan in positie worden vastgezet voor gemakkelijk drinken. De draaglus kan een aan carabiner worden vastgemaakt. De brede opening is praktisch bij het schoonmaken of als u de fles vult met ijsblokjes of stukjes fruit. De extra dikke dubbele rvs-wand doorstaat vele jaren ruw gebruik en bespaart u daarmee het gebruik van talloze wegwerpflesjes. De Double Wall-fles is voorzien van een unieke Getter om het vacuüm jaren in stand te houden.</p><p>- Inhoud: 0,55 L<br>- Gewicht: 315 g<br>- Materiaal: 18/8 Stainless steel, ABS, Silicon<br>- Breedte: Ø 7,3 cm<br>- Hoogte: 23,5 cm</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/008175_1.jpg",
+        "img/008175_2.jpg"
+      ],
+      "graveervlak_foto": {
+        "cx": 0.584,
+        "cy": 0.822,
+        "w": 0.1966,
+        "h": 0.1312,
+        "lak": "#DB505C",
+        "dop": "#313038",
+        "gravure": "#D6D9DA"
+      }
+    },
+    {
+      "merk": "Rubytec",
+      "url": "https://www.kathmandu.nl/rubytec-food-container-500ml-ru515135-000903",
+      "naam": "Rubytec Food Container 500ml Grijs/oranje",
+      "prijs": 29.95,
+      "bestelcode": "000903",
+      "leverancierscode": "RU515135",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/09/03/000903_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/09/03/000903_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/09/03/000903_2-1500-1500.jpg"
+      ],
+      "afmetingen_mm": null,
+      "omschrijving": "<p>De Rubytec Shira food container is een lichte, compacte en isolerende voedselcontainer. Ideaal voor het op temperatuur en houdbaar houden van voedsel. De container is gemaakt van 18/8 stainles stel met 'Powder coated' buitenlaag, dit zorgt voor extra grip en maakt de voedselcontainer minder kwetsbaar. Door zijn wijde opening is de food container makkelijk te vullen, serveren en schoonmaken.<br><br>Eigenschappen Rubytec Shira food container:<br>- Dubbelwandige voedselcontainer<br> - Vacuüm isolatie<br>- Met silicone afsluiting, houdt voedsel ook vers<br> - Houd tot wel 12 uur warm<br> - Houdt tot wel 24 uur koud<br> - 18/8 stainles steel<br>- ‘Powder coated’ buitenlaag<br>- Eenvoudig schoon te maken<br> - Wijde opening<br>- Inhoud: 0,5 liter<br>- Gewicht: 340 gram<br> - Hoogte: 16,3 cm<br> - Diameter: 8,5 cm</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 3,
+        "Utrecht": 6
+      },
+      "voorraad": 9,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/000903_1.jpg",
+        "img/000903_2.jpg"
+      ],
+      "graveervlak_foto": {
+        "cx": 0.5,
+        "cy": 0.496,
+        "w": 0.3276,
+        "h": 0.6656,
+        "lak": "#575E60",
+        "dop": "#474243",
+        "gravure": "#D6D9DA"
+      }
+    },
+    {
+      "merk": "Rubytec",
+      "url": "https://www.kathmandu.nl/rubytec-vacuum-bottle-1000ml-ru551131-000878",
+      "naam": "Rubytec Vacuum Bottle 1000ml Dark grey",
+      "prijs": 37.95,
+      "bestelcode": "000878",
+      "leverancierscode": "RU551131",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/08/78/000878_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/08/78/000878_1-1500-1500.jpg"
+      ],
+      "afmetingen_mm": {
+        "d": 85.0,
+        "h": 298.0
+      },
+      "omschrijving": "<p>De Rubytec Shira Vacuum Bottles houden in alle omstandigheden dranken warm of koud. Deze zeer duurzame fles is gemaakt van dubbelwandig 18/8 roestvrij staal met vacuüm isolatie en een koperen coating ertussen. De snelle draaidop voorkomt lekken. Dankzij de grote opening kunt u de fles ook gemakkelijks schoonmaken. De binnenzijde van de beschermdop is van BPA-vrij ABS en kan ook als beker gebruikt worden. Tot slot ziet de Rubytec Shira Bottle er met haar laser-gegraveerde logo en poedercoating fantastisch uit!<br><br>Eigenschappen:<br>Inhoud: 1000 ml<br> Gewicht: 573 gram<br> Afmeting: 29,8 x 8,5 cm</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 4,
+        "Utrecht": 4
+      },
+      "voorraad": 8,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/000878_1.jpg"
+      ],
+      "graveervlak_foto": {
+        "cx": 0.496,
+        "cy": 0.27,
+        "w": 0.1841,
+        "h": 0.2464,
+        "lak": "#444444",
+        "dop": "#474747",
+        "gravure": "#D6D9DA"
+      }
+    },
+    {
+      "merk": "Rubytec",
+      "url": "https://www.kathmandu.nl/rubytec-vacuum-bottle-500ml-ru551135-000876",
+      "naam": "Rubytec Vacuum Bottle 500ml Dark grey",
+      "prijs": 27.95,
+      "bestelcode": "000876",
+      "leverancierscode": "RU551135",
+      "kleur": "Grijs",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/00/08/76/000876_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/00/08/76/000876_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/08/76/000876_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/08/76/000876_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/00/08/76/000876_4-1500-1500.jpg"
+      ],
+      "afmetingen_mm": {
+        "d": 69.0,
+        "h": 247.0
+      },
+      "omschrijving": "<p>De Rubytec Shira Vacuum Bottles houden in alle omstandigheden dranken warm of koud. Deze zeer duurzame fles is gemaakt van dubbelwandig 18/8 roestvrij staal met vacuüm isolatie en een koperen coating ertussen. De snelle draaidop voorkomt lekken. Dankzij de grote opening kunt u de fles ook gemakkelijks schoonmaken. De binnenzijde van de beschermdop is van BPA-vrij ABS en kan ook als beker gebruikt worden. Tot slot ziet de Rubytec Shira Bottle er met haar laser-gegraveerde logo en poedercoating fantastisch uit!<br><br>Eigenschappen:<br>Inhoud: 500 ml<br>Gewicht: 362 gram<br>Afmeting: 24,7 x 6,9 cm</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 2,
+        "Utrecht": 3
+      },
+      "voorraad": 5,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/000876_1.jpg",
+        "img/000876_2.jpg",
+        "img/000876_3.jpg",
+        "img/000876_4.jpg"
+      ],
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.554,
+        "w": 0.1778,
+        "h": 0.4114,
+        "lak": "#555F69",
+        "dop": "#2D3C47",
+        "gravure": "#D6D9DA"
       }
     },
     {
