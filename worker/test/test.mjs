@@ -25,7 +25,7 @@ const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="83mm" height="60mm">
 const png = "data:image/png;base64,iVBORw0KGgo=";
 const klant = { naam: "Sanne Test", email: "sanne@example.com", telefoon: "0612345678" };
 const regel = { code: "029031", n: 2, gravure: { svg, voorbeeld: png, formaat: "83 × 60 mm", config: { r1: "Sanne", r2: "", lettertype: "Strak", symbool: "Ster" } } };
-const order = extra => ({ pin: "246810", winkel: "Amsterdam", medewerker: "Dries", bonnummer: "123456", klant, regels: [regel], ...extra });
+const order = extra => ({ pin: "246810", winkel: "Amsterdam", medewerker: "Dries", klant, regels: [regel], ...extra });
 
 // 1. pincode
 let r = await vraag("/pin", { pin: "0000" }); assert.equal(r.status, 403);
@@ -34,7 +34,7 @@ assert.equal(r.headers.get("Access-Control-Allow-Origin"), "https://nielskathman
 
 // 2. weigeringen
 assert.equal((await vraag("/winkelorder", order({ pin: "1" }))).status, 403, "verkeerde pin");
-assert.equal((await vraag("/winkelorder", order({ bonnummer: "" }))).status, 400, "bonnummer verplicht");
+assert.equal((await vraag("/winkelorder", order({ medewerker: "" }))).status, 400, "medewerker verplicht");
 assert.equal((await vraag("/winkelorder", order({ winkel: "Rotterdam" }))).status, 400, "onbekende winkel");
 assert.equal((await vraag("/winkelorder", order({ regels: [{ code: "029031", n: 1 }] }))).status, 400, "ontwerp verplicht");
 assert.equal((await vraag("/winkelorder", order({ klant: { ...klant, email: "x" } }))).status, 400, "e-mail");
@@ -49,7 +49,7 @@ assert.equal(mails().length, 1, "alleen de ordermail, geen klantmail");
 const [om] = mails();
 assert.equal(om.to, "niels@kathmandu.nl"); assert.equal(om.reply_to, "sanne@example.com");
 assert.match(om.subject, /^Graveerorder A-.* – Amsterdam – Sanne Test – 2 st\.$/);
-assert.match(om.html, /terug naar Amsterdam/); assert.match(om.html, /123456/); assert.match(om.html, /Dries/);
+assert.match(om.html, /terug naar Amsterdam/); assert.match(om.html, /Dries/);
 assert.deepEqual(om.attachments.map(a => a.filename.replace(d.nummer, "NR")), ["NR_regel1_029031_xtool.svg", "NR_regel1_029031_voorbeeld.png"]);
 assert.equal(Buffer.from(om.attachments[0].content, "base64").toString(), svg);
 

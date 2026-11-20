@@ -57,9 +57,7 @@ async function winkelorder(request, env) {
   const k = pick(invoer.klant || {}, ["naam", "email", "telefoon", "opmerking"]);
   if (!k.naam.trim()) return json({ fout: "Vul de naam van de klant in." }, 400);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(k.email)) return json({ fout: "Het e-mailadres van de klant klopt niet." }, 400);
-  const bonnummer = String(invoer.bonnummer || "").trim().slice(0, 60);
   const medewerker = String(invoer.medewerker || "").trim().slice(0, 60);
-  if (!bonnummer) return json({ fout: "Vul het bonnummer van de kassa in." }, 400);
   if (!medewerker) return json({ fout: "Vul je eigen naam in." }, 400);
   if (!Array.isArray(invoer.regels) || !invoer.regels.length) return json({ fout: "De bestelling is leeg." }, 400);
 
@@ -84,7 +82,7 @@ async function winkelorder(request, env) {
   const order = {
     nummer: `${WINKELS[winkel].kort}-${dag}-${willekeurig}`,
     datum: nu.toLocaleString("nl-NL", { timeZone: "Europe/Amsterdam", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }),
-    winkel, klant: k, bonnummer, medewerker, regels,
+    winkel, klant: k, medewerker, regels,
     stuks: regels.reduce((t, r) => t + r.n, 0),
   };
 
@@ -123,12 +121,11 @@ async function stuurOrdermail(env, o) {
     <p style="background:#E9DCC6;padding:10px;font-size:16px;margin:0 0 12px">
       Gekocht in <b>${esc(o.winkel)}</b>. Na het graveren <b>terug naar ${esc(o.winkel)}</b>: de klant haalt de fles daar op.
       ${naarUtrecht ? "<br>De fles komt met dit ordernummer van Amsterdam naar Utrecht." : ""}</p>
-    <p><b>Graveerweekend:</b> de fles is afgerekend aan de kassa, graveren is gratis.</p>
+    <p><b>Graveerweekend:</b> de klant rekent de fles af aan de kassa, graveren is gratis. Het ordernummer staat op de kassabon die aan de fles zit.</p>
     <table style="border-collapse:collapse">
       <tr><td style="padding:2px 16px 2px 0;color:#555">Klant</td><td>${esc(k.naam)}</td></tr>
       <tr><td style="padding:2px 16px 2px 0;color:#555">E-mail</td><td>${esc(k.email)}</td></tr>
       ${k.telefoon ? `<tr><td style="padding:2px 16px 2px 0;color:#555">Telefoon</td><td>${esc(k.telefoon)}</td></tr>` : ""}
-      <tr><td style="padding:2px 16px 2px 0;color:#555">Bonnummer kassa</td><td>${esc(o.bonnummer)}</td></tr>
       <tr><td style="padding:2px 16px 2px 0;color:#555">Opgenomen door</td><td>${esc(o.medewerker)}, ${esc(o.datum)}</td></tr>
       ${k.opmerking ? `<tr><td style="padding:2px 16px 2px 0;color:#555">Opmerking</td><td>${esc(k.opmerking)}</td></tr>` : ""}
     </table>

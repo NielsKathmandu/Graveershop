@@ -251,7 +251,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
 .afrekenform input[type=text]{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:9px 10px;font:inherit;color:inherit}
 .werkbon{background:#fff;color:#17201C;border:2px solid #17201C;border-radius:8px;padding:20px;display:grid;gap:14px;max-width:760px}
 .wbnummer{font-size:clamp(38px,8vw,64px);font-weight:700;letter-spacing:.04em;line-height:1}
-.wbinstructie{margin:6px 0 0;font-size:17px}
+.wbstappen{margin:10px 0 0;padding-left:22px;font-size:17px;display:grid;gap:6px}
 .wbinfo{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 16px;margin:0}
 .wbinfo dt{color:#5B6862}.wbinfo dd{margin:0}
 .wbregels{display:grid;gap:10px}
@@ -398,13 +398,11 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
       </div>
       <div class="veld2">
         <div class="field"><label for="kTel">Telefoon <small>optioneel</small></label><input type="tel" id="kTel" autocomplete="off"></div>
-        <div class="field"><label for="kBon">Bonnummer kassa</label><input type="text" id="kBon" autocomplete="off"></div>
-      </div>
-      <div class="veld2">
         <div class="field"><label for="kMedewerker">Jouw naam</label><input type="text" id="kMedewerker" autocomplete="off"></div>
-        <div class="field"><label for="kOpm">Opmerking <small>optioneel</small></label><input type="text" id="kOpm" autocomplete="off"></div>
       </div>
-      <label class="akkoord groot"><input type="checkbox" id="kBetaald"><span>De klant heeft de flessen afgerekend aan de kassa en het ontwerp gecontroleerd.</span></label>
+      <div class="field"><label for="kOpm">Opmerking <small>optioneel</small></label><input type="text" id="kOpm" autocomplete="off"></div>
+      <label class="akkoord groot"><input type="checkbox" id="kBetaald"><span>De klant heeft het ontwerp gecontroleerd en goedgekeurd.</span></label>
+      <p class="hint">Na het versturen krijg je het ordernummer. Daarna rekent de klant af aan de kassa.</p>
       <button class="btn" type="submit" id="verstuurKnop">Bestelling versturen</button>
       <p class="toast fout" id="klantFout" role="alert"></p>
     </form>
@@ -416,7 +414,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
     <p class="hint" id="klaarStatus"></p>
     <div id="werkbon" class="werkbon"></div>
     <div class="acties">
-      <button class="btn sec" type="button" onclick="print()">Werkbon printen</button>
+      <button class="btn sec" type="button" onclick="print()">Werkbon printen (optioneel)</button>
       <button class="btn" type="button" id="nieuweKlant">Nieuwe klant</button>
     </div>
   </section>
@@ -424,8 +422,8 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
 
 <footer class="uitleg"><div class="wrap">
   <div><h3>1. Ontwerp</h3><p>Kies de fles, maak samen met de klant het ontwerp en voeg het toe aan de bestelling.</p></div>
-  <div><h3>2. Kassa</h3><p>De klant rekent de fles af aan de kassa. Het graveren is gratis. Vul het bonnummer in en verstuur de bestelling.</p></div>
-  <div><h3>3. Naar de werkplaats</h3><p>Zet het ordernummer op de doos of print de werkbon, en leg de fles bij de spullen voor Utrecht. De klant haalt hem op in de winkel waar hij gekocht is.</p></div>
+  <div><h3>2. Versturen</h3><p>Vul de gegevens van de klant in en verstuur de bestelling. Je krijgt een ordernummer.</p></div>
+  <div><h3>3. Kassa</h3><p>Reken de fles af en zet het ordernummer op de kassabon. Print de bon twee keer: één voor de klant, één aan de fles. Uit Amsterdam gaat de fles daarna naar Utrecht.</p></div>
 </div></footer>
 
 <script src="opentype.min.js"></script>
@@ -1154,23 +1152,23 @@ $("klantForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const v=id=>$(id).value.trim();
   const klant={naam:v("kNaam"),email:v("kEmail"),telefoon:v("kTel"),opmerking:v("kOpm")};
-  const leeg=[["de naam van de klant","kNaam"],["het e-mailadres van de klant","kEmail"],["het bonnummer van de kassa","kBon"],["je eigen naam","kMedewerker"]].find(([,id])=>!v(id));
+  const leeg=[["de naam van de klant","kNaam"],["het e-mailadres van de klant","kEmail"],["je eigen naam","kMedewerker"]].find(([,id])=>!v(id));
   if(leeg){$("klantFout").textContent=`Vul ${leeg[0]} in.`;$(leeg[1]).focus();return;}
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("klantFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return;}
-  if(!$("kBetaald").checked){$("klantFout").textContent="Vink aan dat de klant heeft afgerekend en het ontwerp heeft gecontroleerd.";return;}
+  if(!$("kBetaald").checked){$("klantFout").textContent="Vink aan dat de klant het ontwerp heeft goedgekeurd.";return;}
   const regels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
     formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}}));
   $("verstuurKnop").disabled=true; $("verstuurKnop").textContent="Bezig met versturen…"; $("klantFout").textContent="";
   try{
     const r=await fetch(SERVER_URL+"/winkelorder",{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({pin:state.pin,winkel:state.winkel,medewerker:v("kMedewerker"),bonnummer:v("kBon"),klant,regels})});
+      body:JSON.stringify({pin:state.pin,winkel:state.winkel,medewerker:v("kMedewerker"),klant,regels})});
     const d=await r.json().catch(()=>({}));
     if(r.status===403){state.pin=null;opslag.zet("graveerweekend-pin",null);throw new Error("De pincode is niet meer geldig. Log opnieuw in; de bestelling blijft bewaard.");}
     if(!r.ok) throw new Error(d.fout||`Versturen lukte niet (fout ${r.status}).`);
-    laatsteOrder={nummer:d.nummer,winkel:state.winkel,klant,bonnummer:v("kBon"),medewerker:v("kMedewerker"),datum:new Date(),
+    laatsteOrder={nummer:d.nummer,winkel:state.winkel,klant,kassa:state.mand.reduce((t,r)=>t+r.n*r.p.prijs,0),stuks:state.mand.reduce((t,r)=>t+r.n,0),medewerker:v("kMedewerker"),datum:new Date(),
       regels:state.mand.map(r=>({n:r.n,p:r.p,c:r.gravure.c,voorbeeld:r.gravure.voorbeeld,W:r.gravure.g.W,H:r.gravure.g.H})),
       status:`De ordermail met de bestanden is verstuurd naar ${d.naar}.`};
-    state.mand=[]; mandBijwerken(); ["kNaam","kEmail","kTel","kBon","kOpm"].forEach(id=>$(id).value=""); $("kBetaald").checked=false;
+    state.mand=[]; mandBijwerken(); ["kNaam","kEmail","kTel","kOpm"].forEach(id=>$(id).value=""); $("kBetaald").checked=false;
     opslag.zet("graveerweekend-medewerker",v("kMedewerker"));
     location.hash="verstuurd";
   }catch(err){
@@ -1185,11 +1183,15 @@ function renderKlaar(){
   $("klaarStatus").textContent=o.status;
   const naarUtrecht=o.winkel!=="Utrecht";
   $("werkbon").innerHTML=`<div class="wbkop"><span class="label">Ordernummer</span><div class="wbnummer mono">${esc(o.nummer)}</div>
-      <p class="wbinstructie">${naarUtrecht?`Schrijf dit nummer op de doos of leg deze werkbon bij de fles, en stuur hem naar <strong>Utrecht</strong> om te graveren.`:`Schrijf dit nummer op de doos of leg deze werkbon bij de fles, en leg hem bij de spullen om te graveren.`}</p></div>
+      <ol class="wbstappen">
+        <li>Reken ${o.stuks===1?"de fles":`de ${o.stuks} flessen`} af aan de kassa (<span class="mono">${euro(o.kassa)}</span>, graveren gratis).</li>
+        <li>Zet ordernummer <strong class="mono">${esc(o.nummer)}</strong> op de kassabon.</li>
+        <li>Print de bon <strong>twee keer</strong>: één voor de klant, één vast aan de fles.</li>
+        <li>${naarUtrecht?`Stuur de fles met de bon naar <strong>Utrecht</strong> om te graveren.`:`Leg de fles met de bon bij de spullen om te graveren.`}</li>
+      </ol></div>
     <dl class="wbinfo">
       <dt>Retour naar</dt><dd><strong>${esc(o.winkel)}</strong> (klant haalt op)</dd>
       <dt>Klant</dt><dd>${esc(o.klant.naam)}${o.klant.telefoon?` · ${esc(o.klant.telefoon)}`:""}</dd>
-      <dt>Bonnummer</dt><dd class="mono">${esc(o.bonnummer)}</dd>
       <dt>Opgenomen</dt><dd>${esc(o.medewerker)}, ${o.datum.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}</dd>
       ${o.klant.opmerking?`<dt>Opmerking</dt><dd>${esc(o.klant.opmerking)}</dd>`:""}
     </dl>
