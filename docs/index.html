@@ -305,6 +305,7 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <button class="chip" data-merk="" aria-pressed="true">Alle merken</button>
         <button class="chip" data-merk="Stanley" aria-pressed="false">Stanley</button>
         <button class="chip" data-merk="Klean Kanteen" aria-pressed="false">Klean Kanteen</button>
+        <button class="chip" data-merk="Rubytec" aria-pressed="false">Rubytec</button>
       </div>
       <div class="filters" role="group" aria-label="Soort" id="soortFilter"></div>
       <label class="klein alleswissel"><input type="checkbox" id="ookElders"> Ook artikelen zonder voorraad in deze winkel</label>
@@ -820,7 +821,12 @@ const MODELLEN = [
   [/tkwide 355/i, "tkwide", {D:76,H:184}, "K"],
   [/tkwide/i, "tkwide", {D:76,H:220}, "K"],
   [/lowball/i, "lowball", {D:85,H:98}, "F"],
-  [/mok met flip/i, "kkmug", {D:97,H:99}, "K"]
+  [/mok met flip/i, "kkmug", {D:97,H:99}, "K"],
+  // Rubytec: geschat; zodra kathmandu.nl afmetingen geeft, worden die gebruikt (zie vindModel)
+  [/rubytec.*vacuum bottle 1000/i, "legendary", {D:90,H:300}, "G"],
+  [/rubytec.*vacuum bottle/i, "legendary", {D:74,H:250}, "G"],
+  [/rubytec.*cool drink bottle/i, "kkloop", {D:72,H:240}, "G"],
+  [/rubytec.*food container/i, "foodjar", {D:90,H:140}, "G"]
 ];
 const BRONNEN={S:"Stanley",K:"Klean Kanteen",KN:"kathmandu.nl",F:"fabrikant en foto",G:"geschat"};
 /* Graveervlak in mm, afgeleid uit het rechte deel van de fles in de tekening. */
@@ -865,8 +871,9 @@ const SOORT_PER_VORM={kkclassic:"water",kkloop:"water",iceflow:"water",
 const EXTRA_SOORT=[[/isolatiefles classic met ringdop/i,"thermos"],[/transit fliptop/i,"thermos"],[/caf.-to-go/i,"thermos"],[/tkwide/i,"thermos"]];
 const soortenVan=(vorm,naam)=>[SOORT_PER_VORM[vorm]||"overig",...EXTRA_SOORT.filter(([re])=>re.test(naam||"")).map(([,k])=>k)];
 function vindModel(naam, afm){
-  for(const [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
+  for(let [re,vorm,maat,bron] of MODELLEN) if(re.test(naam)){
     const m={...maat};
+    if(bron==="G"&&afm&&afm.d&&afm.h){m.D=afm.d;m.H=afm.h;bron="KN";}
     return {vorm,maat:m,zone:graveervlakVan(vorm,m),maatBron:BRONNEN[bron]||bron,opspanning:opspanning(vorm,m)};
   }
   // onbekend model: maat van kathmandu.nl als die er is, anders een standaardbeker
@@ -1249,11 +1256,13 @@ function kleurHex(n){
   return "#5B6862";
 }
 
+// artikelen die niet in de tool horen
+const UITSLUITEN=[/legendary classic bottle 1,4/i];
 function vanJson(data){
-  return data.producten.filter(p=>p.voorraad>0 && p.bestelcode).map(p=>{
+  return data.producten.filter(p=>p.voorraad>0 && p.bestelcode && !UITSLUITEN.some(re=>re.test(p.naam||""))).map(p=>{
     const volledig=(p.naam||"").replace(new RegExp("^"+p.merk+"\\s*"),"").replace(/\s+/g," ");
     const m=volledig.match(/^(.*?\d+(?:,\d+)?\s?(?:ml|l|L|oz)\b(?:\/\d+oz)?)\s*(.*)$/);
-    let naam=m?m[1]:volledig, kleur=m&&m[2]?m[2]:(p.kleur||"");
+    let naam=m?m[1]:volledig, kleur=(m&&m[2]?m[2]:(p.kleur||"")).replace(/^[.,\s]+/,"");
     const met=kleur.match(/^(met \S+?,?)\s+(.+)$/i);   // 'met koffiedop Black' -> dop bij de naam
     if(met){naam+=" "+met[1].replace(/,$/,"");kleur=met[2];}
     const md=vindModel(volledig,p.afmetingen_mm), gemeten=p.graveervlak_foto||null;

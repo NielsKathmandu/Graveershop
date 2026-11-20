@@ -66,6 +66,11 @@ def test_graveerbaar():
     assert is_graveerbaar("Stanley The Transit Fliptop Mug 0,47L Ash")
     assert not is_graveerbaar("Klean Kanteen Rise Ach Loop Cap Black")
     assert not is_graveerbaar("Klean Kanteen Sportdop (voor classic flessen) Black")
+    assert not is_graveerbaar("Rubytec Shira Screw Stopper Vac. Bottle 1L Black")
+    assert not is_graveerbaar("Rubytec Shira drinking cap cool drink Black")
+    assert is_graveerbaar("Rubytec Vacuum Bottle 500ml Dark grey")
+    assert is_graveerbaar("Rubytec Cool Drink Bottle 550ml. Red")
+    assert is_graveerbaar("Rubytec Food Container 500ml Grijs/oranje")
 
 
 if __name__ == "__main__":

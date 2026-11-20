@@ -31,6 +31,7 @@ BASIS = "https://www.kathmandu.nl"
 MERKPAGINAS = {
     "Stanley": f"{BASIS}/uitrusting/drinkflessen-en-thermosflessen/stanley",
     "Klean Kanteen": f"{BASIS}/uitrusting/drinkflessen-en-thermosflessen/klean-kanteen",
+    "Rubytec": f"{BASIS}/uitrusting/drinkflessen-en-thermosflessen/rubytec",
 }
 WINKELS = ("Amsterdam", "Utrecht")
 
@@ -237,6 +238,8 @@ def is_graveerbaar(naam: str) -> bool:
         return False
     n = naam.lower()
     if re.search(r"\bvoor (classic|tk|rise)", n):  # 'Sportdop (voor classic flessen)'
+        return False
+    if re.search(r"\b(stopper|drinking cap)\b", n):  # 'Rubytec Shira Screw Stopper Vac. Bottle 1L'
         return False
     is_onderdeel = re.search(r"(dop|cap|deksel|spork|rietje|straw)\b", n)
     is_fles = re.search(r"\bmet\b", n) or re.search(r"\b(bottle|mug|jar|flask)\b", n)
