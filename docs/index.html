@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kathmandu Graveershop</title>
+<title>Kathmandu Graveerweekend</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -229,33 +229,83 @@ footer.uitleg .voetlinks{margin-top:8px}
 .bedrijf{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 16px;font-size:15px}
 .bedrijf dt{color:var(--muted)}.bedrijf dd{margin:0}
 footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color:var(--muted);font-size:15px}
+/* personeelstool */
+.pinscherm{min-height:70vh;display:grid;place-items:center;padding-block:40px}
+.pinkaart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px;width:min(440px,100%);display:grid;gap:14px}
+.pinkaart h1{font-size:34px}
+.pinkaart input{font-size:24px;letter-spacing:.3em;text-align:center;width:100%}
+.winkelkeuze{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chip.groot{min-height:56px;font-size:17px;border-radius:8px}
+.zoek{flex:1 1 260px;min-height:46px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px 12px;font:inherit;color:inherit}
+.alleswissel{display:flex;gap:6px;align-items:center;color:var(--muted)}
+.klein{font-size:13px}
+.card .mono.klein{color:var(--muted)}
+.winkelknop{cursor:pointer;background:var(--surface)}
+.mandlijst{display:grid;gap:12px}
+.ph.wit{background:#fff}
+.formkop{font-size:22px}
+.akkoord.groot{font-size:16px;padding:10px;border:1px solid var(--line);border-radius:6px}
+.akkoord.groot input{width:22px;height:22px;flex:none}
+.afrekenform input[type=text]{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:9px 10px;font:inherit;color:inherit}
+.werkbon{background:#fff;color:#17201C;border:2px solid #17201C;border-radius:8px;padding:20px;display:grid;gap:14px;max-width:760px}
+.wbnummer{font-size:clamp(38px,8vw,64px);font-weight:700;letter-spacing:.04em;line-height:1}
+.wbinstructie{margin:6px 0 0;font-size:17px}
+.wbinfo{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 16px;margin:0}
+.wbinfo dt{color:#5B6862}.wbinfo dd{margin:0}
+.wbregels{display:grid;gap:10px}
+.wbregel{border-top:1px solid #D3DAD5;padding-top:10px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center}
+.wbregel img{width:100%;border:1px solid #D3DAD5;border-radius:4px}
+.acties{display:flex;gap:10px;flex-wrap:wrap}
+@media print{header.top,footer.uitleg,.acties,#klaarStatus,#vKlaar>h1{display:none!important}body{background:#fff}.werkbon{border:0;padding:0;max-width:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
 <header class="top"><div class="wrap">
-  <a class="brand" href="#">KATHMANDU <span>GRAVEERWERK</span></a>
+  <a class="brand" href="#">KATHMANDU <span>GRAVEERWEEKEND</span></a>
   <div class="topright">
-    <a class="bonlink" href="#winkelmand">Winkelmand <span class="n" id="bonN">0</span></a>
+    <button class="bonlink winkelknop" type="button" id="winkelKnop" title="Winkel wisselen"></button>
+    <a class="bonlink" href="#bestelling">Bestelling <span class="n" id="bonN">0</span></a>
   </div>
 </div></header>
 
 <main>
+  <!-- inloggen: pincode + winkel -->
+  <section id="vPin" class="wrap pinscherm" hidden>
+    <div class="pinkaart">
+      <span class="label">Alleen voor medewerkers</span>
+      <h1>Graveerweekend</h1>
+      <form id="pinForm" class="form" novalidate>
+        <div class="field"><label for="pinCode">Pincode</label><input type="password" id="pinCode" inputmode="numeric" autocomplete="off" maxlength="12"></div>
+        <div class="field"><span class="lbl">In welke winkel sta je?</span>
+          <div class="winkelkeuze" role="group" aria-label="Winkel">
+            <button type="button" class="chip groot" data-winkel="Amsterdam" aria-pressed="false">Amsterdam</button>
+            <button type="button" class="chip groot" data-winkel="Utrecht" aria-pressed="false">Utrecht</button>
+          </div>
+        </div>
+        <button class="btn" type="submit" id="pinKnop">Starten</button>
+        <p class="toast fout" id="pinFout" role="alert"></p>
+      </form>
+    </div>
+  </section>
+
   <!-- overzicht -->
-  <div id="vOverzicht" class="wrap">
+  <div id="vOverzicht" class="wrap" hidden>
     <div class="intro">
-      <span class="demo">Proof of concept</span>
-      <h1>Personaliseer waterflessen of thermosflessen voor een uniek cadeau, of natuurlijk voor jezelf</h1>
-      <p>Voor relatiegeschenken, personeelscadeaus en december. Kies een fles en stel op de productpagina je gravure samen. Je bestelt alleen wat in onze winkels op voorraad is.</p>
+      <span class="demo">Graveerweekend · graveren gratis</span>
+      <h1>Kies samen met de klant een fles</h1>
+      <p>Zoek op naam of scan/typ de bestelcode van het etiket. Daarna maak je op de productpagina het ontwerp. De klant rekent de fles af aan de kassa; het graveren is gratis.</p>
     </div>
     <div class="toolbar">
+      <input type="search" id="zoek" class="zoek" placeholder="Zoek op naam, kleur of bestelcode" aria-label="Zoeken" autocomplete="off">
       <div class="filters" role="group" aria-label="Merk">
         <button class="chip" data-merk="" aria-pressed="true">Alle merken</button>
         <button class="chip" data-merk="Stanley" aria-pressed="false">Stanley</button>
         <button class="chip" data-merk="Klean Kanteen" aria-pressed="false">Klean Kanteen</button>
       </div>
       <div class="filters" role="group" aria-label="Soort" id="soortFilter"></div>
+      <label class="klein alleswissel"><input type="checkbox" id="ookElders"> Ook artikelen zonder voorraad in deze winkel</label>
       <span class="count" id="count"></span>
     </div>
     <div class="grid" id="grid"></div>
@@ -277,29 +327,15 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <div class="bigprijs" id="pPrijs"></div>
         <div id="pStock"></div>
         <div class="varianten" id="varianten"></div>
-        <div class="koop">
-          <label class="lbl" for="pAantal">Aantal</label>
-          <input type="number" id="pAantal" min="1" value="1" inputmode="numeric">
-          <div class="koopknoppen">
-            <button class="btn" type="button" id="pToevoegen">Toevoegen zonder gravure</button>
-            <button class="btn" type="button" id="naarTool" onclick="document.getElementById('graveren').scrollIntoView({behavior:'smooth'})">Liever gepersonaliseerd? Ga naar ontwerpen</button>
-          </div>
-        </div>
-        <p class="toast" id="pToast" role="status"></p>
+        <button class="btn" type="button" id="naarTool" onclick="document.getElementById('graveren').scrollIntoView({behavior:'smooth'})">Ontwerp maken</button>
         <dl class="feiten" id="feiten"></dl>
       </div>
     </div>
 
-    <section class="omschrijving" id="omschrijving" aria-labelledby="omsKop" hidden>
-      <h2 id="omsKop">Over dit product</h2>
-      <div class="oms-tekst" id="omsTekst"></div>
-      <p class="hint">Productinformatie van kathmandu.nl</p>
-    </section>
-
     <section class="tafel" id="graveren" aria-labelledby="tafelKop">
       <header>
         <span class="label">Graveertafel</span>
-        <h2 id="tafelKop">Stel je gravure samen</h2>
+        <h2 id="tafelKop">Maak het ontwerp met de klant</h2>
         <p id="tZone"></p>
       </header>
       <div class="werkblad">
@@ -307,11 +343,11 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
         <form class="form" id="form">
           <div class="field">
             <label for="r1">Regel 1 <small id="c1">0/20</small></label>
-            <input type="text" id="r1" maxlength="20" value="Sanne">
+            <input type="text" id="r1" maxlength="20" placeholder="Bijvoorbeeld een naam" autocomplete="off">
           </div>
           <div class="field">
             <label for="r2">Regel 2 <small id="c2">0/28</small></label>
-            <input type="text" id="r2" maxlength="28" value="Fijne feestdagen 2026">
+            <input type="text" id="r2" maxlength="28" placeholder="Bijvoorbeeld een datum of korte tekst" autocomplete="off">
           </div>
           <div class="field">
             <span class="lbl">Lettertype</span>
@@ -335,180 +371,59 @@ footer.uitleg h3{font-size:17px;margin-bottom:6px}footer.uitleg p{margin:0;color
             <p class="hint" id="logoHint">Gebruik bij voorkeur een logo in één kleur op een witte of transparante achtergrond. Alles wat donker is, wordt gegraveerd.</p>
           </div>
           <div class="field">
-            <label for="aantal">Aantal <small id="max"></small></label>
+            <label for="aantal">Aantal flessen met dit ontwerp</label>
             <input type="number" id="aantal" min="1" value="1" inputmode="numeric">
           </div>
           <div class="som" id="som"></div>
-          <button class="btn" type="submit">Toevoegen aan winkelmand</button>
-          <p class="hint">Gegraveerde artikelen maken we speciaal voor jou. Je kunt ze daarom niet retourneren (<a href="#voorwaarden">voorwaarden</a>, art. 7).</p>
+          <button class="btn" type="submit">Toevoegen aan bestelling</button>
+          <p class="hint">Laat de klant het voorbeeld controleren: we graveren precies wat hier staat. Gegraveerde artikelen kunnen niet worden geretourneerd.</p>
           <p class="toast" id="toast" role="status"></p>
         </form>
       </div>
     </section>
   </div>
 
-  <!-- winkelmand -->
+  <!-- bestelling: overzicht + klantgegevens -->
   <section id="vMand" class="wrap bonnen" hidden>
-    <nav class="crumbs"><a href="#">← Verder winkelen</a></nav>
-    <h1>Winkelmand</h1>
+    <nav class="crumbs"><a href="#">← Nog een fles toevoegen</a></nav>
+    <h1>Bestelling</h1>
     <div id="mand"></div>
+    <form id="klantForm" class="form afrekenform" novalidate hidden>
+      <h2 class="formkop">Gegevens van de klant</h2>
+      <div class="veld2">
+        <div class="field"><label for="kNaam">Naam</label><input type="text" id="kNaam" autocomplete="off"></div>
+        <div class="field"><label for="kEmail">E-mailadres</label><input type="email" id="kEmail" autocomplete="off" inputmode="email"></div>
+      </div>
+      <div class="veld2">
+        <div class="field"><label for="kTel">Telefoon <small>optioneel</small></label><input type="tel" id="kTel" autocomplete="off"></div>
+        <div class="field"><label for="kBon">Bonnummer kassa</label><input type="text" id="kBon" autocomplete="off"></div>
+      </div>
+      <div class="veld2">
+        <div class="field"><label for="kMedewerker">Jouw naam</label><input type="text" id="kMedewerker" autocomplete="off"></div>
+        <div class="field"><label for="kOpm">Opmerking <small>optioneel</small></label><input type="text" id="kOpm" autocomplete="off"></div>
+      </div>
+      <label class="akkoord groot"><input type="checkbox" id="kBetaald"><span>De klant heeft de flessen afgerekend aan de kassa en het ontwerp gecontroleerd.</span></label>
+      <button class="btn" type="submit" id="verstuurKnop">Bestelling versturen</button>
+      <p class="toast fout" id="klantFout" role="alert"></p>
+    </form>
   </section>
-  <!-- afrekenen -->
-  <section id="vAfrekenen" class="wrap bonnen" hidden>
-    <nav class="crumbs"><a href="#winkelmand">← Terug naar winkelmand</a></nav>
-    <h1>Afrekenen</h1>
-    <div class="afreken">
-      <form id="afrekenForm" class="form afrekenform" novalidate>
-        <div class="veld2">
-          <div class="field"><label for="kNaam" id="lNaam">Naam</label><input type="text" id="kNaam" autocomplete="name" required></div>
-          <div class="field"><label for="kBedrijf">Bedrijfsnaam <small>optioneel</small></label><input type="text" id="kBedrijf" autocomplete="organization"></div>
-        </div>
-        <div class="veld2">
-          <div class="field"><label for="kEmail">E-mailadres</label><input type="email" id="kEmail" autocomplete="email" required></div>
-          <div class="field"><label for="kTel">Telefoon <small>optioneel</small></label><input type="tel" id="kTel" autocomplete="tel"></div>
-        </div>
-        <h2 class="label" id="lAdres" hidden style="margin:10px 0 0"></h2>
-        <div class="cadeauadres" id="cadeauAdres" hidden>
-          <p class="hint" style="margin:0 0 8px">Je bestelling gaat ingepakt als cadeau en zonder factuur naar dit adres. De factuur en de bevestiging mailen we naar jou.</p>
-          <div class="field"><label for="kOntvanger">Naam ontvanger</label><input type="text" id="kOntvanger" autocomplete="shipping name"></div>
-        </div>
-        <div class="field"><label for="kStraat">Straat en huisnummer</label><input type="text" id="kStraat" autocomplete="street-address" required></div>
-        <div class="veld3">
-          <div class="field"><label for="kPostcode">Postcode</label><input type="text" id="kPostcode" autocomplete="postal-code" required></div>
-          <div class="field"><label for="kPlaats">Plaats</label><input type="text" id="kPlaats" autocomplete="address-level2" required></div>
-          <div class="field"><label for="kLand">Land</label><select id="kLand" autocomplete="country-name"><option>Nederland</option><option>België</option></select></div>
-        </div>
-        <div class="field"><label for="kOpm">Opmerking <small>optioneel</small></label><textarea id="kOpm" rows="2"></textarea></div>
-        <label class="akkoord"><input type="checkbox" id="kAkkoord"><span>Ik ga akkoord met de <a href="#voorwaarden" target="_blank">algemene voorwaarden</a> en heb de <a href="#privacy" target="_blank">privacyverklaring</a> gelezen.</span></label>
-        <p class="maatwerk" id="maatwerkMelding" hidden>Je bestelling bevat gegraveerde artikelen. Die maken we speciaal voor jou; je kunt ze daarom niet retourneren of ruilen.</p>
-        <button class="btn" type="submit" id="betaalKnop">Betalen</button>
-        <button class="btn testknop" type="button" id="testKnop" hidden>Testbetaling (er wordt niets afgeschreven)</button>
-        <p class="toast fout" id="afrekenFout" role="alert"></p>
-        <p class="hint">Je betaalt veilig via Buckaroo met iDEAL/Wero, creditcard of Bancontact.</p>
-      </form>
-      <aside class="samenvatting" id="samenvatting"></aside>
+
+  <!-- verstuurd: ordernummer + werkbon -->
+  <section id="vKlaar" class="wrap bonnen" hidden>
+    <h1>Bestelling verstuurd</h1>
+    <p class="hint" id="klaarStatus"></p>
+    <div id="werkbon" class="werkbon"></div>
+    <div class="acties">
+      <button class="btn sec" type="button" onclick="print()">Werkbon printen</button>
+      <button class="btn" type="button" id="nieuweKlant">Nieuwe klant</button>
     </div>
   </section>
-
-  <section id="vBedankt" class="wrap bonnen" hidden>
-    <h1>Bedankt voor je bestelling</h1>
-    <p class="testmelding" id="testBedankt" hidden>Dit was een <strong>testbetaling</strong>: er is niets afgeschreven. De ordermail met de SVG en de voorbeeldafbeelding is verstuurd naar niels@kathmandu.nl.</p>
-    <p>We hebben je betaling ontvangen. Je krijgt een bevestiging per e-mail. Bestellingen tot en met 3 stuks verzenden we binnen 3 werkdagen; bij grotere bestellingen nemen we binnen 2 werkdagen contact met je op over de levertijd.</p>
-    <p><a class="btn" href="#">Verder winkelen</a></p>
-  </section>
-  <section id="vTestorder" class="wrap bonnen" hidden>
-    <h1>Testorder geplaatst</h1>
-    <p class="testmelding">Dit was een <strong>testbetaling</strong>: er is niets afgeschreven.</p>
-    <p class="hint" id="testMailStatus"></p>
-    <div id="testOrder"></div>
-    <p><a class="btn" href="#">Verder winkelen</a></p>
-  </section>
-  <section id="vMislukt" class="wrap bonnen" hidden>
-    <h1>De betaling is niet gelukt</h1>
-    <p>Er is niets afgeschreven. Je winkelmand staat nog voor je klaar.</p>
-    <p><a class="btn" href="#afrekenen">Opnieuw proberen</a></p>
-  </section>
-  <!-- algemene voorwaarden -->
-  <section id="vVoorwaarden" class="wrap juridisch" hidden>
-    <nav class="crumbs"><a href="#">← Verder winkelen</a></nav>
-    <h1>Algemene voorwaarden</h1>
-    <p class="hint">Kathmandu Graveerwerk · versie 30 oktober 2026</p>
-
-    <h2>1. Wie wij zijn</h2>
-    <p>Kathmandu Graveerwerk is een webwinkel van Glencoe B.V., handelend onder de naam Kathmandu Outdoor &amp; Travel.</p>
-    <dl class="bedrijf">
-      <dt>Bedrijfsnaam</dt><dd>Glencoe B.V.</dd>
-      <dt>Adres</dt><dd>Oudegracht 256-264, 3511 NV Utrecht (vestigings- en bezoekadres)</dd>
-      <dt>KvK-nummer</dt><dd>30166640</dd>
-      <dt>Btw-nummer</dt><dd>8089.72.108 B01</dd>
-      <dt>E-mail</dt><dd>webshop@kathmandu.nl</dd>
-      <dt>Telefoon</dt><dd>030-3030047 (tijdens openingstijden van de winkel)</dd>
-    </dl>
-
-    <h2>2. Toepasselijkheid</h2>
-    <p>Deze voorwaarden gelden voor elke bestelling via Kathmandu Graveerwerk. Door een bestelling te plaatsen sluit je een koopovereenkomst op afstand met Glencoe B.V. Wij mogen een bestelling weigeren of annuleren, bijvoorbeeld als het artikel niet meer op voorraad is of als de gewenste gravure niet aan artikel 6 voldoet. Je hoort dat dan zo snel mogelijk van ons en krijgt een eventuele betaling volledig terug.</p>
-
-    <h2>3. Prijzen</h2>
-    <p>Alle prijzen zijn in euro's en inclusief btw. De prijs van het artikel en de prijs van het graveren staan apart vermeld. Graveren kost € 7,50 per stuk, vanaf 10 stuks per bestelregel € 5,00 per stuk en vanaf 25 stuks € 4,00 per stuk. Kennelijke vergissingen in prijzen of omschrijvingen binden ons niet.</p>
-
-    <h2>4. Betalen</h2>
-    <p>Je betaalt vooraf. De betaling verloopt via onze betaalprovider Buckaroo. Je kunt kiezen uit de betaalmethoden die op de betaalpagina worden getoond, zoals iDEAL/Wero, creditcard en Bancontact. Wij starten met graveren nadat de betaling is ontvangen.</p>
-
-    <h2>5. Levering en levertijd</h2>
-    <ul>
-      <li>Bestellingen van in totaal 1 tot en met 3 stuks verzenden wij binnen 3 werkdagen na ontvangst van de betaling.</li>
-      <li>Voor bestellingen vanaf 4 stuks stemmen wij de levertijd met je af. Je ontvangt binnen 2 werkdagen na je bestelling een voorstel. Past die levertijd je niet, dan kun je de bestelling kosteloos annuleren.</li>
-      <li>Wij verzenden met PostNL. Binnen Nederland is verzenden gratis vanaf € 30; daaronder rekenen we € 4,95. Verzenden naar het buitenland kost minimaal € 7,95.</li>
-      <li>Kies je voor cadeauverpakking (€ 2,95 per bestelling), dan pakken wij de bestelling in als cadeau en sturen wij hem zonder factuur naar het adres van de ontvanger. De factuur ontvang je per e-mail.</li>
-      <li>Wij leveren uiterlijk binnen 30 dagen. Lukt dat niet, dan mag je de bestelling kosteloos ontbinden.</li>
-    </ul>
-
-    <h2>6. Gravure: jouw tekst en logo</h2>
-    <ul>
-      <li>Wij graveren de tekst, het symbool of het logo precies zoals jij het in de graveertool hebt ingevoerd en gezien. Controleer spelling en vormgeving daarom goed voordat je bestelt.</li>
-      <li>Het voorbeeld in de graveertool is een weergave op schaal. Kleur, glans en exacte plaats van de gravure kunnen op het echte product iets afwijken, onder andere door de ronding van de fles.</li>
-      <li>Je verklaart dat je het recht hebt om een geüpload logo of beeldmerk te gebruiken. Je vrijwaart ons voor aanspraken van derden, bijvoorbeeld over merk- of auteursrecht.</li>
-      <li>Wij mogen een gravure weigeren als de tekst of het logo beledigend, discriminerend, bedreigend of anderszins aanstootgevend is, inbreuk maakt op rechten van anderen, of technisch niet goed te graveren is. Wij nemen dan contact met je op; zo nodig annuleren wij de bestelling en betalen we het volledige bedrag terug.</li>
-    </ul>
-
-    <h2>7. Bedenktijd en retourneren</h2>
-    <p><strong>Gegraveerde artikelen kun je niet retourneren.</strong> Een gegraveerd artikel wordt volgens jouw specificaties gemaakt. Daarom geldt hiervoor geen herroepingsrecht (artikel 7:46d lid 4 onder c Burgerlijk Wetboek). Dat melden wij ook in de graveertool en bij het afrekenen, voordat je bestelt.</p>
-    <p>Artikelen <strong>zonder gravure</strong> mag je binnen 14 dagen na ontvangst zonder opgave van reden retourneren. Het artikel moet ongebruikt en onbeschadigd zijn en in de originele verpakking zitten. Meld je retour via webshop@kathmandu.nl. De kosten van het terugsturen zijn voor jou; terugbrengen in onze winkels in Utrecht of Amsterdam is gratis. Wij betalen het aankoopbedrag binnen 14 dagen na ontvangst van de retour terug.</p>
-
-    <h2>8. Verkeerde of beschadigde levering</h2>
-    <p>Ontvang je een verkeerd, beschadigd of onjuist gegraveerd artikel, meld dit dan binnen 14 dagen via webshop@kathmandu.nl, het liefst met een foto. Ligt de fout bij ons, dan maken of sturen wij kosteloos een nieuw artikel of betalen wij je terug.</p>
-
-    <h2>9. Garantie</h2>
-    <p>Op de artikelen geldt de garantie van de fabrikant. Wij treden op als servicepunt. Schade die is ontstaan door het graveren valt onder onze eigen verantwoordelijkheid volgens artikel 8.</p>
-
-    <h2>10. Privacy</h2>
-    <p>Wij gebruiken je gegevens alleen om je bestelling te verwerken. Lees hierover meer in onze <a href="#privacy">privacyverklaring</a>.</p>
-
-    <h2>11. Klachten en geschillen</h2>
-    <p>Heb je een klacht, laat het ons dan weten via webshop@kathmandu.nl; wij reageren binnen 14 dagen. Komen we er samen niet uit, dan kun je het geschil voorleggen aan de Geschillencommissie In Retail. Op alle overeenkomsten is Nederlands recht van toepassing.</p>
-
-    <h2>12. Intellectueel eigendom</h2>
-    <p>Teksten, afbeeldingen en ontwerpen op deze website zijn van Kathmandu of van de betreffende merken en mogen niet zonder schriftelijke toestemming worden overgenomen.</p>
-  </section>
-
-  <!-- privacyverklaring -->
-  <section id="vPrivacy" class="wrap juridisch" hidden>
-    <nav class="crumbs"><a href="#">← Verder winkelen</a></nav>
-    <h1>Privacyverklaring</h1>
-    <p class="hint">Kathmandu Graveerwerk · versie 30 oktober 2026</p>
-    <p>Glencoe B.V. (handelend als Kathmandu Outdoor &amp; Travel), Oudegracht 256-264, 3511 NV Utrecht, is verantwoordelijk voor de verwerking van je persoonsgegevens via Kathmandu Graveerwerk. Wij gaan zorgvuldig met je gegevens om, verkopen ze niet en maken ze niet openbaar.</p>
-
-    <h2>Welke gegevens en waarvoor</h2>
-    <ul>
-      <li><strong>Bestellen:</strong> naam, adres, e-mailadres, telefoonnummer, eventueel bedrijfsnaam, je bestelling en de tekst of het logo dat je laat graveren. Wij gebruiken dit om je bestelling te maken, te verzenden en met je te communiceren.</li>
-      <li><strong>Betalen:</strong> de betaling verloopt via Buckaroo. Wij ontvangen geen bank- of creditcardgegevens, alleen of de betaling gelukt is.</li>
-      <li><strong>Boekhouding:</strong> wij bewaren bestel- en factuurgegevens 7 jaar, zoals de wet voorschrijft.</li>
-    </ul>
-
-    <h2>Met wie wij gegevens delen</h2>
-    <ul>
-      <li>Buckaroo, voor de betaling.</li>
-      <li>PostNL, voor de bezorging. PostNL gebruikt je e-mailadres om je over de bezorging te informeren.</li>
-      <li>Onze dienstverleners voor hosting en e-mail, die de gegevens alleen in onze opdracht verwerken.</li>
-    </ul>
-
-    <h2>Cookies en websitegegevens</h2>
-    <p>Kathmandu Graveerwerk gebruikt geen tracking- of marketingcookies. Je winkelmand staat alleen in je eigen browser. Voor de lettertypen laden wij bestanden van Google Fonts; daarbij ziet Google je IP-adres.</p>
-
-    <h2>Beveiliging</h2>
-    <p>Wij beveiligen je gegevens passend bij hun gevoeligheid. Bestellingen worden alleen versleuteld verstuurd.</p>
-
-    <h2>Jouw rechten</h2>
-    <p>Je mag je gegevens inzien, laten corrigeren of laten verwijderen, voor zover wij ze niet wettelijk moeten bewaren. Stuur hiervoor een e-mail naar webshop@kathmandu.nl. Ben je het niet eens met hoe wij met je gegevens omgaan, dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens.</p>
-  </section>
-
 </main>
 
 <footer class="uitleg"><div class="wrap">
-  <div><h3>Levertijd</h3><p>Bestellingen tot en met 3 stuks verzenden we binnen 3 werkdagen. Vanaf 4 stuks stemmen we de levertijd met je af. Gratis verzending vanaf € 30.</p></div>
-  <div><h3>Gravure is maatwerk</h3><p>Gegraveerde artikelen maken we speciaal voor jou en kun je daarom niet retourneren. Zonder gravure heb je 14 dagen bedenktijd.</p></div>
-  <div><h3>Kathmandu Outdoor &amp; Travel</h3><p>Glencoe B.V. · Oudegracht 256-264, 3511 NV Utrecht · KvK 30166640 · btw 8089.72.108 B01 · webshop@kathmandu.nl · 030-3030047</p>
-    <p class="voetlinks"><a href="#voorwaarden">Algemene voorwaarden</a> · <a href="#privacy">Privacyverklaring</a></p></div>
+  <div><h3>1. Ontwerp</h3><p>Kies de fles, maak samen met de klant het ontwerp en voeg het toe aan de bestelling.</p></div>
+  <div><h3>2. Kassa</h3><p>De klant rekent de fles af aan de kassa. Het graveren is gratis. Vul het bonnummer in en verstuur de bestelling.</p></div>
+  <div><h3>3. Naar de werkplaats</h3><p>Zet het ordernummer op de doos of print de werkbon, en leg de fles bij de spullen voor Utrecht. De klant haalt hem op in de winkel waar hij gekocht is.</p></div>
 </div></footer>
 
 <script src="opentype.min.js"></script>
@@ -589,10 +504,10 @@ function silhouet(p, gravure){
 }
 const euro = n => "€ " + n.toFixed(2).replace(".", ",");
 const voorraad = p => p.ams + p.utr;
-function graveerPrijs(n){ return n>=25?4:n>=10?5:7.5; }
+const hier = p => state.winkel==="Utrecht" ? p.utr : p.ams;
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-const state = {sel:null, font:"strak", motif:"ster", merk:"", soort:"", foto:0, mand:[]};
+const state = {sel:null, font:"strak", motif:"ster", merk:"", soort:"", zoek:"", ookElders:false, foto:0, mand:[], winkel:null, pin:null};
 const fonts = {};
 function b64buf(b){const s=atob(b),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u.buffer;}
 for (const [k,f] of Object.entries(FONTDATA)) {
@@ -964,16 +879,21 @@ const titel=document.title;
 
 /* ---------- overzicht ---------- */
 function renderGrid(){
-  const lijst=PRODUCTEN.filter(p=>(!state.merk||p.merk===state.merk)&&(!state.soort||p.soorten.includes(state.soort)));
+  const z=state.zoek.toLowerCase().trim();
+  const lijst=PRODUCTEN.filter(p=>(!state.merk||p.merk===state.merk)&&(!state.soort||p.soorten.includes(state.soort))&&(state.ookElders||hier(p)>0)
+    &&(!z||(p.code+" "+p.merk+" "+p.naam+" "+p.kleur).toLowerCase().includes(z)));
   $("count").textContent=`${lijst.length} ${lijst.length===1?"artikel":"artikelen"}`;
   $("grid").innerHTML=lijst.map(p=>{
-    const v=voorraad(p);
+    const v=hier(p);
     return `<a class="card" href="#p-${p.code}">
       <div class="ph">${foto(p,p.fotos[0])}</div>
       <div class="info"><span class="merk">${esc(p.merk)}</span><span class="naam">${esc(p.naam)}</span><span class="kleur">${esc(p.kleur)}</span><span></span>
-      <div class="row"><span class="prijs">${euro(p.prijs)}</span><span class="stock${v<=2?" laag":""}">${v<=2?"Nog "+v:v+" op voorraad"}</span></div></div></a>`;
+      <div class="row"><span class="prijs">${euro(p.prijs)}</span><span class="stock${v<=1?" laag":""}">${v} in ${esc(state.winkel||"")}</span></div><span class="mono klein">${p.code}</span></div></a>`;
   }).join("");
 }
+$("zoek").addEventListener("input",e=>{state.zoek=e.target.value;renderGrid();
+  const exact=PRODUCTEN.find(p=>p.code===state.zoek.trim()); if(exact) location.hash="p-"+exact.code;});
+$("ookElders").onchange=e=>{state.ookElders=e.target.checked;renderGrid();};
 document.querySelectorAll(".chip[data-merk]").forEach(c=>c.onclick=()=>{state.merk=c.dataset.merk;document.querySelectorAll(".chip[data-merk]").forEach(x=>x.setAttribute("aria-pressed",x===c));renderGrid();});
 function renderSoortFilter(){
   const aanwezig=Object.keys(SOORTEN).filter(k=>PRODUCTEN.some(p=>p.soorten.includes(k)));
@@ -984,29 +904,24 @@ function renderSoortFilter(){
 
 /* ---------- productpagina ---------- */
 function renderProduct(){
-  const p=state.sel, v=voorraad(p);
+  const p=state.sel, v=hier(p);
   document.title=`${p.merk} ${p.naam} ${p.kleur} | ${titel}`;
   $("crumbMerk").textContent=`${p.merk} · ${p.naam}`;
   $("pMerk").textContent=p.merk; $("pNaam").textContent=p.naam; $("pKleur").textContent=p.kleur;
   $("mMerk").textContent=p.merk; $("mNaam").textContent=p.naam; $("mKleur").textContent=p.kleur;
   const vp=$("vProduct"); vp.classList.remove("binnen"); void vp.offsetWidth; vp.classList.add("binnen");
-  $("pPrijs").textContent=euro(p.prijs);
-  $("pStock").innerHTML=`<span class="stock${v<=2?" laag":""}">${v<=2?"Nog "+v+" op voorraad":v+" op voorraad"}</span>`;
+  $("pPrijs").innerHTML=`${euro(p.prijs)} <span class="hint">aan de kassa · graveren gratis</span>`;
+  $("pStock").innerHTML=`<span class="stock${v<=1?" laag":""}">${v} in ${esc(state.winkel)}</span> <span class="hint">· ${state.winkel==="Utrecht"?p.ams+" in Amsterdam":p.utr+" in Utrecht"}</span>`;
   renderFoto();
   $("thumbs").innerHTML=p.fotos.length>1?p.fotos.map((f,i)=>`<button type="button" data-i="${i}" aria-pressed="${i===state.foto}" aria-label="Foto ${i+1}"><img src="${esc(f)}" alt="" loading="lazy"></button>`).join(""):"";
   $("thumbs").querySelectorAll("button").forEach(b=>b.onclick=()=>{state.foto=+b.dataset.i;renderFoto();$("thumbs").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));});
   const sib=PRODUCTEN.filter(q=>q.merk===p.merk&&q.naam===p.naam);
-  $("varianten").innerHTML=sib.length>1?`<span class="label">${sib.length} kleuren op voorraad</span><div class="lijst">${sib.map(q=>`<a href="#p-${q.code}" title="${esc(q.kleur)}" aria-label="${esc(q.kleur)}"${q===p?' aria-current="page"':""}>${foto(q,q.fotos[0])}</a>`).join("")}</div>`:"";
+  $("varianten").innerHTML=sib.length>1?`<span class="label">${sib.length} kleuren</span><div class="lijst">${sib.map(q=>`<a href="#p-${q.code}" title="${esc(q.kleur)}" aria-label="${esc(q.kleur)}"${q===p?' aria-current="page"':""}>${foto(q,q.fotos[0])}</a>`).join("")}</div>`:"";
   $("feiten").innerHTML=`<dt>Bestelcode</dt><dd class="mono">${p.code}</dd>
-    <dt>Voorraad</dt><dd>${v}</dd>
     <dt>Afmetingen</dt><dd class="mono">Ø ${Math.round(p.maat.D)} × ${Math.round(p.maat.H)} mm</dd>
-    <dt>Graveervlak</dt><dd class="mono">${p.zone[0]} × ${p.zone[1]} mm</dd>
-    <dt>Levering</dt><dd>Tot en met 3 stuks binnen 3 werkdagen verzonden; vanaf 4 stuks in overleg</dd>`;
+    <dt>Graveervlak</dt><dd class="mono">${p.zone[0]} × ${p.zone[1]} mm</dd>`;
   $("tZone").innerHTML=`Typ tot twee regels tekst en kies een symbool. Alles wordt passend gemaakt voor het graveervlak van <span class="mono">${p.zone[0]} × ${p.zone[1]} mm</span>${p.vorm==="flask"?"":", rondom gegraveerd met de rotatiemodule. Het voorbeeld toont de voorkant: naar de zijkanten loopt de tekst om de fles heen"}.`;
-  $("toast").textContent=""; $("pToast").textContent="";
-  $("pAantal").max=v; $("pAantal").value=1;
-  $("omschrijving").hidden=!p.omschrijving;
-  $("omsTekst").innerHTML=p.omschrijving||"";
+  $("toast").textContent=""; $("aantal").value=1;
   renderTafel();
 }
 function renderFoto(){const p=state.sel;$("mainPhoto").innerHTML=foto(p,p.fotos[state.foto]||p.fotos[0],false);}
@@ -1049,18 +964,14 @@ function segButtons(el,opts,key){
 function cfg(){return {zone:state.sel.zone,font:state.font,motif:state.motif,r1:$("r1").value,r2:$("r2").value};}
 function renderTafel(){
   const p=state.sel; if(!p) return;
-  const v=voorraad(p);
   $("c1").textContent=`${$("r1").value.length}/20`;$("c2").textContent=`${$("r2").value.length}/28`;
-  const a=$("aantal"); a.max=v; if(+a.value>v)a.value=v; if(+a.value<1)a.value=1;
-  $("max").textContent=`max. ${v}`;
+  const a=$("aantal"); if(+a.value<1)a.value=1;
   const foto_ok=rechtBruikbaar(p);
   $("preview").innerHTML=foto_ok?opFoto(p,bouwGravure(cfg()),foto_ok):teken(p,bouwGravure(cfg()));
-  const n=+a.value, gp=graveerPrijs(n);
-  $("som").innerHTML=`<div><span>${n} × fles</span><span class="mono">${euro(p.prijs*n)}</span></div>
-    <div><span>${n} × graveren à ${euro(gp)}</span><span class="mono">${euro(gp*n)}</span></div>
-    <div class="tot"><span>Totaal incl. btw</span><span class="mono">${euro((p.prijs+gp)*n)}</span></div>
-    <span class="hint">Graveren € 7,50 per stuk, vanaf 10 stuks € 5,00, vanaf 25 stuks € 4,00.</span>
-    <span class="hint">${n>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
+  const n=+a.value;
+  $("som").innerHTML=`<div><span>${n} × fles (afrekenen aan de kassa)</span><span class="mono">${euro(p.prijs*n)}</span></div>
+    <div><span>${n} × graveren</span><span class="mono">gratis</span></div>
+    ${n>hier(p)?`<span class="hint">Let op: volgens de voorraad zijn er ${hier(p)} in ${esc(state.winkel)}.</span>`:""}`;
 }
 ["r1","r2","aantal"].forEach(id=>$(id).addEventListener("input",renderTafel));
 
@@ -1126,242 +1037,150 @@ async function voorbeeldAfbeelding(){
   }catch(e){return null;}
 }
 
-/* ---------- winkelmand ---------- */
-state.mand=[];
+/* ---------- inloggen: pincode + winkel, onthouden op deze tablet ----------
+   SERVER_URL: adres van de Cloudflare Worker (zie worker/README). De pincode staat daar als variabele PINCODE. */
+const SERVER_URL="https://graveerwerk-afrekenen.niels-691.workers.dev";
+const WINKELS={Amsterdam:{kort:"A",adres:"Haarlemmerstraat 123, Amsterdam"},Utrecht:{kort:"U",adres:"Oudegracht 256-264, Utrecht"}};
+const opslag={lees(k){try{return localStorage.getItem(k);}catch(e){return null;}},zet(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v);}catch(e){}}};
+state.pin=opslag.lees("graveerweekend-pin"); state.winkel=opslag.lees("graveerweekend-winkel");
+const ingelogd=()=>!!(state.pin&&WINKELS[state.winkel]);
+let gekozenWinkel=state.winkel;
+document.querySelectorAll("[data-winkel]").forEach(b=>b.onclick=()=>{gekozenWinkel=b.dataset.winkel;document.querySelectorAll("[data-winkel]").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+$("pinForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const pin=$("pinCode").value.trim();
+  if(!pin){$("pinFout").textContent="Vul de pincode in.";$("pinCode").focus();return;}
+  if(!WINKELS[gekozenWinkel]){$("pinFout").textContent="Kies in welke winkel je staat.";return;}
+  $("pinKnop").disabled=true; $("pinFout").textContent="";
+  try{
+    const r=await fetch(SERVER_URL+"/pin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pin})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(d.fout||"Pincode klopt niet.");
+    state.pin=pin; state.winkel=gekozenWinkel; opslag.zet("graveerweekend-pin",pin); opslag.zet("graveerweekend-winkel",gekozenWinkel);
+    $("pinCode").value=""; winkelTonen(); renderGrid(); location.hash=""; route();
+  }catch(err){$("pinFout").textContent=err.message.includes("fetch")?"Geen verbinding met de server. Controleer de wifi.":err.message;}
+  $("pinKnop").disabled=false;
+});
+function winkelTonen(){$("winkelKnop").textContent=state.winkel?"📍 "+state.winkel:"Winkel";$("winkelKnop").hidden=!ingelogd();document.querySelector('a.bonlink[href="#bestelling"]').hidden=!ingelogd();}
+$("winkelKnop").onclick=()=>{
+  if(state.mand.length&&!confirm2("Er staat nog een bestelling open. Toch wisselen?")) return;
+  state.winkel=null; opslag.zet("graveerweekend-winkel",null); gekozenWinkel=null;
+  document.querySelectorAll("[data-winkel]").forEach(x=>x.setAttribute("aria-pressed","false"));
+  route();
+};
+// geen browserdialoog: de knop vraagt bij een tweede tik om bevestiging
+let bevestigTot=0;
+function confirm2(tekst){ if(Date.now()<bevestigTot) return true; bevestigTot=Date.now()+4000; $("winkelKnop").textContent="Nog een keer tikken om te wisselen"; setTimeout(winkelTonen,4000); return false; }
+
+/* ---------- bestelling (één klant tegelijk) ---------- */
 let regelNr=0;
-const inMand=p=>state.mand.filter(r=>r.p===p).reduce((t,r)=>t+r.n,0);
-function kanToevoegen(p,n,toast){
-  const vrij=voorraad(p)-inMand(p);
-  if(n>vrij){$(toast).textContent=vrij>0?`Er zijn nog ${vrij} op voorraad die niet in je winkelmand zitten.`:"Alle voorraad van deze fles zit al in je winkelmand.";return false;}
-  return true;
-}
 function mandBijwerken(){
   $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
-  try{localStorage.setItem("graveerwerk-mand",JSON.stringify({regelNr,cadeau:!!state.cadeau,regels:state.mand.map(r=>({...r,p:r.p.code}))}));}catch(e){}
+  opslag.zet("graveerweekend-bestelling",JSON.stringify({regelNr,regels:state.mand.map(r=>({...r,p:r.p.code}))}));
   renderMand();
 }
 function mandLaden(){
   try{
-    const m=JSON.parse(localStorage.getItem("graveerwerk-mand")||"null"); if(!m) return;
-    regelNr=m.regelNr||0; state.cadeau=!!m.cadeau;
+    const m=JSON.parse(opslag.lees("graveerweekend-bestelling")||"null"); if(!m) return;
+    regelNr=m.regelNr||0;
     state.mand=m.regels.map(r=>({...r,p:PRODUCTEN.find(p=>p.code===r.p)})).filter(r=>r.p);
     $("bonN").textContent=state.mand.reduce((t,r)=>t+r.n,0);
   }catch(e){}
 }
-$("pToevoegen").onclick=()=>{
-  const p=state.sel, n=Math.max(1,+$("pAantal").value||1);
-  if(!kanToevoegen(p,n,"pToast")) return;
-  const bestaand=state.mand.find(r=>r.p===p&&!r.gravure);
-  if(bestaand) bestaand.n+=n; else state.mand.push({nr:++regelNr,p,n,gravure:null});
-  mandBijwerken();
-  $("pToast").innerHTML=`${n} × toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
-};
 $("form").addEventListener("submit",async e=>{
   e.preventDefault();
   const p=state.sel,c=cfg();
-  if(c.motif==="logo"&&!state.logo){$("toast").textContent="Upload eerst je logo, of kies een ander symbool.";return;}
+  if(c.motif==="logo"&&!state.logo){$("toast").textContent="Upload eerst het logo, of kies een ander symbool.";return;}
   if(!c.r1.trim()&&!c.r2.trim()&&c.motif==="geen"){$("toast").textContent="Vul minimaal één regel tekst in of kies een symbool.";return;}
-  const n=+$("aantal").value;
-  if(!kanToevoegen(p,n,"toast")) return;
+  const n=Math.max(1,+$("aantal").value||1);
   const g=bouwGravure(c), nr=++regelNr, voorbeeld=await voorbeeldAfbeelding();
   const meta=`Werkbon ${nr} | ${p.merk} ${p.naam} ${p.kleur} | bestelcode ${p.code} | ${n} stuks | ${g.W}x${g.H} mm`;
   state.mand.push({nr,p,n,gravure:{c,g:{W:g.W,H:g.H},svg:svgVoorXtool(g,meta),voorbeeld,logo:c.motif==="logo"&&state.logo?{png:state.logo.png,naam:state.logo.naam}:null}});
   mandBijwerken();
-  $("toast").innerHTML=`Met gravure toegevoegd aan je winkelmand. <a href="#winkelmand">Bekijk winkelmand</a>`;
+  $("toast").innerHTML=`Toegevoegd aan de bestelling. <a href="#bestelling">Naar de bestelling</a> of kies nog een fles.`;
 });
-function regelPrijs(r){return r.n*(r.p.prijs+(r.gravure?graveerPrijs(r.n):0));}
-const CADEAUPRIJS=2.95;
-function totalen(){
-  const sub=state.mand.reduce((t,r)=>t+regelPrijs(r),0), cadeau=state.cadeau&&state.mand.length?CADEAUPRIJS:0, verzend=sub+cadeau>=30?0:4.95;
-  return {sub,cadeau,verzend,totaal:sub+cadeau+verzend,stuks:state.mand.reduce((t,r)=>t+r.n,0)};
-}
 function renderMand(){
-  if(!state.mand.length){$("mand").innerHTML=`<p class="leeg">Je winkelmand is leeg. Kies een fles en voeg hem toe, met of zonder gravure.</p>`;return;}
-  $("mand").innerHTML="";
-  const lijst=document.createElement("div");lijst.style.cssText="display:grid;gap:12px";
-  state.mand.forEach(r=>{
-    const p=r.p, el=document.createElement("article");el.className="regel";
-    const gp=r.gravure?graveerPrijs(r.n):0;
-    el.innerHTML=`<a class="ph" href="#p-${p.code}">${foto(p,p.fotos[0])}</a>
-      <div><span class="merk">${esc(p.merk)}</span><h3>${esc(p.naam)}</h3><div class="kleur">${esc(p.kleur)}</div>
-        <div class="hint" style="margin-top:6px">${r.gravure?`Met gravure: <strong>${esc([r.gravure.c.r1,r.gravure.c.r2].filter(Boolean).join(" / ")||"alleen symbool")}</strong> · ${FONTDATA[r.gravure.c.font].label}${r.gravure.c.motif!=="geen"?" · "+MOTIFS[r.gravure.c.motif].toLowerCase():""}`:"Zonder gravure"}</div>
-        ${r.gravure?`<div class="werkplaats"><div class="svgbox" style="border:1px dashed var(--muted);background:#fff;border-radius:3px;padding:6px">${r.gravure.svg.replace(/^[\s\S]*?(<svg)/,"$1")}</div>
-          <div><span class="label">Werkbon ${r.nr} · voor de werkplaats</span><div class="hint">${r.gravure.g.W} × ${r.gravure.g.H} mm, bestelcode ${p.code}</div>
-          <div class="acties" style="margin-top:6px"><button class="btn sec" type="button" data-kopieer="${r.nr}">Kopieer SVG voor xTool</button><span class="toast" id="kt${r.nr}"></span></div>
-          <textarea id="ta${r.nr}" readonly aria-label="SVG-code werkbon ${r.nr}" hidden style="width:100%;height:100px;font:12px/1.4 var(--mono)"></textarea></div></div>`:""}
-      </div>
-      <div class="rprijs"><span class="mono">Artikel ${r.n} × ${euro(p.prijs)} = ${euro(r.n*p.prijs)}</span>${r.gravure?`<span class="mono">Graveren ${r.n} × ${euro(gp)} = ${euro(r.n*gp)}</span>`:""}<strong class="mono">${euro(regelPrijs(r))}</strong>
-        <button class="linkknop" type="button" data-weg="${r.nr}">Verwijderen</button></div>`;
-    lijst.appendChild(el);
-    if(r.gravure){
-      const ta=el.querySelector("#ta"+r.nr); ta.value=r.gravure.svg;
-      el.querySelector("[data-kopieer]").onclick=()=>{
-        const ok=()=>{$("kt"+r.nr).textContent="Gekopieerd. Plak in een .svg-bestand.";};
-        const fallback=()=>{ta.hidden=false;ta.focus();ta.select();$("kt"+r.nr).textContent="Kopiëren lukte niet automatisch; de code is geselecteerd.";};
-        try{navigator.clipboard.writeText(r.gravure.svg).then(ok,fallback);}catch(e){fallback();}
-      };
-    }
-    el.querySelector("[data-weg]").onclick=()=>{state.mand=state.mand.filter(x=>x!==r);mandBijwerken();};
-  });
-  $("mand").appendChild(lijst);
-  const {sub,cadeau,verzend,totaal}=totalen();
-  const kado=document.createElement("label");kado.className="cadeauoptie";
-  kado.innerHTML=`<input type="checkbox" id="cadeauVink"${state.cadeau?" checked":""}><span><strong>Met cadeauverpakking</strong> <span class="mono">+ ${euro(CADEAUPRIJS)}</span><br>
-    <span class="hint">We pakken je bestelling in als cadeau en sturen hem zonder factuur op. Zo kan hij direct naar de ontvanger; de factuur mailen we naar jou.</span></span>`;
-  kado.querySelector("input").onchange=e=>{state.cadeau=e.target.checked;mandBijwerken();};
-  $("mand").appendChild(kado);
-  const tot=document.createElement("div");tot.className="mandtotaal";
-  tot.innerHTML=`<span>Subtotaal <span class="mono">${euro(sub)}</span></span>
-    ${cadeau?`<span>Cadeauverpakking <span class="mono">${euro(cadeau)}</span></span>`:""}
-    <span>Verzenden <span class="mono">${verzend?euro(verzend):"gratis"}</span></span>
-    <span class="tot">Totaal incl. btw <span class="mono">${euro(totaal)}</span></span>
-    <a class="btn" href="#afrekenen">Afrekenen</a>
-    ${state.mand.reduce((t,r)=>t+r.n,0)>3?'<span class="hint">Vanaf 4 stuks stemmen we de levertijd met je af.</span>':'<span class="hint">Binnen 3 werkdagen verzonden.</span>'}`;
-  $("mand").appendChild(tot);
-}
-renderMand();
-
-/* ---------- afrekenen ----------
-   AFREKEN_URL: adres van de Cloudflare Worker (zie worker/README). Leeg = afrekenen nog niet gekoppeld. */
-const AFREKEN_URL="https://graveerwerk-afrekenen.niels-691.workers.dev";
-const BUCKAROO_ACTIEF=false;    // true zodra de Buckaroo-sleutels in de Worker staan; tot die tijd testbetaling
-function renderAfrekenen(){
-  if(!state.mand.length){location.hash="winkelmand";return;}
-  const {cadeau,verzend,totaal,stuks}=totalen();
-  $("samenvatting").innerHTML=`<strong>Je bestelling</strong>${state.mand.map(r=>`<div class="r"><span>${r.n} × ${esc(r.p.merk+" "+r.p.naam+" "+r.p.kleur)}</span><span class="mono">${euro(r.n*r.p.prijs)}</span></div>${r.gravure?`<div class="r"><span>${r.n} × Graveren à ${euro(graveerPrijs(r.n))}</span><span class="mono">${euro(r.n*graveerPrijs(r.n))}</span></div>`:""}`).join("")}
-    ${cadeau?`<div class="r"><span>Cadeauverpakking</span><span class="mono">${euro(cadeau)}</span></div>`:""}
-    <div class="r"><span>Verzenden</span><span class="mono">${verzend?euro(verzend):"gratis"}</span></div>
-    <div class="r tot"><span>Totaal incl. btw</span><span class="mono">${euro(totaal)}</span></div>
-    <span class="hint">${stuks>3?"Vanaf 4 stuks stemmen we de levertijd met je af.":"Binnen 3 werkdagen verzonden."}</span>`;
-  $("maatwerkMelding").hidden=!state.mand.some(r=>r.gravure);
-  $("cadeauAdres").hidden=!state.cadeau;
-  $("lNaam").textContent=state.cadeau?"Jouw naam":"Naam";
-  $("lAdres").textContent=state.cadeau?"Adres van de ontvanger":"";$("lAdres").hidden=!state.cadeau;
-  $("afrekenFout").textContent="";
-  $("betaalKnop").hidden=!BUCKAROO_ACTIEF; $("testKnop").hidden=BUCKAROO_ACTIEF;
-  $("testKnop").disabled=false; $("testKnop").textContent="Testbetaling (er wordt niets afgeschreven)";
-}
-/* ---------- testbetaling ----------
-   Zolang Buckaroo niet gekoppeld is: geen betaling, wel een echte ordermail via FormSubmit (formulier met bijlagen). */
-const TEST_ORDERMAIL="niels@kathmandu.nl";
-let wasTest=false; try{wasTest=sessionStorage.getItem("graveerwerk-test")==="1";sessionStorage.removeItem("graveerwerk-test");}catch(e){}
-function klantUitFormulier(){
-  const v=id=>$(id).value.trim();
-  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm"),ontvanger:state.cadeau?v("kOntvanger"):""};
-  const leeg=[["naam","kNaam"],...(state.cadeau?[["naam van de ontvanger","kOntvanger"]]:[]),["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
-  if(leeg){$("afrekenFout").textContent=`Vul je ${leeg[0]} in.`;$(leeg[1]).focus();return null;}
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("afrekenFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return null;}
-  if(!$("kAkkoord").checked){$("afrekenFout").textContent="Ga akkoord met de algemene voorwaarden om te bestellen.";return null;}
-  return klant;
-}
-function dataUrlNaarBestand(url,naam,type){const b=atob(url.split(",")[1]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return new File([u],naam,{type});}
-let laatsteTestorder=null;
-$("testKnop").onclick=async()=>{
-  const klant=klantUitFormulier(); if(!klant) return;
-  const d=new Date(), nummer=`TEST-${d.toISOString().slice(0,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
-  const {sub,cadeau,verzend,totaal,stuks}=totalen(), metCadeau=!!state.cadeau;
-  const velden=[], bijlagen=[], regels=[];
-  const veld=(k,v)=>velden.push([k,v]);
-  veld("Bestelnummer",nummer+" (testbetaling, niets afgeschreven)");
-  veld("Levertijd",stuks>3?`${stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen`:`${stuks} ${stuks===1?"stuk":"stuks"}: binnen 3 werkdagen verzenden`);
-  veld("Let op","Artikelen handmatig uitboeken in de kassa / op kathmandu.nl");
-  if(metCadeau) veld("Cadeau","Inpakken als cadeau, GEEN factuur meesturen. Verzenden naar: "+[klant.ontvanger,klant.straat,`${klant.postcode} ${klant.plaats}`,klant.land].join(", "));
-  veld("Klant",[klant.naam,klant.bedrijf,klant.straat,`${klant.postcode} ${klant.plaats}`,klant.land].filter(Boolean).join(", "));
-  veld("E-mail klant",klant.email); if(klant.telefoon) veld("Telefoon klant",klant.telefoon); if(klant.opmerking) veld("Opmerking",klant.opmerking);
-  state.mand.forEach((r,i)=>{
-    const nr=i+1, p=r.p, basis=`${nummer}_regel${nr}_${p.code}`;
-    let t=`${r.n} × ${p.merk} ${p.naam} ${p.kleur} (bestelcode ${p.code}) à ${euro(p.prijs)} = ${euro(r.n*p.prijs)}`;
-    const eigen=[];
-    if(r.gravure){
-      const c=r.gravure.c;
-      t+=` | GRAVEREN ${r.n} × ${euro(graveerPrijs(r.n))} = ${euro(r.n*graveerPrijs(r.n))}: regel 1 “${c.r1||"–"}”, regel 2 “${c.r2||"–"}”, lettertype ${FONTDATA[c.font].label}, symbool ${MOTIFS[c.motif]}, formaat ${r.gravure.g.W} × ${r.gravure.g.H} mm`;
-      eigen.push(new File([r.gravure.svg],`${basis}_xtool.svg`,{type:"image/svg+xml"}));
-      if(r.gravure.voorbeeld) eigen.push(dataUrlNaarBestand(r.gravure.voorbeeld,`${basis}_voorbeeld.png`,"image/png"));
-      if(r.gravure.logo&&r.gravure.logo.png) eigen.push(dataUrlNaarBestand(r.gravure.logo.png,`${basis}_logo.png`,"image/png"));
-      t+=` | bijlagen: ${eigen.map(f=>f.name).join(", ")}`;
-    } else t+=" | zonder gravure";
-    veld(`Regel ${nr}`,t); bijlagen.push(...eigen);
-    regels.push({tekst:t,voorbeeld:r.gravure&&r.gravure.voorbeeld,bestanden:eigen});
-  });
-  veld("Subtotaal",euro(sub)); if(cadeau) veld("Cadeauverpakking",euro(cadeau)); veld("Verzenden",verzend?euro(verzend):"gratis"); veld("Totaal",euro(totaal));
-  laatsteTestorder={nummer,velden,regels};
-  const verzendRegels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:r.gravure?{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
-    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}:null}));
-  // mand leeg en testorder tonen; mail op de achtergrond versturen (pagina blijft staan)
-  state.mand=[]; state.cadeau=false; mandBijwerken(); location.hash="testorder";
-  if(!AFREKEN_URL){
-    $("testMailStatus").textContent="De mailserver is nog niet gekoppeld, dus er is geen mail verstuurd. Hieronder staat de complete ordermail met de bijlagen om te downloaden.";
-    return;
-  }
-  $("testMailStatus").textContent=`Ordermail wordt verstuurd naar ${TEST_ORDERMAIL}…`;
-  try{
-    const r=await fetch(AFREKEN_URL+"/testbestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,akkoord:true,cadeau:metCadeau,regels:verzendRegels})});
-    const d=await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(d.fout||`Fout ${r.status}`);
-    $("testMailStatus").textContent=`Ordermail ${d.nummer} is verstuurd naar ${d.naar}. `+(d.klantmail?`De bevestiging is verstuurd naar ${d.klantmail}.`:`De bevestiging kon nog niet naar het klantadres (domein nog niet geverifieerd bij Resend); een voorbeeld ervan staat in je eigen mailbox.`)+` De bijlagen kun je hieronder ook downloaden.`;
-  }catch(e){
-    $("testMailStatus").textContent=`De mail kon niet worden verstuurd (${e.message}). Hieronder staat de complete ordermail met de bijlagen om te downloaden.`;
-  }
-};
-function renderTestorder(){
-  const o=laatsteTestorder;
-  if(!o){$("testOrder").innerHTML='<p class="leeg">Geen testorder gevonden. Plaats een testbestelling via de winkelmand.</p>';return;}
-  const info=o.velden.filter(([k])=>!k.startsWith("_")&&!k.startsWith("Regel "));
-  $("testOrder").innerHTML=`<div class="ordermail"><strong>Zo ziet de ordermail eruit</strong>
-    <dl>${info.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
-    <div class="regels">${o.regels.map((r,i)=>`<div class="oregel">${r.voorbeeld?`<img src="${r.voorbeeld}" alt="Voorbeeld gravure regel ${i+1}">`:"<span></span>"}
-      <div><strong>Regel ${i+1}</strong><div>${esc(r.tekst)}</div>
-      ${r.bestanden.length?`<div class="downloads">${r.bestanden.map((f,j)=>`<a class="btn sec" href="#" data-r="${i}" data-f="${j}">Download ${esc(f.name.split("_").slice(-1)[0])}</a>`).join("")}</div>`:""}</div></div>`).join("")}</div></div>`;
-  $("testOrder").querySelectorAll("[data-f]").forEach(a=>{
-    const f=o.regels[+a.dataset.r].bestanden[+a.dataset.f];
-    a.href=URL.createObjectURL(f); a.download=f.name;
-  });
+  $("klantForm").hidden=!state.mand.length;
+  if(!state.mand.length){$("mand").innerHTML=`<p class="leeg">Nog geen flessen in deze bestelling. Kies een fles en maak het ontwerp.</p>`;return;}
+  const stuks=state.mand.reduce((t,r)=>t+r.n,0), kassa=state.mand.reduce((t,r)=>t+r.n*r.p.prijs,0);
+  $("mand").innerHTML=`<div class="mandlijst">${state.mand.map(r=>{const p=r.p,c=r.gravure.c;return `<article class="regel">
+      <div class="ph wit">${r.gravure.voorbeeld?`<img src="${r.gravure.voorbeeld}" alt="Voorbeeld gravure">`:foto(p,p.fotos[0])}</div>
+      <div><span class="merk">${esc(p.merk)}</span><h3>${esc(p.naam)}</h3><div class="kleur">${esc(p.kleur)} · bestelcode <span class="mono">${p.code}</span></div>
+        <div class="hint" style="margin-top:6px"><strong>${esc([c.r1,c.r2].filter(Boolean).join(" / ")||"alleen symbool")}</strong> · ${FONTDATA[c.font].label}${c.motif!=="geen"?" · "+MOTIFS[c.motif].toLowerCase():""}</div></div>
+      <div class="rprijs"><span class="mono">${r.n} × ${euro(p.prijs)}</span><span class="hint">graveren gratis</span>
+        <button class="linkknop" type="button" data-weg="${r.nr}">Verwijderen</button></div></article>`;}).join("")}</div>
+    <div class="mandtotaal"><span>${stuks} ${stuks===1?"fles":"flessen"}</span><span class="tot">Afrekenen aan de kassa <span class="mono">${euro(kassa)}</span></span><span class="hint">Graveren is gratis tijdens het graveerweekend.</span></div>`;
+  $("mand").querySelectorAll("[data-weg]").forEach(b=>b.onclick=()=>{state.mand=state.mand.filter(x=>x.nr!==+b.dataset.weg);mandBijwerken();});
 }
 
-$("afrekenForm").addEventListener("submit",async e=>{
+/* ---------- versturen ---------- */
+let laatsteOrder=null;
+$("klantForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const v=id=>$(id).value.trim();
-  const klant={naam:v("kNaam"),bedrijf:v("kBedrijf"),email:v("kEmail"),telefoon:v("kTel"),straat:v("kStraat"),postcode:v("kPostcode"),plaats:v("kPlaats"),land:$("kLand").value,opmerking:v("kOpm"),ontvanger:state.cadeau?v("kOntvanger"):""};
-  const leeg=[["naam","kNaam"],...(state.cadeau?[["naam van de ontvanger","kOntvanger"]]:[]),["e-mailadres","kEmail"],["straat en huisnummer","kStraat"],["postcode","kPostcode"],["plaats","kPlaats"]].find(([,id])=>!v(id));
-  if(leeg){$("afrekenFout").textContent=`Vul je ${leeg[0]} in.`;$(leeg[1]).focus();return;}
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("afrekenFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return;}
-  if(!$("kAkkoord").checked){$("afrekenFout").textContent="Ga akkoord met de algemene voorwaarden om te bestellen.";return;}
-  if(!AFREKEN_URL){$("afrekenFout").textContent="Afrekenen is nog niet gekoppeld aan Buckaroo. Dit volgt zodra de betaalserver draait.";return;}
-  const regels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:r.gravure?{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
-    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}:null}));
-  $("betaalKnop").disabled=true; $("betaalKnop").textContent="Bezig met doorsturen naar Buckaroo…"; $("afrekenFout").textContent="";
+  const klant={naam:v("kNaam"),email:v("kEmail"),telefoon:v("kTel"),opmerking:v("kOpm")};
+  const leeg=[["de naam van de klant","kNaam"],["het e-mailadres van de klant","kEmail"],["het bonnummer van de kassa","kBon"],["je eigen naam","kMedewerker"]].find(([,id])=>!v(id));
+  if(leeg){$("klantFout").textContent=`Vul ${leeg[0]} in.`;$(leeg[1]).focus();return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(klant.email)){$("klantFout").textContent="Dit e-mailadres klopt niet.";$("kEmail").focus();return;}
+  if(!$("kBetaald").checked){$("klantFout").textContent="Vink aan dat de klant heeft afgerekend en het ontwerp heeft gecontroleerd.";return;}
+  const regels=state.mand.map(r=>({code:r.p.code,n:r.n,gravure:{svg:r.gravure.svg,voorbeeld:r.gravure.voorbeeld,logo:r.gravure.logo&&r.gravure.logo.png,
+    formaat:`${r.gravure.g.W} × ${r.gravure.g.H} mm`,config:{r1:r.gravure.c.r1,r2:r.gravure.c.r2,lettertype:FONTDATA[r.gravure.c.font].label,symbool:MOTIFS[r.gravure.c.motif]}}}));
+  $("verstuurKnop").disabled=true; $("verstuurKnop").textContent="Bezig met versturen…"; $("klantFout").textContent="";
   try{
-    const r=await fetch(AFREKEN_URL+"/bestelling",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({klant,regels,akkoord:true,cadeau:!!state.cadeau})});
-    const d=await r.json();
-    if(!r.ok||!d.doorsturen) throw new Error(d.fout||"Afrekenen lukte niet.");
-    location.href=d.doorsturen;
+    const r=await fetch(SERVER_URL+"/winkelorder",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({pin:state.pin,winkel:state.winkel,medewerker:v("kMedewerker"),bonnummer:v("kBon"),klant,regels})});
+    const d=await r.json().catch(()=>({}));
+    if(r.status===403){state.pin=null;opslag.zet("graveerweekend-pin",null);throw new Error("De pincode is niet meer geldig. Log opnieuw in; de bestelling blijft bewaard.");}
+    if(!r.ok) throw new Error(d.fout||`Versturen lukte niet (fout ${r.status}).`);
+    laatsteOrder={nummer:d.nummer,winkel:state.winkel,klant,bonnummer:v("kBon"),medewerker:v("kMedewerker"),datum:new Date(),
+      regels:state.mand.map(r=>({n:r.n,p:r.p,c:r.gravure.c,voorbeeld:r.gravure.voorbeeld,W:r.gravure.g.W,H:r.gravure.g.H})),
+      status:`De ordermail met de bestanden is verstuurd naar ${d.naar}. `+(d.klantmail?`De klant krijgt een bevestiging op ${d.klantmail}.`:`De bevestiging kon nog niet naar de klant (domein nog niet geverifieerd bij Resend); een voorbeeld staat in de mailbox van ${d.naar}.`)};
+    state.mand=[]; mandBijwerken(); ["kNaam","kEmail","kTel","kBon","kOpm"].forEach(id=>$(id).value=""); $("kBetaald").checked=false;
+    opslag.zet("graveerweekend-medewerker",v("kMedewerker"));
+    location.hash="verstuurd";
   }catch(err){
-    $("afrekenFout").textContent=err.message||"Afrekenen lukte niet. Probeer het opnieuw.";
-    $("betaalKnop").disabled=false; $("betaalKnop").textContent="Betalen";
+    $("klantFout").textContent=err.message.includes("fetch")?"Geen verbinding met de server. Controleer de wifi en probeer het opnieuw; de bestelling blijft bewaard.":err.message;
   }
+  $("verstuurKnop").disabled=false; $("verstuurKnop").textContent="Bestelling versturen";
 });
+$("kMedewerker").value=opslag.lees("graveerweekend-medewerker")||"";
+function renderKlaar(){
+  const o=laatsteOrder;
+  if(!o){$("werkbon").innerHTML='<p class="leeg">Geen verstuurde bestelling gevonden.</p>';$("klaarStatus").textContent="";return;}
+  $("klaarStatus").textContent=o.status;
+  const naarUtrecht=o.winkel!=="Utrecht";
+  $("werkbon").innerHTML=`<div class="wbkop"><span class="label">Ordernummer</span><div class="wbnummer mono">${esc(o.nummer)}</div>
+      <p class="wbinstructie">${naarUtrecht?`Schrijf dit nummer op de doos of leg deze werkbon bij de fles, en stuur hem naar <strong>Utrecht</strong> om te graveren.`:`Schrijf dit nummer op de doos of leg deze werkbon bij de fles, en leg hem bij de spullen om te graveren.`}</p></div>
+    <dl class="wbinfo">
+      <dt>Retour naar</dt><dd><strong>${esc(o.winkel)}</strong> (klant haalt op)</dd>
+      <dt>Klant</dt><dd>${esc(o.klant.naam)}${o.klant.telefoon?` · ${esc(o.klant.telefoon)}`:""}</dd>
+      <dt>Bonnummer</dt><dd class="mono">${esc(o.bonnummer)}</dd>
+      <dt>Opgenomen</dt><dd>${esc(o.medewerker)}, ${o.datum.toLocaleString("nl-NL",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}</dd>
+      ${o.klant.opmerking?`<dt>Opmerking</dt><dd>${esc(o.klant.opmerking)}</dd>`:""}
+    </dl>
+    <div class="wbregels">${o.regels.map(r=>`<div class="wbregel">${r.voorbeeld?`<img src="${r.voorbeeld}" alt="">`:"<span></span>"}
+      <div><strong>${r.n} × ${esc(r.p.merk+" "+r.p.naam)}</strong><div>${esc(r.p.kleur)} · bestelcode <span class="mono">${r.p.code}</span></div>
+      <div class="hint">“${esc([r.c.r1,r.c.r2].filter(Boolean).join(" / ")||"alleen symbool")}” · ${FONTDATA[r.c.font].label} · ${MOTIFS[r.c.motif]} · ${r.W} × ${r.H} mm</div></div></div>`).join("")}</div>`;
+}
+$("nieuweKlant").onclick=()=>{laatsteOrder=null;state.sel=null;$("r1").value="";$("r2").value="";$("zoek").value="";state.zoek="";renderGrid();location.hash="";};
 
-/* ---------- navigatie: #, #p-<bestelcode>, #werkbonnen, #graveren ---------- */
+/* ---------- navigatie: #, #p-<bestelcode>, #bestelling, #verstuurd ---------- */
 let laatsteScroll=0;
+const SCHERMEN=["vPin","vOverzicht","vProduct","vMand","vKlaar"];
+function toon(id){SCHERMEN.forEach(x=>$(x).hidden=x!==id);document.querySelector("footer.uitleg").hidden=id==="vPin"||id==="vKlaar";}
 function route(){
+  winkelTonen();
+  if(!ingelogd()){toon("vPin");document.title="Inloggen | "+titel;
+    document.querySelectorAll("[data-winkel]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.winkel===gekozenWinkel));return;}
   const h=location.hash.slice(1);
-  if(h==="graveren"&&state.sel){$("graveren").scrollIntoView({behavior:"smooth"});return;}
+  if(h==="graveren"&&state.sel&&!$("vProduct").hidden){$("graveren").scrollIntoView({behavior:"smooth"});return;}
   const m=h.match(/^p-(\d{6})$/), p=m&&PRODUCTEN.find(x=>x.code===m[1]);
   const wasOverzicht=!$("vOverzicht").hidden;
   if(wasOverzicht) laatsteScroll=scrollY;
-  const mand=h==="winkelmand"||h==="werkbonnen", vw=h==="voorwaarden", pr=h==="privacy", af=h==="afrekenen", bd=h==="bedankt", ms=h==="betaling-mislukt", to=h==="testorder";
-  $("vAfrekenen").hidden=!af; $("vBedankt").hidden=!bd; $("vMislukt").hidden=!ms; $("vTestorder").hidden=!to;
-  if(to){["vOverzicht","vProduct","vMand","vVoorwaarden","vPrivacy"].forEach(id=>$(id).hidden=true);document.title="Testorder | "+titel;renderTestorder();scrollTo(0,0);return;}
-  if(bd){state.mand=[];mandBijwerken();$("testBedankt").hidden=!wasTest;}
-  if(af||bd||ms){$("vOverzicht").hidden=true;$("vProduct").hidden=true;$("vMand").hidden=true;$("vVoorwaarden").hidden=true;$("vPrivacy").hidden=true;
-    document.title=(af?"Afrekenen":bd?"Bedankt":"Betaling niet gelukt")+" | "+titel; if(af)renderAfrekenen(); scrollTo(0,0); return;}
-  $("vOverzicht").hidden=!!(p||mand||vw||pr);
-  $("vProduct").hidden=!p;
-  $("vMand").hidden=!mand;
-  $("vVoorwaarden").hidden=!vw; $("vPrivacy").hidden=!pr;
-  if(vw||pr){document.title=(vw?"Algemene voorwaarden":"Privacyverklaring")+" | "+titel;scrollTo(0,0);return;}
-  if(p){ if(state.sel!==p){state.sel=p;state.foto=0;} renderProduct(); scrollTo(0,0); }
-  else { document.title=mand?"Winkelmand | "+titel:titel; if(mand){renderMand();scrollTo(0,0);} else if(!wasOverzicht) scrollTo(0,laatsteScroll); }
+  if(h==="bestelling"||h==="winkelmand"){toon("vMand");document.title="Bestelling | "+titel;renderMand();scrollTo(0,0);return;}
+  if(h==="verstuurd"){toon("vKlaar");document.title="Bestelling verstuurd | "+titel;renderKlaar();scrollTo(0,0);return;}
+  if(p){toon("vProduct"); if(state.sel!==p){state.sel=p;state.foto=0;} renderProduct(); scrollTo(0,0); return;}
+  toon("vOverzicht"); document.title=titel; if(!wasOverzicht) scrollTo(0,laatsteScroll);
 }
 addEventListener("hashchange",route);
 

@@ -1,208 +1,102 @@
 /**
- * Kathmandu Graveerwerk – afrekenen via Buckaroo en ordermail.
+ * Kathmandu Graveerweekend – server voor de personeelstool op de tablet.
  *
  * Draait als Cloudflare Worker (gratis abonnement volstaat). Routes:
- *   POST /bestelling  winkelmand + klantgegevens -> prijzen narekenen -> Buckaroo-betaling starten
- *   POST /push        Buckaroo meldt een betaling -> status controleren -> ordermail + bevestiging
- *   GET|POST /terug   klant komt terug van Buckaroo -> door naar de shop (bedankt of mislukt)
+ *   POST /pin          controleert de pincode van de medewerkers
+ *   POST /winkelorder  bestelling uit de winkel -> ordermail met SVG/voorbeeld naar MAIL_ORDERS + bevestiging naar de klant
  *
- * Instellingen (wrangler.toml [vars] en `wrangler secret put`):
- *   SITE_URL                 https://nielskathmandu.github.io/Graveershop   (zonder slash)
- *   BUCKAROO_TEST            "1" = testomgeving, "0" = live
- *   BUCKAROO_WEBSITE_KEY     (geheim) uit Buckaroo Plaza
- *   BUCKAROO_SECRET_KEY      (geheim) uit Buckaroo Plaza
- *   RESEND_API_KEY           (geheim) voor het versturen van e-mail via resend.com
- *   MAIL_VAN                 bijv. "Kathmandu Graveerwerk <graveerwerk@kathmandu.nl>"
- *   MAIL_ORDERS              adres waar orders binnenkomen: niels@kathmandu.nl
- *   TESTMODUS                "1" = /testbestelling aan (bestellen zonder betaling, mail alleen naar MAIL_ORDERS)
- *   KV-binding ORDERS        opslag van openstaande bestellingen
+ * Instellingen (Cloudflare: Settings -> Variables and Secrets):
+ *   SITE_URL        https://nielskathmandu.github.io/Graveershop   (zonder slash)
+ *   PINCODE         de pincode voor de tablets (bij voorkeur 6 cijfers)
+ *   RESEND_API_KEY  (geheim) voor het versturen van e-mail via resend.com
+ *   MAIL_VAN        bijv. "Kathmandu Graveerwerk <onboarding@resend.dev>"
+ *   MAIL_ORDERS     adres waar de ordermails binnenkomen (nu niels@kathmandu.nl, later servicedesk@kathmandu.nl)
+ * (Oude webshopcode met Buckaroo staat in de git-geschiedenis.)
  */
 
-const CADEAUPRIJS = 2.95;
-const GRAVEERPRIJS = n => (n >= 25 ? 4 : n >= 10 ? 5 : 7.5);
-const VERZENDKOSTEN = sub => (sub >= 30 ? 0 : 4.95);
-const MAX_SNEL = 3; // tot en met 3 stuks: binnen 3 werkdagen verzonden
+const WINKELS = {
+  Amsterdam: { kort: "A", adres: "Haarlemmerstraat 123, Amsterdam" },
+  Utrecht: { kort: "U", adres: "Oudegracht 256-264, Utrecht" },
+};
+const MAX_STUKS = 100;
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     try {
       if (request.method === "OPTIONS") return cors(env, new Response(null, { status: 204 }));
-      if (url.pathname === "/bestelling" && request.method === "POST") return cors(env, await bestelling(request, env, url));
-      if (url.pathname === "/testbestelling" && request.method === "POST") return cors(env, await testbestelling(request, env));
-      if (url.pathname === "/push" && request.method === "POST") return await push(request, env);
-      if (url.pathname === "/terug") return await terug(request, env);
-      return new Response("Kathmandu Graveerwerk", { status: 200 });
+      if (url.pathname === "/pin" && request.method === "POST") return cors(env, await pin(request, env));
+      if (url.pathname === "/winkelorder" && request.method === "POST") return cors(env, await winkelorder(request, env));
+      return new Response("Kathmandu Graveerweekend", { status: 200 });
     } catch (e) {
       console.error(e);
-      return cors(env, json({ fout: "Er ging iets mis bij het afrekenen. Probeer het later opnieuw." }, 500));
+      return cors(env, json({ fout: "Er ging iets mis op de server. Probeer het opnieuw." }, 500));
     }
   },
 };
 
-/* ---------------- bestelling starten ---------------- */
-async function maakOrder(invoer, env, voorvoegsel) {
-  const k = invoer.klant || {};
-  for (const veld of ["naam", "email", "straat", "postcode", "plaats", "land"]) {
-    if (!String(k[veld] || "").trim()) return { fout: json({ fout: `Vul je ${veld} in.` }, 400) };
-  }
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(k.email)) return { fout: json({ fout: "Dit e-mailadres klopt niet." }, 400) };
-  if (!invoer.akkoord) return { fout: json({ fout: "Ga akkoord met de algemene voorwaarden om te bestellen." }, 400) };
-  if (!Array.isArray(invoer.regels) || !invoer.regels.length) return { fout: json({ fout: "Je winkelmand is leeg." }, 400) };
+/* ---------------- pincode ---------------- */
+async function pinKlopt(env, invoer) {
+  if (!env.PINCODE) return false;
+  const ok = String(invoer || "") === String(env.PINCODE);
+  if (!ok) await new Promise(r => setTimeout(r, 800)); // raden traag maken
+  return ok;
+}
+async function pin(request, env) {
+  if (!env.PINCODE) return json({ fout: "Er is nog geen pincode ingesteld in Cloudflare (variabele PINCODE)." }, 500);
+  const { pin } = await request.json().catch(() => ({}));
+  return (await pinKlopt(env, pin)) ? json({ ok: true }) : json({ fout: "Pincode klopt niet." }, 403);
+}
 
-  // Prijzen en voorraad nooit uit de browser overnemen: zelf ophalen
+/* ---------------- bestelling uit de winkel ---------------- */
+async function winkelorder(request, env) {
+  const invoer = await request.json().catch(() => ({}));
+  if (!(await pinKlopt(env, invoer.pin))) return json({ fout: "Pincode klopt niet." }, 403);
+  const winkel = WINKELS[invoer.winkel] ? invoer.winkel : null;
+  if (!winkel) return json({ fout: "Kies eerst de winkel." }, 400);
+  const k = pick(invoer.klant || {}, ["naam", "email", "telefoon", "opmerking"]);
+  if (!k.naam.trim()) return json({ fout: "Vul de naam van de klant in." }, 400);
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(k.email)) return json({ fout: "Het e-mailadres van de klant klopt niet." }, 400);
+  const bonnummer = String(invoer.bonnummer || "").trim().slice(0, 60);
+  const medewerker = String(invoer.medewerker || "").trim().slice(0, 60);
+  if (!bonnummer) return json({ fout: "Vul het bonnummer van de kassa in." }, 400);
+  if (!medewerker) return json({ fout: "Vul je eigen naam in." }, 400);
+  if (!Array.isArray(invoer.regels) || !invoer.regels.length) return json({ fout: "De bestelling is leeg." }, 400);
+
+  // namen uit voorraad.json, niet uit de browser
   const voorraad = await (await fetch(`${env.SITE_URL}/voorraad.json`, { cf: { cacheTtl: 300 } })).json();
   const perCode = Object.fromEntries(voorraad.producten.map(p => [p.bestelcode, p]));
-  const inMand = {};
   const regels = [];
   for (const r of invoer.regels) {
     const p = perCode[r.code];
     const n = Math.floor(Number(r.n));
-    if (!p || !(n >= 1)) return { fout: json({ fout: "Een artikel in je winkelmand bestaat niet meer. Verwijder het en probeer opnieuw." }, 400) };
-    inMand[r.code] = (inMand[r.code] || 0) + n;
-    if (inMand[r.code] > p.voorraad) return { fout: json({ fout: `Van ${p.naam} zijn er nog ${p.voorraad} op voorraad.` }, 409) };
-    const gravure = r.gravure && r.gravure.svg ? r.gravure : null;
-    if (gravure && gravure.svg.length > 2e6) return { fout: json({ fout: "Een gravure is te groot. Gebruik een eenvoudiger logo." }, 400) };
-    const graveren = gravure ? GRAVEERPRIJS(n) : 0;
-    regels.push({ code: r.code, naam: p.naam, n, stukprijs: p.prijs, graveren, bedrag: round(n * (p.prijs + graveren)), gravure });
+    if (!p) return json({ fout: `Artikel ${r.code} is niet gevonden.` }, 400);
+    if (!(n >= 1 && n <= MAX_STUKS)) return json({ fout: "Ongeldig aantal." }, 400);
+    const g = r.gravure;
+    if (!g || typeof g.svg !== "string" || !g.svg.trim().startsWith("<")) return json({ fout: "Er ontbreekt een ontwerp bij een artikel." }, 400);
+    regels.push({ code: p.bestelcode, naam: p.naam, n, gravure: g });
   }
-  const subtotaal = round(regels.reduce((t, r) => t + r.bedrag, 0));
-  const cadeau = invoer.cadeau === true;
-  const cadeauverpakking = cadeau ? CADEAUPRIJS : 0;
-  const verzending = VERZENDKOSTEN(subtotaal + cadeauverpakking);
-  if (cadeau && !String(k.ontvanger || "").trim()) return { fout: json({ fout: "Vul de naam van de ontvanger in." }, 400) };
-  const totaal = round(subtotaal + cadeauverpakking + verzending);
-  const stuks = regels.reduce((t, r) => t + r.n, 0);
 
-  const datum = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  const nummer = `${voorvoegsel}-${datum}-${crypto.randomUUID().slice(0, 6).toUpperCase()}`;
+  const nu = new Date();
+  const dag = nu.toLocaleDateString("nl-NL", { timeZone: "Europe/Amsterdam", day: "2-digit", month: "2-digit" }).replace(/\D/g, "");
+  const tekens = "ACDEFHJKLMNPRTUVWXY3479";
+  const willekeurig = [...crypto.getRandomValues(new Uint8Array(3))].map(b => tekens[b % tekens.length]).join("");
   const order = {
-    nummer, aangemaakt: new Date().toISOString(), status: "open",
-    klant: pick(k, ["naam", "bedrijf", "email", "telefoon", "straat", "postcode", "plaats", "land", "opmerking", "ontvanger"]),
-    regels, subtotaal, cadeau, cadeauverpakking, verzending, totaal, stuks, levertijdInOverleg: stuks > MAX_SNEL,
+    nummer: `${WINKELS[winkel].kort}-${dag}-${willekeurig}`,
+    datum: nu.toLocaleString("nl-NL", { timeZone: "Europe/Amsterdam", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }),
+    winkel, klant: k, bonnummer, medewerker, regels,
+    stuks: regels.reduce((t, r) => t + r.n, 0),
   };
-  return { order };
-}
 
-async function bestelling(request, env, url) {
-  const { order, fout } = await maakOrder(await request.json(), env, "KG");
-  if (fout) return fout;
-  const nummer = order.nummer, totaal = order.totaal;
-  await env.ORDERS.put(nummer, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 30 });
-
-  const eigen = `${url.protocol}//${url.host}`;
-  const transactie = {
-    Currency: "EUR",
-    AmountDebit: totaal,
-    Invoice: nummer,
-    Description: `Kathmandu Graveerwerk ${nummer}`,
-    ReturnURL: `${eigen}/terug`,
-    ReturnURLCancel: `${eigen}/terug`,
-    ReturnURLError: `${eigen}/terug`,
-    ReturnURLReject: `${eigen}/terug`,
-    PushURL: `${eigen}/push`,
-    ContinueOnIncomplete: "RedirectToHTML",
-    ClientIP: { Type: 0, Address: request.headers.get("CF-Connecting-IP") || "0.0.0.0" },
-  };
-  const antwoord = await buckaroo(env, "POST", "/json/Transaction", transactie);
-  const doorsturen = antwoord?.RequiredAction?.RedirectURL;
-  if (!doorsturen) {
-    console.error("Buckaroo-antwoord zonder RedirectURL", JSON.stringify(antwoord));
-    return json({ fout: "De betaalpagina kon niet worden geopend. Probeer het later opnieuw." }, 502);
-  }
-  order.buckarooKey = antwoord.Key;
-  await env.ORDERS.put(nummer, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 30 });
-  return json({ doorsturen, nummer });
-}
-
-/* ---------------- testbestelling: zonder betaling, wel een echte ordermail ----------------
-   Alleen actief als TESTMODUS = "1". De bevestiging gaat naar het ingevulde e-mailadres. Weigert Resend dat
-   (domein nog niet geverifieerd: dan mag alleen naar het eigen account), dan gaat een voorbeeld naar MAIL_ORDERS. */
-async function testbestelling(request, env) {
-  if (env.TESTMODUS !== "1") return json({ fout: "Testbestellingen staan uit." }, 403);
-  const { order, fout } = await maakOrder(await request.json(), env, "TEST");
-  if (fout) return fout;
-  order.status = "test";
-  const ok = await stuurOrdermail(env, order, true);
+  const ok = await stuurOrdermail(env, order);
   if (!ok) return json({ fout: "De ordermail kon niet worden verstuurd. Controleer de Resend-instellingen." }, 502);
-  let klantmail = order.klant.email;
+  // bevestiging naar de klant; weigert Resend dat (domein nog niet geverifieerd), dan een voorbeeld naar MAIL_ORDERS
+  let klantmail = k.email;
   if (!(await stuurBevestiging(env, order))) {
     klantmail = null;
     await stuurBevestiging(env, order, env.MAIL_ORDERS);
   }
-  return json({ ok: true, nummer: order.nummer, totaal: order.totaal, naar: env.MAIL_ORDERS, klantmail });
-}
-
-/* ---------------- betaling gemeld ---------------- */
-async function push(request, env) {
-  const tekst = await request.text();
-  let key = null, invoice = null;
-  try {
-    const b = JSON.parse(tekst);
-    key = b?.Transaction?.Key; invoice = b?.Transaction?.Invoice;
-  } catch {
-    const f = new URLSearchParams(tekst);
-    key = f.get("brq_transactions"); invoice = f.get("brq_invoicenumber");
-  }
-  if (!key || !invoice) return new Response("ok");
-  // De melding zelf niet vertrouwen: status rechtstreeks bij Buckaroo opvragen
-  const status = await buckaroo(env, "GET", `/json/Transaction/Status/${encodeURIComponent(key)}`);
-  const code = status?.Status?.Code?.Code;
-  const order = JSON.parse((await env.ORDERS.get(invoice)) || "null");
-  if (!order) return new Response("ok");
-  if (code === 190 && order.status !== "betaald") {
-    if (Math.abs(Number(status.AmountDebit) - order.totaal) > 0.009) {
-      order.status = "bedrag-wijkt-af";
-    } else {
-      order.status = "betaald";
-      order.betaaldOp = new Date().toISOString();
-      await stuurOrdermail(env, order);
-      await stuurBevestiging(env, order);
-    }
-    await env.ORDERS.put(invoice, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 90 });
-  } else if ([490, 491, 492, 690, 890, 891].includes(code)) {
-    order.status = "mislukt";
-    await env.ORDERS.put(invoice, JSON.stringify(order), { expirationTtl: 60 * 60 * 24 * 7 });
-  }
-  return new Response("ok");
-}
-
-/* ---------------- klant terug van Buckaroo ---------------- */
-async function terug(request, env) {
-  let code = null;
-  if (request.method === "POST") {
-    const f = new URLSearchParams(await request.text());
-    code = f.get("brq_statuscode") || f.get("BRQ_STATUSCODE");
-  } else {
-    const q = new URL(request.url).searchParams;
-    code = q.get("brq_statuscode") || q.get("BRQ_STATUSCODE");
-  }
-  const gelukt = code === "190" || code === "790" || code === "791";
-  return Response.redirect(`${env.SITE_URL}/#${gelukt ? "bedankt" : "betaling-mislukt"}`, 303);
-}
-
-/* ---------------- Buckaroo met HMAC-ondertekening ---------------- */
-async function buckaroo(env, methode, pad, body) {
-  const host = env.BUCKAROO_TEST === "0" ? "checkout.buckaroo.nl" : "testcheckout.buckaroo.nl";
-  const inhoud = body ? JSON.stringify(body) : "";
-  const tijd = Math.floor(Date.now() / 1000).toString();
-  const nonce = crypto.randomUUID().replace(/-/g, "");
-  const md5 = inhoud ? b64(await crypto.subtle.digest("MD5", new TextEncoder().encode(inhoud))) : "";
-  const uri = encodeURIComponent(host + pad).toLowerCase();
-  const te = env.BUCKAROO_WEBSITE_KEY + methode + uri + tijd + nonce + md5;
-  const sleutel = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.BUCKAROO_SECRET_KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-  const handtekening = b64(await crypto.subtle.sign("HMAC", sleutel, new TextEncoder().encode(te)));
-  const r = await fetch(`https://${host}${pad}`, {
-    method: methode,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `hmac ${env.BUCKAROO_WEBSITE_KEY}:${handtekening}:${nonce}:${tijd}`,
-      Culture: "nl-NL",
-    },
-    body: inhoud || undefined,
-  });
-  const t = await r.text();
-  try { return JSON.parse(t); } catch { console.error("Buckaroo", r.status, t); return null; }
+  return json({ ok: true, nummer: order.nummer, naar: env.MAIL_ORDERS, klantmail });
 }
 
 /* ---------------- e-mail via Resend ---------------- */
@@ -216,66 +110,57 @@ async function mail(env, bericht) {
   return r.ok;
 }
 
-async function stuurOrdermail(env, o, test = false) {
+async function stuurOrdermail(env, o) {
   const bijlagen = [];
   const td = (x, rechts = false) => `<td style="padding:8px;border-top:1px solid #ddd;vertical-align:top${rechts ? ";text-align:right;white-space:nowrap" : ""}">${x}</td>`;
   const rijen = o.regels.map((r, i) => {
-    const nr = i + 1;
-    let rij = `<tr>${td(`<b>${esc(r.naam)}</b><br>Bestelcode ${esc(r.code)}`)}${td(r.n, true)}${td(euro(r.stukprijs), true)}${td(euro(r.n * r.stukprijs), true)}</tr>`;
-    if (r.gravure) {
-      const c = r.gravure.config || {};
-      const basis = `${o.nummer}_regel${nr}_${r.code}`;
-      bijlagen.push({ filename: `${basis}_xtool.svg`, content: btoa(unescape(encodeURIComponent(r.gravure.svg))) });
-      if (r.gravure.voorbeeld) bijlagen.push({ filename: `${basis}_voorbeeld.png`, content: r.gravure.voorbeeld.split(",")[1] });
-      if (r.gravure.logo) bijlagen.push({ filename: `${basis}_logo.png`, content: r.gravure.logo.split(",")[1] });
-      const g = `<b>Graveren</b> – op ${esc(r.naam)} (${esc(r.code)})<br><span style="color:#555">Regel 1: ${esc(c.r1 || "–")}<br>Regel 2: ${esc(c.r2 || "–")}<br>Lettertype: ${esc(c.lettertype || "")} · Symbool: ${esc(c.symbool || "")}<br>
-           Formaat: ${esc(r.gravure.formaat || "")}<br>Bijlagen: ${basis}_xtool.svg, ${basis}_voorbeeld.png${r.gravure.logo ? `, ${basis}_logo.png` : ""}</span>`;
-      rij += `<tr>${td(g)}${td(r.n, true)}${td(euro(r.graveren), true)}${td(euro(r.n * r.graveren), true)}</tr>`;
-    }
-    return rij;
+    const nr = i + 1, c = r.gravure.config || {};
+    const basis = `${o.nummer}_regel${nr}_${r.code}`;
+    bijlagen.push({ filename: `${basis}_xtool.svg`, content: btoa(unescape(encodeURIComponent(r.gravure.svg))) });
+    if (r.gravure.voorbeeld) bijlagen.push({ filename: `${basis}_voorbeeld.png`, content: r.gravure.voorbeeld.split(",")[1] });
+    if (r.gravure.logo) bijlagen.push({ filename: `${basis}_logo.png`, content: r.gravure.logo.split(",")[1] });
+    return `<tr>${td(nr)}${td(`<b>${esc(r.naam)}</b><br>Bestelcode ${esc(r.code)}`)}${td(r.n, true)}
+      ${td(`Regel 1: <b>${esc(c.r1 || "–")}</b><br>Regel 2: <b>${esc(c.r2 || "–")}</b><br>Lettertype: ${esc(c.lettertype || "")} · Symbool: ${esc(c.symbool || "")}<br>
+        Formaat: ${esc(r.gravure.formaat || "")}<br><span style="color:#555">Bijlagen: ${basis}_xtool.svg${r.gravure.voorbeeld ? `, ${basis}_voorbeeld.png` : ""}${r.gravure.logo ? `, ${basis}_logo.png` : ""}</span>`)}</tr>`;
   }).join("");
-  const k = o.klant;
+  const k = o.klant, naarUtrecht = o.winkel !== "Utrecht";
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
-    ${test ? `<p style="background:#E9DCC6;padding:8px"><b>TESTBESTELLING</b>: er is niet betaald. Niet verzenden.</p>` : ""}
-    <h2>Nieuwe bestelling ${o.nummer}</h2>
-    ${o.levertijdInOverleg ? `<p style="background:#FFF3D6;padding:8px"><b>${o.stuks} stuks: levertijd binnen 2 werkdagen met de klant afstemmen.</b></p>` : `<p>${o.stuks} stuks: binnen 3 werkdagen verzenden.</p>`}
-    ${o.cadeau ? `<p style="background:#F6D7D2;padding:10px;font-size:16px"><b>🎁 CADEAUVERPAKKING – inpakken als cadeau en GEEN factuur of pakbon meesturen.</b><br>Verzenden naar: ${esc(k.ontvanger)}, ${esc(k.straat)}, ${esc(k.postcode)} ${esc(k.plaats)}, ${esc(k.land)}</p>` : ""}
-    <p><b>Let op:</b> boek de artikelen handmatig uit in de kassa / op kathmandu.nl.</p>
-    <h3>${o.cadeau ? "Klant (besteller, krijgt de factuur per mail)" : "Klant"}</h3>
-    <p>${esc(k.naam)}${k.bedrijf ? `<br>${esc(k.bedrijf)}` : ""}<br>${esc(k.straat)}<br>${esc(k.postcode)} ${esc(k.plaats)}<br>${esc(k.land)}<br>
-       ${esc(k.email)}${k.telefoon ? `<br>${esc(k.telefoon)}` : ""}</p>
-    ${k.opmerking ? `<p><b>Opmerking:</b> ${esc(k.opmerking)}</p>` : ""}
-    <h3>Artikelen</h3>
+    <p style="font-size:30px;font-weight:bold;margin:0 0 4px;letter-spacing:1px">${esc(o.nummer)}</p>
+    <p style="background:#E9DCC6;padding:10px;font-size:16px;margin:0 0 12px">
+      Gekocht in <b>${esc(o.winkel)}</b>. Na het graveren <b>terug naar ${esc(o.winkel)}</b>: de klant haalt de fles daar op.
+      ${naarUtrecht ? "<br>De fles komt met dit ordernummer van Amsterdam naar Utrecht." : ""}</p>
+    <p><b>Graveerweekend:</b> de fles is afgerekend aan de kassa, graveren is gratis.</p>
+    <table style="border-collapse:collapse">
+      <tr><td style="padding:2px 16px 2px 0;color:#555">Klant</td><td>${esc(k.naam)}</td></tr>
+      <tr><td style="padding:2px 16px 2px 0;color:#555">E-mail</td><td>${esc(k.email)}</td></tr>
+      ${k.telefoon ? `<tr><td style="padding:2px 16px 2px 0;color:#555">Telefoon</td><td>${esc(k.telefoon)}</td></tr>` : ""}
+      <tr><td style="padding:2px 16px 2px 0;color:#555">Bonnummer kassa</td><td>${esc(o.bonnummer)}</td></tr>
+      <tr><td style="padding:2px 16px 2px 0;color:#555">Opgenomen door</td><td>${esc(o.medewerker)}, ${esc(o.datum)}</td></tr>
+      ${k.opmerking ? `<tr><td style="padding:2px 16px 2px 0;color:#555">Opmerking</td><td>${esc(k.opmerking)}</td></tr>` : ""}
+    </table>
+    <h3>Te graveren (${o.stuks} ${o.stuks === 1 ? "fles" : "flessen"})</h3>
     <table style="border-collapse:collapse;width:100%">
-      <tr style="text-align:left"><th style="padding:8px">Omschrijving</th><th style="padding:8px;text-align:right">Aantal</th><th style="padding:8px;text-align:right">Stukprijs</th><th style="padding:8px;text-align:right">Bedrag</th></tr>${rijen}
-      <tr><td colspan="3" style="padding:8px;text-align:right">Subtotaal</td><td style="padding:8px;text-align:right">${euro(o.subtotaal + (o.cadeauverpakking || 0))}</td></tr>
-      ${o.cadeau ? `<tr>${td("<b>Cadeauverpakking</b>")}${td(1, true)}${td(euro(o.cadeauverpakking), true)}${td(euro(o.cadeauverpakking), true)}</tr>` : ""}
-      <tr><td colspan="3" style="padding:8px;text-align:right">Verzenden</td><td style="padding:8px;text-align:right">${o.verzending ? euro(o.verzending) : "gratis"}</td></tr>
-      <tr><td colspan="3" style="padding:8px;text-align:right"><b>Totaal betaald</b></td><td style="padding:8px;text-align:right"><b>${euro(o.totaal)}</b></td></tr>
-    </table></div>`;
-  return mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `${test ? "TESTBESTELLING" : "Bestelling"} ${o.nummer} – ${k.naam} – ${o.stuks} st.`, html, attachments: bijlagen });
+      <tr style="text-align:left"><th style="padding:8px">#</th><th style="padding:8px">Artikel</th><th style="padding:8px;text-align:right">Aantal</th><th style="padding:8px">Gravure</th></tr>${rijen}
+    </table>
+    <p style="color:#555">Beantwoorden van deze mail gaat naar de klant, bijvoorbeeld om te laten weten dat de fles klaarligt in ${esc(o.winkel)}.</p></div>`;
+  return mail(env, { to: env.MAIL_ORDERS, reply_to: k.email, subject: `Graveerorder ${o.nummer} – ${o.winkel} – ${k.naam} – ${o.stuks} st.`, html, attachments: bijlagen });
 }
 
 async function stuurBevestiging(env, o, naar = null) {
-  const k = o.klant;
-  const tdk = (x, rechts = false) => `<td style="padding:6px 8px;border-top:1px solid #ddd;vertical-align:top${rechts ? ";text-align:right;white-space:nowrap" : ""}">${x}</td>`;
-  const regels = o.regels.map(r => {
-    let rij = `<tr>${tdk(esc(r.naam))}${tdk(`${r.n} × ${euro(r.stukprijs)}`, true)}${tdk(euro(r.n * r.stukprijs), true)}</tr>`;
-    if (r.gravure) rij += `<tr>${tdk(`Graveren: “${esc([r.gravure.config?.r1, r.gravure.config?.r2].filter(Boolean).join(" / ") || "symbool/logo")}”`)}${tdk(`${r.n} × ${euro(r.graveren)}`, true)}${tdk(euro(r.n * r.graveren), true)}</tr>`;
-    return rij;
-  }).join("");
+  const k = o.klant, w = WINKELS[o.winkel];
+  const regels = o.regels.map(r => `<li>${r.n} × ${esc(r.naam)}: “${esc([r.gravure.config?.r1, r.gravure.config?.r2].filter(Boolean).join(" / ") || "symbool/logo")}”</li>`).join("");
+  const metOntwerp = o.regels.filter(r => r.gravure.voorbeeld);
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#17201C">
     <p>Beste ${esc(k.naam)},</p>
-    <p>Bedankt voor je bestelling bij Kathmandu Graveerwerk. We hebben je betaling ontvangen.</p>
-    <table style="border-collapse:collapse">${regels}
-      ${o.cadeau ? `<tr>${tdk("Cadeauverpakking")}${tdk("1 × " + euro(o.cadeauverpakking), true)}${tdk(euro(o.cadeauverpakking), true)}</tr>` : ""}
-      <tr>${tdk("Verzenden")}${tdk("", true)}${tdk(o.verzending ? euro(o.verzending) : "gratis", true)}</tr>
-      <tr>${tdk("<b>Totaal betaald</b> (incl. btw)")}${tdk("", true)}${tdk(`<b>${euro(o.totaal)}</b>`, true)}</tr></table>
-    ${o.cadeau ? `<p>We pakken je bestelling in als cadeau en sturen hem zonder factuur naar ${esc(k.ontvanger)}, ${esc(k.straat)}, ${esc(k.postcode)} ${esc(k.plaats)}. Deze mail is je factuur.</p>` : ""}
-    <p>${o.levertijdInOverleg ? "Omdat je 4 of meer artikelen hebt besteld, nemen we binnen 2 werkdagen contact met je op over de levertijd." : "We verzenden je bestelling binnen 3 werkdagen."}</p>
-    <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail of mail naar webshop@kathmandu.nl.</p>
-    <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel<br>Glencoe B.V. · Oudegracht 256-264, 3511 NV Utrecht · KvK 30166640</p></div>`;
-  return mail(env, { to: naar || k.email, reply_to: env.MAIL_ORDERS, subject: `${naar ? "[Voorbeeld klantmail] " : ""}Bevestiging bestelling ${o.nummer}`, html });
+    <p>Bedankt voor je aankoop tijdens ons graveerweekend. We graveren je ${o.stuks === 1 ? "fles" : "flessen"} gratis.</p>
+    <p>Ordernummer: <b>${esc(o.nummer)}</b></p>
+    <ul>${regels}</ul>
+    ${metOntwerp.length ? "<p>Het ontwerp zoals je het in de winkel hebt gezien, zit als bijlage bij deze mail.</p>" : ""}
+    <p>Zodra je bestelling gegraveerd is, laten we het je weten. Je kunt hem dan ophalen in onze winkel in ${esc(o.winkel)}, ${esc(w.adres.split(",")[0])}. Neem je ordernummer of kassabon mee.</p>
+    <p>Gegraveerde artikelen worden speciaal voor jou gemaakt en kun je niet retourneren. Vragen? Beantwoord deze mail.</p>
+    <p>Met vriendelijke groet,<br>Kathmandu Outdoor &amp; Travel</p></div>`;
+  const bijlagen = metOntwerp.map((r, i) => ({ filename: `ontwerp_${i + 1}.png`, content: r.gravure.voorbeeld.split(",")[1] }));
+  return mail(env, { to: naar || k.email, reply_to: env.MAIL_ORDERS, subject: `${naar ? "[Voorbeeld klantmail] " : ""}Je graveerbestelling ${o.nummer} bij Kathmandu`, html, attachments: bijlagen });
 }
 
 /* ---------------- hulpjes ---------------- */
@@ -287,8 +172,5 @@ function cors(env, r) {
   return new Response(r.body, { status: r.status, headers: h });
 }
 const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "Content-Type": "application/json" } });
-const round = n => Math.round(n * 100) / 100;
-const euro = n => "€ " + n.toFixed(2).replace(".", ",");
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const pick = (o, ks) => Object.fromEntries(ks.map(k => [k, String(o[k] || "").slice(0, 500)]));
-function b64(buf) { let s = ""; for (const x of new Uint8Array(buf)) s += String.fromCharCode(x); return btoa(s); }

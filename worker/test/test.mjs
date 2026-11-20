@@ -1,117 +1,70 @@
-// Test van de Worker met nagebootste Buckaroo, voorraad.json en Resend. Uitvoeren: node worker/test/test.mjs
-import { createHash, webcrypto } from "node:crypto";
+// Test van de Worker met nagebootste voorraad.json en Resend. Uitvoeren: node worker/test/test.mjs
 import assert from "node:assert";
-
-// Cloudflare ondersteunt MD5 in crypto.subtle; Node niet. Nabootsen:
-const echteDigest = crypto.subtle.digest.bind(crypto.subtle);
-crypto.subtle.digest = async (alg, data) =>
-  alg === "MD5" ? createHash("md5").update(Buffer.from(data)).digest().buffer : echteDigest(alg, data);
-// globalThis.crypto is in Node al webcrypto; digest hierboven is aangepast
-
 const { default: worker } = await import("../src/index.js");
 
-const kv = new Map();
 const env = {
-  SITE_URL: "https://nielskathmandu.github.io/Graveershop",
-  BUCKAROO_TEST: "1", BUCKAROO_WEBSITE_KEY: "WEBKEY", BUCKAROO_SECRET_KEY: "GEHEIM",
-  RESEND_API_KEY: "re_test", TESTMODUS: "1", MAIL_VAN: "Graveerwerk <x@kathmandu.nl>", MAIL_ORDERS: "webshop@kathmandu.nl",
-  ORDERS: { get: async k => kv.get(k) ?? null, put: async (k, v) => void kv.set(k, v) },
+  SITE_URL: "https://nielskathmandu.github.io/Graveershop", PINCODE: "246810",
+  RESEND_API_KEY: "re_test", MAIL_VAN: "Graveerwerk <x@kathmandu.nl>", MAIL_ORDERS: "niels@kathmandu.nl",
 };
 const verzoeken = [];
+let resendWeigertKlant = false;
 globalThis.fetch = async (url, opt = {}) => {
   url = String(url); verzoeken.push({ url, opt });
   if (url.endsWith("/voorraad.json"))
     return new Response(JSON.stringify({ producten: [{ bestelcode: "029031", naam: "Stanley Legendary 0,59L Black", prijs: 54.95, voorraad: 4 }] }));
-  if (url.includes("buckaroo.nl/json/Transaction/Status/"))
-    return new Response(JSON.stringify({ Key: "TX1", Status: { Code: { Code: 190 } }, AmountDebit: 117.40 }));
-  if (url.includes("buckaroo.nl/json/Transaction"))
-    return new Response(JSON.stringify({ Key: "TX1", RequiredAction: { RedirectURL: "https://testcheckout.buckaroo.nl/html/redirect?x=1" } }));
-  if (url.includes("api.resend.com")) return new Response(JSON.stringify({ id: "m1" }));
+  if (url.includes("api.resend.com")) {
+    if (resendWeigertKlant && JSON.parse(opt.body).to !== env.MAIL_ORDERS) return new Response('{"message":"testing emails only to own address"}', { status: 403 });
+    return new Response(JSON.stringify({ id: "m1" }));
+  }
   throw new Error("onverwacht verzoek " + url);
 };
+const vraag = (pad, body) => worker.fetch(new Request("https://graveerwerk.example.workers.dev" + pad, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }), env);
+const mails = () => verzoeken.filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
 
-const klant = { naam: "Sanne Test", email: "sanne@example.com", straat: "Oudegracht 1", postcode: "3511 AA", plaats: "Utrecht", land: "Nederland" };
 const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="83mm" height="60mm"><path d="M0 0L1 1Z"/></svg>';
 const png = "data:image/png;base64,iVBORw0KGgo=";
-const vraag = (pad, body, methode = "POST", type = "application/json") =>
-  worker.fetch(new Request("https://graveerwerk.example.workers.dev" + pad, { method: methode, headers: { "Content-Type": type }, body }), env);
+const klant = { naam: "Sanne Test", email: "sanne@example.com", telefoon: "0612345678" };
+const regel = { code: "029031", n: 2, gravure: { svg, voorbeeld: png, formaat: "83 × 60 mm", config: { r1: "Sanne", r2: "", lettertype: "Strak", symbool: "Ster" } } };
+const order = extra => ({ pin: "246810", winkel: "Amsterdam", medewerker: "Dries", bonnummer: "123456", klant, regels: [regel], ...extra });
 
-// 1. prijs uit de browser wordt genegeerd; te veel stuks wordt geweigerd
-let r = await vraag("/bestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 5 }] }));
-assert.equal(r.status, 409, "voorraadcontrole");
-
-// 2. geldige bestelling: 1 zonder + 1 met gravure = 54,95 + 54,95 + 7,50 = 117,40 (geen verzendkosten)
-r = await vraag("/bestelling", JSON.stringify({ klant, akkoord: true, regels: [
-  { code: "029031", n: 1, prijs: 0.01 },
-  { code: "029031", n: 1, gravure: { svg, voorbeeld: png, formaat: "83 × 60 mm", config: { r1: "Sanne", r2: "", lettertype: "Strak", symbool: "Ster" } } },
-] }));
-const d = await r.json();
-assert.equal(r.status, 200, JSON.stringify(d));
-assert.ok(d.doorsturen.startsWith("https://testcheckout.buckaroo.nl"));
-const tx = verzoeken.find(v => v.url === "https://testcheckout.buckaroo.nl/json/Transaction");
-const body = JSON.parse(tx.opt.body);
-assert.equal(body.AmountDebit, 117.4, "bedrag server-side berekend");
-assert.match(tx.opt.headers.Authorization, /^hmac WEBKEY:[A-Za-z0-9+/]{43}=:[0-9a-f]{32}:\d{10}$/, "HMAC-header");
+// 1. pincode
+let r = await vraag("/pin", { pin: "0000" }); assert.equal(r.status, 403);
+r = await vraag("/pin", { pin: "246810" }); assert.equal(r.status, 200);
 assert.equal(r.headers.get("Access-Control-Allow-Origin"), "https://nielskathmandu.github.io");
 
-// 3. push van Buckaroo -> status opvragen -> ordermail met bijlagen + bevestiging
-r = await vraag("/push", JSON.stringify({ Transaction: { Key: "TX1", Invoice: d.nummer, Status: { Code: { Code: 190 } } } }));
-assert.equal(r.status, 200);
-const mails = verzoeken.filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
-assert.equal(mails.length, 2, "ordermail + bevestiging");
-const order = mails.find(m => m.to === "webshop@kathmandu.nl");
-assert.deepEqual(order.attachments.map(a => a.filename.replace(d.nummer, "NR")), ["NR_regel2_029031_xtool.svg", "NR_regel2_029031_voorbeeld.png"]);
-assert.equal(Buffer.from(order.attachments[0].content, "base64").toString(), svg);
-assert.match(order.html, /<b>Graveren<\/b>/, "gravure als losse regel"); assert.ok(order.html.includes("7,50"), "graveerprijs apart");
-assert.equal(JSON.parse(kv.get(d.nummer)).status, "betaald");
+// 2. weigeringen
+assert.equal((await vraag("/winkelorder", order({ pin: "1" }))).status, 403, "verkeerde pin");
+assert.equal((await vraag("/winkelorder", order({ bonnummer: "" }))).status, 400, "bonnummer verplicht");
+assert.equal((await vraag("/winkelorder", order({ winkel: "Rotterdam" }))).status, 400, "onbekende winkel");
+assert.equal((await vraag("/winkelorder", order({ regels: [{ code: "029031", n: 1 }] }))).status, 400, "ontwerp verplicht");
+assert.equal((await vraag("/winkelorder", order({ klant: { ...klant, email: "x" } }))).status, 400, "e-mail");
+assert.equal(mails().length, 0);
 
-// 4. dubbele push mailt niet opnieuw
-await vraag("/push", JSON.stringify({ Transaction: { Key: "TX1", Invoice: d.nummer } }));
-assert.equal(verzoeken.filter(v => v.url.includes("resend")).length, 2);
+// 3. geldige order uit Amsterdam
+r = await vraag("/winkelorder", order());
+const d = await r.json();
+assert.equal(r.status, 200, JSON.stringify(d));
+assert.match(d.nummer, /^A-\d{4}-[A-Z0-9]{3}$/);
+assert.equal(d.klantmail, "sanne@example.com");
+const [om, km] = mails();
+assert.equal(om.to, "niels@kathmandu.nl"); assert.equal(om.reply_to, "sanne@example.com");
+assert.match(om.subject, /^Graveerorder A-.* – Amsterdam – Sanne Test – 2 st\.$/);
+assert.match(om.html, /terug naar Amsterdam/); assert.match(om.html, /123456/); assert.match(om.html, /Dries/);
+assert.deepEqual(om.attachments.map(a => a.filename.replace(d.nummer, "NR")), ["NR_regel1_029031_xtool.svg", "NR_regel1_029031_voorbeeld.png"]);
+assert.equal(Buffer.from(om.attachments[0].content, "base64").toString(), svg);
+assert.equal(km.to, "sanne@example.com"); assert.match(km.html, /Haarlemmerstraat 123/); assert.equal(km.attachments.length, 1);
 
-// 5. terugkeer van de klant
-r = await vraag("/terug", "brq_statuscode=190&brq_invoicenumber=X", "POST", "application/x-www-form-urlencoded");
-assert.equal(r.status, 303); assert.equal(r.headers.get("Location"), env.SITE_URL + "/#bedankt");
-r = await vraag("/terug", "brq_statuscode=890", "POST", "application/x-www-form-urlencoded");
-assert.equal(r.headers.get("Location"), env.SITE_URL + "/#betaling-mislukt");
+// 4. Utrecht + Resend weigert klantadres -> voorbeeld naar MAIL_ORDERS
+resendWeigertKlant = true;
+const voor = mails().length;
+r = await vraag("/winkelorder", order({ winkel: "Utrecht" }));
+const u = await r.json();
+assert.match(u.nummer, /^U-/); assert.equal(u.klantmail, null);
+const nieuw = mails().slice(voor);
+assert.equal(nieuw.at(-1).to, "niels@kathmandu.nl"); assert.match(nieuw.at(-1).subject, /Voorbeeld klantmail/); assert.match(nieuw.at(-1).html, /Oudegracht 256-264/);
 
-// 6. testbestelling zonder betaling: ordermail met TEST-label + voorbeeld-klantmail naar MAIL_ORDERS, geen Buckaroo
-const voor = verzoeken.length;
-r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1, gravure: { svg, voorbeeld: png, formaat: "83 × 60 mm", config: { r1: "Test" } } }] }));
-const td = await r.json();
-assert.equal(r.status, 200, JSON.stringify(td)); assert.ok(td.nummer.startsWith("TEST-"));
-const nieuw = verzoeken.slice(voor);
-assert.ok(!nieuw.some(v => v.url.includes("buckaroo")), "geen Buckaroo bij testbestelling");
-const tm = nieuw.filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
-assert.equal(tm.length, 2); assert.equal(tm[0].to, "webshop@kathmandu.nl"); assert.equal(tm[1].to, "sanne@example.com", "klantmail naar ingevuld adres");
-assert.equal(td.klantmail, "sanne@example.com");
-assert.match(tm[0].subject, /^TESTBESTELLING TEST-/); assert.equal(tm[0].attachments.length, 2);
-env.TESTMODUS = "0";
-r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1 }] }));
-assert.equal(r.status, 403, "testmodus uit");
+// 5. zonder PINCODE-variabele
+delete env.PINCODE;
+r = await vraag("/pin", { pin: "246810" }); assert.equal(r.status, 500);
 
-console.log("Alle tests geslaagd. Ordermail-onderwerp:", order.subject);
-
-// 7. cadeauverpakking: aparte regel van 2,95, ontvanger verplicht, melding in ordermail
-env.TESTMODUS = "1";
-r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, cadeau: true, regels: [{ code: "029031", n: 1 }] }));
-assert.equal(r.status, 400, "ontvanger verplicht bij cadeau");
-const v7 = verzoeken.length;
-r = await vraag("/testbestelling", JSON.stringify({ klant: { ...klant, ontvanger: "Piet Cadeau" }, akkoord: true, cadeau: true, regels: [{ code: "029031", n: 1 }] }));
-const cd = await r.json();
-assert.equal(cd.totaal, 57.9, "54,95 + 2,95 cadeau, gratis verzending");
-const cm = verzoeken.slice(v7).filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
-assert.match(cm[0].html, /CADEAUVERPAKKING/); assert.match(cm[0].html, /Piet Cadeau/); assert.match(cm[1].html, /Cadeauverpakking/);
-console.log("Cadeauverpakking ok");
-
-// 9. Resend weigert klantadres (domein niet geverifieerd) -> voorbeeld naar MAIL_ORDERS
-const echteFetch = globalThis.fetch;
-globalThis.fetch = async (url, opt = {}) => (String(url).includes("api.resend.com") && JSON.parse(opt.body).to === "sanne@example.com")
-  ? new Response('{"message":"You can only send testing emails to your own email address"}', { status: 403 }) : echteFetch(url, opt);
-const v9 = verzoeken.length;
-r = await vraag("/testbestelling", JSON.stringify({ klant, akkoord: true, regels: [{ code: "029031", n: 1 }] }));
-const d9 = await r.json();
-assert.equal(d9.klantmail, null);
-const m9 = verzoeken.slice(v9).filter(v => v.url.includes("resend")).map(v => JSON.parse(v.opt.body));
-assert.equal(m9.at(-1).to, "webshop@kathmandu.nl"); assert.match(m9.at(-1).subject, /Voorbeeld klantmail/);
-console.log("Klantmail-terugval ok");
+console.log("Alle tests geslaagd. Voorbeeld ordernummer:", d.nummer);
