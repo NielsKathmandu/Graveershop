@@ -1,7 +1,7 @@
 {
-  "bijgewerkt": "2026-11-24T18:02:10+00:00",
+  "bijgewerkt": "2026-11-24T19:11:03+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
-  "aantal": 111,
+  "aantal": 110,
   "producten": [
     {
       "merk": "Klean Kanteen",
@@ -2959,56 +2959,6 @@
         "h": 0.2587,
         "lak": "#2D2E2E",
         "dop": "#504F4E",
-        "gravure": "#D6D9DA"
-      }
-    },
-    {
-      "merk": "Stanley",
-      "url": "https://www.kathmandu.nl/stanley-the-everyday-camp-mug-0-35l-100000123671-029032",
-      "naam": "Stanley The Everyday Camp Mug 0,35L  Hammertone Green",
-      "prijs": 35.95,
-      "bestelcode": "029032",
-      "leverancierscode": "10-13094-0125",
-      "kleur": "Groen",
-      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_1-1500-1500.jpg",
-      "afbeeldingen": [
-        "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_1-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/32/029032_2-1500-1500.jpg"
-      ],
-      "afmetingen_mm": {
-        "d": 99.0,
-        "h": 120.0
-      },
-      "omschrijving": "<p>Stevige kampeermok</p><h3>Eigenschappen Stanley The Everyday Camp Mug 0,35L</h3><ul><li>Dubbelwandige vacuüm isolatie</li><li>De speciale deksel reduceert lekken</li><li>Splash free, niet volledig lekvrij</li><li>Makkelijk schoon te maken</li><li>Vaatwasmachinebestendig</li><li>Geschikt voor bekerhouders</li><li>BPA-vrij</li><li>Tijdloos en duurzaam ontwerp</li><li>Gemaakt van 18/8 roestvrij staal</li><li>Afmetingen: 10,8 x 9,9 x 12 cm</li><li>Inhoud: 350 ml</li><li>Gewicht: 290 gram</li><li>Houdt 1,5 uur warm</li><li>houdt 3 uur koud</li></ul><h4>Materiaal</h4><ul><li>18/8 Roestvrij staal</li><li>BPA-vrij kunststof</li></ul><p>Stevige kampeermok gemaakt met Stanley's dubbelwandige vacuümisolatie, zodat je favoriete drankjes langer warm of koud blijven. Het veilige Tritan™-deksel met perssluiting voorkomt ook spatten, zodat u gemakkelijk kunt nippen in de keuken, op het werk of rond het kampvuur. De Stanley Camp-mok is ontworpen om compatibel te zijn met koffiezetapparaten voor één kopje en onze Classic Perfect-Brew Pour Over voor degenen die hun koffie serieus nemen.</p>",
-      "voorraad_per_winkel": {
-        "Amsterdam": 1,
-        "Utrecht": 0
-      },
-      "voorraad": 1,
-      "voorraadtabel_gevonden": true,
-      "lokale_afbeeldingen": [
-        "img/029032_1.jpg",
-        "img/029032_2.jpg"
-      ],
-      "recht_foto": {
-        "pad": "img/029032_recht.jpg",
-        "cx": 0.396,
-        "cy": 0.6644,
-        "w": 0.5086,
-        "h": 0.257,
-        "lak": "#778D79",
-        "dop": "#A4A9A6",
-        "gravure": "#D6D9DA",
-        "product_y0": 0.105,
-        "product_h": 0.79
-      },
-      "graveervlak_foto": {
-        "cx": 0.4,
-        "cy": 0.6964,
-        "w": 0.5179,
-        "h": 0.257,
-        "lak": "#758677",
-        "dop": "#71706E",
         "gravure": "#D6D9DA"
       }
     },
