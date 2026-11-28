@@ -1,7 +1,7 @@
 {
-  "bijgewerkt": "2026-11-28T11:00:01+00:00",
+  "bijgewerkt": "2026-11-28T11:58:13+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
-  "aantal": 110,
+  "aantal": 109,
   "producten": [
     {
       "merk": "Klean Kanteen",
@@ -2299,60 +2299,6 @@
     },
     {
       "merk": "Stanley",
-      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000148729-029009",
-      "naam": "Stanley The Café-To-Go Travel Mug 0,23L  Blue Sky",
-      "prijs": 27.95,
-      "bestelcode": "029009",
-      "leverancierscode": "10-21326-0003",
-      "kleur": "Lichtblauw",
-      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_1-1500-1500.jpg",
-      "afbeeldingen": [
-        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_1-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_2-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_3-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_4-1500-1500.jpg"
-      ],
-      "afmetingen_mm": {
-        "d": 77.6,
-        "h": 158.0
-      },
-      "omschrijving": "<p>Compacte geïsoleerde reisbeker</p><h3>Eigenschappen Stanley The Café-To-Go Travel Mug 0,23L</h3><ul><li>Gerecycled roestvrij staal BPA-vrij</li><li>Dubbelwandige vacuümisolatie</li><li>Houdt 3 uur warm</li><li>Houdt 16 uur koud</li><li>Praktisch draaghandvat</li><li>Past in de meeste bekerhouders</li><li>Vaatwasmachinebestendig</li><li>Levenslange garantie</li><li>Gewicht: 250g</li><li>Afmetingen: 77.6 x 77.6 x 158 mm</li></ul><p>De Café To-Go Travel Mug neem je elke dag mee als je op weg gaat, of dat nu in de stad is of op het platteland. Deze compacte reisbeker is ontwikkeld voor geweldige prestaties. Hij heeft een uniek 2-delig deksel dat volledig lekvrij is en waar je toch gemakkelijk aan drinkt, zodat je de beker gemakkelijk overal mee naartoe neemt. Deze beker houdt je drankjes 3 uur warm: perfect voor 's ochtends vroeg in de winter naar je werk te gaan. Ook houdt hij je drankje 16 uur lang koud, perfect voor een lekkere wandeling met een Iced Latte tijdens je lunchpauze in de zomer. Dit product is gemaakt van gerecycled roestvrij staal en volledig vaatwasmachinebestendig en past naadloos in jouw levensstijl.</p>",
-      "voorraad_per_winkel": {
-        "Amsterdam": 0,
-        "Utrecht": 1
-      },
-      "voorraad": 1,
-      "voorraadtabel_gevonden": true,
-      "lokale_afbeeldingen": [
-        "img/029009_1.jpg",
-        "img/029009_2.jpg",
-        "img/029009_3.jpg",
-        "img/029009_4.jpg"
-      ],
-      "recht_foto": {
-        "pad": "img/029009_recht.jpg",
-        "cx": 0.498,
-        "cy": 0.7544,
-        "w": 0.3026,
-        "h": 0.1982,
-        "lak": "#7FA9D4",
-        "dop": "#91BAE3",
-        "gravure": "#8F9497",
-        "product_y0": 0.07,
-        "product_h": 0.86
-      },
-      "graveervlak_foto": {
-        "cx": 0.498,
-        "cy": 0.7516,
-        "w": 0.3026,
-        "h": 0.1966,
-        "lak": "#7EA9D2",
-        "dop": "#92B9E3",
-        "gravure": "#8F9497"
-      }
-    },
-    {
-      "merk": "Stanley",
       "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000108038-029007",
       "naam": "Stanley The Café-To-Go Travel Mug 0,23L  Cream Gloss",
       "prijs": 27.95,
@@ -2580,9 +2526,9 @@
       "omschrijving": "<p>Compacte geïsoleerde reisbeker</p><h3>Eigenschappen Stanley The Café-To-Go Travel Mug 0,35L</h3><ul><li>Gerecycled roestvrij staal BPA-vrij</li><li>Dubbelwandige vacuümisolatie</li><li>Houdt 4 uur warm</li><li>Houdt 24 uur koud</li><li>Praktisch draaghandvat</li><li>Past in de meeste bekerhouders</li><li>Vaatwasmachinebestendig</li><li>Levenslange garantie</li><li>Gewicht: 290g</li><li>Afmetingen: 77.6 x 77.6 x 190 mm</li></ul><p>De Café To-Go Travel Mug neem je elke dag mee als je op weg gaat, of dat nu in de stad is of op het platteland. Deze compacte reisbeker is ontwikkeld voor geweldige prestaties. Hij heeft een uniek 2-delig deksel dat volledig lekvrij is en waar je toch gemakkelijk aan drinkt, zodat je de beker gemakkelijk overal mee naartoe neemt. Deze beker houdt je drankjes 3 uur warm: perfect voor 's ochtends vroeg in de winter naar je werk te gaan. Ook houdt hij je drankje 16 uur lang koud, perfect voor een lekkere wandeling met een Iced Latte tijdens je lunchpauze in de zomer. Dit product is gemaakt van gerecycled roestvrij staal en volledig vaatwasmachinebestendig en past naadloos in jouw levensstijl.</p>",
       "voorraad_per_winkel": {
         "Amsterdam": 4,
-        "Utrecht": 4
+        "Utrecht": 3
       },
-      "voorraad": 8,
+      "voorraad": 7,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/029011_1.jpg",
