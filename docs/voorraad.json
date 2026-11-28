@@ -1,5 +1,5 @@
 {
-  "bijgewerkt": "2026-11-28T13:11:54+00:00",
+  "bijgewerkt": "2026-11-28T14:15:22+00:00",
   "bron": "kathmandu.nl, lokale winkelvoorraad Amsterdam + Utrecht",
   "aantal": 109,
   "producten": [
@@ -1827,10 +1827,10 @@
       },
       "omschrijving": "<p>Thermosfles is moderne uitvoering.</p><h3>Eigenschappen Stanley The Adventure To-Go Bottle 1,0L</h3><ul><li>Dubbelwandig: goede isolatie</li><li>Dop is ook dubbelwandig en fungeert ook als beker</li><li>25 uur heet</li><li>27 uur koud</li><li>5 dagen ijs</li><li>8/8 roestvast staal</li><li>BPA-free</li><li>Lekvrij</li><li>Inhoud: 1 liter</li><li>Gewicht: 670 gram</li><li>Afmetingen: 8,8 x 30,3 cm (∅ x H), dop is 7,3 cm H</li></ul><p>Thermosfles voor werk, vakantie en eigenlijk elke dag. De dubbelwandige thermosfles met een modern design.</p>",
       "voorraad_per_winkel": {
-        "Amsterdam": 3,
+        "Amsterdam": 2,
         "Utrecht": 2
       },
-      "voorraad": 5,
+      "voorraad": 4,
       "voorraadtabel_gevonden": true,
       "lokale_afbeeldingen": [
         "img/029042_1.jpg",
@@ -2295,6 +2295,60 @@
         "lak": "#D94524",
         "dop": "#EA5A40",
         "gravure": "#D6D9DA"
+      }
+    },
+    {
+      "merk": "Stanley",
+      "url": "https://www.kathmandu.nl/stanley-the-cafe-to-go-travel-mug-0-23l-100000148729-029009",
+      "naam": "Stanley The Café-To-Go Travel Mug 0,23L  Blue Sky",
+      "prijs": 27.95,
+      "bestelcode": "029009",
+      "leverancierscode": "10-21326-0003",
+      "kleur": "Lichtblauw",
+      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_1-1500-1500.jpg",
+      "afbeeldingen": [
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_1-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_2-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_3-1500-1500.jpg",
+        "https://www.kathmandu.nl/pimages/cache/02/90/09/029009_4-1500-1500.jpg"
+      ],
+      "afmetingen_mm": {
+        "d": 77.6,
+        "h": 158.0
+      },
+      "omschrijving": "<p>Compacte geïsoleerde reisbeker</p><h3>Eigenschappen Stanley The Café-To-Go Travel Mug 0,23L</h3><ul><li>Gerecycled roestvrij staal BPA-vrij</li><li>Dubbelwandige vacuümisolatie</li><li>Houdt 3 uur warm</li><li>Houdt 16 uur koud</li><li>Praktisch draaghandvat</li><li>Past in de meeste bekerhouders</li><li>Vaatwasmachinebestendig</li><li>Levenslange garantie</li><li>Gewicht: 250g</li><li>Afmetingen: 77.6 x 77.6 x 158 mm</li></ul><p>De Café To-Go Travel Mug neem je elke dag mee als je op weg gaat, of dat nu in de stad is of op het platteland. Deze compacte reisbeker is ontwikkeld voor geweldige prestaties. Hij heeft een uniek 2-delig deksel dat volledig lekvrij is en waar je toch gemakkelijk aan drinkt, zodat je de beker gemakkelijk overal mee naartoe neemt. Deze beker houdt je drankjes 3 uur warm: perfect voor 's ochtends vroeg in de winter naar je werk te gaan. Ook houdt hij je drankje 16 uur lang koud, perfect voor een lekkere wandeling met een Iced Latte tijdens je lunchpauze in de zomer. Dit product is gemaakt van gerecycled roestvrij staal en volledig vaatwasmachinebestendig en past naadloos in jouw levensstijl.</p>",
+      "voorraad_per_winkel": {
+        "Amsterdam": 0,
+        "Utrecht": 1
+      },
+      "voorraad": 1,
+      "voorraadtabel_gevonden": true,
+      "lokale_afbeeldingen": [
+        "img/029009_1.jpg",
+        "img/029009_2.jpg",
+        "img/029009_3.jpg",
+        "img/029009_4.jpg"
+      ],
+      "recht_foto": {
+        "pad": "img/029009_recht.jpg",
+        "cx": 0.498,
+        "cy": 0.7544,
+        "w": 0.3026,
+        "h": 0.1982,
+        "lak": "#7FA9D4",
+        "dop": "#91BAE3",
+        "gravure": "#8F9497",
+        "product_y0": 0.07,
+        "product_h": 0.86
+      },
+      "graveervlak_foto": {
+        "cx": 0.498,
+        "cy": 0.7516,
+        "w": 0.3026,
+        "h": 0.1966,
+        "lak": "#7EA9D2",
+        "dop": "#92B9E3",
+        "gravure": "#8F9497"
       }
     },
     {
@@ -3425,58 +3479,6 @@
         "h": 0.2386,
         "lak": "#748C83",
         "dop": "#989A99",
-        "gravure": "#D6D9DA"
-      }
-    },
-    {
-      "merk": "Stanley",
-      "url": "https://www.kathmandu.nl/stanley-the-legendary-classic-bottle-1-4l-100000115850-029022",
-      "naam": "Stanley The Legendary Classic Bottle 1,4L  Hammertone Lake",
-      "prijs": 69.95,
-      "bestelcode": "029022",
-      "leverancierscode": "10-11347-120",
-      "kleur": "Blauw",
-      "afbeelding": "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_1-1500-1500.jpg",
-      "afbeeldingen": [
-        "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_1-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_2-1500-1500.jpg",
-        "https://www.kathmandu.nl/pimages/cache/02/90/22/029022_3-1500-1500.jpg"
-      ],
-      "afmetingen_mm": {
-        "d": 99.0,
-        "h": 358.0
-      },
-      "omschrijving": "<p>Robuuste thermosfles die warme en koude dranken maar dan 24 uur op temperatuur houdt.</p><h3>Eigenschappen Stanley Classic Vacuum Bottle 1,4L</h3><ul><li>Lekvrij en compact</li><li>Dubbelwandige vacuüm isolatie</li><li>De geïsoleerde deksel fungeert ook als beker</li><li>Vaatwasmachinebestendig</li><li>BPA-vrij</li><li>Gemaakt van 18/8 Roestvrij staal</li><li>Afmetingen: 12 x 9,9 x 35,8 cm</li><li>Inhoud: 1,4 liter</li><li>Gewicht: 935 gram</li></ul><p>Een dagje vissen aan het meer of een hike door de bergen. Bij deze activiteiten mag een praktische thermosfles die jouw drankje op de juiste temperatuur houdt niet ontbreken. De Stanley Classic 1,4 liter thermosfles is robuust waardoor hij tegen een stootje kan. De fles is compact en voorzien van een handvat, zodat jij je drankje zonder morsen kan inschenken. Bovendien is de thermosfles voorzien van een dubbele wandconstructie. Hierdoor blijven warme dranken tot wel 28 uur warm en koude dranken 28 uur lang koel.</p>",
-      "voorraad_per_winkel": {
-        "Amsterdam": 1,
-        "Utrecht": 0
-      },
-      "voorraad": 1,
-      "voorraadtabel_gevonden": true,
-      "lokale_afbeeldingen": [
-        "img/029022_1.jpg",
-        "img/029022_2.jpg",
-        "img/029022_3.jpg"
-      ],
-      "recht_foto": {
-        "pad": "img/029022_recht.jpg",
-        "cx": 0.474,
-        "cy": 0.6812,
-        "w": 0.1778,
-        "h": 0.2335,
-        "lak": "#30658B",
-        "dop": "#8D8F8E",
-        "gravure": "#D6D9DA",
-        "product_y0": 0.07,
-        "product_h": 0.86
-      },
-      "graveervlak_foto": {
-        "cx": 0.474,
-        "cy": 0.6812,
-        "w": 0.1778,
-        "h": 0.2335,
-        "lak": "#30668B",
-        "dop": "#8D8F8E",
         "gravure": "#D6D9DA"
       }
     },
